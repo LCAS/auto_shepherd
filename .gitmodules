@@ -1,0 +1,12 @@
+[submodule "auto_shepherd_simulation"]
+	path = auto_shepherd_simulation
+	url = git@github.com:lcas/auto_shepherd_simulation
+[submodule "auto_shepherd_communications"]
+	path = auto_shepherd_communications
+	url = git@github.com:lcas/auto_shepherd_communications
+[submodule "auto_shepherd_drone_control"]
+	path = auto_shepherd_drone_control
+	url = git@github.com:lcas/auto_shepherd_drone_control
+[submodule "auto_shepherd_sheep_localisation"]
+	path = auto_shepherd_sheep_localisation
+	url = git@github.com:lcas/auto_shepherd_sheep_localisation
