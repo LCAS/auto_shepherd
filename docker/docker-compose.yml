@@ -1,11 +1,16 @@
 services:
   simulation:
-    extends:
-      file: ../auto_shepherd_simulation/docker/docker-compose.yml
-      service: auto_shepherd_simulation_ros2_humble
+    build:
+      context: ../auto_shepherd_simulation
+      dockerfile: docker/Dockerfile
+    container_name: simulation
+    hostname: simulation
+    network_mode: bridge
+    tty: true
+    stdin_open: true
     volumes:
       - ../auto_shepherd_simulation/auto_shepherd_simulation_ros2:/home/ros/base_ws/src/auto_shepherd_simulation_ros2:rw
-      - ../auto_shepherd_simulation/bash_scripts:/home/ros/bash_scripts:rw
+      - ../auto_shepherd_simulation/bash_scripts/container:/home/ros/bash_scripts:rw
       - /tmp/.X11-unix:/tmp/.X11-unix:rw
       - ../auto_shepherd_simulation/configs/rviz:/home/ros/.rviz2:rw
       - ../auto_shepherd_simulation/configs/map:/home/ros/map:rw
@@ -13,16 +18,23 @@ services:
       - DISPLAY=${DISPLAY}
       - QT_X11_NO_MITSHM=1
       - BASE_WS=/home/ros/base_ws
+      - ROS_DOMAIN_ID=0
 
   sheep_localisation:
-    extends:
-      file: ../auto_shepherd_sheep_localisation/docker/docker-compose.yml
-      service: auto_shepherd_sheep_localisation_ros2_humble
+    build:
+      context: ../auto_shepherd_sheep_localisation
+      dockerfile: docker/Dockerfile
+    container_name: sheep_localisation
+    hostname: sheep_localisation
+    network_mode: bridge
+    tty: true
+    stdin_open: true
     volumes:
       - ../auto_shepherd_sheep_localisation/auto_shepherd_sheep_localisation_ros2:/home/ros/base_ws/src/auto_shepherd_sheep_localisation_ros2:rw
-      - ../auto_shepherd_sheep_localisation/bash_scripts:/home/ros/bash_scripts:rw
+      - ../auto_shepherd_sheep_localisation/bash_scripts/container:/home/ros/bash_scripts:rw
       - /tmp/.X11-unix:/tmp/.X11-unix:rw
     environment:
       - DISPLAY=${DISPLAY}
       - QT_X11_NO_MITSHM=1
       - BASE_WS=/home/ros/base_ws
+      - ROS_DOMAIN_ID=0
