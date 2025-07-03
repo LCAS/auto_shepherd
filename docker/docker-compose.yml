@@ -1,4 +1,45 @@
 services:
+
+#  drone_control:
+#    build:
+#      context: ../auto_shepherd_drone_control
+#      dockerfile: docker/Dockerfile
+#    container_name: drone_control
+#    hostname: drone_control
+#    network_mode: bridge
+#    ipc: "host"
+#    tty: true
+#    stdin_open: true
+#    volumes:
+#      - ../auto_shepherd_drone_control/auto_shepherd_drone_control_ros2:/home/ros/base_ws/src/auto_shepherd_drone_control_ros2:rw
+#      - ../auto_shepherd_drone_control/bash_scripts/container:/home/ros/bash_scripts:rw
+#      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+#    environment:
+#      - DISPLAY=${DISPLAY}
+#      - QT_X11_NO_MITSHM=1
+#      - BASE_WS=/home/ros/base_ws
+#      - ROS_DOMAIN_ID=0
+
+  sheep_localisation:
+    build:
+      context: ../auto_shepherd_sheep_localisation
+      dockerfile: docker/Dockerfile
+    container_name: sheep_localisation
+    hostname: sheep_localisation
+    network_mode: bridge
+    ipc: "host"
+    tty: true
+    stdin_open: true
+    volumes:
+      - ../auto_shepherd_sheep_localisation/auto_shepherd_sheep_localisation_ros2:/home/ros/base_ws/src/auto_shepherd_sheep_localisation_ros2:rw
+      - ../auto_shepherd_sheep_localisation/bash_scripts/container:/home/ros/bash_scripts:rw
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+    environment:
+      - DISPLAY=${DISPLAY}
+      - QT_X11_NO_MITSHM=1
+      - BASE_WS=/home/ros/base_ws
+      - ROS_DOMAIN_ID=0
+
   simulation:
     build:
       context: ../auto_shepherd_simulation
@@ -6,6 +47,7 @@ services:
     container_name: simulation
     hostname: simulation
     network_mode: bridge
+    ipc: "host"
     tty: true
     stdin_open: true
     volumes:
@@ -20,21 +62,23 @@ services:
       - BASE_WS=/home/ros/base_ws
       - ROS_DOMAIN_ID=0
 
-  sheep_localisation:
+  communications:
     build:
-      context: ../auto_shepherd_sheep_localisation
+      context: ../auto_shepherd_communications
       dockerfile: docker/Dockerfile
-    container_name: sheep_localisation
-    hostname: sheep_localisation
+    container_name: communications
+    hostname: communications
     network_mode: bridge
+    ipc: "host"
     tty: true
     stdin_open: true
     volumes:
-      - ../auto_shepherd_sheep_localisation/auto_shepherd_sheep_localisation_ros2:/home/ros/base_ws/src/auto_shepherd_sheep_localisation_ros2:rw
-      - ../auto_shepherd_sheep_localisation/bash_scripts/container:/home/ros/bash_scripts:rw
+      - ../auto_shepherd_communications/auto_shepherd_communications_ros2:/home/ros/base_ws/src/auto_shepherd_communications_ros2:rw
+      - ../auto_shepherd_communications/bash_scripts/container:/home/ros/bash_scripts:rw
       - /tmp/.X11-unix:/tmp/.X11-unix:rw
     environment:
       - DISPLAY=${DISPLAY}
       - QT_X11_NO_MITSHM=1
       - BASE_WS=/home/ros/base_ws
       - ROS_DOMAIN_ID=0
+
