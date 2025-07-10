@@ -18,13 +18,15 @@ This gives a choise of which to launch, select the number you wish.
 
 ## How to Launch
 
-Shortcuts have been setup for your convenience.
-
-You can launch the internal system running sample data using: `tmule -c $INTERNAL launch`
+Shortcuts have been setup for your convenience. The shortcuts are used to launch the three TMuLe files. Connected is used to run the subsystem will full data inputs and outputs. Injected is to run the subsystem with sample data for inputs. Simulated also exists for the communications gorup to limit the reliance on hardware during software development.
 
 You can launch the connected system using: `tmule -c $CONNECTED launch`
 
-Respectively both commands have also been shortened to `int launch` and `con launch`
+You can launch the internal system running sample data using: `tmule -c $INTERNAL launch`
+
+For the communications group, you can launch the simulated system injecting sample data using: `tmule -c $SIMULATED launch`
+
+Respectively both commands have also been shortened to `con launch`, `inj launch`, and `sim launch`.
 
 ## How to Terminate
 
@@ -46,3 +48,4 @@ To navigate TMux, you can use `Shift+[Left/Right]` to move between windows.
 You can use `Alt+[Up/Down/Right/Left]` to move between panes within a window.
 
 You can use `Ctrl+b, d` to exit the session.
+
