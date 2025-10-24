@@ -24,9 +24,7 @@ You can launch the connected system using: `tmule -c $CONNECTED launch`
 
 You can launch the internal system running sample data using: `tmule -c $INTERNAL launch`
 
-For the communications group, you can launch the simulated system injecting sample data using: `tmule -c $SIMULATED launch`
-
-Respectively both commands have also been shortened to `con launch`, `inj launch`, and `sim launch`.
+Respectively both commands have also been shortened to `con launch` and `inj launch`.
 
 ## How to Terminate
 

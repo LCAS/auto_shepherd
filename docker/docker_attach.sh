@@ -3,6 +3,13 @@
 # Prompt user to select a service
 echo "Select a service to attach to:"
 select SERVICE in drone_control sheep_localisation simulation communications; do
+
+    # Run pre-attach script
+    if [[ -f "../auto_shepherd_$SERVICE/bash_scripts/host/pre_attach.sh" ]]; then
+        source "../auto_shepherd_$SERVICE/bash_scripts/host/pre_attach.sh"
+    fi
+
+    # Attach
     if [[ "$SERVICE" == "drone_control" || "$SERVICE" == "sheep_localisation"  || "$SERVICE" == "simulation" || "$SERVICE" == "communications" ]]; then
         # Get the running container name
         CONTAINER=$(docker compose ps -q "$SERVICE")

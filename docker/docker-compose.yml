@@ -62,7 +62,7 @@ services:
       - BASE_WS=/home/ros/base_ws
       - ROS_DOMAIN_ID=0
 
-  communications:
+  communications_sim:
     build:
       context: ../auto_shepherd_communications
       dockerfile: docker/Dockerfile
@@ -72,6 +72,11 @@ services:
     ipc: "host"
     tty: true
     stdin_open: true
+    devices:
+      - "/dev/ttyVserver:/dev/ttyVserver"
+      - "/dev/ttyVrobot:/dev/ttyVrobot"
+    group_add:
+      - dialout
     volumes:
       - ../auto_shepherd_communications/auto_shepherd_communications_ros2:/home/ros/base_ws/src/auto_shepherd_communications_ros2:rw
       - ../auto_shepherd_communications/bash_scripts/container:/home/ros/bash_scripts:rw
@@ -81,4 +86,3 @@ services:
       - QT_X11_NO_MITSHM=1
       - BASE_WS=/home/ros/base_ws
       - ROS_DOMAIN_ID=0
-
