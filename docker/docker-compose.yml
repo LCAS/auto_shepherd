@@ -30,6 +30,8 @@ services:
     ipc: "host"
     tty: true
     stdin_open: true
+    ports:
+      - "8080:8080"
     volumes:
       - ../auto_shepherd_sheep_localisation/auto_shepherd_sheep_localisation_ros2:/home/ros/base_ws/src/auto_shepherd_sheep_localisation_ros2:rw
       - ../auto_shepherd_sheep_localisation/bash_scripts/container:/home/ros/bash_scripts:rw
