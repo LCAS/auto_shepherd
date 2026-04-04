@@ -10,3 +10,6 @@
 [submodule "auto_shepherd_sheep_localisation"]
 	path = auto_shepherd_sheep_localisation
 	url = git@github.com:lcas/auto_shepherd_sheep_localisation
+[submodule "auto_shepherd_ethics_and_economics"]
+	path = auto_shepherd_ethics_and_economics
+	url = https://github.com/LCAS/auto_shepherd_ethics_and_economics
