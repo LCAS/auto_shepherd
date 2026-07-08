@@ -25,3 +25,6 @@ https://github.com/LCAS/auto_shepherd_ethics_and_economics
 
 ### Other:
 https://github.com/LCAS/auto_shepherd_msgs
+
+## Video
+[![YouTube](http://i.ytimg.com/vi/_Za5ONXb7bg/hqdefault.jpg)](https://www.youtube.com/watch?v=_Za5ONXb7bg)
