@@ -38,6 +38,21 @@
       --grid: rgba(202, 230, 191, 0.055);
       --field: rgba(200, 232, 107, 0.09);
       --field-line: rgba(200, 232, 107, 0.45);
+      --geometry-background: #0b1415;
+      --geometry-text: #edf1e6;
+      --geometry-muted: #a7b5a8;
+      --geometry-arrow: #d0dfc8;
+      --geometry-communication-fill: #225f3b;
+      --geometry-drone-fill: #225d8d;
+      --geometry-sheep-fill: #713f3a;
+      --geometry-dog-fill: #71511d;
+      --geometry-simulation-fill: #58387a;
+      --geometry-media-filter: brightness(0.82) saturate(0.92);
+      --accent-drone: #a9d5f4;
+      --accent-vision: #f3a18f;
+      --accent-simulation: #c4a7ea;
+      --accent-communication: #b7e4b5;
+      --accent-dog: #f0d28a;
       --sans: "Space Grotesk", sans-serif;
       --mono: "IBM Plex Mono", monospace;
     }
@@ -60,6 +75,21 @@
       --grid: rgba(23, 36, 29, 0.055);
       --field: rgba(102, 139, 33, 0.08);
       --field-line: rgba(102, 139, 33, 0.42);
+      --geometry-background: #f7f9f4;
+      --geometry-text: #17241d;
+      --geometry-muted: #53665a;
+      --geometry-arrow: #657667;
+      --geometry-communication-fill: #dcefd8;
+      --geometry-drone-fill: #dbe8f7;
+      --geometry-sheep-fill: #f9e0d6;
+      --geometry-dog-fill: #fff1c9;
+      --geometry-simulation-fill: #eadbf5;
+      --geometry-media-filter: none;
+      --accent-drone: #5f8fb8;
+      --accent-vision: #cb715e;
+      --accent-simulation: #906fb7;
+      --accent-communication: #5f9f6a;
+      --accent-dog: #b98e32;
     }
 
     * { box-sizing: border-box; }
@@ -162,7 +192,6 @@
     .outline-index,
     .tag,
     .status,
-    .page-counter,
     .signal-code,
     .source-link {
       font-family: var(--mono);
@@ -197,7 +226,7 @@
     .nav-item {
       display: inline-flex;
       min-height: 41px;
-      align-items: center;
+      align-items: flex-start;
       justify-content: center;
       min-width: 72px;
       flex-direction: column;
@@ -216,7 +245,7 @@
     }
 
     .nav-item .nav-number {
-      color: var(--faint);
+      color: var(--nav-accent, var(--faint));
       font-family: var(--mono);
       font-size: 0.5rem;
       line-height: 1;
@@ -229,20 +258,28 @@
       text-transform: uppercase;
     }
 
+    .nav-item.nav-wide { min-width: 104px; }
+
+    .nav-item[data-page-target="drone-control"] { --nav-accent: var(--accent-drone); }
+    .nav-item[data-page-target="sheep-detection"] { --nav-accent: var(--accent-vision); }
+    .nav-item[data-page-target="simulation"] { --nav-accent: var(--accent-simulation); }
+    .nav-item[data-page-target="communication"] { --nav-accent: var(--accent-communication); }
+    .nav-item[data-page-target="dog-control"] { --nav-accent: var(--accent-dog); }
+
     .nav-item:hover,
     .nav-item:focus-visible {
-      border-color: var(--line-strong);
-      color: var(--ink);
+      border-color: color-mix(in srgb, var(--nav-accent, var(--lime)) 62%, var(--line));
+      color: var(--nav-accent, var(--ink));
       outline: none;
     }
 
     .nav-item[aria-selected="true"] {
-      border-color: color-mix(in srgb, var(--lime) 45%, var(--line));
-      background: color-mix(in srgb, var(--lime) 12%, transparent);
-      color: var(--lime);
+      border-color: color-mix(in srgb, var(--nav-accent, var(--lime)) 55%, var(--line));
+      background: color-mix(in srgb, var(--nav-accent, var(--lime)) 12%, transparent);
+      color: var(--nav-accent, var(--lime));
     }
 
-    .nav-item[aria-selected="true"] .nav-number { color: var(--lime); }
+    .nav-item[aria-selected="true"] .nav-number { color: var(--nav-accent, var(--lime)); }
 
     .theme-toggle {
       display: inline-flex;
@@ -554,22 +591,6 @@
       line-height: 1.65;
     }
 
-    .page-counter {
-      align-self: start;
-      color: var(--faint);
-      font-size: 0.58rem;
-      line-height: 1.5;
-      text-align: right;
-    }
-
-    .page-counter strong {
-      display: block;
-      margin-top: 7px;
-      color: var(--coral);
-      font-size: 1.2rem;
-      font-weight: 500;
-    }
-
     .section-intro {
       display: flex;
       align-items: baseline;
@@ -800,31 +821,15 @@
     }
 
     .site-grid.is-description-page .page-view[data-page-view="description"] .page-header {
-      position: absolute;
-      z-index: 4;
-      top: 70px;
-      right: 30px;
-      left: 30px;
-      margin: 0;
-      padding: 0;
-      border: 0;
-      pointer-events: none;
+      display: none;
     }
 
-    .site-grid.is-description-page .page-view[data-page-view="description"] .page-header h2 {
-      max-width: 680px;
-      font-size: clamp(2rem, 4vw, 3.8rem);
-      text-shadow: 0 2px 20px var(--shadow);
-    }
-
-    .site-grid.is-description-page .page-view[data-page-view="description"] .page-header p:not(.eyebrow) {
-      max-width: 520px;
-      margin-top: 12px;
-      font-size: 0.84rem;
-      text-shadow: 0 2px 16px var(--shadow);
-    }
-
+    .site-grid.is-description-page .section-intro,
     .site-grid.is-description-page .system-map {
+      display: none;
+    }
+
+    .poster-canvas {
       display: flex;
       height: 100%;
       min-height: 0;
@@ -832,19 +837,128 @@
       margin: 0;
       border: 0;
       box-shadow: none;
+      overflow: auto;
+      overscroll-behavior: contain;
+      scrollbar-color: var(--faint) transparent;
+      scrollbar-width: thin;
     }
 
-    .site-grid.is-description-page .system-map-viewport {
-      min-height: 0;
-      max-height: none;
-      flex: 1 1 auto;
-    }
-
-    .site-grid.is-description-page .system-map-canvas {
-      width: 100%;
-      min-width: 920px;
+    .geometry-sheet {
+      position: relative;
+      width: max(100%, calc((100svh - 76px) * 1.4136));
+      min-width: 100%;
       height: 100%;
-      min-height: 0;
+      flex: 0 0 auto;
+      background: var(--geometry-background);
+    }
+
+    .geometry-svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+      background: var(--geometry-background);
+      overflow: visible;
+    }
+
+    .geometry-object { outline: none; }
+    .geometry-object.geometry-link { cursor: pointer; }
+    .geometry-object.geometry-link rect.geometry-box {
+      transition: filter 150ms ease, stroke-width 150ms ease;
+    }
+
+    .geometry-object.geometry-link:hover rect.geometry-box,
+    .geometry-object.geometry-link:focus-visible rect.geometry-box {
+      filter: brightness(0.97) saturate(1.12);
+      stroke: var(--geometry-accent, #2c3747);
+      stroke-width: 8;
+    }
+
+    .geometry-object.geometry-link.geometry-drone { --geometry-accent: var(--accent-drone); }
+    .geometry-object.geometry-link.geometry-sheep { --geometry-accent: var(--accent-vision); }
+    .geometry-object.geometry-link.geometry-simulation { --geometry-accent: var(--accent-simulation); }
+    .geometry-object.geometry-link.geometry-communication { --geometry-accent: var(--accent-communication); }
+    .geometry-object.geometry-link.geometry-dog { --geometry-accent: var(--accent-dog); }
+
+    .geometry-item-box {
+      fill: color-mix(in srgb, var(--geometry-accent) 12%, var(--geometry-background));
+      stroke: var(--geometry-accent);
+      stroke-width: 5;
+      vector-effect: non-scaling-stroke;
+    }
+
+    .geometry-object.geometry-link:hover .geometry-item-box,
+    .geometry-object.geometry-link:focus-visible .geometry-item-box {
+      fill: color-mix(in srgb, var(--geometry-accent) 25%, var(--geometry-background));
+      stroke-width: 8;
+    }
+
+    .geometry-label-text {
+      fill: var(--geometry-text);
+      font-family: var(--sans);
+      font-weight: 600;
+      pointer-events: none;
+    }
+
+    .geometry-title-text {
+      fill: #ffffff;
+      font-style: italic;
+      font-weight: 600;
+      text-anchor: middle;
+    }
+
+    .geometry-title-subline {
+      font-size: 87px;
+    }
+
+    .geometry-title-mainline {
+      font-size: 120px;
+      font-style: normal;
+      font-weight: 700;
+    }
+
+    .geometry-connector {
+      fill: none;
+      opacity: 0.7;
+      stroke: var(--geometry-arrow) !important;
+      stroke-linecap: square;
+      stroke-linejoin: miter;
+      pointer-events: none;
+    }
+
+    .geometry-fragment {
+      fill: var(--geometry-arrow);
+      pointer-events: none;
+    }
+
+    .geometry-media {
+      filter: var(--geometry-media-filter);
+      pointer-events: none;
+    }
+
+    .geometry-region-communication .geometry-box,
+    .geometry-region-communication.geometry-fragment { fill: var(--geometry-communication-fill); }
+    .geometry-region-drone .geometry-box,
+    .geometry-region-drone.geometry-fragment { fill: var(--geometry-drone-fill); }
+    .geometry-region-sheep .geometry-box,
+    .geometry-region-sheep.geometry-fragment { fill: var(--geometry-sheep-fill); }
+    .geometry-region-dog .geometry-box,
+    .geometry-region-dog.geometry-fragment { fill: var(--geometry-dog-fill); }
+    .geometry-region-simulation .geometry-box,
+    .geometry-region-simulation.geometry-fragment { fill: var(--geometry-simulation-fill); }
+
+    .geometry-loading {
+      display: grid;
+      height: 100%;
+      place-items: center;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .site-grid.is-description-page .poster-canvas {
+      flex: 1 1 auto;
     }
 
     .site-grid.is-description-page .description-lower { display: none; }
@@ -860,9 +974,6 @@
     }
 
     .map-node-icon .icon-fill { fill: currentColor; stroke: none; }
-
-    .description-lower,
-    .research-footer {
 
     .description-lower,
     .research-footer {
@@ -976,11 +1087,11 @@
       line-height: 1.6;
     }
 
-    .module-page[data-accent="drone"] { --accent: var(--coral); }
-    .module-page[data-accent="sheep"] { --accent: var(--cyan); }
-    .module-page[data-accent="simulation"] { --accent: var(--blue); }
-    .module-page[data-accent="communication"] { --accent: var(--lime); }
-    .module-page[data-accent="dog"] { --accent: #e6b15f; }
+    .module-page[data-accent="drone"] { --accent: var(--accent-drone); }
+    .module-page[data-accent="vision"] { --accent: var(--accent-vision); }
+    .module-page[data-accent="simulation"] { --accent: var(--accent-simulation); }
+    .module-page[data-accent="communication"] { --accent: var(--accent-communication); }
+    .module-page[data-accent="dog"] { --accent: var(--accent-dog); }
 
     .module-identity {
       display: grid;
@@ -1159,10 +1270,7 @@
       .signal-visual { min-height: 460px; }
       .content-column { padding: 28px 18px 60px; }
       .site-grid.is-description-page .content-column { height: calc(100svh - 134px); padding: 0; }
-      .site-grid.is-description-page .page-view[data-page-view="description"] .page-header { top: 62px; right: 18px; left: 18px; }
-      .site-grid.is-description-page .page-view[data-page-view="description"] .page-header p:not(.eyebrow) { max-width: 390px; }
-      .site-grid.is-description-page .system-map-viewport { min-height: 0; }
-      .site-grid.is-description-page .system-map-canvas { min-width: 920px; height: 100%; }
+      .geometry-sheet { width: max(100%, calc((100svh - 134px) * 1.4136)); }
       .page-header { margin-bottom: 32px; }
       .page-header h2 { font-size: 3rem; }
       .module-identity { grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: 18px; }
@@ -1185,7 +1293,6 @@
       .content-column { padding: 24px 12px 52px; }
       .page-header { display: block; }
       .page-header h2 { font-size: 2.55rem; }
-      .page-counter { margin-top: 20px; text-align: left; }
       .system-map-viewport { min-height: 500px; }
       .system-map-canvas { min-width: 980px; min-height: 500px; }
       .description-lower,
@@ -1209,7 +1316,7 @@
 </head>
 <body>
   <header class="topbar">
-    <a class="brand" href="#description" aria-label="Auto Shepherd description">
+    <a class="brand" href="#description" aria-label="Auto Shepherd system architecture">
       <span class="brand-mark"><img src="assets/auto-shepherd-mark.png" alt=""></span>
       <span class="brand-copy">
         <span class="brand-name">Auto Shepherd</span>
@@ -1219,13 +1326,13 @@
 
     <nav class="top-nav" aria-label="Auto Shepherd pages">
       <div class="nav-list" role="tablist" aria-label="Programme sections">
-        <button class="nav-item" id="description-tab" type="button" role="tab" aria-label="Open Description page" data-page-target="description" aria-controls="page-description" aria-selected="true"><span class="nav-number">01</span><span class="nav-name">About</span></button>
-        <button class="nav-item" id="research-tab" type="button" role="tab" aria-label="Open Research page" data-page-target="research" aria-controls="page-research" aria-selected="false"><span class="nav-number">02</span><span class="nav-name">Research</span></button>
-        <button class="nav-item" id="drone-control-tab" type="button" role="tab" aria-label="Open Drone control page" data-page-target="drone-control" aria-controls="page-drone-control" aria-selected="false"><span class="nav-number">03</span><span class="nav-name">Drone</span></button>
-        <button class="nav-item" id="sheep-detection-tab" type="button" role="tab" aria-label="Open Sheep detection page" data-page-target="sheep-detection" aria-controls="page-sheep-detection" aria-selected="false"><span class="nav-number">04</span><span class="nav-name">Sheep</span></button>
-        <button class="nav-item" id="simulation-tab" type="button" role="tab" aria-label="Open Simulation page" data-page-target="simulation" aria-controls="page-simulation" aria-selected="false"><span class="nav-number">05</span><span class="nav-name">Sim</span></button>
-        <button class="nav-item" id="communication-tab" type="button" role="tab" aria-label="Open Communication page" data-page-target="communication" aria-controls="page-communication" aria-selected="false"><span class="nav-number">06</span><span class="nav-name">Comms</span></button>
-        <button class="nav-item" id="dog-control-tab" type="button" role="tab" aria-label="Open Dog control page" data-page-target="dog-control" aria-controls="page-dog-control" aria-selected="false"><span class="nav-number">07</span><span class="nav-name">Dog</span></button>
+        <button class="nav-item nav-wide" id="description-tab" type="button" role="tab" aria-label="Open System Architecture page" data-page-target="description" aria-controls="page-description" aria-selected="true"><span class="nav-name">System<br>Architecture</span></button>
+        <button class="nav-item" id="drone-control-tab" type="button" role="tab" aria-label="Open Drone control page" data-page-target="drone-control" aria-controls="page-drone-control" aria-selected="false"><span class="nav-number">01</span><span class="nav-name">Drone</span></button>
+        <button class="nav-item" id="sheep-detection-tab" type="button" role="tab" aria-label="Open Vision page" data-page-target="sheep-detection" aria-controls="page-sheep-detection" aria-selected="false"><span class="nav-number">02</span><span class="nav-name">Vision</span></button>
+        <button class="nav-item" id="simulation-tab" type="button" role="tab" aria-label="Open Simulation page" data-page-target="simulation" aria-controls="page-simulation" aria-selected="false"><span class="nav-number">03</span><span class="nav-name">Sim</span></button>
+        <button class="nav-item" id="communication-tab" type="button" role="tab" aria-label="Open Communication page" data-page-target="communication" aria-controls="page-communication" aria-selected="false"><span class="nav-number">04</span><span class="nav-name">Comms</span></button>
+        <button class="nav-item" id="dog-control-tab" type="button" role="tab" aria-label="Open Dog control page" data-page-target="dog-control" aria-controls="page-dog-control" aria-selected="false"><span class="nav-number">05</span><span class="nav-name">Dog</span></button>
+        <button class="nav-item nav-wide" id="research-tab" type="button" role="tab" aria-label="Open Research Projects page" data-page-target="research" aria-controls="page-research" aria-selected="false"><span class="nav-name">Open Research<br>Projects</span></button>
       </div>
     </nav>
 
@@ -1267,16 +1374,18 @@
       <section class="page-view" id="page-description" data-page-view="description" role="tabpanel" aria-labelledby="description-tab">
         <header class="page-header">
           <div>
-            <p class="eyebrow">01 / Programme description</p>
+            <p class="eyebrow">System architecture</p>
             <h2>A field system assembled from many kinds of intelligence.</h2>
             <p>Auto Shepherd brings aerial sensing, animal localisation, simulation, communications and robot-dog control into one shared research programme. The map below follows the working pipeline and will grow with the project poster.</p>
           </div>
-          <div class="page-counter">Pages<strong>01 / 07</strong></div>
         </header>
 
         <div class="section-intro">
           <h3>System map</h3>
           <span>Five linked subsystems</span>
+        </div>
+        <div class="poster-canvas" id="poster-canvas" aria-label="Auto Shepherd source-coordinate pipeline canvas">
+          <div class="geometry-loading" id="geometry-loading">Loading source geometry</div>
         </div>
         <div class="system-map" id="system-map">
           <div class="system-map-toolbar">
@@ -1536,11 +1645,10 @@
       <section class="page-view" id="page-research" data-page-view="research" role="tabpanel" aria-labelledby="research-tab" hidden>
         <header class="page-header">
           <div>
-            <p class="eyebrow">02 / Research agenda</p>
+            <p class="eyebrow">Open research projects</p>
             <h2>Questions that keep the system pointed at the real world.</h2>
             <p>The research page is ready for the objectives, methods and development locations from the project poster. For now, these are the three lines the programme is being shaped around.</p>
           </div>
-          <div class="page-counter">Pages<strong>02 / 07</strong></div>
         </header>
 
         <div class="section-intro">
@@ -1572,10 +1680,9 @@
         </div>
       </section>
 
-      <section class="page-view module-page" id="page-drone-control" data-page-view="drone-control" data-accent="drone" role="tabpanel" aria-labelledby="drone-control-tab" hidden>
+      <section class="page-view module-page" id="page-drone-control" data-page-view="drone-control" data-accent="drone" style="--accent: var(--accent-drone)" role="tabpanel" aria-labelledby="drone-control-tab" hidden>
         <header class="page-header">
-          <div><p class="eyebrow">03 / Subsystem</p><h2>Drone control</h2><p>The eye in the sky: a reliable path from aircraft data to useful, deliberate field observation.</p></div>
-          <div class="page-counter">Pages<strong>03 / 07</strong></div>
+          <div><p class="eyebrow">01 / Subsystem</p><h2>Drone control</h2><p>The eye in the sky: a reliable path from aircraft data to useful, deliberate field observation.</p></div>
         </header>
         <div class="module-identity">
           <div class="module-stamp"><span class="micro-label">Baa Force One</span><strong>UAV</strong></div>
@@ -1589,10 +1696,9 @@
         <div class="module-footer"><p>Detailed goals, diagrams and project links will be added to this subsystem page.</p><span class="status">Page scaffold / ready</span></div>
       </section>
 
-      <section class="page-view module-page" id="page-sheep-detection" data-page-view="sheep-detection" data-accent="sheep" role="tabpanel" aria-labelledby="sheep-detection-tab" hidden>
+      <section class="page-view module-page" id="page-sheep-detection" data-page-view="sheep-detection" data-accent="vision" style="--accent: var(--accent-vision)" role="tabpanel" aria-labelledby="sheep-detection-tab" hidden>
         <header class="page-header">
-          <div><p class="eyebrow">04 / Subsystem</p><h2>Sheep detection</h2><p>Make a moving flock measurable: detect individuals, follow them over time, and place them back on the map.</p></div>
-          <div class="page-counter">Pages<strong>04 / 07</strong></div>
+          <div><p class="eyebrow">02 / Subsystem</p><h2>Vision</h2><p>Make a moving flock measurable: detect individuals, follow them over time, and place them back on the map.</p></div>
         </header>
         <div class="module-identity">
           <div class="module-stamp"><span class="micro-label">ShLAMb</span><strong>CV</strong></div>
@@ -1606,10 +1712,9 @@
         <div class="module-footer"><p>Detailed datasets, visualisations and evaluation results will be added to this subsystem page.</p><span class="status">Page scaffold / ready</span></div>
       </section>
 
-      <section class="page-view module-page" id="page-simulation" data-page-view="simulation" data-accent="simulation" role="tabpanel" aria-labelledby="simulation-tab" hidden>
+      <section class="page-view module-page" id="page-simulation" data-page-view="simulation" data-accent="simulation" style="--accent: var(--accent-simulation)" role="tabpanel" aria-labelledby="simulation-tab" hidden>
         <header class="page-header">
-          <div><p class="eyebrow">05 / Subsystem</p><h2>Simulation</h2><p>Build a place to test flocking, control strategies and cross-system behaviour before the next field run.</p></div>
-          <div class="page-counter">Pages<strong>05 / 07</strong></div>
+          <div><p class="eyebrow">03 / Subsystem</p><h2>Simulation</h2><p>Build a place to test flocking, control strategies and cross-system behaviour before the next field run.</p></div>
         </header>
         <div class="module-identity">
           <div class="module-stamp"><span class="micro-label">ShepSim</span><strong>SIM</strong></div>
@@ -1623,10 +1728,9 @@
         <div class="module-footer"><p>Detailed simulator views, parameters and experiment notes will be added to this subsystem page.</p><span class="status">Page scaffold / ready</span></div>
       </section>
 
-      <section class="page-view module-page" id="page-communication" data-page-view="communication" data-accent="communication" role="tabpanel" aria-labelledby="communication-tab" hidden>
+      <section class="page-view module-page" id="page-communication" data-page-view="communication" data-accent="communication" style="--accent: var(--accent-communication)" role="tabpanel" aria-labelledby="communication-tab" hidden>
         <header class="page-header">
-          <div><p class="eyebrow">06 / Subsystem</p><h2>Communication</h2><p>Keep the distributed system coherent when its robots, radios and operators are spread across the field.</p></div>
-          <div class="page-counter">Pages<strong>06 / 07</strong></div>
+          <div><p class="eyebrow">04 / Subsystem</p><h2>Communication</h2><p>Keep the distributed system coherent when its robots, radios and operators are spread across the field.</p></div>
         </header>
         <div class="module-identity">
           <div class="module-stamp"><span class="micro-label">Baa-ndwidth</span><strong>RF</strong></div>
@@ -1640,10 +1744,9 @@
         <div class="module-footer"><p>Detailed protocol diagrams, coverage maps and hardware notes will be added to this subsystem page.</p><span class="status">Page scaffold / ready</span></div>
       </section>
 
-      <section class="page-view module-page" id="page-dog-control" data-page-view="dog-control" data-accent="dog" role="tabpanel" aria-labelledby="dog-control-tab" hidden>
+      <section class="page-view module-page" id="page-dog-control" data-page-view="dog-control" data-accent="dog" style="--accent: var(--accent-dog)" role="tabpanel" aria-labelledby="dog-control-tab" hidden>
         <header class="page-header">
-          <div><p class="eyebrow">07 / Subsystem</p><h2>Dog control</h2><p>Bring the shepherding decision to ground level through a robot dog that can be supervised, tested and trusted.</p></div>
-          <div class="page-counter">Pages<strong>07 / 07</strong></div>
+          <div><p class="eyebrow">05 / Subsystem</p><h2>Dog control</h2><p>Bring the shepherding decision to ground level through a robot dog that can be supervised, tested and trusted.</p></div>
         </header>
         <div class="module-identity">
           <div class="module-stamp"><span class="micro-label">Walkies</span><strong>UGV</strong></div>
@@ -1663,18 +1766,18 @@
     (() => {
       const pageOrder = [
         "description",
-        "research",
         "drone-control",
         "sheep-detection",
         "simulation",
         "communication",
-        "dog-control"
+        "dog-control",
+        "research"
       ];
       const pageNames = {
-        description: "Description",
-        research: "Research",
+        description: "System Architecture",
+        research: "Open Research Projects",
         "drone-control": "Drone control",
-        "sheep-detection": "Sheep detection",
+        "sheep-detection": "Vision",
         simulation: "Simulation",
         communication: "Communication",
         "dog-control": "Dog control"
@@ -1692,7 +1795,7 @@
         ".signal-visual",
         "[data-page-view]:not([hidden]) .page-header",
         "[data-page-view]:not([hidden]) .section-intro",
-        "[data-page-view]:not([hidden]) .system-map",
+        "[data-page-view]:not([hidden]) .poster-canvas",
         "[data-page-view]:not([hidden]) .description-lower",
         "[data-page-view]:not([hidden]) .objective-row",
         "[data-page-view]:not([hidden]) .research-note",
@@ -1882,6 +1985,183 @@
         });
       }
 
+      function geometryRouteClass(route) {
+        return route ? `geometry-${route.replace("-control", "").replace("-detection", "")}` : "";
+      }
+
+      function geometryRegion(item) {
+        const sourceFill = (item.fill || "").toLowerCase();
+        const fillRegions = {
+          "#e2f0d9": "communication",
+          "#70ad47": "communication",
+          "#548235": "communication",
+          "#dae3f3": "drone",
+          "#5b9bd5": "drone",
+          "#fbe5d6": "sheep",
+          "#ed7d31": "sheep",
+          "#fff2cc": "dog",
+          "#ffc000": "dog",
+          "#ffa606": "dog",
+          "#e9dbf5": "simulation",
+          "#8f45c7": "simulation"
+        };
+        if (fillRegions[sourceFill]) return fillRegions[sourceFill];
+        const routeClass = geometryRouteClass(item.route);
+        return routeClass ? routeClass.replace("geometry-", "") : "";
+      }
+
+      function wrapGeometryText(text, maxCharacters) {
+        const words = text.split(/\s+/).filter(Boolean);
+        const lines = [];
+        let line = "";
+        words.forEach((word) => {
+          if (line && `${line} ${word}`.length > maxCharacters) {
+            lines.push(line);
+            line = word;
+          } else {
+            line = line ? `${line} ${word}` : word;
+          }
+        });
+        if (line) lines.push(line);
+        return lines.length ? lines : [text];
+      }
+
+      function setSvgAttributes(element, attributes) {
+        Object.entries(attributes).forEach(([name, value]) => element.setAttribute(name, String(value)));
+      }
+
+      async function renderPipelineGeometry() {
+        const canvas = document.getElementById("poster-canvas");
+        if (!canvas) return;
+        const svgNamespace = "http://www.w3.org/2000/svg";
+        try {
+          const response = await fetch("assets/pipeline-geometry.json?source=odp-v6");
+          if (!response.ok) throw new Error(`Geometry request failed: ${response.status}`);
+          const geometry = await response.json();
+          const viewWidth = 4681;
+          const viewHeight = 3311;
+          const scaleX = viewWidth / geometry.widthIn;
+          const scaleY = viewHeight / geometry.heightIn;
+          const sheet = document.createElement("div");
+          sheet.className = "geometry-sheet";
+          const svg = document.createElementNS(svgNamespace, "svg");
+          svg.classList.add("geometry-svg");
+          setSvgAttributes(svg, { viewBox: `0 0 ${viewWidth} ${viewHeight}`, role: "img", "aria-label": "Auto Shepherd pipeline reconstructed from the uploaded slide geometry" });
+          const defs = document.createElementNS(svgNamespace, "defs");
+          const marker = document.createElementNS(svgNamespace, "marker");
+          marker.id = "geometry-arrow";
+          setSvgAttributes(marker, { markerWidth: 12, markerHeight: 12, refX: 10, refY: 5, orient: "auto", markerUnits: "userSpaceOnUse" });
+          const arrow = document.createElementNS(svgNamespace, "path");
+          setSvgAttributes(arrow, { d: "M 0 0 L 10 5 L 0 10 z", fill: "#66715f" });
+          marker.append(arrow);
+          defs.append(marker);
+          svg.append(defs);
+
+          const makeElement = (tag, attributes) => {
+            const element = document.createElementNS(svgNamespace, tag);
+            setSvgAttributes(element, attributes);
+            return element;
+          };
+
+          geometry.objects.sort((first, second) => first.order - second.order).forEach((item) => {
+            const x = item.x * scaleX;
+            const y = item.y * scaleY;
+            const width = item.width * scaleX;
+            const height = item.height * scaleY;
+            const isTransformed = Boolean(item.rotation) && !Object.hasOwn(item, "x1");
+            const drawX = isTransformed ? 0 : x;
+            const drawY = isTransformed ? 0 : y;
+            const group = item.route ? document.createElementNS(svgNamespace, "a") : document.createElementNS(svgNamespace, "g");
+            group.classList.add("geometry-object");
+            const region = geometryRegion(item);
+            if (region) group.classList.add(`geometry-region-${region}`);
+            if (item.route) {
+              group.classList.add("geometry-link", geometryRouteClass(item.route));
+              group.setAttribute("href", `#${item.route}`);
+              group.setAttribute("data-page-target", item.route);
+              group.setAttribute("tabindex", "0");
+              group.setAttribute("aria-label", `Open ${item.route.replaceAll("-", " ")}: ${item.text || item.mediaLabel || "pipeline object"}`);
+              const itemBox = makeElement("rect", { x: drawX, y: drawY, width, height, rx: Math.min(width, height) * 0.035 });
+              itemBox.classList.add("geometry-item-box");
+              group.append(itemBox);
+            }
+            if (isTransformed) {
+              group.setAttribute("transform", `translate(${x} ${y}) rotate(${item.rotation}) translate(${-width / 2} ${-height / 2})`);
+            }
+
+            if (item.kind === "native-connector") {
+              const connectorStartX = item.x1 * scaleX;
+              const connectorStartY = item.y1 * scaleY;
+              const connectorEndX = item.x2 * scaleX;
+              const connectorEndY = item.y2 * scaleY;
+              const deltaX = connectorEndX - connectorStartX;
+              const deltaY = connectorEndY - connectorStartY;
+              let pathData;
+              if (Math.abs(deltaX) < 4 || Math.abs(deltaY) < 4) {
+                pathData = `M ${connectorStartX} ${connectorStartY} L ${connectorEndX} ${connectorEndY}`;
+              } else if (Math.abs(deltaX) >= Math.abs(deltaY)) {
+                const midX = connectorStartX + deltaX / 2;
+                pathData = `M ${connectorStartX} ${connectorStartY} H ${midX} V ${connectorEndY} H ${connectorEndX}`;
+              } else {
+                const midY = connectorStartY + deltaY / 2;
+                pathData = `M ${connectorStartX} ${connectorStartY} V ${midY} H ${connectorEndX} V ${connectorEndY}`;
+              }
+              const path = makeElement("path", { d: pathData, stroke: item.stroke !== "transparent" ? item.stroke : item.fill !== "transparent" && item.fill !== "#ffffff" ? item.fill : "#66715f", "stroke-width": 8, "marker-end": "url(#geometry-arrow)" });
+              path.classList.add("geometry-connector");
+              group.append(path);
+            } else if (item.kind === "connector") {
+              const fragment = makeElement("rect", { x: drawX, y: drawY, width, height, fill: item.fill === "transparent" ? "#66715f" : item.fill, stroke: item.stroke === "transparent" ? "none" : item.stroke });
+              fragment.classList.add("geometry-fragment");
+              group.append(fragment);
+            } else if (item.kind === "media") {
+              const image = makeElement("image", { x: drawX, y: drawY, width, height, href: item.src, preserveAspectRatio: "none" });
+              image.classList.add("geometry-media");
+              group.append(image);
+            } else {
+              const box = makeElement("rect", { x: drawX, y: drawY, width, height, rx: Math.min(width, height) * 0.035, fill: item.fill === "transparent" ? "none" : item.fill, stroke: item.stroke === "transparent" ? "none" : item.stroke, "stroke-width": item.stroke === "transparent" ? 0 : 2 });
+              box.classList.add("geometry-box");
+              group.append(box);
+              if (item.kind === "label" && item.text) {
+                const isPosterTitle = item.order === 756 || item.text.includes("5thAnnual");
+                if (isPosterTitle) {
+                  const title = makeElement("text", { x: drawX + width / 2 - 28, y: drawY + height * 0.34 });
+                  title.classList.add("geometry-title-text");
+                  const subtitle = makeElement("tspan", { x: drawX + width / 2 - 28, dy: 0 });
+                  subtitle.classList.add("geometry-title-subline");
+                  subtitle.textContent = "5th Annual Summer School";
+                  const mainline = makeElement("tspan", { x: drawX + width / 2 - 28, dy: height * 0.55 });
+                  mainline.classList.add("geometry-title-mainline");
+                  mainline.textContent = "Going to the Dogs";
+                  title.append(subtitle, mainline);
+                  group.append(title);
+                  svg.append(group);
+                  return;
+                }
+                const fontSize = Math.max(44, Math.min(width * 0.24, height * 0.75));
+                const lines = wrapGeometryText(item.text, Math.max(7, Math.floor(width / (fontSize * 0.56))));
+                const lineHeight = fontSize * 1.08;
+                const text = makeElement("text", { x: drawX + width * 0.08, y: drawY + (height - lines.length * lineHeight) / 2 + fontSize * 0.86, "font-size": fontSize });
+                text.classList.add("geometry-label-text");
+                lines.forEach((line, index) => {
+                  const tspan = makeElement("tspan", { x: drawX + width * 0.08, dy: index === 0 ? 0 : lineHeight });
+                  tspan.textContent = line;
+                  text.append(tspan);
+                });
+                group.append(text);
+              }
+            }
+            svg.append(group);
+          });
+
+          sheet.append(svg);
+          canvas.replaceChildren(sheet);
+        } catch (error) {
+          const loading = document.getElementById("geometry-loading");
+          if (loading) loading.textContent = "Source geometry unavailable";
+          console.error(error);
+        }
+      }
+
       if (systemMapCanvas && systemMapViewport) {
         systemMapZoomIn.addEventListener("click", () => zoomSystemMap(0.82));
         systemMapZoomOut.addEventListener("click", () => zoomSystemMap(1.22));
@@ -1922,6 +2202,7 @@
       }
 
       addSystemMapIcons();
+      renderPipelineGeometry();
 
       pageButtons.forEach((button) => {
         button.addEventListener("click", () => {
