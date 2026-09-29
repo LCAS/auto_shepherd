@@ -1,0 +1,14 @@
+services:
+  restreamer:
+    image: datarhei/restreamer:latest
+    container_name: restreamer
+    restart: unless-stopped
+    ports:
+      - "8080:8080"      # Web UI / local web player
+      - "8181:8181"      # HTTPS UI
+      - "1935:1935"      # RTMP input from OBS
+      - "1936:1936"      # RTMPS
+      - "6000:6000/udp"  # SRT, optional
+    volumes:
+      - ../restreamer/config:/core/config
+      - ../restreamer/data:/core/data
