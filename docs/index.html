@@ -2030,12 +2030,16 @@
         Object.entries(attributes).forEach(([name, value]) => element.setAttribute(name, String(value)));
       }
 
+      function isMainGeometryText(item) {
+        return item.kind === "label" && (item.width >= 3 || /Server|Compute|Simulation|Training/i.test(item.text));
+      }
+
       async function renderPipelineGeometry() {
         const canvas = document.getElementById("poster-canvas");
         if (!canvas) return;
         const svgNamespace = "http://www.w3.org/2000/svg";
         try {
-          const response = await fetch("assets/pipeline-geometry.json?source=odp-v6");
+          const response = await fetch("assets/pipeline-geometry.json?source=odp-v7");
           if (!response.ok) throw new Error(`Geometry request failed: ${response.status}`);
           const geometry = await response.json();
           const viewWidth = 4681;
@@ -2071,18 +2075,22 @@
             const isTransformed = Boolean(item.rotation) && !Object.hasOwn(item, "x1");
             const drawX = isTransformed ? 0 : x;
             const drawY = isTransformed ? 0 : y;
-            const group = item.route ? document.createElementNS(svgNamespace, "a") : document.createElementNS(svgNamespace, "g");
+            const isMainText = isMainGeometryText(item);
+            const isPredictionControl = item.text.includes("Prediction & Control Server");
+            const isClickable = Boolean(item.route) && !isMainText;
+            const group = isClickable ? document.createElementNS(svgNamespace, "a") : document.createElementNS(svgNamespace, "g");
             group.classList.add("geometry-object");
             const region = geometryRegion(item);
             if (region) group.classList.add(`geometry-region-${region}`);
-            if (item.route) {
+            if (isClickable) {
               group.classList.add("geometry-link", geometryRouteClass(item.route));
               group.setAttribute("href", `#${item.route}`);
               group.setAttribute("data-page-target", item.route);
               group.setAttribute("tabindex", "0");
               group.setAttribute("aria-label", `Open ${item.route.replaceAll("-", " ")}: ${item.text || item.mediaLabel || "pipeline object"}`);
-              if (item.kind === "label") {
-                const itemBox = makeElement("rect", { x: drawX, y: drawY, width, height, rx: Math.min(width, height) * 0.035 });
+              if (item.kind === "label" && !isMainText) {
+                const componentBoxWidth = Math.min(width, height);
+                const itemBox = makeElement("rect", { x: drawX, y: drawY, width: componentBoxWidth, height, rx: componentBoxWidth * 0.035 });
                 itemBox.classList.add("geometry-item-box");
                 group.append(itemBox);
               }
@@ -2141,11 +2149,19 @@
                 }
                 const fontSize = Math.max(44, Math.min(width * 0.24, height * 0.75));
                 const lines = wrapGeometryText(item.text, Math.max(7, Math.floor(width / (fontSize * 0.56))));
+                if (!isMainText && lines.length === 1) lines.push("");
                 const lineHeight = fontSize * 1.08;
-                const text = makeElement("text", { x: drawX + width * 0.08, y: drawY + (height - lines.length * lineHeight) / 2 + fontSize * 0.86, "font-size": fontSize });
+                const componentBoxWidth = item.kind === "label" && !isMainText ? Math.min(width, height) : 0;
+                const textX = isMainText && !isPredictionControl
+                  ? drawX + width * 0.985
+                  : componentBoxWidth
+                    ? drawX + componentBoxWidth + 20
+                    : drawX + width * 0.015;
+                const text = makeElement("text", { x: textX, y: drawY + (height - lines.length * lineHeight) / 2 + fontSize * 0.86, "font-size": fontSize });
                 text.classList.add("geometry-label-text");
+                if (isMainText && !isPredictionControl) text.setAttribute("text-anchor", "end");
                 lines.forEach((line, index) => {
-                  const tspan = makeElement("tspan", { x: drawX + width * 0.08, dy: index === 0 ? 0 : lineHeight });
+                  const tspan = makeElement("tspan", { x: textX, dy: index === 0 ? 0 : lineHeight });
                   tspan.textContent = line;
                   text.append(tspan);
                 });
