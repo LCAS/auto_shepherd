@@ -1,0 +1,1368 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta id="theme-color" name="theme-color" content="#0c1715">
+  <meta name="description" content="Auto Shepherd brings field robotics, sheep localisation, simulation and animal-aware control into one research programme.">
+  <title>Auto Shepherd | Field systems</title>
+  <script>
+    (() => {
+      try {
+        const savedTheme = localStorage.getItem("auto-shepherd-theme");
+        if (savedTheme === "light" || savedTheme === "dark") {
+          document.documentElement.dataset.theme = savedTheme;
+        }
+      } catch {}
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --background: #0c1715;
+      --surface: #12231f;
+      --surface-raised: #193029;
+      --surface-soft: rgba(18, 35, 31, 0.78);
+      --ink: #edf1e6;
+      --muted: #a7b5a8;
+      --faint: #71857a;
+      --line: rgba(202, 230, 191, 0.16);
+      --line-strong: rgba(202, 230, 191, 0.32);
+      --lime: #c8e86b;
+      --coral: #f28268;
+      --cyan: #78cbd0;
+      --blue: #8ab6e3;
+      --shadow: rgba(0, 0, 0, 0.32);
+      --grid: rgba(202, 230, 191, 0.055);
+      --field: rgba(200, 232, 107, 0.09);
+      --field-line: rgba(200, 232, 107, 0.45);
+      --sans: "Space Grotesk", sans-serif;
+      --mono: "IBM Plex Mono", monospace;
+    }
+
+    :root[data-theme="light"] {
+      --background: #f1f3ea;
+      --surface: #fbfcf7;
+      --surface-raised: #e6eee0;
+      --surface-soft: rgba(251, 252, 247, 0.82);
+      --ink: #17241d;
+      --muted: #53665a;
+      --faint: #7c8d80;
+      --line: rgba(23, 36, 29, 0.15);
+      --line-strong: rgba(23, 36, 29, 0.31);
+      --lime: #668b21;
+      --coral: #c95d46;
+      --cyan: #247d83;
+      --blue: #356b9a;
+      --shadow: rgba(23, 36, 29, 0.12);
+      --grid: rgba(23, 36, 29, 0.055);
+      --field: rgba(102, 139, 33, 0.08);
+      --field-line: rgba(102, 139, 33, 0.42);
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      min-width: 320px;
+      min-height: 100%;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100svh;
+      margin: 0;
+      overflow-x: hidden;
+      background-color: var(--background);
+      background-image:
+        linear-gradient(var(--grid) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+      background-size: 42px 42px;
+      color: var(--ink);
+      font-family: var(--sans);
+      transition: background-color 180ms ease, color 180ms ease;
+    }
+
+    body::before {
+      position: fixed;
+      z-index: -1;
+      inset: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(120deg, transparent 0 42%, color-mix(in srgb, var(--coral) 5%, transparent) 42% 42.08%, transparent 42.08% 100%),
+        linear-gradient(300deg, transparent 0 58%, color-mix(in srgb, var(--cyan) 5%, transparent) 58% 58.08%, transparent 58.08% 100%);
+      content: "";
+    }
+
+    a { color: inherit; }
+    button { color: inherit; font: inherit; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    [hidden] { display: none !important; }
+
+    .topbar {
+      position: sticky;
+      z-index: 20;
+      top: 0;
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 24px;
+      min-height: 76px;
+      padding: 12px 28px;
+      border-bottom: 1px solid var(--line);
+      background: color-mix(in srgb, var(--background) 89%, transparent);
+      box-shadow: 0 12px 28px var(--shadow);
+      backdrop-filter: blur(18px);
+    }
+
+    .brand {
+      display: inline-flex;
+      min-width: 190px;
+      align-items: center;
+      gap: 11px;
+      color: var(--ink);
+      text-decoration: none;
+    }
+
+    .brand-mark {
+      display: grid;
+      width: 39px;
+      height: 39px;
+      place-items: center;
+      overflow: hidden;
+      border: 1px solid var(--line-strong);
+      border-radius: 50%;
+      background: var(--surface-raised);
+    }
+
+    .brand-mark img {
+      display: block;
+      width: 29px;
+      height: 29px;
+      object-fit: contain;
+      mix-blend-mode: multiply;
+    }
+
+    :root[data-theme="dark"] .brand-mark img { mix-blend-mode: screen; }
+
+    .brand-copy { display: grid; gap: 3px; }
+
+    .brand-name {
+      font-size: 0.92rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      line-height: 1;
+    }
+
+    .brand-meta,
+    .eyebrow,
+    .micro-label,
+    .meta-value,
+    .outline-index,
+    .tag,
+    .status,
+    .page-counter,
+    .signal-code,
+    .source-link {
+      font-family: var(--mono);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .brand-meta {
+      color: var(--faint);
+      font-size: 0.51rem;
+      line-height: 1;
+    }
+
+    .top-nav {
+      min-width: 0;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    .top-nav::-webkit-scrollbar { display: none; }
+
+    .nav-list {
+      display: flex;
+      min-width: max-content;
+      justify-content: center;
+      gap: 3px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .nav-item {
+      display: inline-flex;
+      min-height: 41px;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 10px;
+      border: 1px solid transparent;
+      border-radius: 3px;
+      background: transparent;
+      color: var(--faint);
+      cursor: pointer;
+      font-size: 0.62rem;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      transition: background 150ms ease, border-color 150ms ease, color 150ms ease;
+      white-space: nowrap;
+    }
+
+    .nav-item span {
+      color: var(--faint);
+      font-family: var(--mono);
+      font-size: 0.53rem;
+    }
+
+    .nav-item:hover,
+    .nav-item:focus-visible {
+      border-color: var(--line-strong);
+      color: var(--ink);
+      outline: none;
+    }
+
+    .nav-item[aria-selected="true"] {
+      border-color: color-mix(in srgb, var(--lime) 45%, var(--line));
+      background: color-mix(in srgb, var(--lime) 12%, transparent);
+      color: var(--lime);
+    }
+
+    .nav-item[aria-selected="true"] span { color: var(--lime); }
+
+    .theme-toggle {
+      display: inline-flex;
+      min-height: 38px;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 10px;
+      border: 1px solid var(--line-strong);
+      border-radius: 3px;
+      background: var(--surface-soft);
+      cursor: pointer;
+      font-family: var(--mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: background 150ms ease, border-color 150ms ease, color 150ms ease;
+    }
+
+    .theme-toggle:hover,
+    .theme-toggle:focus-visible {
+      border-color: var(--lime);
+      background: var(--surface-raised);
+      color: var(--lime);
+      outline: none;
+    }
+
+    .theme-icon {
+      display: grid;
+      width: 16px;
+      height: 16px;
+      place-items: center;
+      border: 1px solid currentColor;
+      border-radius: 50%;
+      color: var(--lime);
+      font-size: 0.48rem;
+      line-height: 1;
+    }
+
+    .site-grid {
+      display: grid;
+      grid-template-columns: minmax(275px, 0.72fr) minmax(0, 1.28fr);
+      gap: 0;
+      width: min(1540px, 100%);
+      min-height: calc(100svh - 76px);
+      margin: 0 auto;
+    }
+
+    .signal-column {
+      position: sticky;
+      top: 100px;
+      display: flex;
+      min-width: 0;
+      height: calc(100svh - 100px);
+      flex-direction: column;
+      padding: 24px 28px 28px;
+      border-right: 1px solid var(--line);
+    }
+
+    .signal-visual {
+      position: relative;
+      display: flex;
+      min-height: 520px;
+      flex: 1;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+      padding: 28px;
+      border: 1px solid var(--line-strong);
+      background:
+        linear-gradient(148deg, color-mix(in srgb, var(--lime) 12%, transparent), transparent 32%),
+        linear-gradient(330deg, color-mix(in srgb, var(--coral) 9%, transparent), transparent 37%),
+        var(--surface);
+      box-shadow: 0 22px 50px var(--shadow);
+    }
+
+    .signal-visual::before {
+      position: absolute;
+      z-index: 0;
+      inset: 0;
+      background-image:
+        linear-gradient(var(--grid) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+      background-size: 30px 30px;
+      content: "";
+      opacity: 1;
+    }
+
+    .signal-visual::after {
+      position: absolute;
+      z-index: 0;
+      top: 19%;
+      right: -18%;
+      width: 128%;
+      height: 44%;
+      border: 1px solid var(--field-line);
+      border-radius: 50%;
+      content: "";
+      opacity: 0.72;
+      transform: rotate(-17deg);
+    }
+
+    .signal-line,
+    .signal-frame,
+    .signal-mark,
+    .signal-copy,
+    .signal-meta,
+    .signal-footer { position: relative; z-index: 1; }
+
+    .signal-line {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 39%;
+      border-left: 1px solid color-mix(in srgb, var(--cyan) 30%, transparent);
+      transform: rotate(24deg);
+      transform-origin: top;
+    }
+
+    .signal-frame {
+      position: absolute;
+      right: 9%;
+      bottom: 18%;
+      width: 52%;
+      height: 27%;
+      border: 1px solid var(--field-line);
+      transform: rotate(-11deg);
+    }
+
+    .signal-frame::before,
+    .signal-frame::after {
+      position: absolute;
+      content: "";
+    }
+
+    .signal-frame::before {
+      top: 50%;
+      right: -17%;
+      left: -17%;
+      border-top: 1px solid var(--field-line);
+    }
+
+    .signal-frame::after {
+      top: -18%;
+      bottom: -18%;
+      left: 50%;
+      border-left: 1px solid var(--field-line);
+    }
+
+    .signal-copy { max-width: 300px; }
+
+    .signal-code {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--lime);
+      font-size: 0.59rem;
+      font-weight: 600;
+    }
+
+    .signal-code::before {
+      width: 7px;
+      height: 7px;
+      border: 1px solid currentColor;
+      border-radius: 50%;
+      background: color-mix(in srgb, currentColor 18%, transparent);
+      box-shadow: 0 0 0 4px color-mix(in srgb, currentColor 7%, transparent);
+      content: "";
+    }
+
+    .signal-copy h1 {
+      max-width: 290px;
+      margin: 23px 0 16px;
+      color: var(--ink);
+      font-size: 4.65rem;
+      font-weight: 600;
+      letter-spacing: -0.075em;
+      line-height: 0.88;
+    }
+
+    .signal-copy p {
+      max-width: 275px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.87rem;
+      line-height: 1.55;
+    }
+
+    .signal-mark {
+      position: absolute;
+      top: 44%;
+      right: 13%;
+      display: grid;
+      width: 98px;
+      height: 98px;
+      place-items: center;
+      border: 1px solid var(--line-strong);
+      border-radius: 50%;
+      background: color-mix(in srgb, var(--surface) 67%, transparent);
+      box-shadow: 0 0 0 10px color-mix(in srgb, var(--lime) 6%, transparent);
+      transform: rotate(7deg);
+    }
+
+    .signal-mark img {
+      display: block;
+      width: 69px;
+      height: 69px;
+      object-fit: contain;
+      mix-blend-mode: multiply;
+    }
+
+    :root[data-theme="dark"] .signal-mark img { mix-blend-mode: screen; }
+
+    .signal-meta {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      max-width: 300px;
+      margin-top: auto;
+      padding-top: 24px;
+    }
+
+    .meta-block { border-top: 1px solid var(--line-strong); padding-top: 9px; }
+
+    .micro-label {
+      display: block;
+      margin-bottom: 5px;
+      color: var(--faint);
+      font-size: 0.5rem;
+    }
+
+    .meta-value {
+      color: var(--ink);
+      font-size: 0.61rem;
+      line-height: 1.4;
+    }
+
+    .signal-footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      padding-top: 14px;
+      color: var(--faint);
+      font-family: var(--mono);
+      font-size: 0.5rem;
+      letter-spacing: 0.07em;
+      line-height: 1.5;
+      text-transform: uppercase;
+    }
+
+    .signal-footer span:last-child { color: var(--coral); }
+
+    .content-column {
+      min-width: 0;
+      padding: 42px 7.5% 80px;
+    }
+
+    .page-view { min-width: 0; animation: page-in 280ms ease both; }
+
+    @keyframes page-in {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes theme-component-in {
+      from { opacity: 0.72; transform: translateY(8px) scale(0.995); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .theme-transition-item { --theme-index: 0; }
+
+    body.is-theme-transitioning .theme-transition-item {
+      animation: theme-component-in 560ms cubic-bezier(0.22, 1, 0.36, 1) both;
+      animation-delay: calc(var(--theme-index) * 52ms);
+    }
+
+    .page-header {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: end;
+      gap: 28px;
+      margin-bottom: 42px;
+      padding-bottom: 27px;
+      border-bottom: 1px solid var(--line-strong);
+    }
+
+    .eyebrow {
+      margin: 0 0 16px;
+      color: var(--lime);
+      font-size: 0.62rem;
+      font-weight: 600;
+      line-height: 1.4;
+    }
+
+    .page-header h2 {
+      max-width: 690px;
+      margin: 0;
+      color: var(--ink);
+      font-size: 3.65rem;
+      font-weight: 500;
+      letter-spacing: -0.07em;
+      line-height: 0.98;
+    }
+
+    .page-header p:not(.eyebrow) {
+      max-width: 620px;
+      margin: 18px 0 0;
+      color: var(--muted);
+      font-size: 0.98rem;
+      line-height: 1.65;
+    }
+
+    .page-counter {
+      align-self: start;
+      color: var(--faint);
+      font-size: 0.58rem;
+      line-height: 1.5;
+      text-align: right;
+    }
+
+    .page-counter strong {
+      display: block;
+      margin-top: 7px;
+      color: var(--coral);
+      font-size: 1.2rem;
+      font-weight: 500;
+    }
+
+    .section-intro {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 20px;
+      margin-bottom: 14px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .section-intro h3 {
+      margin: 0;
+      font-size: 0.77rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .section-intro span {
+      color: var(--faint);
+      font-family: var(--mono);
+      font-size: 0.54rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .overview-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .overview-card {
+      position: relative;
+      display: flex;
+      min-height: 155px;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 17px 18px 16px;
+      border: 1px solid var(--line);
+      background: color-mix(in srgb, var(--surface) 72%, transparent);
+      text-decoration: none;
+      transition: border-color 150ms ease, background 150ms ease, transform 150ms ease;
+    }
+
+    .overview-card:last-child { grid-column: span 2; min-height: 135px; }
+
+    .overview-card:hover,
+    .overview-card:focus-visible {
+      border-color: var(--accent, var(--lime));
+      background: color-mix(in srgb, var(--surface-raised) 84%, transparent);
+      outline: none;
+      transform: translateY(-2px);
+    }
+
+    .overview-card-top,
+    .overview-card-bottom {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 14px;
+    }
+
+    .overview-number {
+      color: var(--accent, var(--lime));
+      font-family: var(--mono);
+      font-size: 0.58rem;
+    }
+
+    .overview-arrow {
+      color: var(--accent, var(--lime));
+      font-size: 1.25rem;
+      line-height: 0.8;
+    }
+
+    .overview-card h3 {
+      max-width: 220px;
+      margin: 0;
+      font-size: 1.05rem;
+      font-weight: 500;
+      letter-spacing: -0.035em;
+    }
+
+    .overview-card p {
+      max-width: 300px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.72rem;
+      line-height: 1.45;
+    }
+
+    .overview-card .tag { color: var(--faint); font-size: 0.5rem; }
+
+    .description-lower,
+    .research-footer {
+      display: grid;
+      grid-template-columns: minmax(0, 1.25fr) minmax(180px, 0.75fr);
+      gap: 28px;
+      margin-top: 38px;
+      padding-top: 18px;
+      border-top: 1px solid var(--line-strong);
+    }
+
+    .description-lower h3,
+    .research-footer h3 {
+      margin: 0 0 10px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .description-lower p,
+    .research-footer p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.79rem;
+      line-height: 1.65;
+    }
+
+    .source-list {
+      display: grid;
+      align-content: start;
+      gap: 9px;
+    }
+
+    .source-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--line);
+      color: var(--ink);
+      font-size: 0.54rem;
+      text-decoration: none;
+    }
+
+    .source-link::after {
+      color: var(--coral);
+      content: "->";
+    }
+
+    .source-link:hover,
+    .source-link:focus-visible { color: var(--lime); outline: none; }
+
+    .objective-list {
+      border-top: 1px solid var(--line-strong);
+    }
+
+    .objective-row {
+      display: grid;
+      grid-template-columns: 46px minmax(0, 1fr) auto;
+      align-items: start;
+      gap: 18px;
+      padding: 21px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .objective-index {
+      color: var(--coral);
+      font-family: var(--mono);
+      font-size: 0.63rem;
+    }
+
+    .objective-row h3 {
+      margin: 0 0 7px;
+      font-size: 1.25rem;
+      font-weight: 500;
+      letter-spacing: -0.04em;
+    }
+
+    .objective-row p {
+      max-width: 550px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.79rem;
+      line-height: 1.6;
+    }
+
+    .objective-track {
+      min-width: 116px;
+      color: var(--faint);
+      font-family: var(--mono);
+      font-size: 0.5rem;
+      letter-spacing: 0.08em;
+      line-height: 1.5;
+      text-align: right;
+      text-transform: uppercase;
+    }
+
+    .research-note {
+      margin-top: 24px;
+      padding: 16px 18px;
+      border-left: 2px solid var(--coral);
+      background: color-mix(in srgb, var(--coral) 7%, transparent);
+    }
+
+    .research-note p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.76rem;
+      line-height: 1.6;
+    }
+
+    .module-page[data-accent="drone"] { --accent: var(--coral); }
+    .module-page[data-accent="sheep"] { --accent: var(--cyan); }
+    .module-page[data-accent="simulation"] { --accent: var(--blue); }
+    .module-page[data-accent="communication"] { --accent: var(--lime); }
+    .module-page[data-accent="dog"] { --accent: #e6b15f; }
+
+    .module-identity {
+      display: grid;
+      grid-template-columns: minmax(0, 0.75fr) minmax(0, 1.25fr);
+      gap: 28px;
+      margin-bottom: 38px;
+    }
+
+    .module-stamp {
+      position: relative;
+      min-height: 220px;
+      overflow: hidden;
+      padding: 20px;
+      border: 1px solid var(--accent);
+      background:
+        linear-gradient(145deg, color-mix(in srgb, var(--accent) 17%, transparent), transparent 50%),
+        var(--surface);
+    }
+
+    .module-stamp::before {
+      position: absolute;
+      right: -23%;
+      bottom: -46%;
+      width: 120%;
+      height: 120%;
+      border: 1px solid color-mix(in srgb, var(--accent) 75%, transparent);
+      border-radius: 50%;
+      content: "";
+      transform: rotate(-21deg);
+    }
+
+    .module-stamp .micro-label { color: var(--accent); }
+
+    .module-stamp strong {
+      position: absolute;
+      bottom: 17px;
+      left: 20px;
+      color: var(--ink);
+      font-family: var(--mono);
+      font-size: 3.3rem;
+      font-weight: 400;
+      letter-spacing: -0.08em;
+      line-height: 0.8;
+    }
+
+    .module-brief { align-self: center; }
+
+    .module-brief h3 {
+      max-width: 480px;
+      margin: 0 0 13px;
+      font-size: 1.65rem;
+      font-weight: 500;
+      letter-spacing: -0.05em;
+      line-height: 1.06;
+    }
+
+    .module-brief p:not(.eyebrow) {
+      max-width: 520px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.88rem;
+      line-height: 1.65;
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-top: 20px;
+    }
+
+    .tag {
+      padding: 6px 8px;
+      border: 1px solid color-mix(in srgb, var(--accent) 43%, var(--line));
+      color: var(--accent);
+      font-size: 0.5rem;
+    }
+
+    .scope-list {
+      margin: 0;
+      padding: 0;
+      border-top: 1px solid var(--line-strong);
+      list-style: none;
+      counter-reset: scope;
+    }
+
+    .scope-item {
+      display: grid;
+      grid-template-columns: 44px minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 16px;
+      min-height: 77px;
+      border-bottom: 1px solid var(--line);
+      counter-increment: scope;
+    }
+
+    .scope-item::before {
+      color: var(--accent);
+      content: counter(scope, decimal-leading-zero);
+      font-family: var(--mono);
+      font-size: 0.59rem;
+    }
+
+    .scope-item h4 {
+      margin: 0 0 4px;
+      font-size: 0.89rem;
+      font-weight: 500;
+    }
+
+    .scope-item p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.7rem;
+      line-height: 1.45;
+    }
+
+    .scope-state {
+      color: var(--faint);
+      font-family: var(--mono);
+      font-size: 0.48rem;
+      letter-spacing: 0.08em;
+      text-align: right;
+      text-transform: uppercase;
+    }
+
+    .module-footer {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 20px;
+      margin-top: 33px;
+      padding-top: 13px;
+      border-top: 1px solid var(--line-strong);
+    }
+
+    .module-footer p {
+      max-width: 520px;
+      margin: 0;
+      color: var(--faint);
+      font-size: 0.68rem;
+      line-height: 1.5;
+    }
+
+    .status {
+      flex: 0 0 auto;
+      color: var(--accent);
+      font-size: 0.53rem;
+    }
+
+    @media (max-width: 1100px) {
+      .topbar { gap: 14px; padding-right: 18px; padding-left: 18px; }
+      .brand { min-width: 176px; }
+      .nav-item { padding-right: 7px; padding-left: 7px; }
+      .site-grid { grid-template-columns: minmax(238px, 0.66fr) minmax(0, 1.34fr); }
+      .signal-column { padding-right: 18px; padding-left: 18px; }
+      .signal-copy h1 { font-size: 3.8rem; }
+      .content-column { padding-right: 5%; padding-left: 5%; }
+    }
+
+    @media (max-width: 800px) {
+      .topbar {
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 10px 14px;
+      }
+
+      .top-nav { grid-column: 1 / -1; grid-row: 2; margin: 0 -18px -2px; padding: 0 18px 2px; }
+      .nav-list { justify-content: flex-start; }
+      .site-grid { display: block; min-height: 0; }
+      .signal-column {
+        position: relative;
+        top: auto;
+        height: auto;
+        padding: 18px;
+        border-right: 0;
+      }
+      .signal-visual { min-height: 460px; }
+      .content-column { padding: 28px 18px 60px; }
+      .page-header { margin-bottom: 32px; }
+      .page-header h2 { font-size: 3rem; }
+      .module-identity { grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: 18px; }
+    }
+
+    @media (max-width: 560px) {
+      .topbar { padding: 10px 14px; }
+      .brand { min-width: 0; }
+      .brand-mark { width: 35px; height: 35px; }
+      .brand-mark img { width: 26px; height: 26px; }
+      .brand-name { font-size: 0.82rem; }
+      .theme-toggle { width: 38px; justify-content: center; padding-right: 7px; padding-left: 7px; }
+      .theme-toggle span:last-child { display: none; }
+      .top-nav { margin-right: -14px; margin-left: -14px; padding-right: 14px; padding-left: 14px; }
+      .signal-column { padding: 12px; }
+      .signal-visual { min-height: 430px; padding: 22px; }
+      .signal-copy h1 { font-size: 3.55rem; }
+      .signal-mark { top: 46%; right: 11%; width: 80px; height: 80px; }
+      .signal-mark img { width: 56px; height: 56px; }
+      .content-column { padding: 24px 12px 52px; }
+      .page-header { display: block; }
+      .page-header h2 { font-size: 2.55rem; }
+      .page-counter { margin-top: 20px; text-align: left; }
+      .overview-grid { grid-template-columns: 1fr; }
+      .overview-card:last-child { grid-column: auto; }
+      .description-lower,
+      .research-footer,
+      .module-identity { grid-template-columns: 1fr; gap: 22px; }
+      .objective-row { grid-template-columns: 33px minmax(0, 1fr); gap: 12px; }
+      .objective-track { grid-column: 2; min-width: 0; text-align: left; }
+      .module-stamp { min-height: 150px; }
+      .module-stamp strong { font-size: 2.8rem; }
+      .scope-item { grid-template-columns: 32px minmax(0, 1fr); gap: 10px; padding: 12px 0; }
+      .scope-state { grid-column: 2; text-align: left; }
+      .module-footer { display: block; }
+      .status { display: block; margin-top: 12px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+      body.is-theme-transitioning .theme-transition-item { animation: none; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#description" aria-label="Auto Shepherd description">
+      <span class="brand-mark"><img src="assets/auto-shepherd-mark.png" alt=""></span>
+      <span class="brand-copy">
+        <span class="brand-name">Auto Shepherd</span>
+        <span class="brand-meta">Field robotics programme</span>
+      </span>
+    </a>
+
+    <nav class="top-nav" aria-label="Auto Shepherd pages">
+      <div class="nav-list" role="tablist" aria-label="Programme sections">
+        <button class="nav-item" id="description-tab" type="button" role="tab" data-page-target="description" aria-controls="page-description" aria-selected="true"><span>01</span>Description</button>
+        <button class="nav-item" id="research-tab" type="button" role="tab" data-page-target="research" aria-controls="page-research" aria-selected="false"><span>02</span>Research</button>
+        <button class="nav-item" id="drone-control-tab" type="button" role="tab" data-page-target="drone-control" aria-controls="page-drone-control" aria-selected="false"><span>03</span>Drone control</button>
+        <button class="nav-item" id="sheep-detection-tab" type="button" role="tab" data-page-target="sheep-detection" aria-controls="page-sheep-detection" aria-selected="false"><span>04</span>Sheep detection</button>
+        <button class="nav-item" id="simulation-tab" type="button" role="tab" data-page-target="simulation" aria-controls="page-simulation" aria-selected="false"><span>05</span>Simulation</button>
+        <button class="nav-item" id="communication-tab" type="button" role="tab" data-page-target="communication" aria-controls="page-communication" aria-selected="false"><span>06</span>Communication</button>
+        <button class="nav-item" id="dog-control-tab" type="button" role="tab" data-page-target="dog-control" aria-controls="page-dog-control" aria-selected="false"><span>07</span>Dog control</button>
+      </div>
+    </nav>
+
+    <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to light mode" title="Switch to light mode">
+      <span class="theme-icon" id="theme-icon" aria-hidden="true">L</span>
+      <span id="theme-label">Light</span>
+    </button>
+  </header>
+
+  <div class="site-grid">
+    <aside class="signal-column" aria-label="Auto Shepherd programme identity">
+      <div class="signal-visual">
+        <span class="signal-line" aria-hidden="true"></span>
+        <span class="signal-frame" aria-hidden="true"></span>
+        <div class="signal-copy">
+          <span class="signal-code">AS / 01 / Field system</span>
+          <h1>Auto<br>Shepherd</h1>
+          <p>Robotics for understanding, guiding and caring for animals across the working landscape.</p>
+        </div>
+        <div class="signal-mark" aria-hidden="true"><img src="assets/auto-shepherd-mark.png" alt=""></div>
+        <div class="signal-meta">
+          <div class="meta-block">
+            <span class="micro-label">Focus</span>
+            <span class="meta-value">Animal-aware autonomy</span>
+          </div>
+          <div class="meta-block">
+            <span class="micro-label">Setting</span>
+            <span class="meta-value">Open field systems</span>
+          </div>
+        </div>
+        <div class="signal-footer">
+          <span>Lincoln / UK</span>
+          <span>Outline release 01</span>
+        </div>
+      </div>
+    </aside>
+
+    <main class="content-column" id="page-content">
+      <section class="page-view" id="page-description" data-page-view="description" role="tabpanel" aria-labelledby="description-tab">
+        <header class="page-header">
+          <div>
+            <p class="eyebrow">01 / Programme description</p>
+            <h2>A field system assembled from many kinds of intelligence.</h2>
+            <p>Auto Shepherd brings aerial sensing, animal localisation, simulation, communications and robot-dog control into one shared research programme. This is the working outline; the full system map will follow the project poster.</p>
+          </div>
+          <div class="page-counter">Pages<strong>01 / 07</strong></div>
+        </header>
+
+        <div class="section-intro">
+          <h3>Core subsystems</h3>
+          <span>Five connected work packages</span>
+        </div>
+        <div class="overview-grid">
+          <a class="overview-card" href="#drone-control" data-page-target="drone-control" style="--accent: var(--coral)">
+            <div class="overview-card-top"><span class="overview-number">03</span><span class="overview-arrow">-></span></div>
+            <div class="overview-card-bottom"><h3>Drone control</h3><p>Capture the field from above, carry the right data home, and make flight decisions legible.</p></div>
+          </a>
+          <a class="overview-card" href="#sheep-detection" data-page-target="sheep-detection" style="--accent: var(--cyan)">
+            <div class="overview-card-top"><span class="overview-number">04</span><span class="overview-arrow">-></span></div>
+            <div class="overview-card-bottom"><h3>Sheep detection</h3><p>Turn aerial imagery into tracked, geo-referenced knowledge of the flock.</p></div>
+          </a>
+          <a class="overview-card" href="#simulation" data-page-target="simulation" style="--accent: var(--blue)">
+            <div class="overview-card-top"><span class="overview-number">05</span><span class="overview-arrow">-></span></div>
+            <div class="overview-card-bottom"><h3>Simulation</h3><p>Explore flock behaviour, dog influence and synthetic data before field trials.</p></div>
+          </a>
+          <a class="overview-card" href="#communication" data-page-target="communication" style="--accent: var(--lime)">
+            <div class="overview-card-top"><span class="overview-number">06</span><span class="overview-arrow">-></span></div>
+            <div class="overview-card-bottom"><h3>Communication</h3><p>Give every subsystem a dependable way to exchange messages across the field.</p></div>
+          </a>
+          <a class="overview-card" href="#dog-control" data-page-target="dog-control" style="--accent: #e6b15f">
+            <div class="overview-card-top"><span class="overview-number">07</span><span class="overview-arrow">-></span></div>
+            <div class="overview-card-bottom"><h3>Dog control</h3><p>Connect autonomy, teleoperation and animal-aware motion at ground level.</p></div>
+          </a>
+        </div>
+
+        <div class="description-lower">
+          <div>
+            <h3>Programme shape</h3>
+            <p>Each work package can stand alone while contributing to a common loop: observe the animals, understand their movement, decide what should happen next, and communicate that decision safely.</p>
+          </div>
+          <div class="source-list">
+            <a class="source-link" href="https://github.com/LCAS/auto_shepherd_sheep_localisation" target="_blank" rel="noreferrer">Sheep localisation</a>
+            <a class="source-link" href="https://github.com/LCAS/auto_shepherd_simulation" target="_blank" rel="noreferrer">ShepSim</a>
+            <a class="source-link" href="https://github.com/LCAS/auto_shepherd_communications" target="_blank" rel="noreferrer">Communications</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="page-view" id="page-research" data-page-view="research" role="tabpanel" aria-labelledby="research-tab" hidden>
+        <header class="page-header">
+          <div>
+            <p class="eyebrow">02 / Research agenda</p>
+            <h2>Questions that keep the system pointed at the real world.</h2>
+            <p>The research page is ready for the objectives, methods and development locations from the project poster. For now, these are the three lines the programme is being shaped around.</p>
+          </div>
+          <div class="page-counter">Pages<strong>02 / 07</strong></div>
+        </header>
+
+        <div class="section-intro">
+          <h3>Core research objectives</h3>
+          <span>Working outline</span>
+        </div>
+        <div class="objective-list">
+          <article class="objective-row">
+            <span class="objective-index">01</span>
+            <div><h3>Understand animal response</h3><p>Measure how sheep and dogs respond to sensing, prediction and intervention, keeping welfare part of the system design rather than an afterthought.</p></div>
+            <span class="objective-track">Behaviour<br>Welfare</span>
+          </article>
+          <article class="objective-row">
+            <span class="objective-index">02</span>
+            <div><h3>Coordinate a mixed robot team</h3><p>Develop a dependable loop between aerial observation, field communications, simulation and ground control that can be tested and explained.</p></div>
+            <span class="objective-track">Autonomy<br>Integration</span>
+          </article>
+          <article class="objective-row">
+            <span class="objective-index">03</span>
+            <div><h3>Build evidence for adoption</h3><p>Explore what farmers, researchers and animals need from a useful shepherding system, including the practical, ethical and economic conditions for use.</p></div>
+            <span class="objective-track">Field work<br>Adoption</span>
+          </article>
+        </div>
+
+        <div class="research-note"><p>Development locations and objective-specific methods will be added here from the poster, with links out to the subsystem pages that make each line of research possible.</p></div>
+        <div class="research-footer">
+          <div><h3>Developed through</h3><p>Field trials, simulation studies, subsystem experiments and conversations with the people who work alongside animals.</p></div>
+          <div><h3>Next addition</h3><p>Poster-derived objective map</p></div>
+        </div>
+      </section>
+
+      <section class="page-view module-page" id="page-drone-control" data-page-view="drone-control" data-accent="drone" role="tabpanel" aria-labelledby="drone-control-tab" hidden>
+        <header class="page-header">
+          <div><p class="eyebrow">03 / Subsystem</p><h2>Drone control</h2><p>The eye in the sky: a reliable path from aircraft data to useful, deliberate field observation.</p></div>
+          <div class="page-counter">Pages<strong>03 / 07</strong></div>
+        </header>
+        <div class="module-identity">
+          <div class="module-stamp"><span class="micro-label">Baa Force One</span><strong>UAV</strong></div>
+          <div class="module-brief"><p class="eyebrow">Working outline</p><h3>See the field clearly, then decide what the aircraft should do next.</h3><p>Streaming, telemetry, camera pose and future autonomy belong together here. The page will grow with the drone control package.</p><div class="tag-row"><span class="tag">Video</span><span class="tag">Telemetry</span><span class="tag">Flight planning</span></div></div>
+        </div>
+        <ol class="scope-list">
+          <li class="scope-item"><div><h4>Real-time data streaming</h4><p>Video, GPS, camera information and telemetry into the shared ROS2 system.</p></div><span class="scope-state">Outline</span></li>
+          <li class="scope-item"><div><h4>Remote tele-operation</h4><p>Coordinate, plan and review a flight before sending it into the field.</p></div><span class="scope-state">Outline</span></li>
+          <li class="scope-item"><div><h4>Autonomous planning</h4><p>Keep targets in frame while accounting for battery life, risk and handover.</p></div><span class="scope-state">Outline</span></li>
+        </ol>
+        <div class="module-footer"><p>Detailed goals, diagrams and project links will be added to this subsystem page.</p><span class="status">Page scaffold / ready</span></div>
+      </section>
+
+      <section class="page-view module-page" id="page-sheep-detection" data-page-view="sheep-detection" data-accent="sheep" role="tabpanel" aria-labelledby="sheep-detection-tab" hidden>
+        <header class="page-header">
+          <div><p class="eyebrow">04 / Subsystem</p><h2>Sheep detection</h2><p>Make a moving flock measurable: detect individuals, follow them over time, and place them back on the map.</p></div>
+          <div class="page-counter">Pages<strong>04 / 07</strong></div>
+        </header>
+        <div class="module-identity">
+          <div class="module-stamp"><span class="micro-label">ShLAMb</span><strong>CV</strong></div>
+          <div class="module-brief"><p class="eyebrow">Working outline</p><h3>From aerial pixels to a persistent picture of the flock.</h3><p>Computer vision, tracking and geo-referencing form the bridge between drone observation and decisions made elsewhere in the system.</p><div class="tag-row"><span class="tag">Detection</span><span class="tag">Tracking</span><span class="tag">Geo-reference</span></div></div>
+        </div>
+        <ol class="scope-list">
+          <li class="scope-item"><div><h4>Sheep detection</h4><p>Optimise a vision pipeline for real-time detection from UAV-captured video.</p></div><span class="scope-state">Outline</span></li>
+          <li class="scope-item"><div><h4>Individual tracking</h4><p>Maintain identities and movement histories through changing aerial views.</p></div><span class="scope-state">Outline</span></li>
+          <li class="scope-item"><div><h4>Mapping and clustering</h4><p>Convert image observations into global positions, paths and useful flock groupings.</p></div><span class="scope-state">Outline</span></li>
+        </ol>
+        <div class="module-footer"><p>Detailed datasets, visualisations and evaluation results will be added to this subsystem page.</p><span class="status">Page scaffold / ready</span></div>
+      </section>
+
+      <section class="page-view module-page" id="page-simulation" data-page-view="simulation" data-accent="simulation" role="tabpanel" aria-labelledby="simulation-tab" hidden>
+        <header class="page-header">
+          <div><p class="eyebrow">05 / Subsystem</p><h2>Simulation</h2><p>Build a place to test flocking, control strategies and cross-system behaviour before the next field run.</p></div>
+          <div class="page-counter">Pages<strong>05 / 07</strong></div>
+        </header>
+        <div class="module-identity">
+          <div class="module-stamp"><span class="micro-label">ShepSim</span><strong>SIM</strong></div>
+          <div class="module-brief"><p class="eyebrow">Working outline</p><h3>A controllable rehearsal space for natural systems.</h3><p>Simulation ties together organic flocking, robot-dog influence and synthetic data so new ideas can be explored with repeatable conditions.</p><div class="tag-row"><span class="tag">Flocking</span><span class="tag">Prediction</span><span class="tag">Synthetic data</span></div></div>
+        </div>
+        <ol class="scope-list">
+          <li class="scope-item"><div><h4>Prediction and control</h4><p>Develop strategies for influencing sheep movement toward a target location.</p></div><span class="scope-state">Outline</span></li>
+          <li class="scope-item"><div><h4>Boid training server</h4><p>Use computer vision inputs to refine a closed-loop natural systems model.</p></div><span class="scope-state">Outline</span></li>
+          <li class="scope-item"><div><h4>Simulation server</h4><p>Work with drone and vision systems to produce a useful synthetic stream.</p></div><span class="scope-state">Outline</span></li>
+        </ol>
+        <div class="module-footer"><p>Detailed simulator views, parameters and experiment notes will be added to this subsystem page.</p><span class="status">Page scaffold / ready</span></div>
+      </section>
+
+      <section class="page-view module-page" id="page-communication" data-page-view="communication" data-accent="communication" role="tabpanel" aria-labelledby="communication-tab" hidden>
+        <header class="page-header">
+          <div><p class="eyebrow">06 / Subsystem</p><h2>Communication</h2><p>Keep the distributed system coherent when its robots, radios and operators are spread across the field.</p></div>
+          <div class="page-counter">Pages<strong>06 / 07</strong></div>
+        </header>
+        <div class="module-identity">
+          <div class="module-stamp"><span class="micro-label">Baa-ndwidth</span><strong>RF</strong></div>
+          <div class="module-brief"><p class="eyebrow">Working outline</p><h3>The shared language and infrastructure between groups.</h3><p>Messages, serial bridges and empirical radio studies make the wider shepherding system possible beyond a single machine or network.</p><div class="tag-row"><span class="tag">ROS2</span><span class="tag">LoRa</span><span class="tag">nRF</span><span class="tag">RF study</span></div></div>
+        </div>
+        <ol class="scope-list">
+          <li class="scope-item"><div><h4>ROS2 group messages</h4><p>Establish shared protocols and a messages package for every subsystem.</p></div><span class="scope-state">Outline</span></li>
+          <li class="scope-item"><div><h4>Radio bridges</h4><p>Connect LoRa and nRF hardware to the field robotics communication layer.</p></div><span class="scope-state">Outline</span></li>
+          <li class="scope-item"><div><h4>Empirical propagation</h4><p>Map signal attenuation and weigh bandwidth needs against field conditions.</p></div><span class="scope-state">Outline</span></li>
+        </ol>
+        <div class="module-footer"><p>Detailed protocol diagrams, coverage maps and hardware notes will be added to this subsystem page.</p><span class="status">Page scaffold / ready</span></div>
+      </section>
+
+      <section class="page-view module-page" id="page-dog-control" data-page-view="dog-control" data-accent="dog" role="tabpanel" aria-labelledby="dog-control-tab" hidden>
+        <header class="page-header">
+          <div><p class="eyebrow">07 / Subsystem</p><h2>Dog control</h2><p>Bring the shepherding decision to ground level through a robot dog that can be supervised, tested and trusted.</p></div>
+          <div class="page-counter">Pages<strong>07 / 07</strong></div>
+        </header>
+        <div class="module-identity">
+          <div class="module-stamp"><span class="micro-label">Walkies</span><strong>UGV</strong></div>
+          <div class="module-brief"><p class="eyebrow">Working outline</p><h3>Translate shared understanding into careful movement.</h3><p>This page will hold the robot-dog interface, control modes, safety constraints and the behaviours that connect autonomy to animal welfare.</p><div class="tag-row"><span class="tag">Robot dog</span><span class="tag">Teleoperation</span><span class="tag">Safety</span></div></div>
+        </div>
+        <ol class="scope-list">
+          <li class="scope-item"><div><h4>Robot interface</h4><p>Connect the physical dog to the shared state and command interfaces.</p></div><span class="scope-state">Outline</span></li>
+          <li class="scope-item"><div><h4>Herding behaviours</h4><p>Explore movement strategies that influence a flock without treating animals as obstacles.</p></div><span class="scope-state">Outline</span></li>
+          <li class="scope-item"><div><h4>Safe supervision</h4><p>Keep human approval, fallback behaviour and field constraints in the control loop.</p></div><span class="scope-state">Outline</span></li>
+        </ol>
+        <div class="module-footer"><p>Detailed dog platform information, control diagrams and research links will be added to this subsystem page.</p><span class="status">Page scaffold / ready</span></div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    (() => {
+      const pageOrder = [
+        "description",
+        "research",
+        "drone-control",
+        "sheep-detection",
+        "simulation",
+        "communication",
+        "dog-control"
+      ];
+      const pageNames = {
+        description: "Description",
+        research: "Research",
+        "drone-control": "Drone control",
+        "sheep-detection": "Sheep detection",
+        simulation: "Simulation",
+        communication: "Communication",
+        "dog-control": "Dog control"
+      };
+      const pageButtons = [...document.querySelectorAll("button[data-page-target]")];
+      const pageLinks = [...document.querySelectorAll("a[data-page-target]")];
+      const pages = [...document.querySelectorAll("[data-page-view]")];
+      const themeButton = document.getElementById("theme-toggle");
+      const themeIcon = document.getElementById("theme-icon");
+      const themeLabel = document.getElementById("theme-label");
+      const themeColor = document.getElementById("theme-color");
+      const themeTransitionSelector = [
+        ".topbar",
+        ".signal-visual",
+        "[data-page-view]:not([hidden]) .page-header",
+        "[data-page-view]:not([hidden]) .section-intro",
+        "[data-page-view]:not([hidden]) .overview-card",
+        "[data-page-view]:not([hidden]) .description-lower",
+        "[data-page-view]:not([hidden]) .objective-row",
+        "[data-page-view]:not([hidden]) .research-note",
+        "[data-page-view]:not([hidden]) .research-footer",
+        "[data-page-view]:not([hidden]) .module-stamp",
+        "[data-page-view]:not([hidden]) .module-brief",
+        "[data-page-view]:not([hidden]) .scope-item",
+        "[data-page-view]:not([hidden]) .module-footer"
+      ].join(", ");
+      let themeAnimationTimer;
+
+      function setPage(requestedPage) {
+        const page = pageOrder.includes(requestedPage) ? requestedPage : "description";
+        pages.forEach((panel) => {
+          const isActive = panel.dataset.pageView === page;
+          panel.hidden = !isActive;
+          panel.setAttribute("aria-hidden", String(!isActive));
+        });
+        pageButtons.forEach((button) => {
+          const isActive = button.dataset.pageTarget === page;
+          button.setAttribute("aria-selected", String(isActive));
+          button.tabIndex = isActive ? 0 : -1;
+        });
+        document.title = `${pageNames[page]} | Auto Shepherd`;
+        window.scrollTo(0, 0);
+      }
+
+      function readPageFromHash() {
+        return window.location.hash.slice(1).toLowerCase();
+      }
+
+      function updatePageFromHash() {
+        const requestedPage = readPageFromHash();
+        if (!pageOrder.includes(requestedPage)) {
+          history.replaceState(null, "", "#description");
+          setPage("description");
+          return;
+        }
+        setPage(requestedPage);
+      }
+
+      function animateThemeComponents() {
+        const items = [...document.querySelectorAll(themeTransitionSelector)];
+        document.body.classList.remove("is-theme-transitioning");
+        items.forEach((item, index) => {
+          item.classList.remove("theme-transition-item");
+          item.style.setProperty("--theme-index", index);
+        });
+        void document.body.offsetWidth;
+        items.forEach((item) => item.classList.add("theme-transition-item"));
+        document.body.classList.add("is-theme-transitioning");
+        window.clearTimeout(themeAnimationTimer);
+        themeAnimationTimer = window.setTimeout(() => {
+          document.body.classList.remove("is-theme-transitioning");
+          items.forEach((item) => {
+            item.classList.remove("theme-transition-item");
+            item.style.removeProperty("--theme-index");
+          });
+        }, 1250);
+      }
+
+      function setTheme(theme, shouldAnimate = true) {
+        const nextTheme = theme === "light" ? "dark" : "light";
+        document.documentElement.dataset.theme = theme;
+        themeLabel.textContent = nextTheme === "light" ? "Light" : "Dark";
+        themeIcon.textContent = nextTheme === "light" ? "L" : "D";
+        themeButton.setAttribute("aria-label", `Switch to ${nextTheme} mode`);
+        themeButton.title = `Switch to ${nextTheme} mode`;
+        themeColor.setAttribute("content", theme === "light" ? "#f1f3ea" : "#0c1715");
+        try {
+          localStorage.setItem("auto-shepherd-theme", theme);
+        } catch {}
+        if (shouldAnimate) animateThemeComponents();
+      }
+
+      pageButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          window.location.hash = button.dataset.pageTarget;
+        });
+      });
+
+      pageLinks.forEach((link) => {
+        link.addEventListener("click", () => {
+          setPage(link.dataset.pageTarget);
+        });
+      });
+
+      themeButton.addEventListener("click", () => {
+        const currentTheme = document.documentElement.dataset.theme === "light" ? "light" : "dark";
+        setTheme(currentTheme === "light" ? "dark" : "light");
+      });
+
+      window.addEventListener("hashchange", updatePageFromHash);
+      document.addEventListener("keydown", (event) => {
+        if (event.key !== "ArrowRight" && event.key !== "ArrowLeft") return;
+        if (event.target.closest("input, textarea, select")) return;
+        const current = pageOrder.indexOf(readPageFromHash());
+        const nextIndex = event.key === "ArrowRight" ? current + 1 : current - 1;
+        if (current >= 0 && pageOrder[nextIndex]) {
+          window.location.hash = pageOrder[nextIndex];
+        }
+      });
+
+      const initialTheme = document.documentElement.dataset.theme === "light" ? "light" : "dark";
+      setTheme(initialTheme, false);
+      updatePageFromHash();
+    })();
+  </script>
+</body>
+</html>

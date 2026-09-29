@@ -26,5 +26,16 @@ https://github.com/LCAS/auto_shepherd_ethics_and_economics
 ### Other:
 https://github.com/LCAS/auto_shepherd_msgs
 
+## Website
+
+The project website is in [`docs/`](docs/). Run it locally with:
+
+```bash
+python3 -m http.server 8000 --directory docs
+```
+
+The `Deploy Auto Shepherd website` GitHub Actions workflow publishes the site
+to GitHub Pages whenever `docs/` changes on `main`.
+
 ## Video
 [![YouTube](http://i.ytimg.com/vi/_Za5ONXb7bg/hqdefault.jpg)](https://www.youtube.com/watch?v=_Za5ONXb7bg)
