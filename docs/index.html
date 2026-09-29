@@ -2081,9 +2081,11 @@
               group.setAttribute("data-page-target", item.route);
               group.setAttribute("tabindex", "0");
               group.setAttribute("aria-label", `Open ${item.route.replaceAll("-", " ")}: ${item.text || item.mediaLabel || "pipeline object"}`);
-              const itemBox = makeElement("rect", { x: drawX, y: drawY, width, height, rx: Math.min(width, height) * 0.035 });
-              itemBox.classList.add("geometry-item-box");
-              group.append(itemBox);
+              if (item.kind === "label") {
+                const itemBox = makeElement("rect", { x: drawX, y: drawY, width, height, rx: Math.min(width, height) * 0.035 });
+                itemBox.classList.add("geometry-item-box");
+                group.append(itemBox);
+              }
             }
             if (isTransformed) {
               group.setAttribute("transform", `translate(${x} ${y}) rotate(${item.rotation}) translate(${-width / 2} ${-height / 2})`);
