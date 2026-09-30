@@ -137,7 +137,7 @@
       "fill": "#70ad47",
       "stroke": "transparent",
       "text": "Bridge",
-      "route": "simulation",
+      "route": "communication",
       "rotation": 0
     },
     {
@@ -584,7 +584,7 @@
       "height": 1.31477,
       "fill": "#5b9bd5",
       "stroke": "transparent",
-      "text": "DJIMini 4Pro",
+      "text": "DJI Mini 4 Pro",
       "route": "drone-control",
       "rotation": 0
     },
@@ -814,7 +814,7 @@
       "height": 1.31477,
       "fill": "#ffc000",
       "stroke": "transparent",
-      "text": "HolybroH-RTK",
+      "text": "Holybro H-RTK",
       "route": "dog-control",
       "rotation": 0
     },
@@ -2111,7 +2111,7 @@
       "fill": "#8f45c7",
       "stroke": "transparent",
       "text": "Synthetic Data Stream",
-      "route": "sheep-detection",
+      "route": "simulation",
       "rotation": 0
     },
     {
@@ -2138,7 +2138,7 @@
       "height": 1.31477,
       "fill": "#5b9bd5",
       "stroke": "transparent",
-      "text": "Nav GoalEstimator",
+      "text": "Nav Goal Estimator",
       "route": "drone-control",
       "rotation": 0
     },
@@ -2299,7 +2299,7 @@
       "fill": "#70ad47",
       "stroke": "transparent",
       "text": "Bridge",
-      "route": "dog-control",
+      "route": "communication",
       "rotation": 0
     },
     {
@@ -4296,8 +4296,8 @@
       "height": 1.31477,
       "fill": "#8f45c7",
       "stroke": "transparent",
-      "text": "DronePath",
-      "route": null,
+      "text": "Drone Path",
+      "route": "simulation",
       "rotation": 0
     },
     {
@@ -4365,7 +4365,7 @@
       "height": 1.31477,
       "fill": "#8f45c7",
       "stroke": "transparent",
-      "text": "N-Second Simulation",
+      "text": "N-Second Simulations",
       "route": "simulation",
       "rotation": 0
     },
@@ -4486,7 +4486,7 @@
       "height": 1.31477,
       "fill": "#ffc000",
       "stroke": "transparent",
-      "text": "TeleopDashboard",
+      "text": "Teleop Dashboard",
       "route": "dog-control",
       "rotation": 0
     },
