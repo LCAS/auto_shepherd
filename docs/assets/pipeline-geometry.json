@@ -57,7 +57,15 @@
       "x1": 31.10592,
       "y1": 28.85416,
       "x2": 33.06841,
-      "y2": 26.24941
+      "points": [{"x":31.10592,"y":28.85416},{"x":31.10592,"y":27.551785000000002},{"x":33.06841,"y":27.551785000000002},{"x":33.06841,"y":26.24941}],
+      "y2": 26.24941,
+      "strokeColor": "#7030a0",
+      "strokeWidth": 8.333,
+      "strokeDasharray": "0 8.333",
+      "strokeLinecap": "round",
+      "lineType": "unity_signal",
+      "arrowHead": "triangle",
+      "arrowHeadScale": 2
     },
     {
       "order": 25,
@@ -74,7 +82,15 @@
       "x1": 23.60313,
       "y1": 27.22792,
       "x2": 26.20788,
-      "y2": 29.19042
+      "points": [{"x":23.60313,"y":27.22792},{"x":24.905504999999998,"y":27.22792},{"x":24.905504999999998,"y":29.19042},{"x":26.20788,"y":29.19042}],
+      "y2": 29.19042,
+      "strokeColor": "#7030a0",
+      "strokeWidth": 8.333,
+      "strokeDasharray": "0 8.333",
+      "strokeLinecap": "round",
+      "lineType": "unity_signal",
+      "arrowHead": "triangle",
+      "arrowHeadScale": 2
     },
     {
       "order": 28,
@@ -91,7 +107,15 @@
       "x1": 24.26506,
       "y1": 23.79472,
       "x2": 26.20788,
-      "y2": 26.57053
+      "points": [{"x":24.26506,"y":23.79472},{"x":24.26506,"y":25.182625},{"x":26.20788,"y":25.182625},{"x":26.20788,"y":26.57053}],
+      "y2": 26.57053,
+      "strokeColor": "#7030a0",
+      "strokeWidth": 8.333,
+      "strokeDasharray": "0 8.333",
+      "strokeLinecap": "round",
+      "lineType": "unity_signal",
+      "arrowHead": "triangle",
+      "arrowHeadScale": 2
     },
     {
       "order": 31,
@@ -108,7 +132,15 @@
       "x1": 23.60313,
       "y1": 25.91315,
       "x2": 23.60313,
-      "y2": 24.45212
+      "points": [{"x":23.60313,"y":25.91315},{"x":23.60313,"y":24.45212}],
+      "y2": 24.45212,
+      "strokeColor": "#7030a0",
+      "strokeWidth": 8.333,
+      "strokeDasharray": "0 8.333",
+      "strokeLinecap": "round",
+      "lineType": "unity_signal",
+      "arrowHead": "triangle",
+      "arrowHeadScale": 2
     },
     {
       "order": 34,
@@ -125,7 +157,15 @@
       "x1": 30.1274,
       "y1": 27.22792,
       "x2": 30.1274,
-      "y2": 28.53303
+      "points": [{"x":30.1274,"y":27.22792},{"x":30.1274,"y":28.53303}],
+      "y2": 28.53303,
+      "strokeColor": "#7030a0",
+      "strokeWidth": 8.333,
+      "strokeDasharray": "0 8.333",
+      "strokeLinecap": "round",
+      "lineType": "unity_signal",
+      "arrowHead": "triangle",
+      "arrowHeadScale": 2
     },
     {
       "order": 40,
@@ -211,7 +251,15 @@
       "x1": 28.49634,
       "y1": 28.21673,
       "x2": 28.51022,
-      "y2": 31.47887
+      "points": [{"x":28.49634,"y":28.21673},{"x":28.51022,"y":31.47887}],
+      "y2": 31.47887,
+      "strokeColor": "#7030a0",
+      "strokeWidth": 8.333,
+      "strokeDasharray": "0 8.333",
+      "strokeLinecap": "round",
+      "lineType": "unity_signal",
+      "arrowHead": "triangle",
+      "arrowHeadScale": 2
     },
     {
       "order": 129,
@@ -228,7 +276,15 @@
       "x1": 26.86527,
       "y1": 27.22792,
       "x2": 26.86527,
-      "y2": 28.53303
+      "points": [{"x":26.86527,"y":27.22792},{"x":26.86527,"y":28.53303}],
+      "y2": 28.53303,
+      "strokeColor": "#7030a0",
+      "strokeWidth": 8.333,
+      "strokeDasharray": "0 8.333",
+      "strokeLinecap": "round",
+      "lineType": "unity_signal",
+      "arrowHead": "triangle",
+      "arrowHeadScale": 2
     },
     {
       "order": 132,
@@ -245,7 +301,15 @@
       "x1": 24.26506,
       "y1": 23.79472,
       "x2": 26.20788,
-      "y2": 23.81994
+      "points": [{"x":24.26506,"y":23.79472},{"x":26.20788,"y":23.81994}],
+      "y2": 23.81994,
+      "strokeColor": "#7030a0",
+      "strokeWidth": 8.333,
+      "strokeDasharray": "0 8.333",
+      "strokeLinecap": "round",
+      "lineType": "unity_signal",
+      "arrowHead": "triangle",
+      "arrowHeadScale": 2
     },
     {
       "order": 135,
@@ -262,7 +326,15 @@
       "x1": 27.52265,
       "y1": 23.81994,
       "x2": 29.47002,
-      "y2": 26.57053
+      "points": [{"x":27.52265,"y":23.81994},{"x":27.52265,"y":25.195235},{"x":29.47002,"y":25.195235},{"x":29.47002,"y":26.57053}],
+      "y2": 26.57053,
+      "strokeColor": "#7030a0",
+      "strokeWidth": 8.333,
+      "strokeDasharray": "0 8.333",
+      "strokeLinecap": "round",
+      "lineType": "unity_signal",
+      "arrowHead": "triangle",
+      "arrowHeadScale": 2
     },
     {
       "order": 138,
@@ -618,7 +690,14 @@
       "x1": 26.64719,
       "y1": 3.05698,
       "x2": 26.64523,
-      "y2": 4.14321
+      "points": [{"x":26.64719,"y":3.05698},{"x":26.64523,"y":4.14321}],
+      "y2": 4.14321,
+      "strokeColor": "#2e75b6",
+      "strokeWidth": 8.333,
+      "strokeLinecap": "butt",
+      "lineType": "serial",
+      "arrowHead": "triangle",
+      "arrowHeadScale": 2
     },
     {
       "order": 370,
@@ -635,7 +714,15 @@
       "x1": 29.80773,
       "y1": 2.40688,
       "x2": 27.30457,
-      "y2": 2.3996
+      "points": [{"x":29.80773,"y":2.40688},{"x":27.30457,"y":2.3996}],
+      "y2": 2.3996,
+      "strokeColor": "#2e75b6",
+      "strokeWidth": 8.333,
+      "strokeDasharray": "66.666 8.333 8.333 8.333",
+      "strokeLinecap": "butt",
+      "lineType": "rf_link",
+      "arrowHead": "triangle",
+      "arrowHeadScale": 2, "a":"drone2controller"
     },
     {
       "order": 376,
@@ -680,7 +767,15 @@
       "x1": 22.28354,
       "y1": 5.42368,
       "x2": 22.28354,
-      "y2": 7.14115
+      "points": [{"x":22.28354,"y":5.42368},{"x":22.28354,"y":7.14115}],
+      "y2": 7.14115,
+      "strokeColor": "#2e75b6",
+      "strokeWidth": 8.333,
+      "strokeDasharray": "8.333 8.333",
+      "strokeLinecap": "butt",
+      "lineType": "ros2_topic",
+      "arrowHead": "triangle",
+      "arrowHeadScale": 2
     },
     {
       "order": 392,
@@ -889,7 +984,15 @@
       "x1": 20.23395,
       "y1": 23.79472,
       "x2": 22.9503,
-      "y2": 23.79472
+      "points": [{"x":20.23395,"y":23.79472},{"x":22.9503,"y":23.79472}],
+      "y2": 23.79472,
+      "strokeColor": "#548235",
+      "strokeWidth": 8.333,
+      "strokeDasharray": "12.5 12.5",
+      "strokeLinecap": "butt",
+      "lineType": "ros2_topic",
+      "arrowHead": "triangle",
+      "arrowHeadScale": 2
     },
     {
       "order": 485,
@@ -906,7 +1009,15 @@
       "x1": 20.27882,
       "y1": 25.47645,
       "x2": 22.9503,
-      "y2": 23.79472
+      "points": [{"x":20.27882,"y":25.47645},{"x":21.614559999999997,"y":25.47645},{"x":21.614559999999997,"y":23.79472},{"x":22.9503,"y":23.79472}],
+      "y2": 23.79472,
+      "strokeColor": "#548235",
+      "strokeWidth": 8.333,
+      "strokeDasharray": "12.5 12.5",
+      "strokeLinecap": "butt",
+      "lineType": "ros2_topic",
+      "arrowHead": "triangle",
+      "arrowHeadScale": 2
     },
     {
       "order": 488,
@@ -949,7 +1060,15 @@
       "x1": 41.54858,
       "y1": 30.03598,
       "x2": 41.54858,
-      "y2": 28.83225
+      "points": [{"x":41.54858,"y":30.03598},{"x":41.54858,"y":28.83225}],
+      "y2": 28.83225,
+      "strokeColor": "#7030a0",
+      "strokeWidth": 8.333,
+      "strokeDasharray": "0 8.333",
+      "strokeLinecap": "round",
+      "lineType": "unity_signal",
+      "arrowHead": "triangle",
+      "arrowHeadScale": 2
     },
     {
       "order": 503,
@@ -966,7 +1085,15 @@
       "x1": 40.8912,
       "y1": 28.17486,
       "x2": 38.5375,
-      "y2": 28.17486
+      "points": [{"x":40.8912,"y":28.17486},{"x":38.5375,"y":28.17486}],
+      "y2": 28.17486,
+      "strokeColor": "#7030a0",
+      "strokeWidth": 8.333,
+      "strokeDasharray": "0 8.333",
+      "strokeLinecap": "round",
+      "lineType": "unity_signal",
+      "arrowHead": "triangle",
+      "arrowHeadScale": 2
     },
     {
       "order": 506,
@@ -983,7 +1110,15 @@
       "x1": 37.88012,
       "y1": 30.03598,
       "x2": 37.88012,
-      "y2": 28.83225
+      "points": [{"x":37.88012,"y":30.03598},{"x":37.88012,"y":28.83225}],
+      "y2": 28.83225,
+      "strokeColor": "#7030a0",
+      "strokeWidth": 8.333,
+      "strokeDasharray": "0 8.333",
+      "strokeLinecap": "round",
+      "lineType": "unity_signal",
+      "arrowHead": "triangle",
+      "arrowHeadScale": 2
     },
     {
       "order": 509,
@@ -1000,7 +1135,15 @@
       "x1": 37.88012,
       "y1": 27.51748,
       "x2": 37.88012,
-      "y2": 26.31375
+      "points": [{"x":37.88012,"y":27.51748},{"x":37.88012,"y":26.31375}],
+      "y2": 26.31375,
+      "strokeColor": "#7030a0",
+      "strokeWidth": 8.333,
+      "strokeDasharray": "0 8.333",
+      "strokeLinecap": "round",
+      "lineType": "unity_signal",
+      "arrowHead": "triangle",
+      "arrowHeadScale": 2
     },
     {
       "order": 512,
@@ -1017,7 +1160,15 @@
       "x1": 38.5375,
       "y1": 30.69336,
       "x2": 40.8912,
-      "y2": 30.69336
+      "points": [{"x":38.5375,"y":30.69336},{"x":40.8912,"y":30.69336}],
+      "y2": 30.69336,
+      "strokeColor": "#7030a0",
+      "strokeWidth": 8.333,
+      "strokeDasharray": "0 8.333",
+      "strokeLinecap": "round",
+      "lineType": "unity_signal",
+      "arrowHead": "triangle",
+      "arrowHeadScale": 2
     },
     {
       "order": 515,
@@ -1073,7 +1224,15 @@
       "x1": 31.16366,
       "y1": 18.30127,
       "x2": 33.37222,
-      "y2": 18.324
+      "points": [{"x":31.16366,"y":18.30127},{"x":33.37222,"y":18.324}],
+      "y2": 18.324,
+      "strokeColor": "#7030a0",
+      "strokeWidth": 8.333,
+      "strokeDasharray": "0 8.333",
+      "strokeLinecap": "round",
+      "lineType": "unity_signal",
+      "arrowHead": "triangle",
+      "arrowHeadScale": 2
     },
     {
       "order": 536,
@@ -1090,7 +1249,15 @@
       "x1": 28.07076,
       "y1": 18.30127,
       "x2": 29.8489,
-      "y2": 18.30127
+      "points": [{"x":28.07076,"y":18.30127},{"x":29.8489,"y":18.30127}],
+      "y2": 18.30127,
+      "strokeColor": "#7030a0",
+      "strokeWidth": 8.333,
+      "strokeDasharray": "0 8.333",
+      "strokeLinecap": "round",
+      "lineType": "unity_signal",
+      "arrowHead": "triangle",
+      "arrowHeadScale": 2
     },
     {
       "order": 539,
@@ -1107,7 +1274,15 @@
       "x1": 30.50628,
       "y1": 16.41978,
       "x2": 30.50628,
-      "y2": 17.64389
+      "points": [{"x":30.50628,"y":16.41978},{"x":30.50628,"y":17.64389}],
+      "y2": 17.64389,
+      "strokeColor": "#7030a0",
+      "strokeWidth": 8.333,
+      "strokeDasharray": "0 8.333",
+      "strokeLinecap": "round",
+      "lineType": "unity_signal",
+      "arrowHead": "triangle",
+      "arrowHeadScale": 2
     },
     {
       "order": 542,
@@ -1137,7 +1312,15 @@
       "x1": 30.50628,
       "y1": 18.95865,
       "x2": 32.48657,
-      "y2": 22.01347
+      "points": [{"x":30.50628,"y":18.95865},{"x":30.50628,"y":20.486060000000002},{"x":32.48657,"y":20.486060000000002},{"x":32.48657,"y":22.01347}],
+      "y2": 22.01347,
+      "strokeColor": "#7030a0",
+      "strokeWidth": 12.5,
+      "strokeDasharray": "0 8.333",
+      "strokeLinecap": "round",
+      "lineType": "unity_signal",
+      "arrowHead": "triangle",
+      "arrowHeadScale": 2
     },
     {
       "order": 551,
@@ -1154,7 +1337,15 @@
       "x1": 27.59987,
       "y1": 22.95084,
       "x2": 23.42119,
-      "y2": 19.14515
+      "points": [{"x":23.6,"y":22.95},{"x":23.6,"y":22.0},{"x":27.4,"y":22.0},{"x":27.4,"y":19.0}],
+      "y2": 19.14515,
+      "strokeColor": "#548235",
+      "strokeWidth": 12.5,
+      "strokeDasharray": "12.5 12.5",
+      "strokeLinecap": "butt",
+      "lineType": "ros2_topic",
+      "arrowHead": "triangle",
+      "arrowHeadScale": 2, "a": "sim2path"
     },
     {
       "order": 557,
@@ -1210,7 +1401,15 @@
       "x1": 33.47787,
       "y1": 11.63015,
       "x2": 36.11784,
-      "y2": 11.63015
+      "points": [{"x":33.47787,"y":11.63015},{"x":36.11784,"y":11.63015}],
+      "y2": 11.63015,
+      "strokeColor": "#c55a11",
+      "strokeWidth": 8.333,
+      "strokeDasharray": "8.333 8.333",
+      "strokeLinecap": "butt",
+      "lineType": "ros2_topic",
+      "arrowHead": "triangle",
+      "arrowHeadScale": 2
     },
     {
       "order": 578,
@@ -1227,7 +1426,15 @@
       "x1": 37.43261,
       "y1": 14.24447,
       "x2": 40.07259,
-      "y2": 14.24447
+      "points": [{"x":37.43261,"y":14.24447},{"x":40.07259,"y":14.24447}],
+      "y2": 14.24447,
+      "strokeColor": "#c55a11",
+      "strokeWidth": 8.333,
+      "strokeDasharray": "8.333 8.333",
+      "strokeLinecap": "butt",
+      "lineType": "ros2_topic",
+      "arrowHead": "triangle",
+      "arrowHeadScale": 2
     },
     {
       "order": 581,
@@ -1244,7 +1451,15 @@
       "x1": 36.77523,
       "y1": 12.28753,
       "x2": 36.77523,
-      "y2": 13.58709
+      "points": [{"x":36.77523,"y":12.28753},{"x":36.77523,"y":13.58709}],
+      "y2": 13.58709,
+      "strokeColor": "#c55a11",
+      "strokeWidth": 8.333,
+      "strokeDasharray": "8.333 8.333",
+      "strokeLinecap": "butt",
+      "lineType": "ros2_topic",
+      "arrowHead": "triangle",
+      "arrowHeadScale": 2
     },
     {
       "order": 584,
@@ -1261,7 +1476,15 @@
       "x1": 29.71946,
       "y1": 7.6691,
       "x2": 23.07037,
-      "y2": 15.89183
+      "points": [{"x":22.3,"y":8.5},{"x":22.3,"y":11.0},{"x":30.5,"y":11.0},{"x":30.5,"y":15.0}],
+      "y2": 15.89183,
+      "strokeColor": "#548235",
+      "strokeWidth": 12.5,
+      "strokeDasharray": "12.5 12.5",
+      "strokeLinecap": "butt",
+      "lineType": "ros2_topic",
+      "arrowHead": "triangle",
+      "arrowHeadScale": 2
     },
     {
       "order": 587,
@@ -1278,7 +1501,15 @@
       "x1": 33.38954,
       "y1": 29.8478,
       "x2": 37.82359,
-      "y2": 32.6641
+      "points": [{"x":33.38954,"y":29.8478},{"x":35.606565,"y":29.8478},{"x":35.606565,"y":32.6641},{"x":37.82359,"y":32.6641}],
+      "y2": 32.6641,
+      "strokeColor": "#548235",
+      "strokeWidth": 12.5,
+      "strokeDasharray": "12.5 12.5",
+      "strokeLinecap": "butt",
+      "lineType": "ros2_topic",
+      "arrowHead": "triangle",
+      "arrowHeadScale": 2
     },
     {
       "order": 590,
@@ -1295,7 +1526,15 @@
       "x1": 34.34797,
       "y1": 26.203,
       "x2": 36.6761,
-      "y2": 21.46683
+      "points": [{"x":34.34797,"y":26.203},{"x":34.34797,"y":23.834915000000002},{"x":36.6761,"y":23.834915000000002},{"x":36.6761,"y":21.46683}],
+      "y2": 21.46683,
+      "strokeColor": "#7030a0",
+      "strokeWidth": 12.5,
+      "strokeDasharray": "0 8.333",
+      "strokeLinecap": "round",
+      "lineType": "unity_signal",
+      "arrowHead": "triangle",
+      "arrowHeadScale": 2
     },
     {
       "order": 593,
@@ -1312,7 +1551,15 @@
       "x1": 30.1274,
       "y1": 25.91315,
       "x2": 32.48657,
-      "y2": 22.01347
+      "points": [{"x":30.1274,"y":25.91315},{"x":30.1274,"y":23.96331},{"x":32.48657,"y":23.96331},{"x":32.48657,"y":22.01347}],
+      "y2": 22.01347,
+      "strokeColor": "#7030a0",
+      "strokeWidth": 12.5,
+      "strokeDasharray": "0 8.333",
+      "strokeLinecap": "round",
+      "lineType": "unity_signal",
+      "arrowHead": "triangle",
+      "arrowHeadScale": 2
     },
     {
       "order": 599,
@@ -1815,7 +2062,14 @@
       "x1": 17.18423,
       "y1": 24.35851,
       "x2": 18.54208,
-      "y2": 19.61281
+      "points": [{"x":15.4,"y":21.3},{"x":15.4,"y":21.8},{"x":20.3,"y":21.8},{"x":20.3,"y":22.6}],
+      "y2": 19.61281,
+      "strokeColor": "#548235",
+      "strokeWidth": 12.5,
+      "strokeDasharray": "12.5 12.5",
+      "strokeLinecap": "butt",
+      "lineType": "rf_link" ,
+      "arrowHead": "none", "a":"sim2dog"
     },
     {
       "order": 2583,
@@ -2099,7 +2353,15 @@
       "x1": 30.6629,
       "y1": 15.50902,
       "x2": 36.1872,
-      "y2": 14.2999
+      "points": [{"x":34.0,"y":17.6},{"x":34.0,"y":13.6},{"x":32.8,"y":13.6},{"x":32.8,"y":12.3}],
+      "y2": 14.2999,
+      "strokeColor": "#548235",
+      "strokeWidth": 12.5,
+      "strokeDasharray": "12.5 12.5",
+      "strokeLinecap": "butt",
+      "lineType": "ros2_topic",
+      "arrowHead": "triangle",
+      "arrowHeadScale": 2
     },
     {
       "order": 2973,
@@ -2185,7 +2447,15 @@
       "x1": 7.84168,
       "y1": 20.26532,
       "x2": 6.16066,
-      "y2": 20.26532
+      "points": [{"x":7.84168,"y":20.26532},{"x":6.16066,"y":20.26532}],
+      "y2": 20.26532,
+      "strokeColor": "#bf9000",
+      "strokeWidth": 8.333,
+      "strokeDasharray": "8.333 8.333",
+      "strokeLinecap": "butt",
+      "lineType": "ros2_topic",
+      "arrowHead": "triangle",
+      "arrowHeadScale": 2
     },
     {
       "order": 3007,
@@ -2202,7 +2472,15 @@
       "x1": 9.15644,
       "y1": 17.34568,
       "x2": 10.83747,
-      "y2": 17.34568
+      "points": [{"x":9.15644,"y":17.34568},{"x":10.83747,"y":17.34568}],
+      "y2": 17.34568,
+      "strokeColor": "#bf9000",
+      "strokeWidth": 8.333,
+      "strokeDasharray": "8.333 8.333",
+      "strokeLinecap": "butt",
+      "lineType": "ros2_topic",
+      "arrowHead": "triangle",
+      "arrowHeadScale": 2
     },
     {
       "order": 3010,
@@ -2219,7 +2497,15 @@
       "x1": 10.83747,
       "y1": 20.26532,
       "x2": 9.15644,
-      "y2": 20.26532
+      "points": [{"x":10.83747,"y":20.26532},{"x":9.15644,"y":20.26532}],
+      "y2": 20.26532,
+      "strokeColor": "#bf9000",
+      "strokeWidth": 8.333,
+      "strokeDasharray": "8.333 8.333",
+      "strokeLinecap": "butt",
+      "lineType": "ros2_topic",
+      "arrowHead": "triangle",
+      "arrowHeadScale": 2
     },
     {
       "order": 3013,
@@ -2236,7 +2522,15 @@
       "x1": 11.49485,
       "y1": 18.00306,
       "x2": 11.49485,
-      "y2": 19.60794
+      "points": [{"x":11.49485,"y":18.00306},{"x":11.49485,"y":19.60794}],
+      "y2": 19.60794,
+      "strokeColor": "#bf9000",
+      "strokeWidth": 8.333,
+      "strokeDasharray": "8.333 8.333",
+      "strokeLinecap": "butt",
+      "lineType": "ros2_topic",
+      "arrowHead": "triangle",
+      "arrowHeadScale": 2
     },
     {
       "order": 3016,
@@ -2253,7 +2547,15 @@
       "x1": 6.16066,
       "y1": 16.46053,
       "x2": 7.84168,
-      "y2": 17.34568
+      "points": [{"x":6.16066,"y":16.46053},{"x":7.00117,"y":16.46053},{"x":7.00117,"y":17.34568},{"x":7.84168,"y":17.34568}],
+      "y2": 17.34568,
+      "strokeColor": "#bf9000",
+      "strokeWidth": 8.333,
+      "strokeDasharray": "8.333 8.333",
+      "strokeLinecap": "butt",
+      "lineType": "ros2_topic",
+      "arrowHead": "triangle",
+      "arrowHeadScale": 2
     },
     {
       "order": 3019,
@@ -2270,7 +2572,15 @@
       "x1": 6.16066,
       "y1": 18.23082,
       "x2": 7.84168,
-      "y2": 17.34568
+      "points": [{"x":6.16066,"y":18.23082},{"x":7.00117,"y":18.23082},{"x":7.00117,"y":17.34568},{"x":7.84168,"y":17.34568}],
+      "y2": 17.34568,
+      "strokeColor": "#bf9000",
+      "strokeWidth": 8.333,
+      "strokeDasharray": "8.333 8.333",
+      "strokeLinecap": "butt",
+      "lineType": "ros2_topic",
+      "arrowHead": "triangle",
+      "arrowHeadScale": 2
     },
     {
       "order": 3022,
@@ -2287,7 +2597,15 @@
       "x1": 9.19452,
       "y1": 17.3076,
       "x2": 10.7994,
-      "y2": 20.30339
+      "points": [{"x":9.19452,"y":17.3076},{"x":9.19452,"y":18.805495},{"x":10.7994,"y":18.805495},{"x":10.7994,"y":20.30339}],
+      "y2": 20.30339,
+      "strokeColor": "#bf9000",
+      "strokeWidth": 8.333,
+      "strokeDasharray": "8.333 8.333",
+      "strokeLinecap": "butt",
+      "lineType": "ros2_topic",
+      "arrowHead": "triangle",
+      "arrowHeadScale": 2
     },
     {
       "order": 3028,
@@ -2386,7 +2704,14 @@
       "x1": 1.65913,
       "y1": 20.84947,
       "x2": 4.84589,
-      "y2": 20.26532
+      "points": [{"x":1.65913,"y":20.84947},{"x":3.25251,"y":20.84947},{"x":3.25251,"y":20.26532},{"x":4.84589,"y":20.26532}],
+      "y2": 20.26532,
+      "strokeColor": "#bf9000",
+      "strokeWidth": 8.333,
+      "strokeLinecap": "butt",
+      "lineType": "serial",
+      "arrowHead": "triangle",
+      "arrowHeadScale": 2
     },
     {
       "order": 3126,
@@ -2403,7 +2728,15 @@
       "x1": 14.75483,
       "y1": 20.27574,
       "x2": 12.15224,
-      "y2": 20.26532
+      "points": [{"x":14.75483,"y":20.27574},{"x":12.15224,"y":20.26532}],
+      "y2": 20.26532,
+      "strokeColor": "#548235",
+      "strokeWidth": 8.333,
+      "strokeDasharray": "12.5 12.5",
+      "strokeLinecap": "butt",
+      "lineType": "ros2_topic",
+      "arrowHead": "triangle",
+      "arrowHeadScale": 2
     },
     {
       "order": 3129,
@@ -2420,7 +2753,15 @@
       "x1": 12.15224,
       "y1": 20.26532,
       "x2": 14.75483,
-      "y2": 18.54996
+      "points": [{"x":12.15224,"y":20.26532},{"x":13.453535,"y":20.26532},{"x":13.453535,"y":18.54996},{"x":14.75483,"y":18.54996}],
+      "y2": 18.54996,
+      "strokeColor": "#548235",
+      "strokeWidth": 8.333,
+      "strokeDasharray": "12.5 12.5",
+      "strokeLinecap": "butt",
+      "lineType": "ros2_topic",
+      "arrowHead": "triangle",
+      "arrowHeadScale": 2
     },
     {
       "order": 3132,
@@ -2437,7 +2778,14 @@
       "x1": 3.70745,
       "y1": 14.41221,
       "x2": 2.79757,
-      "y2": 17.59897
+      "points": [{"x":3.70745,"y":14.41221},{"x":3.70745,"y":16.00559},{"x":2.79757,"y":16.00559},{"x":2.79757,"y":17.59897}],
+      "y2": 17.59897,
+      "strokeColor": "#bf9000",
+      "strokeWidth": 8.333,
+      "strokeLinecap": "butt",
+      "lineType": "serial",
+      "arrowHead": "triangle",
+      "arrowHeadScale": 2
     },
     {
       "order": 3135,
@@ -2454,7 +2802,14 @@
       "x1": 4.5926,
       "y1": 15.29736,
       "x2": 1.91243,
-      "y2": 18.48412
+      "points": [{"x":4.5926,"y":15.29736},{"x":4.5926,"y":16.89074},{"x":1.91243,"y":16.89074},{"x":1.91243,"y":18.48412}],
+      "y2": 18.48412,
+      "strokeColor": "#bf9000",
+      "strokeWidth": 8.333,
+      "strokeLinecap": "butt",
+      "lineType": "serial",
+      "arrowHead": "triangle",
+      "arrowHeadScale": 2
     },
     {
       "order": 3141,
@@ -2471,7 +2826,15 @@
       "x1": 15.45595,
       "y1": 32.52858,
       "x2": 19.48819,
-      "y2": 32.52858
+      "points": [{"x":15.45595,"y":32.52858},{"x":19.48819,"y":32.52858}],
+      "y2": 32.52858,
+      "strokeColor": "#000000",
+      "strokeWidth": 12.5,
+      "strokeDasharray": "99.998 12.5 12.5 12.5",
+      "strokeLinecap": "butt",
+      "lineType": "rf_link",
+      "arrowHead": "triangle",
+      "arrowHeadScale": 2, "a":"legend"
     },
     {
       "order": 3144,
@@ -2488,7 +2851,15 @@
       "x1": 10.53345,
       "y1": 32.52858,
       "x2": 14.56568,
-      "y2": 32.52858
+      "points": [{"x":10.53345,"y":32.52858},{"x":14.56568,"y":32.52858}],
+      "y2": 32.52858,
+      "strokeColor": "#000000",
+      "strokeWidth": 12.5,
+      "strokeDasharray": "12.5 12.5",
+      "strokeLinecap": "round",
+      "lineType": "unity_signal",
+      "arrowHead": "triangle",
+      "arrowHeadScale": 2
     },
     {
       "order": 3147,
@@ -2505,7 +2876,15 @@
       "x1": 5.61094,
       "y1": 32.52858,
       "x2": 9.64318,
-      "y2": 32.52858
+      "points": [{"x":5.61094,"y":32.52858},{"x":9.64318,"y":32.52858}],
+      "y2": 32.52858,
+      "strokeColor": "#000000",
+      "strokeWidth": 12.5,
+      "strokeDasharray": "12.5 12.5",
+      "strokeLinecap": "butt",
+      "lineType": "ros2_topic",
+      "arrowHead": "triangle",
+      "arrowHeadScale": 2
     },
     {
       "order": 3150,
@@ -2522,7 +2901,14 @@
       "x1": 0.68844,
       "y1": 32.52858,
       "x2": 4.72067,
-      "y2": 32.52858
+      "points": [{"x":0.68844,"y":32.52858},{"x":4.72067,"y":32.52858}],
+      "y2": 32.52858,
+      "strokeColor": "#000000",
+      "strokeWidth": 12.5,
+      "strokeLinecap": "butt",
+      "lineType": "serial",
+      "arrowHead": "triangle",
+      "arrowHeadScale": 2
     },
     {
       "order": 3153,
@@ -2560,7 +2946,7 @@
       "fill": "transparent",
       "stroke": "transparent",
       "text": "Unity Signal",
-      "route": "simulation",
+      "route": null,
       "rotation": 0
     },
     {
@@ -3631,7 +4017,14 @@
       "x1": 17.36733,
       "y1": 7.05639,
       "x2": 17.53504,
-      "y2": 7.3151
+      "points": [{"x":17.36733,"y":7.05639},{"x":17.36733,"y":7.185745000000001},{"x":17.53504,"y":7.185745000000001},{"x":17.53504,"y":7.3151}],
+      "y2": 7.3151,
+      "strokeColor": "#548235",
+      "strokeWidth": 4.514,
+      "strokeDasharray": "12.5 12.5",
+      "strokeLinecap": "butt",
+      "lineType": "ros2_topic" ,
+      "arrowHead": "none"
     },
     {
       "order": 4069,
@@ -3648,7 +4041,14 @@
       "x1": 17.12119,
       "y1": 7.39448,
       "x2": 16.76731,
-      "y2": 7.07219
+      "points": [{"x":17.12119,"y":7.39448},{"x":16.944249999999997,"y":7.39448},{"x":16.944249999999997,"y":7.07219},{"x":16.76731,"y":7.07219}],
+      "y2": 7.07219,
+      "strokeColor": "#548235",
+      "strokeWidth": 4.514,
+      "strokeDasharray": "12.5 12.5",
+      "strokeLinecap": "butt",
+      "lineType": "ros2_topic" ,
+      "arrowHead": "none"
     },
     {
       "order": 4072,
@@ -3691,7 +4091,14 @@
       "x1": 17.29904,
       "y1": 6.10196,
       "x2": 16.73594,
-      "y2": 6.79502
+      "points": [{"x":17.29904,"y":6.10196},{"x":17.29904,"y":6.44849},{"x":16.73594,"y":6.44849},{"x":16.73594,"y":6.79502}],
+      "y2": 6.79502,
+      "strokeColor": "#548235",
+      "strokeWidth": 4.514,
+      "strokeDasharray": "12.5 12.5",
+      "strokeLinecap": "butt",
+      "lineType": "ros2_topic" ,
+      "arrowHead": "none"
     },
     {
       "order": 4087,
@@ -3708,7 +4115,14 @@
       "x1": 18.28882,
       "y1": 6.65716,
       "x2": 17.9918,
-      "y2": 8.10585
+      "points": [{"x":18.28882,"y":6.65716},{"x":18.28882,"y":7.381505000000001},{"x":17.9918,"y":7.381505000000001},{"x":17.9918,"y":8.10585}],
+      "y2": 8.10585,
+      "strokeColor": "#548235",
+      "strokeWidth": 4.514,
+      "strokeDasharray": "12.5 12.5",
+      "strokeLinecap": "butt",
+      "lineType": "ros2_topic" ,
+      "arrowHead": "none"
     },
     {
       "order": 4090,
@@ -3725,7 +4139,14 @@
       "x1": 17.56215,
       "y1": 6.16627,
       "x2": 17.3495,
-      "y2": 6.38125
+      "points": [{"x":17.56215,"y":6.16627},{"x":17.56215,"y":6.273759999999999},{"x":17.3495,"y":6.273759999999999},{"x":17.3495,"y":6.38125}],
+      "y2": 6.38125,
+      "strokeColor": "#548235",
+      "strokeWidth": 4.514,
+      "strokeDasharray": "12.5 12.5",
+      "strokeLinecap": "butt",
+      "lineType": "ros2_topic" ,
+      "arrowHead": "none"
     },
     {
       "order": 4093,
@@ -3742,7 +4163,14 @@
       "x1": 17.8653,
       "y1": 7.85206,
       "x2": 17.73802,
-      "y2": 8.23236
+      "points": [{"x":17.8653,"y":7.85206},{"x":17.8653,"y":8.04221},{"x":17.73802,"y":8.04221},{"x":17.73802,"y":8.23236}],
+      "y2": 8.23236,
+      "strokeColor": "#548235",
+      "strokeWidth": 4.514,
+      "strokeDasharray": "12.5 12.5",
+      "strokeLinecap": "butt",
+      "lineType": "ros2_topic" ,
+      "arrowHead": "none"
     },
     {
       "order": 4096,
@@ -3759,7 +4187,14 @@
       "x1": 17.69267,
       "y1": 7.6699,
       "x2": 17.88984,
-      "y2": 7.26881
+      "points": [{"x":17.69267,"y":7.6699},{"x":17.69267,"y":7.469355},{"x":17.88984,"y":7.469355},{"x":17.88984,"y":7.26881}],
+      "y2": 7.26881,
+      "strokeColor": "#548235",
+      "strokeWidth": 4.514,
+      "strokeDasharray": "12.5 12.5",
+      "strokeLinecap": "butt",
+      "lineType": "ros2_topic" ,
+      "arrowHead": "none"
     },
     {
       "order": 4099,
@@ -3776,7 +4211,14 @@
       "x1": 17.33524,
       "y1": 7.64536,
       "x2": 17.53503,
-      "y2": 7.3151
+      "points": [{"x":17.33524,"y":7.64536},{"x":17.33524,"y":7.480230000000001},{"x":17.53503,"y":7.480230000000001},{"x":17.53503,"y":7.3151}],
+      "y2": 7.3151,
+      "strokeColor": "#548235",
+      "strokeWidth": 4.514,
+      "strokeDasharray": "12.5 12.5",
+      "strokeLinecap": "butt",
+      "lineType": "ros2_topic" ,
+      "arrowHead": "none"
     },
     {
       "order": 4102,
@@ -3793,7 +4235,14 @@
       "x1": 16.23981,
       "y1": 7.513,
       "x2": 16.35341,
-      "y2": 7.1111
+      "points": [{"x":16.23981,"y":7.513},{"x":16.23981,"y":7.31205},{"x":16.35341,"y":7.31205},{"x":16.35341,"y":7.1111}],
+      "y2": 7.1111,
+      "strokeColor": "#548235",
+      "strokeWidth": 4.514,
+      "strokeDasharray": "12.5 12.5",
+      "strokeLinecap": "butt",
+      "lineType": "ros2_topic" ,
+      "arrowHead": "none"
     },
     {
       "order": 4105,
@@ -3810,7 +4259,14 @@
       "x1": 17.38059,
       "y1": 6.76425,
       "x2": 17.84843,
-      "y2": 6.66185
+      "points": [{"x":17.38059,"y":6.76425},{"x":17.614510000000003,"y":6.76425},{"x":17.614510000000003,"y":6.66185},{"x":17.84843,"y":6.66185}],
+      "y2": 6.66185,
+      "strokeColor": "#548235",
+      "strokeWidth": 4.514,
+      "strokeDasharray": "12.5 12.5",
+      "strokeLinecap": "butt",
+      "lineType": "ros2_topic" ,
+      "arrowHead": "none"
     },
     {
       "order": 4108,
@@ -3853,7 +4309,14 @@
       "x1": 15.49205,
       "y1": 6.97794,
       "x2": 16.07721,
-      "y2": 6.36911
+      "points": [{"x":15.49205,"y":6.97794},{"x":15.49205,"y":6.673525},{"x":16.07721,"y":6.673525},{"x":16.07721,"y":6.36911}],
+      "y2": 6.36911,
+      "strokeColor": "#548235",
+      "strokeWidth": 4.514,
+      "strokeDasharray": "12.5 12.5",
+      "strokeLinecap": "butt",
+      "lineType": "ros2_topic" ,
+      "arrowHead": "none"
     },
     {
       "order": 4123,
@@ -3870,7 +4333,14 @@
       "x1": 18.28882,
       "y1": 6.65716,
       "x2": 16.73037,
-      "y2": 5.74924
+      "points": [{"x":18.28882,"y":6.65716},{"x":17.509595,"y":6.65716},{"x":17.509595,"y":5.74924},{"x":16.73037,"y":5.74924}],
+      "y2": 5.74924,
+      "strokeColor": "#548235",
+      "strokeWidth": 4.514,
+      "strokeDasharray": "12.5 12.5",
+      "strokeLinecap": "butt",
+      "lineType": "ros2_topic" ,
+      "arrowHead": "none"
     },
     {
       "order": 4126,
@@ -4208,7 +4678,14 @@
       "x1": 26.64523,
       "y1": 5.45798,
       "x2": 26.62896,
-      "y2": 7.14701
+      "points": [{"x":26.64523,"y":5.45798},{"x":26.62896,"y":7.14701}],
+      "y2": 7.14701,
+      "strokeColor": "#2e75b6",
+      "strokeWidth": 8.333,
+      "strokeLinecap": "butt",
+      "lineType": "serial",
+      "arrowHead": "triangle",
+      "arrowHeadScale": 2
     },
     {
       "order": 4221,
@@ -4225,7 +4702,14 @@
       "x1": 22.94093,
       "y1": 7.79854,
       "x2": 25.98785,
-      "y2": 4.80059
+      "points": [{"x":22.94093,"y":7.79854},{"x":24.46439,"y":7.79854},{"x":24.46439,"y":4.80059},{"x":25.98785,"y":4.80059}],
+      "y2": 4.80059,
+      "strokeColor": "#2e75b6",
+      "strokeWidth": 8.333,
+      "strokeLinecap": "butt",
+      "lineType": "serial",
+      "arrowHead": "triangle",
+      "arrowHeadScale": 2
     },
     {
       "order": 4224,
@@ -4242,7 +4726,14 @@
       "x1": 29.30813,
       "y1": 4.48411,
       "x2": 27.6191,
-      "y2": 8.12088
+      "points": [{"x":29.30813,"y":4.48411},{"x":29.30813,"y":6.302495},{"x":27.6191,"y":6.302495},{"x":27.6191,"y":8.12088}],
+      "y2": 8.12088,
+      "strokeColor": "#2e75b6",
+      "strokeWidth": 8.333,
+      "strokeLinecap": "butt",
+      "lineType": "serial",
+      "arrowHead": "triangle",
+      "arrowHeadScale": 2
     },
     {
       "order": 4227,
@@ -4259,7 +4750,14 @@
       "x1": 28.93125,
       "y1": 7.16614,
       "x2": 27.92459,
-      "y2": 10.76407
+      "points": [{"x":26.6,"y":8.5},{"x":26.6,"y":9.4},{"x":30.2,"y":9.4}],
+      "y2": 10.76407,
+      "strokeColor": "#548235",
+      "strokeWidth": 12.5,
+      "strokeDasharray": "12.5 12.5",
+      "strokeLinecap": "butt",
+      "lineType": "ros2_topic" ,
+      "arrowHead": "none"
     },
     {
       "order": 4230,
@@ -4276,7 +4774,15 @@
       "x1": 30.33712,
       "y1": 9.46843,
       "x2": 32.82049,
-      "y2": 10.97277
+      "points": [{"x":30.3,"y":9.4},{"x":32.8,"y":9.4},{"x":32.8,"y":11.0}],
+      "y2": 10.97277,
+      "strokeColor": "#548235",
+      "strokeWidth": 12.5,
+      "strokeDasharray": "12.5 12.5",
+      "strokeLinecap": "butt",
+      "lineType": "ros2_topic",
+      "arrowHead": "triangle",
+      "arrowHeadScale": 2
     },
     {
       "order": 4233,
@@ -4293,7 +4799,15 @@
       "x1": 22.28354,
       "y1": 4.10892,
       "x2": 46.26386,
-      "y2": 0.60058
+      "points": [{"x":22.28354,"y":4.10892},{"x":34.2737,"y":4.10892},{"x":34.2737,"y":0.60058},{"x":46.26386,"y":0.60058}],
+      "y2": 0.60058,
+      "strokeColor": "#548235",
+      "strokeWidth": 12.5,
+      "strokeDasharray": "12.5 12.5",
+      "strokeLinecap": "butt",
+      "lineType": "ros2_topic",
+      "arrowHead": "triangle",
+      "arrowHeadScale": 2
     },
     {
       "order": 4239,
@@ -4656,7 +5170,15 @@
       "x1": 3.36556,
       "y1": 8.25933,
       "x2": 3.36556,
-      "y2": 9.9825
+      "points": [{"x":3.36556,"y":8.25933},{"x":3.36556,"y":9.9825}],
+      "y2": 9.9825,
+      "strokeColor": "#bf9000",
+      "strokeWidth": 8.333,
+      "strokeDasharray": "8.333 8.333",
+      "strokeLinecap": "butt",
+      "lineType": "ros2_topic",
+      "arrowHead": "triangle",
+      "arrowHeadScale": 2
     },
     {
       "order": 5091,
@@ -4673,7 +5195,15 @@
       "x1": 7.56574,
       "y1": 10.6503,
       "x2": 4.02294,
-      "y2": 10.63988
+      "points": [{"x":7.56574,"y":10.6503},{"x":4.02294,"y":10.63988}],
+      "y2": 10.63988,
+      "strokeColor": "#548235",
+      "strokeWidth": 8.333,
+      "strokeDasharray": "12.5 12.5",
+      "strokeLinecap": "butt",
+      "lineType": "ros2_topic",
+      "arrowHead": "triangle",
+      "arrowHeadScale": 2
     },
     {
       "order": 5094,
@@ -4690,7 +5220,15 @@
       "x1": 4.02294,
       "y1": 10.63988,
       "x2": 7.56574,
-      "y2": 8.92452
+      "points": [{"x":4.02294,"y":10.63988},{"x":5.79434,"y":10.63988},{"x":5.79434,"y":8.92452},{"x":7.56574,"y":8.92452}],
+      "y2": 8.92452,
+      "strokeColor": "#548235",
+      "strokeWidth": 8.333,
+      "strokeDasharray": "12.5 12.5",
+      "strokeLinecap": "butt",
+      "lineType": "ros2_topic",
+      "arrowHead": "triangle",
+      "arrowHeadScale": 2
     },
     {
       "order": 5097,
@@ -4707,7 +5245,14 @@
       "x1": 9.04111,
       "y1": 18.13049,
       "x2": 14.75041,
-      "y2": 10.94141
+      "points": [{"x":15.45,"y":17.3},{"x":15.45,"y":13.5},{"x":8.3,"y":13.5},{"x":8.3,"y":11.7}],
+      "y2": 10.94141,
+      "strokeColor": "#548235",
+      "strokeWidth": 12.5,
+      "strokeDasharray": "12.5 12.5",
+      "strokeLinecap": "butt",
+      "lineType": "rf_link" ,
+      "arrowHead": "none", "a":"dog2dash"
     },
     {
       "order": 5103,
@@ -4776,7 +5321,15 @@
       "x1": 37.87871,
       "y1": 32.60898,
       "x2": 37.88012,
-      "y2": 31.35074
+      "points": [{"x":37.87871,"y":32.60898},{"x":37.88012,"y":31.35074}],
+      "y2": 31.35074,
+      "strokeColor": "#548235",
+      "strokeWidth": 12.5,
+      "strokeDasharray": "12.5 12.5",
+      "strokeLinecap": "butt",
+      "lineType": "ros2_topic",
+      "arrowHead": "triangle",
+      "arrowHeadScale": 2
     },
     {
       "order": 6135,
@@ -4793,7 +5346,14 @@
       "x1": 46.31178,
       "y1": 32.6641,
       "x2": 37.93383,
-      "y2": 32.6641
+      "points": [{"x":46.31178,"y":32.6641},{"x":37.93383,"y":32.6641}],
+      "y2": 32.6641,
+      "strokeColor": "#548235",
+      "strokeWidth": 12.5,
+      "strokeDasharray": "12.5 12.5",
+      "strokeLinecap": "butt",
+      "lineType": "ros2_topic" ,
+      "arrowHead": "none"
     },
     {
       "order": 6138,
@@ -4810,7 +5370,14 @@
       "x1": 46.3669,
       "y1": 32.60898,
       "x2": 46.31898,
-      "y2": 14.29818
+      "points": [{"x":46.3669,"y":32.60898},{"x":46.3669,"y":23.453580000000002},{"x":46.31898,"y":23.453580000000002},{"x":46.31898,"y":14.29818}],
+      "y2": 14.29818,
+      "strokeColor": "#548235",
+      "strokeWidth": 12.5,
+      "strokeDasharray": "12.5 12.5",
+      "strokeLinecap": "butt",
+      "lineType": "ros2_topic" ,
+      "arrowHead": "none"
     },
     {
       "order": 6141,
@@ -4827,7 +5394,14 @@
       "x1": 41.38735,
       "y1": 14.24447,
       "x2": 46.26386,
-      "y2": 14.24306
+      "points": [{"x":41.38735,"y":14.24447},{"x":46.26386,"y":14.24306}],
+      "y2": 14.24306,
+      "strokeColor": "#548235",
+      "strokeWidth": 12.5,
+      "strokeDasharray": "12.5 12.5",
+      "strokeLinecap": "butt",
+      "lineType": "ros2_topic" ,
+      "arrowHead": "none"
     },
     {
       "order": 6144,
@@ -4844,7 +5418,14 @@
       "x1": 46.31898,
       "y1": 14.18794,
       "x2": 46.31898,
-      "y2": 0.6557
+      "points": [{"x":46.31898,"y":14.18794},{"x":46.31898,"y":0.6557}],
+      "y2": 0.6557,
+      "strokeColor": "#548235",
+      "strokeWidth": 12.5,
+      "strokeDasharray": "12.5 12.5",
+      "strokeLinecap": "butt",
+      "lineType": "ros2_topic" ,
+      "arrowHead": "none"
     },
     {
       "order": 6150,
@@ -4926,7 +5507,14 @@
       "x1": 30.282,
       "y1": 9.41332,
       "x2": 30.282,
-      "y2": 8.46177
+      "points": [{"x":30.2,"y":9.4},{"x":30.2,"y":8.4}],
+      "y2": 8.46177,
+      "strokeColor": "#548235",
+      "strokeWidth": 12.5,
+      "strokeDasharray": "12.5 12.5",
+      "strokeLinecap": "butt",
+      "lineType": "ros2_topic" ,
+      "arrowHead": "none"
     },
     {
       "order": 6183,

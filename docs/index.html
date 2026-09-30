@@ -830,6 +830,7 @@
     }
 
     .poster-canvas {
+      position: relative;
       display: flex;
       height: 100%;
       min-height: 0;
@@ -837,10 +838,44 @@
       margin: 0;
       border: 0;
       box-shadow: none;
-      overflow: auto;
+      overflow: hidden;
       overscroll-behavior: contain;
-      scrollbar-color: var(--faint) transparent;
-      scrollbar-width: thin;
+      touch-action: none;
+      cursor: grab;
+    }
+
+    .poster-canvas.is-panning { cursor: grabbing; }
+    .poster-canvas:focus-visible { outline: 2px solid var(--lime); outline-offset: -3px; }
+
+    .poster-controls {
+      position: absolute;
+      z-index: 3;
+      top: 14px;
+      right: 14px;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 5px;
+      border: 1px solid var(--line-strong);
+      background: color-mix(in srgb, var(--surface) 92%, transparent);
+      box-shadow: 0 8px 20px var(--shadow);
+      backdrop-filter: blur(10px);
+    }
+
+    .poster-controls .system-map-scale { min-width: 42px; }
+
+    .poster-coordinate-readout {
+      display: inline-flex;
+      min-width: 142px;
+      align-items: center;
+      justify-content: center;
+      padding: 0 8px;
+      border: 1px solid var(--line);
+      color: var(--ink);
+      font-family: var(--mono);
+      font-size: 0.5rem;
+      line-height: 27px;
+      white-space: nowrap;
     }
 
     .geometry-sheet {
@@ -858,6 +893,7 @@
       height: 100%;
       background: var(--geometry-background);
       overflow: visible;
+      user-select: none;
     }
 
     .geometry-object { outline: none; }
@@ -887,7 +923,7 @@
       vector-effect: non-scaling-stroke;
     }
 
-    .geometry-link .geometry-label-text { fill: #101519; }
+    .geometry-link .geometry-label-text { fill: #000000; }
 
     .geometry-object.geometry-link:hover .geometry-item-box,
     .geometry-object.geometry-link:focus-visible .geometry-item-box {
@@ -923,7 +959,6 @@
       fill: none;
       opacity: 0.7;
       stroke: var(--geometry-arrow-color, var(--geometry-arrow));
-      stroke-linecap: square;
       stroke-linejoin: miter;
       pointer-events: none;
     }
@@ -949,11 +984,11 @@
     .geometry-region-simulation .geometry-box,
     .geometry-region-simulation.geometry-fragment { fill: var(--geometry-simulation-fill); }
 
-    .geometry-object.geometry-region-communication { --geometry-arrow-color: #548235; --geometry-text-color: var(--geometry-text); }
-    .geometry-object.geometry-region-drone { --geometry-arrow-color: #2e75b6; --geometry-text-color: #4472c4; }
-    .geometry-object.geometry-region-sheep { --geometry-arrow-color: #c55a11; --geometry-text-color: #ed7d31; }
-    .geometry-object.geometry-region-dog { --geometry-arrow-color: #bf9000; --geometry-text-color: #bf9000; }
-    .geometry-object.geometry-region-simulation { --geometry-arrow-color: #7030a0; --geometry-text-color: #7030a0; }
+    .geometry-object.geometry-region-communication { --geometry-arrow-color: #548235; --geometry-text-color: #000000; }
+    .geometry-object.geometry-region-drone { --geometry-arrow-color: #2e75b6; --geometry-text-color: #000000; }
+    .geometry-object.geometry-region-sheep { --geometry-arrow-color: #c55a11; --geometry-text-color: #000000; }
+    .geometry-object.geometry-region-dog { --geometry-arrow-color: #bf9000; --geometry-text-color: #000000; }
+    .geometry-object.geometry-region-simulation { --geometry-arrow-color: #7030a0; --geometry-text-color: #000000; }
 
     .geometry-object.geometry-region-communication.geometry-connector,
     .geometry-object.geometry-region-drone.geometry-connector,
@@ -967,6 +1002,7 @@
     .geometry-object.geometry-region-dog .geometry-fragment,
     .geometry-object.geometry-region-simulation .geometry-fragment { fill: var(--geometry-arrow-color); }
 
+    .geometry-object.geometry-region-communication .geometry-label-text,
     .geometry-object.geometry-region-drone .geometry-label-text,
     .geometry-object.geometry-region-sheep .geometry-label-text,
     .geometry-object.geometry-region-dog .geometry-label-text,
@@ -1119,16 +1155,29 @@
     .module-page[data-accent="communication"] { --accent: var(--accent-communication); }
     .module-page[data-accent="dog"] { --accent: var(--accent-dog); }
 
+    .module-page .page-header {
+      display: block;
+      margin-bottom: 22px;
+      padding-bottom: 18px;
+    }
+
+    .module-page .page-header .eyebrow { margin-bottom: 10px; }
+    .module-page .page-header h2 { font-size: 2.55rem; line-height: 1.02; }
+    .module-page .page-header p:not(.eyebrow) { margin-top: 10px; font-size: 0.9rem; }
+
     .module-identity {
       display: grid;
-      grid-template-columns: minmax(0, 0.75fr) minmax(0, 1.25fr);
-      gap: 28px;
-      margin-bottom: 38px;
+      grid-template-columns: minmax(220px, 0.58fr) minmax(0, 1.42fr);
+      gap: 24px;
+      align-items: stretch;
+      margin-bottom: 26px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--line-strong);
     }
 
     .module-stamp {
       position: relative;
-      min-height: 220px;
+      min-height: 190px;
       overflow: hidden;
       padding: 20px;
       border: 1px solid var(--accent);
@@ -1151,6 +1200,20 @@
 
     .module-stamp .micro-label { color: var(--accent); }
 
+    .module-image-icon {
+      position: absolute;
+      top: 22px;
+      right: 18px;
+      width: 82px;
+      height: 82px;
+      fill: none;
+      stroke: var(--accent);
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-width: 1.1;
+      opacity: 0.86;
+    }
+
     .module-stamp strong {
       position: absolute;
       bottom: 17px;
@@ -1165,21 +1228,23 @@
 
     .module-brief { align-self: center; }
 
+    .module-brief .eyebrow { margin-bottom: 10px; color: var(--accent); }
+
     .module-brief h3 {
       max-width: 480px;
-      margin: 0 0 13px;
-      font-size: 1.65rem;
+      margin: 0 0 10px;
+      font-size: 1.25rem;
       font-weight: 500;
       letter-spacing: -0.05em;
-      line-height: 1.06;
+      line-height: 1.14;
     }
 
     .module-brief p:not(.eyebrow) {
       max-width: 520px;
       margin: 0;
       color: var(--muted);
-      font-size: 0.88rem;
-      line-height: 1.65;
+      font-size: 0.8rem;
+      line-height: 1.58;
     }
 
     .tag-row {
@@ -1196,76 +1261,128 @@
       font-size: 0.5rem;
     }
 
-    .scope-list {
-      margin: 0;
-      padding: 0;
-      border-top: 1px solid var(--line-strong);
-      list-style: none;
-      counter-reset: scope;
-    }
+    .module-components { margin-top: 25px; }
 
-    .scope-item {
-      display: grid;
-      grid-template-columns: 44px minmax(0, 1fr) auto;
-      align-items: center;
+    .module-components-heading {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
       gap: 16px;
-      min-height: 77px;
+      margin-bottom: 11px;
+      padding: 13px 0 10px;
+      border-top: 1px solid var(--line-strong);
       border-bottom: 1px solid var(--line);
-      counter-increment: scope;
     }
 
-    .scope-item::before {
-      color: var(--accent);
-      content: counter(scope, decimal-leading-zero);
+    .module-components-heading h3 {
+      margin: 0;
+      font-size: 0.77rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .module-components-heading span {
+      color: var(--faint);
       font-family: var(--mono);
-      font-size: 0.59rem;
+      font-size: 0.52rem;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
     }
 
-    .scope-item h4 {
-      margin: 0 0 4px;
-      font-size: 0.89rem;
+    .component-list { border-top: 1px solid var(--line-strong); }
+
+    .component-row {
+      display: grid;
+      grid-template-columns: 42px minmax(0, 1fr) 18px;
+      align-items: center;
+      gap: 14px;
+      min-height: 70px;
+      padding: 11px 2px;
+      border-bottom: 1px solid var(--line);
+      color: inherit;
+      text-decoration: none;
+      scroll-margin-top: 96px;
+      transition: color 150ms ease, background-color 150ms ease;
+    }
+
+    .component-row:hover,
+    .component-row:focus-visible {
+      background: color-mix(in srgb, var(--accent) 6%, transparent);
+      color: var(--accent);
+      outline: none;
+    }
+
+    .component-row.is-targeted { outline: 1px solid color-mix(in srgb, var(--accent) 62%, transparent); outline-offset: -1px; }
+
+    .component-icon {
+      display: block;
+      width: 32px;
+      height: 32px;
+      justify-self: center;
+      fill: none;
+      stroke: currentColor;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-width: 1.6;
+      color: var(--accent);
+    }
+
+    .component-icon .icon-fill { fill: currentColor; stroke: none; }
+    .component-copy { display: grid; gap: 4px; }
+
+    .component-copy strong {
+      color: var(--ink);
+      font-size: 0.86rem;
       font-weight: 500;
     }
 
-    .scope-item p {
-      margin: 0;
+    .component-copy span {
       color: var(--muted);
       font-size: 0.7rem;
       line-height: 1.45;
     }
 
-    .scope-state {
-      color: var(--faint);
-      font-family: var(--mono);
-      font-size: 0.48rem;
-      letter-spacing: 0.08em;
-      text-align: right;
-      text-transform: uppercase;
-    }
-
-    .module-footer {
-      display: flex;
-      align-items: baseline;
-      justify-content: space-between;
-      gap: 20px;
-      margin-top: 33px;
-      padding-top: 13px;
-      border-top: 1px solid var(--line-strong);
-    }
-
-    .module-footer p {
-      max-width: 520px;
-      margin: 0;
-      color: var(--faint);
-      font-size: 0.68rem;
-      line-height: 1.5;
-    }
-
-    .status {
-      flex: 0 0 auto;
+    .component-arrow {
       color: var(--accent);
-      font-size: 0.53rem;
+      font-family: var(--mono);
+      font-size: 1rem;
+      text-align: right;
     }
+
+    .research-project-list { border-top: 1px solid var(--line-strong); }
+
+    .research-project {
+      display: grid;
+      grid-template-columns: 42px minmax(0, 1fr) auto;
+      align-items: start;
+      gap: 16px;
+      padding: 18px 0;
+      border-bottom: 1px solid var(--line);
+      scroll-margin-top: 98px;
+    }
+
+    .research-project-index {
+      color: var(--project-accent, var(--coral));
+      font-family: var(--mono);
+      font-size: 0.6rem;
+    }
+
+    .research-project h4 { margin: 0 0 5px; font-size: 1rem; font-weight: 500; }
+    .research-project p { max-width: 640px; margin: 0; color: var(--muted); font-size: 0.75rem; line-height: 1.55; }
+
+    .research-project-link {
+      color: var(--project-accent, var(--coral));
+      font-family: var(--mono);
+      font-size: 0.5rem;
+      letter-spacing: 0.06em;
+      text-decoration: none;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .research-project-link:hover,
+    .research-project-link:focus-visible { color: var(--ink); outline: none; }
 
     @media (max-width: 1100px) {
       .topbar { gap: 14px; padding-right: 18px; padding-left: 18px; }
@@ -1286,6 +1403,7 @@
       .top-nav { grid-column: 1 / -1; grid-row: 2; margin: 0 -18px -2px; padding: 0 18px 2px; }
       .nav-list { justify-content: flex-start; }
       .site-grid { display: block; min-height: 0; }
+      .site-grid:not(.is-description-page) .signal-column { display: none; }
       .signal-column {
         position: relative;
         top: auto;
@@ -1328,10 +1446,9 @@
       .objective-track { grid-column: 2; min-width: 0; text-align: left; }
       .module-stamp { min-height: 150px; }
       .module-stamp strong { font-size: 2.8rem; }
-      .scope-item { grid-template-columns: 32px minmax(0, 1fr); gap: 10px; padding: 12px 0; }
-      .scope-state { grid-column: 2; text-align: left; }
-      .module-footer { display: block; }
-      .status { display: block; margin-top: 12px; }
+      .component-row { grid-template-columns: 36px minmax(0, 1fr) 16px; gap: 10px; }
+      .research-project { grid-template-columns: 30px minmax(0, 1fr); gap: 10px; }
+      .research-project-link { grid-column: 2; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -1410,7 +1527,14 @@
           <h3>System map</h3>
           <span>Five linked subsystems</span>
         </div>
-        <div class="poster-canvas" id="poster-canvas" aria-label="Auto Shepherd source-coordinate pipeline canvas">
+        <div class="poster-canvas" id="poster-canvas" aria-label="Auto Shepherd source-coordinate pipeline canvas" tabindex="0">
+          <div class="poster-controls" role="group" aria-label="Poster canvas controls">
+            <span class="system-map-scale" id="poster-scale">100%</span>
+            <button class="system-map-control" id="poster-zoom-out" type="button" aria-label="Zoom out poster" title="Zoom out">-</button>
+            <button class="system-map-control" id="poster-zoom-in" type="button" aria-label="Zoom in poster" title="Zoom in">+</button>
+            <output class="poster-coordinate-readout" id="poster-coordinate-readout" aria-label="Mouse coordinates in source geometry, inches" aria-live="off">X -- / Y -- in</output>
+            <button class="system-map-control" id="poster-reset" type="button" aria-label="Reset poster zoom and pan" title="Reset poster">Reset</button>
+          </div>
           <div class="geometry-loading" id="geometry-loading">Loading source geometry</div>
         </div>
         <div class="system-map" id="system-map">
@@ -1673,7 +1797,7 @@
           <div>
             <p class="eyebrow">Open research projects</p>
             <h2>Questions that keep the system pointed at the real world.</h2>
-            <p>The research page is ready for the objectives, methods and development locations from the project poster. For now, these are the three lines the programme is being shaped around.</p>
+            <p>Open lines of work connect the field components to questions about animal response, coordinated autonomy and practical adoption.</p>
           </div>
         </header>
 
@@ -1699,10 +1823,41 @@
           </article>
         </div>
 
-        <div class="research-note"><p>Development locations and objective-specific methods will be added here from the poster, with links out to the subsystem pages that make each line of research possible.</p></div>
+        <div class="section-intro" style="margin-top: 36px">
+          <h3>Subsystem research projects</h3>
+          <span>Five connected workstreams</span>
+        </div>
+        <div class="research-project-list">
+          <article class="research-project" id="project-drone-observation" tabindex="-1" style="--project-accent: var(--accent-drone)">
+            <span class="research-project-index">04</span>
+            <div><h4>Field aerial observation</h4><p>Connect aircraft control, flight planning, telemetry and video into dependable observations that can inform work in the field.</p></div>
+            <a class="research-project-link" href="#drone-control" data-page-target="drone-control">Drone components</a>
+          </article>
+          <article class="research-project" id="project-flock-localisation" tabindex="-1" style="--project-accent: var(--accent-vision)">
+            <span class="research-project-index">05</span>
+            <div><h4>Flock detection and localisation</h4><p>Turn aerial imagery into detections, tracked sheep and geographic positions that can be shared with the rest of the system.</p></div>
+            <a class="research-project-link" href="#sheep-detection" data-page-target="sheep-detection">Vision components</a>
+          </article>
+          <article class="research-project" id="project-flock-simulation" tabindex="-1" style="--project-accent: var(--accent-simulation)">
+            <span class="research-project-index">06</span>
+            <div><h4>Flock prediction and simulation</h4><p>Use repeatable simulation, predicted poses and evaluation to explore how sheep and robot movement interact.</p></div>
+            <a class="research-project-link" href="#simulation" data-page-target="simulation">Simulation components</a>
+          </article>
+          <article class="research-project" id="project-field-communications" tabindex="-1" style="--project-accent: var(--accent-communication)">
+            <span class="research-project-index">07</span>
+            <div><h4>Field messaging and radio links</h4><p>Study the shared ROS2 messages and radio bridges needed to keep distributed robots and operators connected.</p></div>
+            <a class="research-project-link" href="#communication" data-page-target="communication">Communication components</a>
+          </article>
+          <article class="research-project" id="project-supervised-dog-control" tabindex="-1" style="--project-accent: var(--accent-dog)">
+            <span class="research-project-index">08</span>
+            <div><h4>Supervised ground-robot control</h4><p>Bring localisation, navigation and human supervision together for careful robot-dog movement around animals.</p></div>
+            <a class="research-project-link" href="#dog-control" data-page-target="dog-control">Dog-control components</a>
+          </article>
+        </div>
+
         <div class="research-footer">
           <div><h3>Developed through</h3><p>Field trials, simulation studies, subsystem experiments and conversations with the people who work alongside animals.</p></div>
-          <div><h3>Next addition</h3><p>Poster-derived objective map</p></div>
+          <div><h3>Current focus</h3><p>Animal-aware autonomy and integrated field systems</p></div>
         </div>
       </section>
 
@@ -1711,15 +1866,13 @@
           <div><p class="eyebrow">01 / Subsystem</p><h2>Drone control</h2><p>The eye in the sky: a reliable path from aircraft data to useful, deliberate field observation.</p></div>
         </header>
         <div class="module-identity">
-          <div class="module-stamp"><span class="micro-label">Baa Force One</span><strong>UAV</strong></div>
+          <div class="module-stamp"><span class="micro-label">Baa Force One</span><svg class="module-image-icon" viewBox="0 0 24 24" role="img" aria-label="Drone icon"><use href="#map-icon-drone"></use></svg><strong>UAV</strong></div>
           <div class="module-brief"><p class="eyebrow">Working outline</p><h3>See the field clearly, then decide what the aircraft should do next.</h3><p>Streaming, telemetry, camera pose and future autonomy belong together here. The page will grow with the drone control package.</p><div class="tag-row"><span class="tag">Video</span><span class="tag">Telemetry</span><span class="tag">Flight planning</span></div></div>
         </div>
-        <ol class="scope-list">
-          <li class="scope-item"><div><h4>Real-time data streaming</h4><p>Video, GPS, camera information and telemetry into the shared ROS2 system.</p></div><span class="scope-state">Outline</span></li>
-          <li class="scope-item"><div><h4>Remote tele-operation</h4><p>Coordinate, plan and review a flight before sending it into the field.</p></div><span class="scope-state">Outline</span></li>
-          <li class="scope-item"><div><h4>Autonomous planning</h4><p>Keep targets in frame while accounting for battery life, risk and handover.</p></div><span class="scope-state">Outline</span></li>
-        </ol>
-        <div class="module-footer"><p>Detailed goals, diagrams and project links will be added to this subsystem page.</p><span class="status">Page scaffold / ready</span></div>
+        <section class="module-components" aria-labelledby="drone-components-title">
+          <div class="module-components-heading"><h3 id="drone-components-title">Components</h3><span>Architecture / Drone</span></div>
+          <div class="component-list" data-component-list="drone-control"></div>
+        </section>
       </section>
 
       <section class="page-view module-page" id="page-sheep-detection" data-page-view="sheep-detection" data-accent="vision" style="--accent: var(--accent-vision)" role="tabpanel" aria-labelledby="sheep-detection-tab" hidden>
@@ -1727,15 +1880,13 @@
           <div><p class="eyebrow">02 / Subsystem</p><h2>Vision</h2><p>Make a moving flock measurable: detect individuals, follow them over time, and place them back on the map.</p></div>
         </header>
         <div class="module-identity">
-          <div class="module-stamp"><span class="micro-label">ShLAMb</span><strong>CV</strong></div>
+          <div class="module-stamp"><span class="micro-label">ShLAMb</span><svg class="module-image-icon" viewBox="0 0 24 24" role="img" aria-label="Sheep icon"><use href="#map-icon-sheep"></use></svg><strong>CV</strong></div>
           <div class="module-brief"><p class="eyebrow">Working outline</p><h3>From aerial pixels to a persistent picture of the flock.</h3><p>Computer vision, tracking and geo-referencing form the bridge between drone observation and decisions made elsewhere in the system.</p><div class="tag-row"><span class="tag">Detection</span><span class="tag">Tracking</span><span class="tag">Geo-reference</span></div></div>
         </div>
-        <ol class="scope-list">
-          <li class="scope-item"><div><h4>Sheep detection</h4><p>Optimise a vision pipeline for real-time detection from UAV-captured video.</p></div><span class="scope-state">Outline</span></li>
-          <li class="scope-item"><div><h4>Individual tracking</h4><p>Maintain identities and movement histories through changing aerial views.</p></div><span class="scope-state">Outline</span></li>
-          <li class="scope-item"><div><h4>Mapping and clustering</h4><p>Convert image observations into global positions, paths and useful flock groupings.</p></div><span class="scope-state">Outline</span></li>
-        </ol>
-        <div class="module-footer"><p>Detailed datasets, visualisations and evaluation results will be added to this subsystem page.</p><span class="status">Page scaffold / ready</span></div>
+        <section class="module-components" aria-labelledby="vision-components-title">
+          <div class="module-components-heading"><h3 id="vision-components-title">Components</h3><span>Architecture / Vision</span></div>
+          <div class="component-list" data-component-list="sheep-detection"></div>
+        </section>
       </section>
 
       <section class="page-view module-page" id="page-simulation" data-page-view="simulation" data-accent="simulation" style="--accent: var(--accent-simulation)" role="tabpanel" aria-labelledby="simulation-tab" hidden>
@@ -1743,15 +1894,13 @@
           <div><p class="eyebrow">03 / Subsystem</p><h2>Simulation</h2><p>Build a place to test flocking, control strategies and cross-system behaviour before the next field run.</p></div>
         </header>
         <div class="module-identity">
-          <div class="module-stamp"><span class="micro-label">ShepSim</span><strong>SIM</strong></div>
+          <div class="module-stamp"><span class="micro-label">ShepSim</span><svg class="module-image-icon" viewBox="0 0 24 24" role="img" aria-label="Simulation icon"><use href="#map-icon-simulation"></use></svg><strong>SIM</strong></div>
           <div class="module-brief"><p class="eyebrow">Working outline</p><h3>A controllable rehearsal space for natural systems.</h3><p>Simulation ties together organic flocking, robot-dog influence and synthetic data so new ideas can be explored with repeatable conditions.</p><div class="tag-row"><span class="tag">Flocking</span><span class="tag">Prediction</span><span class="tag">Synthetic data</span></div></div>
         </div>
-        <ol class="scope-list">
-          <li class="scope-item"><div><h4>Prediction and control</h4><p>Develop strategies for influencing sheep movement toward a target location.</p></div><span class="scope-state">Outline</span></li>
-          <li class="scope-item"><div><h4>Boid training server</h4><p>Use computer vision inputs to refine a closed-loop natural systems model.</p></div><span class="scope-state">Outline</span></li>
-          <li class="scope-item"><div><h4>Simulation server</h4><p>Work with drone and vision systems to produce a useful synthetic stream.</p></div><span class="scope-state">Outline</span></li>
-        </ol>
-        <div class="module-footer"><p>Detailed simulator views, parameters and experiment notes will be added to this subsystem page.</p><span class="status">Page scaffold / ready</span></div>
+        <section class="module-components" aria-labelledby="simulation-components-title">
+          <div class="module-components-heading"><h3 id="simulation-components-title">Components</h3><span>Architecture / Simulation</span></div>
+          <div class="component-list" data-component-list="simulation"></div>
+        </section>
       </section>
 
       <section class="page-view module-page" id="page-communication" data-page-view="communication" data-accent="communication" style="--accent: var(--accent-communication)" role="tabpanel" aria-labelledby="communication-tab" hidden>
@@ -1759,15 +1908,13 @@
           <div><p class="eyebrow">04 / Subsystem</p><h2>Communication</h2><p>Keep the distributed system coherent when its robots, radios and operators are spread across the field.</p></div>
         </header>
         <div class="module-identity">
-          <div class="module-stamp"><span class="micro-label">Baa-ndwidth</span><strong>RF</strong></div>
+          <div class="module-stamp"><span class="micro-label">Baa-ndwidth</span><svg class="module-image-icon" viewBox="0 0 24 24" role="img" aria-label="Radio icon"><use href="#map-icon-radio"></use></svg><strong>RF</strong></div>
           <div class="module-brief"><p class="eyebrow">Working outline</p><h3>The shared language and infrastructure between groups.</h3><p>Messages, serial bridges and empirical radio studies make the wider shepherding system possible beyond a single machine or network.</p><div class="tag-row"><span class="tag">ROS2</span><span class="tag">LoRa</span><span class="tag">nRF</span><span class="tag">RF study</span></div></div>
         </div>
-        <ol class="scope-list">
-          <li class="scope-item"><div><h4>ROS2 group messages</h4><p>Establish shared protocols and a messages package for every subsystem.</p></div><span class="scope-state">Outline</span></li>
-          <li class="scope-item"><div><h4>Radio bridges</h4><p>Connect LoRa and nRF hardware to the field robotics communication layer.</p></div><span class="scope-state">Outline</span></li>
-          <li class="scope-item"><div><h4>Empirical propagation</h4><p>Map signal attenuation and weigh bandwidth needs against field conditions.</p></div><span class="scope-state">Outline</span></li>
-        </ol>
-        <div class="module-footer"><p>Detailed protocol diagrams, coverage maps and hardware notes will be added to this subsystem page.</p><span class="status">Page scaffold / ready</span></div>
+        <section class="module-components" aria-labelledby="communication-components-title">
+          <div class="module-components-heading"><h3 id="communication-components-title">Components</h3><span>Architecture / Communication</span></div>
+          <div class="component-list" data-component-list="communication"></div>
+        </section>
       </section>
 
       <section class="page-view module-page" id="page-dog-control" data-page-view="dog-control" data-accent="dog" style="--accent: var(--accent-dog)" role="tabpanel" aria-labelledby="dog-control-tab" hidden>
@@ -1775,15 +1922,13 @@
           <div><p class="eyebrow">05 / Subsystem</p><h2>Dog control</h2><p>Bring the shepherding decision to ground level through a robot dog that can be supervised, tested and trusted.</p></div>
         </header>
         <div class="module-identity">
-          <div class="module-stamp"><span class="micro-label">Walkies</span><strong>UGV</strong></div>
+          <div class="module-stamp"><span class="micro-label">Walkies</span><svg class="module-image-icon" viewBox="0 0 24 24" role="img" aria-label="Robot dog icon"><use href="#map-icon-dog"></use></svg><strong>UGV</strong></div>
           <div class="module-brief"><p class="eyebrow">Working outline</p><h3>Translate shared understanding into careful movement.</h3><p>This page will hold the robot-dog interface, control modes, safety constraints and the behaviours that connect autonomy to animal welfare.</p><div class="tag-row"><span class="tag">Robot dog</span><span class="tag">Teleoperation</span><span class="tag">Safety</span></div></div>
         </div>
-        <ol class="scope-list">
-          <li class="scope-item"><div><h4>Robot interface</h4><p>Connect the physical dog to the shared state and command interfaces.</p></div><span class="scope-state">Outline</span></li>
-          <li class="scope-item"><div><h4>Herding behaviours</h4><p>Explore movement strategies that influence a flock without treating animals as obstacles.</p></div><span class="scope-state">Outline</span></li>
-          <li class="scope-item"><div><h4>Safe supervision</h4><p>Keep human approval, fallback behaviour and field constraints in the control loop.</p></div><span class="scope-state">Outline</span></li>
-        </ol>
-        <div class="module-footer"><p>Detailed dog platform information, control diagrams and research links will be added to this subsystem page.</p><span class="status">Page scaffold / ready</span></div>
+        <section class="module-components" aria-labelledby="dog-components-title">
+          <div class="module-components-heading"><h3 id="dog-components-title">Components</h3><span>Architecture / Dog control</span></div>
+          <div class="component-list" data-component-list="dog-control"></div>
+        </section>
       </section>
     </main>
   </div>
@@ -1808,6 +1953,55 @@
         communication: "Communication",
         "dog-control": "Dog control"
       };
+      const componentDefinitions = {
+        "drone-control": [
+          { id: "flight-command", title: "Control", icon: "control", mapLabels: ["Control"], description: "Flight command interface for issuing and supervising aircraft actions.", project: "project-drone-observation" },
+          { id: "mini-aircraft", title: "DJI Mini 4 Pro", icon: "drone", mapLabels: ["DJI Mini 4 Pro"], description: "Aerial platform providing the field video and telemetry used by the wider system.", project: "project-drone-observation" },
+          { id: "android-link", title: "Android", icon: "phone", mapLabels: ["Android"], description: "Mobile operator link between the aircraft controls and the ground system.", project: "project-drone-observation" },
+          { id: "goal-estimator", title: "Navigation goal estimator", icon: "goal", mapLabels: ["Navigation goal estimator"], description: "Turns a selected observation target into a navigation goal for the flight system.", project: "project-drone-observation" },
+          { id: "flight-path", title: "Path", icon: "path", mapLabels: ["Path"], description: "Represents the planned route used to guide an observation flight.", project: "project-drone-observation" },
+          { id: "gps", title: "GPS", icon: "gps", mapLabels: ["GPS"], description: "Provides aircraft position information for mapping and geo-referenced observations.", project: "project-drone-observation" },
+          { id: "video", title: "Video", icon: "video", mapLabels: ["Video"], description: "Carries the aerial image feed into the vision and localisation pipeline.", project: "project-drone-observation" }
+        ],
+        "sheep-detection": [
+          { id: "image-stream", title: "Stream", icon: "stream", mapLabels: ["Stream"], description: "Receives and distributes the image feed used for flock analysis.", project: "project-flock-localisation" },
+          { id: "sheep-detection", title: "Detection", icon: "detect", mapLabels: ["Detection"], description: "Finds sheep in aerial images so individual observations can be measured.", project: "project-flock-localisation" },
+          { id: "localisation", title: "Localisation", icon: "localise", mapLabels: ["Localisation"], description: "Estimates sheep positions from detections across successive observations.", project: "project-flock-localisation" },
+          { id: "geo-references", title: "Geo references", icon: "geo", mapLabels: ["Geo references"], description: "Relates image-space observations to a shared geographic frame.", project: "project-flock-localisation" }
+        ],
+        simulation: [
+          { id: "dog-path", title: "Dog path", icon: "path", mapLabels: ["Dog path"], description: "Represents the ground robot route used in flock interaction studies.", project: "project-flock-simulation" },
+          { id: "unity-sim", title: "Unity sim", icon: "unity", mapLabels: ["Unity sim"], description: "Provides the interactive environment used to rehearse system behaviour.", project: "project-flock-simulation" },
+          { id: "synthetic-stream", title: "Synthetic data stream", icon: "stream", mapLabels: ["Synthetic data stream"], description: "Supplies generated observations for repeatable testing and training.", project: "project-flock-simulation" },
+          { id: "dog-path-prediction", title: "Dog path prediction", icon: "path", mapLabels: ["Dog path prediction"], description: "Estimates candidate robot paths for prediction and control experiments.", project: "project-flock-simulation" },
+          { id: "goal-pose", title: "Goal pose", icon: "goal", mapLabels: ["Goal pose"], description: "Defines a target pose used to evaluate flock movement and robot plans.", project: "project-flock-simulation" },
+          { id: "simulations", title: "Simulations", icon: "simulation", mapLabels: ["Simulations"], description: "Runs repeatable scenarios for comparing flock and robot behaviours.", project: "project-flock-simulation" },
+          { id: "predicted-poses", title: "Predicted poses", icon: "pose", mapLabels: ["Predicted poses"], description: "Stores predicted positions for evaluating future system states.", project: "project-flock-simulation" },
+          { id: "sheep-poses", title: "Sheep poses", icon: "sheep", mapLabels: ["Sheep poses"], description: "Represents sheep positions and orientations in the simulated flock.", project: "project-flock-simulation" },
+          { id: "goal-proximity", title: "Goal proximity score", icon: "goal", mapLabels: ["Goal proximity score"], description: "Measures how close the flock or robot state is to a target.", project: "project-flock-simulation" },
+          { id: "pose-zero", title: "Pose zero setup", icon: "pose", mapLabels: ["Pose zero setup"], description: "Sets the reference pose used to initialise a simulation run.", project: "project-flock-simulation" },
+          { id: "poses", title: "Poses", icon: "pose", mapLabels: ["Poses"], description: "Collects position and orientation states for simulated agents.", project: "project-flock-simulation" },
+          { id: "n-second-simulation", title: "N-second simulation", icon: "simulation", mapLabels: ["N-second simulation"], description: "Runs a defined-duration scenario for repeatable system checks.", project: "project-flock-simulation" },
+          { id: "evaluation", title: "Evaluation", icon: "eval", mapLabels: ["Evaluation"], description: "Compares run outcomes against target measures and experiment criteria.", project: "project-flock-simulation" },
+          { id: "tuning", title: "Tuning", icon: "tuning", mapLabels: ["Tuning"], description: "Adjusts simulation and control parameters against observed outcomes.", project: "project-flock-simulation" },
+          { id: "natural-system-weights", title: "Natural system weights", icon: "weights", mapLabels: ["Natural system weights"], description: "Sets the relative influence of natural-system behaviours in the model.", project: "project-flock-simulation" }
+        ],
+        communication: [
+          { id: "radio-bridge", title: "Bridge", icon: "bridge", mapLabels: ["Bridge", "onboard bridge"], description: "Connects ROS2 messages with the radio or onboard communication link.", project: "project-field-communications" },
+          { id: "lora-radio", title: "LoRa", icon: "radio", mapLabels: ["LoRa"], description: "Long-range radio link for low-bandwidth messages across the field.", project: "project-field-communications" },
+          { id: "nrf-radio", title: "nRF", icon: "radio", mapLabels: ["nRF"], description: "Short-range field radio used to exchange subsystem messages.", project: "project-field-communications" }
+        ],
+        "dog-control": [
+          { id: "teleop-server", title: "Teleop Server", icon: "control", mapLabels: ["Teleop Server"], description: "Operator-facing service for supervising and commanding the robot dog.", project: "project-supervised-dog-control" },
+          { id: "holybro-rtk", title: "Holybro H-RTK", icon: "gps", mapLabels: ["Holybro H-RTK"], description: "RTK positioning hardware supporting accurate ground-robot localisation.", project: "project-supervised-dog-control" },
+          { id: "magnetometer", title: "Magnetometer", icon: "compass", mapLabels: ["Magnetometer"], description: "Heading sensor used as an input to the robot state estimate.", project: "project-supervised-dog-control" },
+          { id: "ekf", title: "EKF", icon: "pose", mapLabels: ["EKF"], description: "Fuses positioning and motion measurements into a robot pose estimate.", project: "project-supervised-dog-control" },
+          { id: "drivers", title: "Drivers", icon: "gears", mapLabels: ["Drivers"], description: "Hardware interfaces that expose platform sensors and actuators to ROS2.", project: "project-supervised-dog-control" },
+          { id: "nav2", title: "Nav2", icon: "nav", mapLabels: ["Nav2"], description: "Navigation stack for planning and executing ground-robot movement.", project: "project-supervised-dog-control" },
+          { id: "robot-pose", title: "Pose", icon: "pose", mapLabels: ["Pose"], description: "Current robot position and orientation used by navigation and control.", project: "project-supervised-dog-control" },
+          { id: "robot-dog", title: "Robot dog", icon: "dog", mapLabels: ["Robot dog"], description: "Ground platform for supervised field interaction with the flock.", project: "project-supervised-dog-control" }
+        ]
+      };
       const pageButtons = [...document.querySelectorAll("button[data-page-target]")];
       const pageLinks = [...document.querySelectorAll("a[data-page-target]")];
       const pages = [...document.querySelectorAll("[data-page-view]")];
@@ -1828,8 +2022,8 @@
         "[data-page-view]:not([hidden]) .research-footer",
         "[data-page-view]:not([hidden]) .module-stamp",
         "[data-page-view]:not([hidden]) .module-brief",
-        "[data-page-view]:not([hidden]) .scope-item",
-        "[data-page-view]:not([hidden]) .module-footer"
+        "[data-page-view]:not([hidden]) .component-row",
+        "[data-page-view]:not([hidden]) .research-project"
       ].join(", ");
       let themeAnimationTimer;
       const systemMapCanvas = document.getElementById("system-map-canvas");
@@ -1841,8 +2035,81 @@
       const baseMapViewBox = { x: 0, y: 0, width: 1500, height: 1050 };
       let mapViewBox = { ...baseMapViewBox };
       let mapPointer = null;
+      const posterCanvas = document.getElementById("poster-canvas");
+      const posterScale = document.getElementById("poster-scale");
+      const posterZoomIn = document.getElementById("poster-zoom-in");
+      const posterZoomOut = document.getElementById("poster-zoom-out");
+      const posterReset = document.getElementById("poster-reset");
+      const posterCoordinateReadout = document.getElementById("poster-coordinate-readout");
+      const basePipelineViewBox = { x: 0, y: 0, width: 4681, height: 3311 };
+      let pipelineViewBox = { ...basePipelineViewBox };
+      let pipelineSvg = null;
+      let pipelineSourceWidthIn = 46.81076;
+      let pipelineSourceHeightIn = 33.10938;
+      let pipelinePointer = null;
+      let suppressPipelineClick = false;
 
-      function setPage(requestedPage) {
+      function clampPipelineView(x, y, width) {
+        const nextWidth = Math.min(basePipelineViewBox.width, Math.max(basePipelineViewBox.width * 0.15, width));
+        const nextHeight = nextWidth * basePipelineViewBox.height / basePipelineViewBox.width;
+        return {
+          x: Math.min(basePipelineViewBox.width - nextWidth, Math.max(0, x)),
+          y: Math.min(basePipelineViewBox.height - nextHeight, Math.max(0, y)),
+          width: nextWidth,
+          height: nextHeight
+        };
+      }
+
+      function renderPipelineView() {
+        if (!pipelineSvg) return;
+        const { x, y, width, height } = pipelineViewBox;
+        pipelineSvg.setAttribute("viewBox", `${x} ${y} ${width} ${height}`);
+        posterScale.textContent = `${Math.round(basePipelineViewBox.width / width * 100)}%`;
+      }
+
+      function zoomPipelineCanvas(factor, clientX, clientY) {
+        if (!pipelineSvg) return;
+        let anchorX = pipelineViewBox.x + pipelineViewBox.width / 2;
+        let anchorY = pipelineViewBox.y + pipelineViewBox.height / 2;
+        if (Number.isFinite(clientX) && Number.isFinite(clientY)) {
+          const matrix = pipelineSvg.getScreenCTM();
+          if (matrix) {
+            const point = pipelineSvg.createSVGPoint();
+            point.x = clientX;
+            point.y = clientY;
+            const localPoint = point.matrixTransform(matrix.inverse());
+            anchorX = localPoint.x;
+            anchorY = localPoint.y;
+          }
+        }
+        const nextWidth = Math.min(basePipelineViewBox.width, Math.max(basePipelineViewBox.width * 0.15, pipelineViewBox.width * factor));
+        const nextHeight = nextWidth * basePipelineViewBox.height / basePipelineViewBox.width;
+        const horizontalRatio = (anchorX - pipelineViewBox.x) / pipelineViewBox.width;
+        const verticalRatio = (anchorY - pipelineViewBox.y) / pipelineViewBox.height;
+        pipelineViewBox = clampPipelineView(anchorX - horizontalRatio * nextWidth, anchorY - verticalRatio * nextHeight, nextWidth);
+        renderPipelineView();
+      }
+
+      function resetPipelineCanvas() {
+        pipelineViewBox = { ...basePipelineViewBox };
+        renderPipelineView();
+      }
+
+      function updatePipelineCoordinates(event) {
+        if (!pipelineSvg || !posterCanvas.contains(event.target) || event.target.closest?.(".poster-controls")) return;
+        const matrix = pipelineSvg.getScreenCTM();
+        if (!matrix) return;
+        const point = pipelineSvg.createSVGPoint();
+        point.x = event.clientX;
+        point.y = event.clientY;
+        const sourcePoint = point.matrixTransform(matrix.inverse());
+        const x = sourcePoint.x * pipelineSourceWidthIn / basePipelineViewBox.width;
+        const y = sourcePoint.y * pipelineSourceHeightIn / basePipelineViewBox.height;
+        posterCoordinateReadout.value = `X ${x.toFixed(2)} / Y ${y.toFixed(2)} in`;
+        posterCoordinateReadout.textContent = posterCoordinateReadout.value;
+      }
+
+      function setPage(requestedPage, shouldResetScroll = true) {
         const page = pageOrder.includes(requestedPage) ? requestedPage : "description";
         siteGrid.classList.toggle("is-description-page", page === "description");
         pages.forEach((panel) => {
@@ -1856,21 +2123,89 @@
           button.tabIndex = isActive ? 0 : -1;
         });
         document.title = `${pageNames[page]} | Auto Shepherd`;
-        window.scrollTo(0, 0);
+        if (shouldResetScroll) window.scrollTo(0, 0);
       }
 
       function readPageFromHash() {
-        return window.location.hash.slice(1).toLowerCase();
+        return window.location.hash.slice(1).toLowerCase().split("--", 1)[0];
+      }
+
+      function scrollToTarget(targetId) {
+        if (!targetId) return;
+        window.requestAnimationFrame(() => {
+          const target = document.getElementById(targetId);
+          if (!target) return;
+          const targetTop = target.getBoundingClientRect().top + window.scrollY - 96;
+          window.scrollTo({ top: Math.max(0, targetTop), behavior: "instant" });
+          target.focus({ preventScroll: true });
+          if (target.matches(".component-row")) {
+            target.classList.add("is-targeted");
+            window.setTimeout(() => target.classList.remove("is-targeted"), 1800);
+          }
+        });
+      }
+
+      function navigateToPage(page, targetId = "") {
+        const nextHash = `#${page}${targetId ? `--${targetId}` : ""}`;
+        if (window.location.hash.toLowerCase() === nextHash.toLowerCase()) {
+          updatePageFromHash();
+          return;
+        }
+        window.location.hash = nextHash;
       }
 
       function updatePageFromHash() {
-        const requestedPage = readPageFromHash();
+        const [requestedPage, targetId] = window.location.hash.slice(1).toLowerCase().split("--", 2);
         if (!pageOrder.includes(requestedPage)) {
           history.replaceState(null, "", "#description");
           setPage("description");
           return;
         }
-        setPage(requestedPage);
+        setPage(requestedPage, !targetId);
+        scrollToTarget(targetId);
+      }
+
+      function renderComponentLists() {
+        const svgNamespace = "http://www.w3.org/2000/svg";
+        document.querySelectorAll("[data-component-list]").forEach((list) => {
+          const route = list.dataset.componentList;
+          const components = componentDefinitions[route] || [];
+          const count = list.closest(".module-components")?.querySelector(".module-components-heading span");
+          if (count) count.textContent = `${components.length} architecture components`;
+          components.forEach((component) => {
+            const targetId = `component-${component.id}`;
+            const row = document.createElement("a");
+            row.className = "component-row";
+            row.id = targetId;
+            row.href = `#research--${component.project}`;
+            row.dataset.pageTarget = "research";
+            row.dataset.anchorTarget = component.project;
+            row.setAttribute("aria-label", `${component.title}. ${component.description} Open research project.`);
+
+            const icon = document.createElementNS(svgNamespace, "svg");
+            icon.classList.add("component-icon");
+            icon.setAttribute("viewBox", "0 0 24 24");
+            icon.setAttribute("aria-hidden", "true");
+            const use = document.createElementNS(svgNamespace, "use");
+            use.setAttribute("href", `#map-icon-${component.icon}`);
+            icon.append(use);
+
+            const copy = document.createElement("span");
+            copy.className = "component-copy";
+            const title = document.createElement("strong");
+            title.textContent = component.title;
+            const description = document.createElement("span");
+            description.textContent = component.description;
+            copy.append(title, description);
+
+            const arrow = document.createElement("span");
+            arrow.className = "component-arrow";
+            arrow.setAttribute("aria-hidden", "true");
+            arrow.textContent = ">";
+            row.append(icon, copy, arrow);
+            list.append(row);
+          });
+        });
       }
 
       function animateThemeComponents() {
@@ -1944,6 +2279,74 @@
         renderSystemMap();
       }
 
+      function panPipelineCanvas(event) {
+        if (!pipelinePointer || event.pointerId !== pipelinePointer.pointerId || !pipelineSvg) return;
+        const deltaX = event.clientX - pipelinePointer.startX;
+        const deltaY = event.clientY - pipelinePointer.startY;
+        if (Math.hypot(deltaX, deltaY) > 3) pipelinePointer.moved = true;
+        if (!pipelinePointer.moved) return;
+        const rect = pipelineSvg.getBoundingClientRect();
+        pipelineViewBox = clampPipelineView(
+          pipelinePointer.viewBox.x - deltaX * pipelinePointer.viewBox.width / rect.width,
+          pipelinePointer.viewBox.y - deltaY * pipelinePointer.viewBox.height / rect.height,
+          pipelinePointer.viewBox.width
+        );
+        renderPipelineView();
+        event.preventDefault();
+      }
+
+      function finishPipelinePan(event) {
+        if (!pipelinePointer || event.pointerId !== pipelinePointer.pointerId) return;
+        const didMove = pipelinePointer.moved;
+        pipelinePointer = null;
+        posterCanvas.classList.remove("is-panning");
+        if (didMove) {
+          suppressPipelineClick = true;
+          window.setTimeout(() => { suppressPipelineClick = false; }, 0);
+        }
+      }
+
+      posterZoomIn.addEventListener("click", () => zoomPipelineCanvas(0.82));
+      posterZoomOut.addEventListener("click", () => zoomPipelineCanvas(1.22));
+      posterReset.addEventListener("click", resetPipelineCanvas);
+      posterCanvas.addEventListener("wheel", (event) => {
+        if (event.target instanceof Element && event.target.closest(".poster-controls")) return;
+        event.preventDefault();
+        const factor = Math.min(1.35, Math.max(0.74, Math.exp(event.deltaY * 0.001)));
+        zoomPipelineCanvas(factor, event.clientX, event.clientY);
+      }, { passive: false });
+      posterCanvas.addEventListener("pointerdown", (event) => {
+        if (event.button !== 0 || (event.target instanceof Element && event.target.closest(".poster-controls"))) return;
+        pipelinePointer = {
+          pointerId: event.pointerId,
+          startX: event.clientX,
+          startY: event.clientY,
+          viewBox: { ...pipelineViewBox },
+          moved: false
+        };
+        posterCanvas.classList.add("is-panning");
+      });
+      window.addEventListener("pointermove", panPipelineCanvas);
+      window.addEventListener("pointermove", updatePipelineCoordinates);
+      window.addEventListener("pointerup", finishPipelinePan);
+      window.addEventListener("pointercancel", finishPipelinePan);
+      posterCanvas.addEventListener("pointerleave", (event) => {
+        if (event.relatedTarget instanceof Node && posterCanvas.querySelector(".poster-controls")?.contains(event.relatedTarget)) return;
+        posterCoordinateReadout.value = "X -- / Y -- in";
+        posterCoordinateReadout.textContent = posterCoordinateReadout.value;
+      });
+      posterCanvas.addEventListener("keydown", (event) => {
+        if (event.key === "+" || event.key === "=") zoomPipelineCanvas(0.82);
+        if (event.key === "-" || event.key === "_") zoomPipelineCanvas(1.22);
+        if (event.key === "0") resetPipelineCanvas();
+      });
+      document.addEventListener("click", (event) => {
+        if (!suppressPipelineClick || !(event.target instanceof Element) || !posterCanvas.contains(event.target)) return;
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        suppressPipelineClick = false;
+      }, true);
+
       function addSystemMapIcons() {
         const iconRules = [
           ["Teleop Server", "control"],
@@ -1985,6 +2388,8 @@
         const svgNamespace = "http://www.w3.org/2000/svg";
         document.querySelectorAll(".map-node").forEach((node) => {
           const label = node.getAttribute("aria-label") || "";
+          const nodeLabel = label.slice(label.indexOf(":") + 1).trim().toLowerCase();
+          const component = (componentDefinitions[node.dataset.pageTarget] || []).find((entry) => entry.mapLabels.some((mapLabel) => mapLabel.toLowerCase() === nodeLabel));
           const match = iconRules.find(([labelPart]) => label.includes(labelPart));
           const rect = node.querySelector("rect");
           const fallbackIcon = node.classList.contains("map-node-communication")
@@ -2001,7 +2406,7 @@
           const rectX = Number(rect.getAttribute("x"));
           const rectY = Number(rect.getAttribute("y"));
           const rectWidth = Number(rect.getAttribute("width"));
-          icon.setAttribute("href", `#map-icon-${match ? match[1] : fallbackIcon}`);
+          icon.setAttribute("href", `#map-icon-${component ? component.icon : match ? match[1] : fallbackIcon}`);
           icon.setAttribute("x", String(rectX + rectWidth - 27));
           icon.setAttribute("y", String(rectY + 10));
           icon.setAttribute("width", "19");
@@ -2111,9 +2516,11 @@
         if (!canvas) return;
         const svgNamespace = "http://www.w3.org/2000/svg";
         try {
-          const response = await fetch("assets/pipeline-geometry.json?source=odp-v13");
+          const response = await fetch("assets/pipeline-geometry.json?source=odp-v13", { cache: "no-store" });
           if (!response.ok) throw new Error(`Geometry request failed: ${response.status}`);
           const geometry = await response.json();
+          pipelineSourceWidthIn = geometry.widthIn;
+          pipelineSourceHeightIn = geometry.heightIn;
           const viewWidth = 4681;
           const viewHeight = 3311;
           const scaleX = viewWidth / geometry.widthIn;
@@ -2124,6 +2531,9 @@
           const svg = document.createElementNS(svgNamespace, "svg");
           svg.classList.add("geometry-svg");
           setSvgAttributes(svg, { viewBox: `0 0 ${viewWidth} ${viewHeight}`, role: "img", "aria-label": "Auto Shepherd pipeline reconstructed from the uploaded slide geometry" });
+          pipelineSvg = svg;
+          pipelineViewBox = { ...basePipelineViewBox };
+          renderPipelineView();
           const defs = document.createElementNS(svgNamespace, "defs");
           svg.append(defs);
 
@@ -2140,9 +2550,22 @@
             dog: "#bf9000",
             simulation: "#7030a0"
           };
-          Object.entries(arrowColors).forEach(([region, color]) => {
-            const marker = makeElement("marker", { id: `geometry-arrow-${region}`, markerWidth: 12, markerHeight: 12, refX: 10, refY: 5, orient: "auto", markerUnits: "userSpaceOnUse" });
-            marker.append(makeElement("path", { d: "M 0 0 L 10 5 L 0 10 z", fill: color }));
+            const lineStyles = {
+              serial: { dasharray: "none", linecap: "butt" },
+              ros2_topic: { dasharray: "12.5 12.5", linecap: "butt" },
+              unity_signal: { dasharray: "0 16.666", linecap: "round" },
+              rf_link: { dasharray: "99.998 12.5 12.5 12.5", linecap: "butt" }
+            };
+          const arrowHeadMarkers = new Map();
+          geometry.objects.filter((item) => item.kind === "native-connector" && item.arrowHead === "triangle").forEach((item) => {
+            const color = item.strokeColor || arrowColors[geometryRegion(item)] || "#548235";
+            const scale = item.arrowHeadScale || 1;
+            const markerId = `${color.slice(1)}-${scale}`;
+            arrowHeadMarkers.set(markerId, { color, scale });
+          });
+          arrowHeadMarkers.forEach(({ color, scale }, markerId) => {
+            const marker = makeElement("marker", { id: `geometry-arrow-${markerId}`, markerWidth: 12 * scale, markerHeight: 12 * scale, refX: 10 * scale, refY: 5 * scale, orient: "auto", markerUnits: "userSpaceOnUse" });
+            marker.append(makeElement("path", { d: `M 0 0 L ${10 * scale} ${5 * scale} L 0 ${10 * scale} z`, fill: color }));
             defs.append(marker);
           });
 
@@ -2184,24 +2607,17 @@
             }
 
             if (item.kind === "native-connector") {
-              const connectorStartX = item.x1 * scaleX;
-              const connectorStartY = item.y1 * scaleY;
-              const connectorEndX = item.x2 * scaleX;
-              const connectorEndY = item.y2 * scaleY;
-              const deltaX = connectorEndX - connectorStartX;
-              const deltaY = connectorEndY - connectorStartY;
-              let pathData;
-              if (Math.abs(deltaX) < 4 || Math.abs(deltaY) < 4) {
-                pathData = `M ${connectorStartX} ${connectorStartY} L ${connectorEndX} ${connectorEndY}`;
-              } else if (Math.abs(deltaX) >= Math.abs(deltaY)) {
-                const midX = connectorStartX + deltaX / 2;
-                pathData = `M ${connectorStartX} ${connectorStartY} H ${midX} V ${connectorEndY} H ${connectorEndX}`;
-              } else {
-                const midY = connectorStartY + deltaY / 2;
-                pathData = `M ${connectorStartX} ${connectorStartY} V ${midY} H ${connectorEndX} V ${connectorEndY}`;
+              const routePoints = item.points || [{ x: item.x1, y: item.y1 }, { x: item.x2, y: item.y2 }];
+              const pathData = routePoints.map((point, index) => `${index === 0 ? "M" : "L"} ${point.x * scaleX} ${point.y * scaleY}`).join(" ");
+              const strokeColor = item.strokeColor || arrowColors[region] || "#548235";
+              const lineStyle = lineStyles[item.lineType] || lineStyles.serial;
+              group.style.setProperty("--geometry-arrow-color", strokeColor);
+              const pathAttributes = { d: pathData, stroke: strokeColor, "stroke-width": item.strokeWidth ?? 8.333, "stroke-dasharray": lineStyle.dasharray, "stroke-linecap": lineStyle.linecap };
+              if (item.arrowHead === "triangle") {
+                const markerId = `${strokeColor.slice(1)}-${item.arrowHeadScale || 1}`;
+                pathAttributes["marker-end"] = `url(#geometry-arrow-${markerId})`;
               }
-              const arrowRegion = region || "communication";
-              const path = makeElement("path", { d: pathData, stroke: arrowColors[arrowRegion], "stroke-width": 8, "marker-end": `url(#geometry-arrow-${arrowRegion})` });
+              const path = makeElement("path", pathAttributes);
               path.classList.add("geometry-connector");
               group.append(path);
             } else if (item.kind === "connector") {
@@ -2258,7 +2674,9 @@
           });
 
           sheet.append(svg);
-          canvas.replaceChildren(sheet);
+          canvas.querySelector(".geometry-sheet")?.remove();
+          canvas.querySelector(".geometry-loading")?.remove();
+          canvas.append(sheet);
         } catch (error) {
           const loading = document.getElementById("geometry-loading");
           if (loading) loading.textContent = "Source geometry unavailable";
@@ -2305,6 +2723,7 @@
         renderSystemMap();
       }
 
+      renderComponentLists();
       addSystemMapIcons();
       renderPipelineGeometry();
 
@@ -2315,8 +2734,9 @@
       });
 
       pageLinks.forEach((link) => {
-        link.addEventListener("click", () => {
-          setPage(link.dataset.pageTarget);
+        link.addEventListener("click", (event) => {
+          event.preventDefault();
+          navigateToPage(link.dataset.pageTarget, link.dataset.anchorTarget || "");
         });
       });
 
