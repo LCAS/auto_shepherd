@@ -41,12 +41,12 @@
       --geometry-background: #4b5055;
       --geometry-text: #17241d;
       --geometry-muted: #53665a;
-      --geometry-arrow: #000000;
-      --geometry-communication-fill: #c6e0c2;
-      --geometry-drone-fill: #c3d6e9;
-      --geometry-sheep-fill: #efc9bd;
-      --geometry-dog-fill: #f0dda8;
-      --geometry-simulation-fill: #ddc9eb;
+      --geometry-arrow: #548235;
+      --geometry-communication-fill: #e2f0d9;
+      --geometry-drone-fill: #dae3f3;
+      --geometry-sheep-fill: #fbe5d6;
+      --geometry-dog-fill: #fff2cc;
+      --geometry-simulation-fill: #e9dbf5;
       --geometry-media-filter: brightness(0.82) saturate(0.92);
       --accent-drone: #a9d5f4;
       --accent-vision: #f3a18f;
@@ -78,12 +78,12 @@
       --geometry-background: #f7f9f4;
       --geometry-text: #17241d;
       --geometry-muted: #53665a;
-      --geometry-arrow: #000000;
-      --geometry-communication-fill: #dcefd8;
-      --geometry-drone-fill: #dbe8f7;
-      --geometry-sheep-fill: #f9e0d6;
-      --geometry-dog-fill: #fff1c9;
-      --geometry-simulation-fill: #eadbf5;
+      --geometry-arrow: #548235;
+      --geometry-communication-fill: #e2f0d9;
+      --geometry-drone-fill: #dae3f3;
+      --geometry-sheep-fill: #fbe5d6;
+      --geometry-dog-fill: #fff2cc;
+      --geometry-simulation-fill: #e9dbf5;
       --geometry-media-filter: none;
       --accent-drone: #5f8fb8;
       --accent-vision: #cb715e;
@@ -874,11 +874,11 @@
     }
 
     .geometry-object.geometry-link.geometry-drone { --geometry-accent: var(--accent-drone); }
-    .geometry-object.geometry-link.geometry-drone { --geometry-component-fill: #2e5f84; }
-    .geometry-object.geometry-link.geometry-sheep { --geometry-accent: var(--accent-vision); --geometry-component-fill: #754139; }
-    .geometry-object.geometry-link.geometry-simulation { --geometry-accent: var(--accent-simulation); --geometry-component-fill: #553271; }
-    .geometry-object.geometry-link.geometry-communication { --geometry-accent: var(--accent-communication); --geometry-component-fill: #25613a; }
-    .geometry-object.geometry-link.geometry-dog { --geometry-accent: var(--accent-dog); --geometry-component-fill: #6c501e; }
+    .geometry-object.geometry-link.geometry-drone { --geometry-component-fill: #5b9bd5; }
+    .geometry-object.geometry-link.geometry-sheep { --geometry-accent: var(--accent-vision); --geometry-component-fill: #ed7d31; }
+    .geometry-object.geometry-link.geometry-simulation { --geometry-accent: var(--accent-simulation); --geometry-component-fill: #8f45c7; }
+    .geometry-object.geometry-link.geometry-communication { --geometry-accent: var(--accent-communication); --geometry-component-fill: #70ad47; }
+    .geometry-object.geometry-link.geometry-dog { --geometry-accent: var(--accent-dog); --geometry-component-fill: #ffc000; }
 
     .geometry-item-box {
       fill: var(--geometry-component-fill, var(--geometry-accent));
@@ -886,12 +886,6 @@
       stroke-width: 3;
       vector-effect: non-scaling-stroke;
     }
-
-    :root[data-theme="light"] .geometry-object.geometry-link.geometry-drone { --geometry-component-fill: #4b789f; }
-    :root[data-theme="light"] .geometry-object.geometry-link.geometry-sheep { --geometry-component-fill: #b35f53; }
-    :root[data-theme="light"] .geometry-object.geometry-link.geometry-simulation { --geometry-component-fill: #79519e; }
-    :root[data-theme="light"] .geometry-object.geometry-link.geometry-communication { --geometry-component-fill: #4a895a; }
-    :root[data-theme="light"] .geometry-object.geometry-link.geometry-dog { --geometry-component-fill: #a77c26; }
 
     .geometry-link .geometry-label-text { fill: #101519; }
 
@@ -928,7 +922,7 @@
     .geometry-connector {
       fill: none;
       opacity: 0.7;
-      stroke: var(--geometry-arrow) !important;
+      stroke: var(--geometry-arrow-color, var(--geometry-arrow));
       stroke-linecap: square;
       stroke-linejoin: miter;
       pointer-events: none;
@@ -954,6 +948,29 @@
     .geometry-region-dog.geometry-fragment { fill: var(--geometry-dog-fill); }
     .geometry-region-simulation .geometry-box,
     .geometry-region-simulation.geometry-fragment { fill: var(--geometry-simulation-fill); }
+
+    .geometry-object.geometry-region-communication { --geometry-arrow-color: #548235; --geometry-text-color: var(--geometry-text); }
+    .geometry-object.geometry-region-drone { --geometry-arrow-color: #2e75b6; --geometry-text-color: #4472c4; }
+    .geometry-object.geometry-region-sheep { --geometry-arrow-color: #c55a11; --geometry-text-color: #ed7d31; }
+    .geometry-object.geometry-region-dog { --geometry-arrow-color: #bf9000; --geometry-text-color: #bf9000; }
+    .geometry-object.geometry-region-simulation { --geometry-arrow-color: #7030a0; --geometry-text-color: #7030a0; }
+
+    .geometry-object.geometry-region-communication.geometry-connector,
+    .geometry-object.geometry-region-drone.geometry-connector,
+    .geometry-object.geometry-region-sheep.geometry-connector,
+    .geometry-object.geometry-region-dog.geometry-connector,
+    .geometry-object.geometry-region-simulation.geometry-connector { stroke: var(--geometry-arrow-color); }
+
+    .geometry-object.geometry-region-communication .geometry-fragment,
+    .geometry-object.geometry-region-drone .geometry-fragment,
+    .geometry-object.geometry-region-sheep .geometry-fragment,
+    .geometry-object.geometry-region-dog .geometry-fragment,
+    .geometry-object.geometry-region-simulation .geometry-fragment { fill: var(--geometry-arrow-color); }
+
+    .geometry-object.geometry-region-drone .geometry-label-text,
+    .geometry-object.geometry-region-sheep .geometry-label-text,
+    .geometry-object.geometry-region-dog .geometry-label-text,
+    .geometry-object.geometry-region-simulation .geometry-label-text { fill: var(--geometry-text-color); }
 
     .geometry-loading {
       display: grid;
@@ -2020,22 +2037,37 @@
       }
 
       function geometryComponentFill(route) {
-        const darkPalette = {
-          "drone-control": "#2e5f84",
-          "sheep-detection": "#754139",
-          simulation: "#553271",
-          communication: "#25613a",
-          "dog-control": "#6c501e"
+        const palette = {
+          "drone-control": "#5b9bd5",
+          "sheep-detection": "#ed7d31",
+          simulation: "#8f45c7",
+          communication: "#70ad47",
+          "dog-control": "#ffc000"
         };
-        const lightPalette = {
-          "drone-control": "#4b789f",
-          "sheep-detection": "#b35f53",
-          simulation: "#79519e",
-          communication: "#4a895a",
-          "dog-control": "#a77c26"
-        };
-        const palette = document.documentElement.dataset.theme === "light" ? lightPalette : darkPalette;
         return palette[route] || "#3d454c";
+      }
+
+      function geometryConnectorRegion(item, objects) {
+        const midpointX = item.kind === "native-connector" ? (item.x1 + item.x2) / 2 : item.x + item.width / 2;
+        const midpointY = item.kind === "native-connector" ? (item.y1 + item.y2) / 2 : item.y + item.height / 2;
+        const panels = objects.filter((object) => object.kind === "panel").map((panel) => ({
+          panel,
+          region: geometryRegion(panel)
+        })).filter(({ region }) => region);
+        const containingPanels = panels.filter(({ panel }) => midpointX >= panel.x && midpointX <= panel.x + panel.width && midpointY >= panel.y && midpointY <= panel.y + panel.height);
+        if (containingPanels.length) {
+          containingPanels.sort((first, second) => first.panel.width * first.panel.height - second.panel.width * second.panel.height);
+          return containingPanels[0].region;
+        }
+        panels.sort((first, second) => {
+          const distanceToPanel = ({ panel }) => {
+            const dx = Math.max(panel.x - midpointX, 0, midpointX - panel.x - panel.width);
+            const dy = Math.max(panel.y - midpointY, 0, midpointY - panel.y - panel.height);
+            return dx * dx + dy * dy;
+          };
+          return distanceToPanel(first) - distanceToPanel(second);
+        });
+        return panels[0]?.region || "";
       }
 
       function wrapGeometryText(text, maxCharacters) {
@@ -2093,13 +2125,6 @@
           svg.classList.add("geometry-svg");
           setSvgAttributes(svg, { viewBox: `0 0 ${viewWidth} ${viewHeight}`, role: "img", "aria-label": "Auto Shepherd pipeline reconstructed from the uploaded slide geometry" });
           const defs = document.createElementNS(svgNamespace, "defs");
-          const marker = document.createElementNS(svgNamespace, "marker");
-          marker.id = "geometry-arrow";
-          setSvgAttributes(marker, { markerWidth: 12, markerHeight: 12, refX: 10, refY: 5, orient: "auto", markerUnits: "userSpaceOnUse" });
-          const arrow = document.createElementNS(svgNamespace, "path");
-          setSvgAttributes(arrow, { d: "M 0 0 L 10 5 L 0 10 z", fill: "#000000" });
-          marker.append(arrow);
-          defs.append(marker);
           svg.append(defs);
 
           const makeElement = (tag, attributes) => {
@@ -2107,6 +2132,19 @@
             setSvgAttributes(element, attributes);
             return element;
           };
+
+          const arrowColors = {
+            communication: "#548235",
+            drone: "#2e75b6",
+            sheep: "#c55a11",
+            dog: "#bf9000",
+            simulation: "#7030a0"
+          };
+          Object.entries(arrowColors).forEach(([region, color]) => {
+            const marker = makeElement("marker", { id: `geometry-arrow-${region}`, markerWidth: 12, markerHeight: 12, refX: 10, refY: 5, orient: "auto", markerUnits: "userSpaceOnUse" });
+            marker.append(makeElement("path", { d: "M 0 0 L 10 5 L 0 10 z", fill: color }));
+            defs.append(marker);
+          });
 
           geometry.objects.sort((first, second) => first.order - second.order).forEach((item) => {
             const x = item.x * scaleX;
@@ -2123,7 +2161,7 @@
             const isClickable = Boolean(item.route) && !isMainText;
             const group = isClickable ? document.createElementNS(svgNamespace, "a") : document.createElementNS(svgNamespace, "g");
             group.classList.add("geometry-object");
-            const region = geometryRegion(item);
+            const region = geometryRegion(item) || ((item.kind === "connector" || item.kind === "native-connector") ? geometryConnectorRegion(item, geometry.objects) : "");
             if (region) group.classList.add(`geometry-region-${region}`);
             if (isClickable) {
               group.classList.add("geometry-link", geometryRouteClass(item.route));
@@ -2162,11 +2200,12 @@
                 const midY = connectorStartY + deltaY / 2;
                 pathData = `M ${connectorStartX} ${connectorStartY} V ${midY} H ${connectorEndX} V ${connectorEndY}`;
               }
-              const path = makeElement("path", { d: pathData, stroke: item.stroke !== "transparent" ? item.stroke : item.fill !== "transparent" && item.fill !== "#ffffff" ? item.fill : "#66715f", "stroke-width": 8, "marker-end": "url(#geometry-arrow)" });
+              const arrowRegion = region || "communication";
+              const path = makeElement("path", { d: pathData, stroke: arrowColors[arrowRegion], "stroke-width": 8, "marker-end": `url(#geometry-arrow-${arrowRegion})` });
               path.classList.add("geometry-connector");
               group.append(path);
             } else if (item.kind === "connector") {
-              const fragment = makeElement("rect", { x: drawX, y: drawY, width, height, fill: item.fill === "transparent" ? "#66715f" : item.fill, stroke: item.stroke === "transparent" ? "none" : item.stroke });
+              const fragment = makeElement("rect", { x: drawX, y: drawY, width, height, fill: arrowColors[region] || (item.fill === "transparent" ? "#66715f" : item.fill), stroke: item.stroke === "transparent" ? "none" : item.stroke });
               fragment.classList.add("geometry-fragment");
               group.append(fragment);
             } else if (item.kind === "media") {
