@@ -2079,7 +2079,7 @@
         if (!canvas) return;
         const svgNamespace = "http://www.w3.org/2000/svg";
         try {
-          const response = await fetch("assets/pipeline-geometry.json?source=odp-v11");
+          const response = await fetch("assets/pipeline-geometry.json?source=odp-v13");
           if (!response.ok) throw new Error(`Geometry request failed: ${response.status}`);
           const geometry = await response.json();
           const viewWidth = 4681;
@@ -2114,8 +2114,9 @@
             const width = item.width * scaleX;
             const height = item.height * scaleY;
             const isTransformed = Boolean(item.rotation) && !Object.hasOwn(item, "x1");
-            const drawX = isTransformed ? 0 : x;
-            const drawY = isTransformed ? 0 : y;
+            const isObjectTransformed = isTransformed || Boolean(item.flipHorizontal);
+            const drawX = isObjectTransformed ? 0 : x;
+            const drawY = isObjectTransformed ? 0 : y;
             const isMainText = isMainGeometryText(item);
             const isPredictionControl = item.text.includes("Prediction & Control Server");
             const isUnfilledLegendLabel = ["ROS2 Topic", "Unity Signal", "RF Link"].includes(item.text);
@@ -2138,7 +2139,10 @@
               }
             }
             if (isTransformed) {
-              group.setAttribute("transform", `translate(${x} ${y}) rotate(${item.rotation}) translate(${-width / 2} ${-height / 2})`);
+              const flipTransform = item.flipHorizontal ? ` translate(${width} 0) scale(-1 1)` : "";
+              group.setAttribute("transform", `translate(${x} ${y}) rotate(${item.rotation}) translate(${-width / 2} ${-height / 2})${flipTransform}`);
+            } else if (item.flipHorizontal) {
+              group.setAttribute("transform", `translate(${x + width} ${y}) scale(-1 1)`);
             }
 
             if (item.kind === "native-connector") {

@@ -3900,7 +3900,8 @@
       "route": "sheep-detection",
       "rotation": 0,
       "src": "assets/pipeline-media/image44.png",
-      "mediaLabel": "sheep icon"
+      "mediaLabel": "sheep icon",
+      "flipHorizontal": true
     },
     {
       "order": 4134,
@@ -3930,7 +3931,8 @@
       "route": "sheep-detection",
       "rotation": 0,
       "src": "assets/pipeline-media/image44.png",
-      "mediaLabel": "sheep icon"
+      "mediaLabel": "sheep icon",
+      "flipHorizontal": true
     },
     {
       "order": 4142,
@@ -3945,7 +3947,8 @@
       "route": "sheep-detection",
       "rotation": 0,
       "src": "assets/pipeline-media/image44.png",
-      "mediaLabel": "sheep icon"
+      "mediaLabel": "sheep icon",
+      "flipHorizontal": true
     },
     {
       "order": 4146,
@@ -3975,7 +3978,8 @@
       "route": "drone-control",
       "rotation": 0,
       "src": "assets/pipeline-media/image44.png",
-      "mediaLabel": "sheep icon"
+      "mediaLabel": "sheep icon",
+      "flipHorizontal": true
     },
     {
       "order": 4157,
@@ -4078,7 +4082,8 @@
       "route": "drone-control",
       "rotation": 0,
       "src": "assets/pipeline-media/image52.png",
-      "mediaLabel": "dog robot icon"
+      "mediaLabel": "dog robot icon",
+      "flipHorizontal": true
     },
     {
       "order": 4190,
@@ -4108,7 +4113,8 @@
       "route": "simulation",
       "rotation": 0,
       "src": "assets/pipeline-media/image44.png",
-      "mediaLabel": "sheep icon"
+      "mediaLabel": "sheep icon",
+      "flipHorizontal": true
     },
     {
       "order": 4198,
@@ -4123,7 +4129,8 @@
       "route": "simulation",
       "rotation": 0,
       "src": "assets/pipeline-media/image44.png",
-      "mediaLabel": "sheep icon"
+      "mediaLabel": "sheep icon",
+      "flipHorizontal": true
     },
     {
       "order": 4202,
@@ -4183,7 +4190,8 @@
       "route": "dog-control",
       "rotation": 0,
       "src": "assets/pipeline-media/image52.png",
-      "mediaLabel": "dog robot icon"
+      "mediaLabel": "dog robot icon",
+      "flipHorizontal": true
     },
     {
       "order": 4218,
@@ -4948,7 +4956,8 @@
       "route": "simulation",
       "rotation": 0,
       "src": "assets/pipeline-media/image44.png",
-      "mediaLabel": "sheep icon"
+      "mediaLabel": "sheep icon",
+      "flipHorizontal": true
     },
     {
       "order": 6191,
@@ -4963,7 +4972,8 @@
       "route": "simulation",
       "rotation": 0,
       "src": "assets/pipeline-media/image44.png",
-      "mediaLabel": "sheep icon"
+      "mediaLabel": "sheep icon",
+      "flipHorizontal": true
     },
     {
       "order": 6195,
@@ -4991,7 +5001,7 @@
       "stroke": "transparent",
       "text": "dog robot icon",
       "route": "simulation",
-      "rotation": -23.016,
+      "rotation": 23.016,
       "src": "assets/pipeline-media/image52.png",
       "mediaLabel": "dog robot icon"
     },
@@ -5053,7 +5063,8 @@
       "route": "dog-control",
       "rotation": 0,
       "src": "assets/pipeline-media/image44.png",
-      "mediaLabel": "sheep icon"
+      "mediaLabel": "sheep icon",
+      "flipHorizontal": true
     },
     {
       "order": 6219,
@@ -5068,7 +5079,8 @@
       "route": "dog-control",
       "rotation": 0,
       "src": "assets/pipeline-media/image44.png",
-      "mediaLabel": "sheep icon"
+      "mediaLabel": "sheep icon",
+      "flipHorizontal": true
     },
     {
       "order": 6223,
@@ -5081,9 +5093,10 @@
       "stroke": "transparent",
       "text": "dog robot icon",
       "route": "dog-control",
-      "rotation": -324.571,
+      "rotation": 324.571,
       "src": "assets/pipeline-media/image52.png",
-      "mediaLabel": "dog robot icon"
+      "mediaLabel": "dog robot icon",
+      "flipHorizontal": true
     },
     {
       "order": 6227,
@@ -5098,7 +5111,8 @@
       "route": "simulation",
       "rotation": 0,
       "src": "assets/pipeline-media/image44.png",
-      "mediaLabel": "sheep icon"
+      "mediaLabel": "sheep icon",
+      "flipHorizontal": true
     },
     {
       "order": 6231,
@@ -5113,7 +5127,8 @@
       "route": "simulation",
       "rotation": 0,
       "src": "assets/pipeline-media/image44.png",
-      "mediaLabel": "sheep icon"
+      "mediaLabel": "sheep icon",
+      "flipHorizontal": true
     },
     {
       "order": 6235,
@@ -5126,9 +5141,10 @@
       "stroke": "transparent",
       "text": "dog robot icon",
       "route": "simulation",
-      "rotation": -68.292,
+      "rotation": 68.292,
       "src": "assets/pipeline-media/image52.png",
-      "mediaLabel": "dog robot icon"
+      "mediaLabel": "dog robot icon",
+      "flipHorizontal": true
     },
     {
       "order": 6239,
@@ -5188,7 +5204,8 @@
       "route": "dog-control",
       "rotation": 0,
       "src": "assets/pipeline-media/image44.png",
-      "mediaLabel": "sheep icon"
+      "mediaLabel": "sheep icon",
+      "flipHorizontal": true
     },
     {
       "order": 6255,
@@ -5203,7 +5220,8 @@
       "route": "dog-control",
       "rotation": 0,
       "src": "assets/pipeline-media/image52.png",
-      "mediaLabel": "dog robot icon"
+      "mediaLabel": "dog robot icon",
+      "flipHorizontal": false
     },
     {
       "order": 6259,
@@ -5218,7 +5236,8 @@
       "route": "dog-control",
       "rotation": 0,
       "src": "assets/pipeline-media/image44.png",
-      "mediaLabel": "sheep icon"
+      "mediaLabel": "sheep icon",
+      "flipHorizontal": true
     },
     {
       "order": 6263,
