@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta id="theme-color" name="theme-color" content="#0c1715">
+  <meta id="theme-color" name="theme-color" content="#f1f3ea">
   <meta name="description" content="Auto Shepherd brings field robotics, sheep localisation, simulation and animal-aware control into one research programme.">
   <title>Auto Shepherd | Field systems</title>
   <script>
@@ -565,6 +565,23 @@
       border-bottom: 1px solid var(--line-strong);
     }
 
+    .overview-page-header {
+      grid-template-columns: minmax(0, 1fr) minmax(190px, 270px);
+      align-items: center;
+      gap: clamp(24px, 5vw, 72px);
+    }
+
+    .overview-logo {
+      display: block;
+      width: 100%;
+      max-width: 270px;
+      justify-self: end;
+      object-fit: contain;
+      mix-blend-mode: multiply;
+    }
+
+    :root[data-theme="dark"] .overview-logo { mix-blend-mode: screen; }
+
     .eyebrow {
       margin: 0 0 16px;
       color: var(--lime);
@@ -799,33 +816,129 @@
     .system-map-legend span { display: inline-flex; align-items: center; gap: 6px; }
     .system-map-legend i { width: 8px; height: 8px; border-radius: 1px; background: var(--legend-color); }
 
-    .site-grid.is-description-page {
+    .site-grid.is-architecture-page {
       display: block;
       width: 100%;
       min-height: calc(100svh - 76px);
     }
 
-    .site-grid.is-description-page .signal-column { display: none; }
+    .site-grid.is-architecture-page .signal-column { display: none; }
 
-    .site-grid.is-description-page .content-column {
+    .site-grid.is-overview-page {
+      display: block;
+      width: 100%;
+      min-height: calc(100svh - 76px);
+    }
+
+    .site-grid.is-overview-page .signal-column { display: none; }
+    .site-grid.is-overview-page .content-column { padding: 44px clamp(24px, 7.5vw, 110px) 76px; }
+
+    .overview-actions {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-bottom: 38px;
+    }
+
+    .overview-action {
+      display: grid;
+      grid-template-columns: 32px minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 12px;
+      min-height: 72px;
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      border-left: 3px solid var(--overview-accent, var(--lime));
+      background: var(--surface-soft);
+      color: var(--ink);
+      text-decoration: none;
+      transition: background 160ms ease, border-color 160ms ease;
+    }
+
+    .overview-action:hover,
+    .overview-action:focus-visible { border-color: var(--overview-accent, var(--lime)); background: var(--surface-raised); outline: none; }
+
+    .overview-action-icon {
+      width: 28px;
+      height: 28px;
+      fill: none;
+      stroke: var(--overview-accent, var(--lime));
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-width: 1.5;
+    }
+
+    .overview-action strong { display: block; font-size: 0.86rem; font-weight: 500; }
+    .overview-action small { display: block; margin-bottom: 4px; color: var(--faint); font-family: var(--mono); font-size: 0.52rem; text-transform: uppercase; }
+    .overview-action-arrow { color: var(--overview-accent, var(--lime)); font-family: var(--mono); }
+
+    .subsystem-overview-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .subsystem-overview-card {
+      display: grid;
+      min-height: 188px;
+      grid-template-rows: auto auto 1fr auto;
+      align-content: start;
+      padding: 17px;
+      border: 1px solid var(--line);
+      border-top: 2px solid var(--overview-accent, var(--lime));
+      background: var(--surface-soft);
+      color: var(--ink);
+      text-decoration: none;
+      transition: background 160ms ease, border-color 160ms ease, transform 160ms ease;
+    }
+
+    .subsystem-overview-card:hover,
+    .subsystem-overview-card:focus-visible { border-color: var(--overview-accent, var(--lime)); background: var(--surface-raised); outline: none; transform: translateY(-2px); }
+
+    .subsystem-overview-icon {
+      width: 25px;
+      height: 25px;
+      margin-bottom: 13px;
+      fill: none;
+      stroke: var(--overview-accent, var(--lime));
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-width: 1.5;
+    }
+
+    .subsystem-overview-card h3 { margin: 0 0 8px; font-size: 0.96rem; font-weight: 500; }
+    .subsystem-overview-card p { margin: 0 0 18px; color: var(--muted); font-size: 0.73rem; line-height: 1.55; }
+    .subsystem-overview-card span { color: var(--overview-accent, var(--lime)); font-family: var(--mono); font-size: 0.52rem; text-transform: uppercase; }
+
+    .site-grid.is-research-page {
+      display: block;
+      width: 100%;
+      min-height: calc(100svh - 76px);
+    }
+
+    .site-grid.is-research-page .signal-column { display: none; }
+
+    .site-grid.is-research-page .content-column { padding: 42px clamp(24px, 7.5vw, 110px) 80px; }
+
+    .site-grid.is-architecture-page .content-column {
       height: calc(100svh - 76px);
       padding: 0;
       overflow: hidden;
     }
 
-    .site-grid.is-description-page .page-view[data-page-view="description"] {
+    .site-grid.is-architecture-page .page-view[data-page-view="system-architecture"] {
       position: relative;
       display: flex;
       height: 100%;
       flex-direction: column;
     }
 
-    .site-grid.is-description-page .page-view[data-page-view="description"] .page-header {
+    .site-grid.is-architecture-page .page-view[data-page-view="system-architecture"] .page-header {
       display: none;
     }
 
-    .site-grid.is-description-page .section-intro,
-    .site-grid.is-description-page .system-map {
+    .site-grid.is-architecture-page .section-intro,
+    .site-grid.is-architecture-page .system-map {
       display: none;
     }
 
@@ -897,6 +1010,7 @@
     }
 
     .geometry-object { outline: none; }
+    .geometry-object:not(.geometry-link) { pointer-events: none; }
     .geometry-object.geometry-link { cursor: pointer; }
     .geometry-object.geometry-link rect.geometry-box {
       transition: filter 150ms ease, stroke-width 150ms ease;
@@ -1019,11 +1133,11 @@
       text-transform: uppercase;
     }
 
-    .site-grid.is-description-page .poster-canvas {
+    .site-grid.is-architecture-page .poster-canvas {
       flex: 1 1 auto;
     }
 
-    .site-grid.is-description-page .description-lower { display: none; }
+    .site-grid.is-architecture-page .description-lower { display: none; }
 
     .map-node-icon {
       fill: none;
@@ -1350,39 +1464,137 @@
       text-align: right;
     }
 
-    .research-project-list { border-top: 1px solid var(--line-strong); }
-
-    .research-project {
+    .research-project-list {
       display: grid;
-      grid-template-columns: 42px minmax(0, 1fr) auto;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    @media (max-width: 800px) and (min-width: 561px) {
+      .research-project-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    .research-status + .research-status { margin-top: 34px; }
+
+    .research-project { min-width: 0; scroll-margin-top: 98px; }
+
+    .research-project-card {
+      display: grid;
+      width: 100%;
+      min-height: 112px;
+      grid-template-columns: 30px minmax(0, 1fr);
+      align-content: start;
       align-items: start;
+      gap: 12px;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      background: var(--surface-soft);
+      color: var(--ink);
+      cursor: pointer;
+      text-align: left;
+      transition: border-color 160ms ease, background 160ms ease, transform 160ms ease;
+    }
+
+    .research-project-card:hover,
+    .research-project-card:focus-visible {
+      border-color: var(--project-accent, var(--coral));
+      background: var(--surface-raised);
+      outline: none;
+      transform: translateY(-2px);
+    }
+
+    .research-project.is-targeted .research-project-card {
+      border-color: var(--project-accent, var(--coral));
+      background: color-mix(in srgb, var(--project-accent, var(--coral)) 12%, var(--surface));
+      outline: 2px solid color-mix(in srgb, var(--project-accent, var(--coral)) 65%, transparent);
+      outline-offset: 2px;
+    }
+
+    .research-project-icon {
+      width: 26px;
+      height: 26px;
+      color: var(--project-accent, var(--coral));
+      fill: none;
+      stroke: currentColor;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-width: 1.5;
+    }
+
+    .research-project-title {
+      font-size: 0.85rem;
+      font-weight: 500;
+      line-height: 1.45;
+    }
+
+    .research-dialog {
+      width: min(560px, calc(100vw - 32px));
+      max-height: min(80vh, 720px);
+      padding: 0;
+      overflow: auto;
+      border: 1px solid var(--line-strong);
+      border-radius: 6px;
+      background: var(--surface);
+      box-shadow: 0 24px 80px var(--shadow);
+      color: var(--ink);
+    }
+
+    .research-dialog::backdrop { background: rgba(12, 23, 21, 0.62); backdrop-filter: blur(3px); }
+
+    .research-dialog-content { padding: 24px; }
+
+    .research-dialog-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
       gap: 16px;
-      padding: 18px 0;
-      border-bottom: 1px solid var(--line);
-      scroll-margin-top: 98px;
+      margin-bottom: 18px;
     }
 
-    .research-project-index {
-      color: var(--project-accent, var(--coral));
+    .research-dialog-status {
+      color: var(--coral);
       font-family: var(--mono);
-      font-size: 0.6rem;
-    }
-
-    .research-project h4 { margin: 0 0 5px; font-size: 1rem; font-weight: 500; }
-    .research-project p { max-width: 640px; margin: 0; color: var(--muted); font-size: 0.75rem; line-height: 1.55; }
-
-    .research-project-link {
-      color: var(--project-accent, var(--coral));
-      font-family: var(--mono);
-      font-size: 0.5rem;
-      letter-spacing: 0.06em;
-      text-decoration: none;
+      font-size: 0.58rem;
       text-transform: uppercase;
-      white-space: nowrap;
     }
 
-    .research-project-link:hover,
-    .research-project-link:focus-visible { color: var(--ink); outline: none; }
+    .research-dialog-close {
+      padding: 7px 10px;
+      border: 1px solid var(--line);
+      border-radius: 3px;
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      font-size: 0.7rem;
+    }
+
+    .research-dialog-close:hover,
+    .research-dialog-close:focus-visible { border-color: var(--line-strong); color: var(--ink); outline: none; }
+
+    .research-dialog h2 { margin: 0; font-size: 1.55rem; font-weight: 500; line-height: 1.2; }
+    .research-dialog-description { margin: 14px 0 22px; color: var(--muted); font-size: 0.82rem; line-height: 1.6; }
+
+    .research-dialog-details {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+      padding-top: 18px;
+      border-top: 1px solid var(--line-strong);
+    }
+
+    .research-dialog-details section { min-width: 0; }
+    .research-dialog-details h3 { margin: 0 0 8px; font-size: 0.67rem; font-weight: 600; text-transform: uppercase; }
+    .research-dialog-details p,
+    .research-dialog-details ul { margin: 0; padding: 0; color: var(--muted); font-size: 0.72rem; line-height: 1.6; }
+    .research-dialog-details ul { display: grid; gap: 5px; list-style: none; }
+    .research-dialog-details li::before { margin-right: 7px; color: var(--project-accent, var(--coral)); content: ">"; font-family: var(--mono); }
+
+    @media (max-width: 560px) {
+      .research-project-list { grid-template-columns: 1fr; }
+      .research-dialog-content { padding: 20px; }
+      .research-dialog-details { grid-template-columns: 1fr; }
+    }
 
     @media (max-width: 1100px) {
       .topbar { gap: 14px; padding-right: 18px; padding-left: 18px; }
@@ -1392,6 +1604,8 @@
       .signal-column { padding-right: 18px; padding-left: 18px; }
       .signal-copy h1 { font-size: 3.8rem; }
       .content-column { padding-right: 5%; padding-left: 5%; }
+      .site-grid.is-overview-page .content-column { padding: 36px 28px 60px; }
+      .site-grid.is-research-page .content-column { padding: 28px 18px 60px; }
     }
 
     @media (max-width: 800px) {
@@ -1403,7 +1617,7 @@
       .top-nav { grid-column: 1 / -1; grid-row: 2; margin: 0 -18px -2px; padding: 0 18px 2px; }
       .nav-list { justify-content: flex-start; }
       .site-grid { display: block; min-height: 0; }
-      .site-grid:not(.is-description-page) .signal-column { display: none; }
+      .site-grid:not(.is-architecture-page):not(.is-overview-page) .signal-column { display: none; }
       .signal-column {
         position: relative;
         top: auto;
@@ -1413,10 +1627,13 @@
       }
       .signal-visual { min-height: 460px; }
       .content-column { padding: 28px 18px 60px; }
-      .site-grid.is-description-page .content-column { height: calc(100svh - 134px); padding: 0; }
+      .site-grid.is-architecture-page .content-column { height: calc(100svh - 134px); padding: 0; }
       .geometry-sheet { width: max(100%, calc((100svh - 134px) * 1.4136)); }
+      .site-grid.is-overview-page .content-column { padding: 28px 18px 60px; }
+      .subsystem-overview-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .page-header { margin-bottom: 32px; }
       .page-header h2 { font-size: 3rem; }
+      .overview-page-header { grid-template-columns: minmax(0, 1fr) minmax(150px, 210px); gap: 20px; }
       .module-identity { grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: 18px; }
     }
 
@@ -1429,12 +1646,18 @@
       .theme-toggle { width: 38px; justify-content: center; padding-right: 7px; padding-left: 7px; }
       .theme-toggle span:last-child { display: none; }
       .top-nav { margin-right: -14px; margin-left: -14px; padding-right: 14px; padding-left: 14px; }
+      .page-header.overview-page-header { display: grid; grid-template-columns: minmax(0, 1fr) 96px; align-items: start; gap: 12px; }
+      .overview-logo { width: 96px; }
       .signal-column { padding: 12px; }
       .signal-visual { min-height: 430px; padding: 22px; }
       .signal-copy h1 { font-size: 3.55rem; }
       .signal-mark { top: 46%; right: 11%; width: 80px; height: 80px; }
       .signal-mark img { width: 56px; height: 56px; }
       .content-column { padding: 24px 12px 52px; }
+      .site-grid.is-overview-page .content-column { padding: 24px 12px 52px; }
+      .site-grid.is-research-page .content-column { padding: 24px 12px 52px; }
+      .overview-actions,
+      .subsystem-overview-grid { grid-template-columns: 1fr; }
       .page-header { display: block; }
       .page-header h2 { font-size: 2.55rem; }
       .system-map-viewport { min-height: 500px; }
@@ -1447,8 +1670,6 @@
       .module-stamp { min-height: 150px; }
       .module-stamp strong { font-size: 2.8rem; }
       .component-row { grid-template-columns: 36px minmax(0, 1fr) 16px; gap: 10px; }
-      .research-project { grid-template-columns: 30px minmax(0, 1fr); gap: 10px; }
-      .research-project-link { grid-column: 2; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -1459,7 +1680,7 @@
 </head>
 <body>
   <header class="topbar">
-    <a class="brand" href="#description" aria-label="Auto Shepherd system architecture">
+    <a class="brand" href="#overview" aria-label="Auto Shepherd overview">
       <span class="brand-mark"><img src="assets/auto-shepherd-mark.png" alt=""></span>
       <span class="brand-copy">
         <span class="brand-name">Auto Shepherd</span>
@@ -1469,13 +1690,14 @@
 
     <nav class="top-nav" aria-label="Auto Shepherd pages">
       <div class="nav-list" role="tablist" aria-label="Programme sections">
-        <button class="nav-item nav-wide" id="description-tab" type="button" role="tab" aria-label="Open System Architecture page" data-page-target="description" aria-controls="page-description" aria-selected="true"><span class="nav-name">System<br>Architecture</span></button>
+        <button class="nav-item" id="overview-tab" type="button" role="tab" aria-label="Open project overview" data-page-target="overview" aria-controls="page-overview" aria-selected="true"><span class="nav-name">Overview</span></button>
+        <button class="nav-item nav-wide" id="system-architecture-tab" type="button" role="tab" aria-label="Open System Architecture page" data-page-target="system-architecture" aria-controls="page-system-architecture" aria-selected="false"><span class="nav-name">System<br>Architecture</span></button>
         <button class="nav-item" id="drone-control-tab" type="button" role="tab" aria-label="Open Drone control page" data-page-target="drone-control" aria-controls="page-drone-control" aria-selected="false"><span class="nav-number">01</span><span class="nav-name">Drone</span></button>
         <button class="nav-item" id="sheep-detection-tab" type="button" role="tab" aria-label="Open Vision page" data-page-target="sheep-detection" aria-controls="page-sheep-detection" aria-selected="false"><span class="nav-number">02</span><span class="nav-name">Vision</span></button>
         <button class="nav-item" id="simulation-tab" type="button" role="tab" aria-label="Open Simulation page" data-page-target="simulation" aria-controls="page-simulation" aria-selected="false"><span class="nav-number">03</span><span class="nav-name">Sim</span></button>
         <button class="nav-item" id="communication-tab" type="button" role="tab" aria-label="Open Communication page" data-page-target="communication" aria-controls="page-communication" aria-selected="false"><span class="nav-number">04</span><span class="nav-name">Comms</span></button>
         <button class="nav-item" id="dog-control-tab" type="button" role="tab" aria-label="Open Dog control page" data-page-target="dog-control" aria-controls="page-dog-control" aria-selected="false"><span class="nav-number">05</span><span class="nav-name">Dog</span></button>
-        <button class="nav-item nav-wide" id="research-tab" type="button" role="tab" aria-label="Open Research Projects page" data-page-target="research" aria-controls="page-research" aria-selected="false"><span class="nav-name">Open Research<br>Projects</span></button>
+        <button class="nav-item nav-wide" id="research-tab" type="button" role="tab" aria-label="Open Supporting Research Projects page" data-page-target="research" aria-controls="page-research" aria-selected="false"><span class="nav-name">Supporting Research<br>Projects</span></button>
       </div>
     </nav>
 
@@ -1514,7 +1736,68 @@
     </aside>
 
     <main class="content-column" id="page-content">
-      <section class="page-view" id="page-description" data-page-view="description" role="tabpanel" aria-labelledby="description-tab">
+      <section class="page-view" id="page-overview" data-page-view="overview" role="tabpanel" aria-labelledby="overview-tab">
+        <header class="page-header overview-page-header">
+          <div>
+            <p class="eyebrow">Auto Shepherd / Project overview</p>
+            <h2>One connected system for animal-aware shepherding.</h2>
+            <p>Auto Shepherd brings aerial observation, flock perception, simulation, field communications and supervised ground robotics into one practical research programme. Each subsystem can develop independently while contributing to a shared picture of the animals and the field.</p>
+          </div>
+          <img class="overview-logo" src="assets/auto-shepherd-mark.png" alt="Auto Shepherd sheep radar logo">
+        </header>
+
+        <div class="overview-actions">
+          <a class="overview-action" href="#system-architecture" data-page-target="system-architecture" style="--overview-accent: var(--lime)">
+            <svg class="overview-action-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#map-icon-geo"></use></svg>
+            <span><small>Explore the system</small><strong>System Architecture</strong></span>
+            <span class="overview-action-arrow" aria-hidden="true">&gt;</span>
+          </a>
+          <a class="overview-action" href="#research" data-page-target="research" style="--overview-accent: var(--coral)">
+            <svg class="overview-action-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#map-icon-eval"></use></svg>
+            <span><small>Contribute to the programme</small><strong>Supporting Research Projects</strong></span>
+            <span class="overview-action-arrow" aria-hidden="true">&gt;</span>
+          </a>
+        </div>
+
+        <div class="section-intro">
+          <h3>Subsystem responsibilities</h3>
+          <span>Five connected subsystems</span>
+        </div>
+        <div class="subsystem-overview-grid">
+          <a class="subsystem-overview-card" href="#drone-control" data-page-target="drone-control" style="--overview-accent: var(--accent-drone)">
+            <svg class="subsystem-overview-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#map-icon-drone"></use></svg>
+            <h3>Drone control</h3>
+            <p>Controls the aerial platform and brings flight planning, telemetry and video into the field system.</p>
+            <span>Open subsystem &gt;</span>
+          </a>
+          <a class="subsystem-overview-card" href="#sheep-detection" data-page-target="sheep-detection" style="--overview-accent: var(--accent-vision)">
+            <svg class="subsystem-overview-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#map-icon-sheep"></use></svg>
+            <h3>Vision</h3>
+            <p>Detects and tracks sheep in aerial video, then maps flock positions into a shared geographic frame.</p>
+            <span>Open subsystem &gt;</span>
+          </a>
+          <a class="subsystem-overview-card" href="#simulation" data-page-target="simulation" style="--overview-accent: var(--accent-simulation)">
+            <svg class="subsystem-overview-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#map-icon-simulation"></use></svg>
+            <h3>Simulation</h3>
+            <p>Models flock and robot behaviour for repeatable experiments, prediction and synthetic training data.</p>
+            <span>Open subsystem &gt;</span>
+          </a>
+          <a class="subsystem-overview-card" href="#communication" data-page-target="communication" style="--overview-accent: var(--accent-communication)">
+            <svg class="subsystem-overview-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#map-icon-radio"></use></svg>
+            <h3>Communication</h3>
+            <p>Carries shared messages, commands and telemetry between robots, operators and field radio links.</p>
+            <span>Open subsystem &gt;</span>
+          </a>
+          <a class="subsystem-overview-card" href="#dog-control" data-page-target="dog-control" style="--overview-accent: var(--accent-dog)">
+            <svg class="subsystem-overview-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#map-icon-dog"></use></svg>
+            <h3>Dog control</h3>
+            <p>Localises and guides the ground robot under human supervision, with safety and animal welfare in view.</p>
+            <span>Open subsystem &gt;</span>
+          </a>
+        </div>
+      </section>
+
+      <section class="page-view" id="page-system-architecture" data-page-view="system-architecture" role="tabpanel" aria-labelledby="system-architecture-tab" hidden>
         <header class="page-header">
           <div>
             <p class="eyebrow">System architecture</p>
@@ -1795,71 +2078,94 @@
       <section class="page-view" id="page-research" data-page-view="research" role="tabpanel" aria-labelledby="research-tab" hidden>
         <header class="page-header">
           <div>
-            <p class="eyebrow">Open research projects</p>
-            <h2>Questions that keep the system pointed at the real world.</h2>
-            <p>Open lines of work connect the field components to questions about animal response, coordinated autonomy and practical adoption.</p>
+            <p class="eyebrow">Collaborative research</p>
+            <h2>Supporting research projects</h2>
+            <p>Focused studies move Auto Shepherd forward one practical question at a time. Each project strengthens part of the wider system, creates reusable evidence, and offers a clear way for researchers and collaborators to contribute.</p>
           </div>
         </header>
 
-        <div class="section-intro">
-          <h3>Core research objectives</h3>
-          <span>Working outline</span>
-        </div>
-        <div class="objective-list">
-          <article class="objective-row">
-            <span class="objective-index">01</span>
-            <div><h3>Understand animal response</h3><p>Measure how sheep and dogs respond to sensing, prediction and intervention, keeping welfare part of the system design rather than an afterthought.</p></div>
-            <span class="objective-track">Behaviour<br>Welfare</span>
-          </article>
-          <article class="objective-row">
-            <span class="objective-index">02</span>
-            <div><h3>Coordinate a mixed robot team</h3><p>Develop a dependable loop between aerial observation, field communications, simulation and ground control that can be tested and explained.</p></div>
-            <span class="objective-track">Autonomy<br>Integration</span>
-          </article>
-          <article class="objective-row">
-            <span class="objective-index">03</span>
-            <div><h3>Build evidence for adoption</h3><p>Explore what farmers, researchers and animals need from a useful shepherding system, including the practical, ethical and economic conditions for use.</p></div>
-            <span class="objective-track">Field work<br>Adoption</span>
-          </article>
-        </div>
+        <section class="research-status" aria-labelledby="active-projects-title">
+          <div class="section-intro">
+            <h3 id="active-projects-title">Active Projects</h3>
+            <span>In progress</span>
+          </div>
+          <div class="research-project-list">
+            <article class="research-project" id="project-field-communications" tabindex="-1" style="--project-accent: var(--accent-communication)">
+              <button class="research-project-card" type="button" data-research-project="project-field-communications" aria-haspopup="dialog">
+                <svg class="research-project-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#map-icon-radio"></use></svg>
+                <span class="research-project-title">Evaluating Long Range (LoRa) units for remote robot control</span>
+              </button>
+            </article>
+            <article class="research-project" id="project-drone-observation" tabindex="-1" style="--project-accent: var(--accent-drone)">
+              <button class="research-project-card" type="button" data-research-project="project-drone-observation" aria-haspopup="dialog">
+                <svg class="research-project-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#map-icon-drone"></use></svg>
+                <span class="research-project-title">High-altitude small-object sheep detection</span>
+              </button>
+            </article>
+          </div>
+        </section>
 
-        <div class="section-intro" style="margin-top: 36px">
-          <h3>Subsystem research projects</h3>
-          <span>Five connected workstreams</span>
-        </div>
-        <div class="research-project-list">
-          <article class="research-project" id="project-drone-observation" tabindex="-1" style="--project-accent: var(--accent-drone)">
-            <span class="research-project-index">04</span>
-            <div><h4>Field aerial observation</h4><p>Connect aircraft control, flight planning, telemetry and video into dependable observations that can inform work in the field.</p></div>
-            <a class="research-project-link" href="#drone-control" data-page-target="drone-control">Drone components</a>
-          </article>
-          <article class="research-project" id="project-flock-localisation" tabindex="-1" style="--project-accent: var(--accent-vision)">
-            <span class="research-project-index">05</span>
-            <div><h4>Flock detection and localisation</h4><p>Turn aerial imagery into detections, tracked sheep and geographic positions that can be shared with the rest of the system.</p></div>
-            <a class="research-project-link" href="#sheep-detection" data-page-target="sheep-detection">Vision components</a>
-          </article>
-          <article class="research-project" id="project-flock-simulation" tabindex="-1" style="--project-accent: var(--accent-simulation)">
-            <span class="research-project-index">06</span>
-            <div><h4>Flock prediction and simulation</h4><p>Use repeatable simulation, predicted poses and evaluation to explore how sheep and robot movement interact.</p></div>
-            <a class="research-project-link" href="#simulation" data-page-target="simulation">Simulation components</a>
-          </article>
-          <article class="research-project" id="project-field-communications" tabindex="-1" style="--project-accent: var(--accent-communication)">
-            <span class="research-project-index">07</span>
-            <div><h4>Field messaging and radio links</h4><p>Study the shared ROS2 messages and radio bridges needed to keep distributed robots and operators connected.</p></div>
-            <a class="research-project-link" href="#communication" data-page-target="communication">Communication components</a>
-          </article>
-          <article class="research-project" id="project-supervised-dog-control" tabindex="-1" style="--project-accent: var(--accent-dog)">
-            <span class="research-project-index">08</span>
-            <div><h4>Supervised ground-robot control</h4><p>Bring localisation, navigation and human supervision together for careful robot-dog movement around animals.</p></div>
-            <a class="research-project-link" href="#dog-control" data-page-target="dog-control">Dog-control components</a>
-          </article>
-        </div>
+        <section class="research-status" aria-labelledby="available-projects-title">
+          <div class="section-intro">
+            <h3 id="available-projects-title">Available Projects</h3>
+            <span>Open for collaboration</span>
+          </div>
+          <div class="research-project-list">
+            <article class="research-project" id="project-supervised-dog-control" tabindex="-1" style="--project-accent: var(--accent-dog)">
+              <button class="research-project-card" type="button" data-research-project="project-supervised-dog-control" aria-haspopup="dialog">
+                <svg class="research-project-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#map-icon-radio"></use></svg>
+                <span class="research-project-title">Testing RF impacts across heterogeneous agricultural obstacles</span>
+              </button>
+            </article>
+            <article class="research-project" id="project-flock-simulation" tabindex="-1" style="--project-accent: var(--accent-simulation)">
+              <button class="research-project-card" type="button" data-research-project="project-flock-simulation" aria-haspopup="dialog">
+                <svg class="research-project-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#map-icon-simulation"></use></svg>
+                <span class="research-project-title">Sheep synthetic-data generation with Low-Rank Adaptation (LoRA)</span>
+              </button>
+            </article>
+          </div>
+        </section>
 
-        <div class="research-footer">
-          <div><h3>Developed through</h3><p>Field trials, simulation studies, subsystem experiments and conversations with the people who work alongside animals.</p></div>
-          <div><h3>Current focus</h3><p>Animal-aware autonomy and integrated field systems</p></div>
-        </div>
+        <section class="research-status" aria-labelledby="completed-projects-title">
+          <div class="section-intro">
+            <h3 id="completed-projects-title">Completed Projects</h3>
+            <span>System contributions</span>
+          </div>
+          <div class="research-project-list">
+            <article class="research-project" id="project-flock-localisation" tabindex="-1" style="--project-accent: var(--accent-vision)">
+              <button class="research-project-card" type="button" data-research-project="project-flock-localisation" aria-haspopup="dialog">
+                <svg class="research-project-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#map-icon-sheep"></use></svg>
+                <span class="research-project-title">Live sheep clustering and map visualisation</span>
+              </button>
+            </article>
+          </div>
+        </section>
       </section>
+
+      <dialog class="research-dialog" id="research-project-dialog" aria-labelledby="research-dialog-title" aria-describedby="research-dialog-description">
+        <div class="research-dialog-content">
+          <div class="research-dialog-header">
+            <span class="research-dialog-status" id="research-dialog-status"></span>
+            <button class="research-dialog-close" id="research-dialog-close" type="button">Close</button>
+          </div>
+          <h2 id="research-dialog-title"></h2>
+          <p class="research-dialog-description" id="research-dialog-description"></p>
+          <div class="research-dialog-details">
+            <section>
+              <h3>Papers</h3>
+              <ul id="research-dialog-papers"></ul>
+            </section>
+            <section>
+              <h3>Lead contact</h3>
+              <p id="research-dialog-contact"></p>
+            </section>
+            <section>
+              <h3>Developers / Contributors</h3>
+              <ul id="research-dialog-collaborators"></ul>
+            </section>
+          </div>
+        </div>
+      </dialog>
 
       <section class="page-view module-page" id="page-drone-control" data-page-view="drone-control" data-accent="drone" style="--accent: var(--accent-drone)" role="tabpanel" aria-labelledby="drone-control-tab" hidden>
         <header class="page-header">
@@ -1936,7 +2242,8 @@
   <script>
     (() => {
       const pageOrder = [
-        "description",
+        "overview",
+        "system-architecture",
         "drone-control",
         "sheep-detection",
         "simulation",
@@ -1945,8 +2252,9 @@
         "research"
       ];
       const pageNames = {
-        description: "System Architecture",
-        research: "Open Research Projects",
+        overview: "Overview",
+        "system-architecture": "System Architecture",
+        research: "Supporting Research Projects",
         "drone-control": "Drone control",
         "sheep-detection": "Vision",
         simulation: "Simulation",
@@ -1965,7 +2273,7 @@
         ],
         "sheep-detection": [
           { id: "image-stream", title: "Stream", icon: "stream", mapLabels: ["Stream"], description: "Receives and distributes the image feed used for flock analysis.", project: "project-flock-localisation" },
-          { id: "sheep-detection", title: "Detection", icon: "detect", mapLabels: ["Detection"], description: "Finds sheep in aerial images so individual observations can be measured.", project: "project-flock-localisation" },
+          { id: "sheep-detection", title: "Detection", icon: "detect", mapLabels: ["Detection"], description: "Finds sheep in aerial images so individual observations can be measured.", project: "project-flock-localisation", projects: ["project-drone-observation", "project-flock-simulation"] },
           { id: "localisation", title: "Localisation", icon: "localise", mapLabels: ["Localisation"], description: "Estimates sheep positions from detections across successive observations.", project: "project-flock-localisation" },
           { id: "geo-references", title: "Geo references", icon: "geo", mapLabels: ["Geo references"], description: "Relates image-space observations to a shared geographic frame.", project: "project-flock-localisation" }
         ],
@@ -2002,9 +2310,44 @@
           { id: "robot-dog", title: "Robot dog", icon: "dog", mapLabels: ["Robot dog"], description: "Ground platform for supervised field interaction with the flock.", project: "project-supervised-dog-control" }
         ]
       };
+      const researchProjectDetails = {
+        "project-field-communications": {
+          description: "Measure range, latency and link reliability for low-bandwidth robot commands in field conditions, and identify where LoRa fits in the control system.",
+          papers: [],
+          leadContact: "To be confirmed"
+        },
+        "project-drone-observation": {
+          description: "Assess how flight altitude affects the reliable detection of small sheep in aerial imagery, informing practical capture and vision-system requirements.",
+          papers: [],
+          leadContact: "To be confirmed"
+        },
+        "project-supervised-dog-control": {
+          description: "Investigate how vegetation, fencing and farm structures affect radio propagation, with the goal of making field robot links more predictable.",
+          papers: [],
+          leadContact: "To be confirmed"
+        },
+        "project-flock-simulation": {
+          description: "Explore adapting image-generation models to create varied synthetic sheep imagery that can expand and diversify detector-training data.",
+          papers: [],
+          leadContact: "To be confirmed"
+        },
+        "project-flock-localisation": {
+          description: "Added real-time sheep clusters, trail history and interactive map overlays to make flock observations easier to interpret.",
+          papers: [],
+          leadContact: "To be confirmed"
+        }
+      };
       const pageButtons = [...document.querySelectorAll("button[data-page-target]")];
       const pageLinks = [...document.querySelectorAll("a[data-page-target]")];
       const pages = [...document.querySelectorAll("[data-page-view]")];
+      const researchProjectDialog = document.getElementById("research-project-dialog");
+      const researchDialogTitle = document.getElementById("research-dialog-title");
+      const researchDialogStatus = document.getElementById("research-dialog-status");
+      const researchDialogDescription = document.getElementById("research-dialog-description");
+      const researchDialogPapers = document.getElementById("research-dialog-papers");
+      const researchDialogContact = document.getElementById("research-dialog-contact");
+      const researchDialogCollaborators = document.getElementById("research-dialog-collaborators");
+      const researchDialogClose = document.getElementById("research-dialog-close");
       const siteGrid = document.querySelector(".site-grid");
       const themeButton = document.getElementById("theme-toggle");
       const themeIcon = document.getElementById("theme-icon");
@@ -2110,8 +2453,10 @@
       }
 
       function setPage(requestedPage, shouldResetScroll = true) {
-        const page = pageOrder.includes(requestedPage) ? requestedPage : "description";
-        siteGrid.classList.toggle("is-description-page", page === "description");
+        const page = pageOrder.includes(requestedPage) ? requestedPage : "overview";
+        siteGrid.classList.toggle("is-overview-page", page === "overview");
+        siteGrid.classList.toggle("is-architecture-page", page === "system-architecture");
+        siteGrid.classList.toggle("is-research-page", page === "research");
         pages.forEach((panel) => {
           const isActive = panel.dataset.pageView === page;
           panel.hidden = !isActive;
@@ -2133,15 +2478,17 @@
       function scrollToTarget(targetId) {
         if (!targetId) return;
         window.requestAnimationFrame(() => {
-          const target = document.getElementById(targetId);
+          const targets = targetId.split(",").map((id) => document.getElementById(id)).filter(Boolean);
+          const target = targets[0];
           if (!target) return;
           const targetTop = target.getBoundingClientRect().top + window.scrollY - 96;
           window.scrollTo({ top: Math.max(0, targetTop), behavior: "instant" });
           target.focus({ preventScroll: true });
-          if (target.matches(".component-row")) {
-            target.classList.add("is-targeted");
-            window.setTimeout(() => target.classList.remove("is-targeted"), 1800);
-          }
+          targets.forEach((item) => {
+            if (!item.matches(".component-row, .research-project")) return;
+            item.classList.add("is-targeted");
+            window.setTimeout(() => item.classList.remove("is-targeted"), 2200);
+          });
         });
       }
 
@@ -2155,10 +2502,11 @@
       }
 
       function updatePageFromHash() {
-        const [requestedPage, targetId] = window.location.hash.slice(1).toLowerCase().split("--", 2);
+        const [hashPage, targetId] = window.location.hash.slice(1).toLowerCase().split("--", 2);
+        const requestedPage = hashPage === "description" ? "system-architecture" : hashPage;
         if (!pageOrder.includes(requestedPage)) {
-          history.replaceState(null, "", "#description");
-          setPage("description");
+          history.replaceState(null, "", "#overview");
+          setPage("overview");
           return;
         }
         setPage(requestedPage, !targetId);
@@ -2174,13 +2522,15 @@
           if (count) count.textContent = `${components.length} architecture components`;
           components.forEach((component) => {
             const targetId = `component-${component.id}`;
+            const relatedProjects = component.projects || [component.project];
+            const researchTarget = relatedProjects.join(",");
             const row = document.createElement("a");
             row.className = "component-row";
             row.id = targetId;
-            row.href = `#research--${component.project}`;
+            row.href = `#research--${researchTarget}`;
             row.dataset.pageTarget = "research";
-            row.dataset.anchorTarget = component.project;
-            row.setAttribute("aria-label", `${component.title}. ${component.description} Open research project.`);
+            row.dataset.anchorTarget = researchTarget;
+            row.setAttribute("aria-label", `${component.title}. ${component.description} Open related research projects.`);
 
             const icon = document.createElementNS(svgNamespace, "svg");
             icon.classList.add("component-icon");
@@ -2390,6 +2740,12 @@
           const label = node.getAttribute("aria-label") || "";
           const nodeLabel = label.slice(label.indexOf(":") + 1).trim().toLowerCase();
           const component = (componentDefinitions[node.dataset.pageTarget] || []).find((entry) => entry.mapLabels.some((mapLabel) => mapLabel.toLowerCase() === nodeLabel));
+          if (component) {
+            const componentTarget = `component-${component.id}`;
+            node.href.baseVal = `#${node.dataset.pageTarget}--${componentTarget}`;
+            node.dataset.anchorTarget = componentTarget;
+            node.setAttribute("aria-label", `${label}. Highlight ${component.title} in its subsystem`);
+          }
           const match = iconRules.find(([labelPart]) => label.includes(labelPart));
           const rect = node.querySelector("rect");
           const fallbackIcon = node.classList.contains("map-node-communication")
@@ -2588,10 +2944,15 @@
             if (region) group.classList.add(`geometry-region-${region}`);
             if (isClickable) {
               group.classList.add("geometry-link", geometryRouteClass(item.route));
-              group.setAttribute("href", `#${item.route}`);
+              const objectLabel = (item.text || item.mediaLabel || "").trim().toLowerCase();
+              const component = (componentDefinitions[item.route] || []).find((entry) => entry.mapLabels.some((mapLabel) => mapLabel.toLowerCase() === objectLabel));
+              const componentTarget = component ? `component-${component.id}` : "";
+              group.setAttribute("href", `#${item.route}${componentTarget ? `--${componentTarget}` : ""}`);
               group.setAttribute("data-page-target", item.route);
+              if (componentTarget) group.setAttribute("data-anchor-target", componentTarget);
               group.setAttribute("tabindex", "0");
-              group.setAttribute("aria-label", `Open ${item.route.replaceAll("-", " ")}: ${item.text || item.mediaLabel || "pipeline object"}`);
+              const componentDescription = component ? ` and highlight ${component.title} in the subsystem` : "";
+              group.setAttribute("aria-label", `Open ${item.route.replaceAll("-", " ")}: ${item.text || item.mediaLabel || "pipeline object"}${componentDescription}`);
               if (item.kind === "label" && !isMainText) {
                 const componentBoxWidth = Math.min(width, height);
                 const itemBox = makeElement("rect", { x: drawX, y: drawY, width: componentBoxWidth, height, rx: componentBoxWidth * 0.035, fill: geometryComponentFill(item.route), "fill-opacity": 1, opacity: 1 });
@@ -2738,6 +3099,47 @@
           event.preventDefault();
           navigateToPage(link.dataset.pageTarget, link.dataset.anchorTarget || "");
         });
+      });
+
+      function renderResearchDialogList(list, items, emptyMessage) {
+        list.replaceChildren();
+        (items.length ? items : [emptyMessage]).forEach((item) => {
+          const entry = document.createElement("li");
+          entry.textContent = item;
+          list.append(entry);
+        });
+      }
+
+      document.querySelectorAll("[data-research-project]").forEach((button) => {
+        button.addEventListener("click", () => {
+          const projectId = button.dataset.researchProject;
+          const details = researchProjectDetails[projectId];
+          const project = document.getElementById(projectId);
+          if (!details || !project) return;
+
+          researchDialogTitle.textContent = project.querySelector(".research-project-title").textContent;
+          researchDialogStatus.textContent = project.closest(".research-status").querySelector(".section-intro h3").textContent;
+          researchDialogDescription.textContent = details.description;
+          researchDialogContact.textContent = details.leadContact;
+          researchProjectDialog.style.setProperty("--project-accent", getComputedStyle(project).getPropertyValue("--project-accent").trim());
+          renderResearchDialogList(researchDialogPapers, details.papers, "No papers linked yet");
+          renderResearchDialogList(researchDialogCollaborators, [], "To be confirmed");
+          researchProjectDialog.showModal();
+        });
+      });
+
+      researchDialogClose.addEventListener("click", () => researchProjectDialog.close());
+      researchProjectDialog.addEventListener("keydown", (event) => {
+        if (event.key !== "Escape") return;
+        event.preventDefault();
+        researchProjectDialog.close();
+      });
+      researchProjectDialog.addEventListener("click", (event) => {
+        if (event.target !== researchProjectDialog) return;
+        const bounds = researchProjectDialog.getBoundingClientRect();
+        if (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom) {
+          researchProjectDialog.close();
+        }
       });
 
       themeButton.addEventListener("click", () => {
