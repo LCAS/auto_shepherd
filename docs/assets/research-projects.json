@@ -1,0 +1,90 @@
+{
+  "availableIconTypes": [
+    "control",
+    "bridge",
+    "radio",
+    "drone",
+    "phone",
+    "goal",
+    "path",
+    "gps",
+    "video",
+    "stream",
+    "detect",
+    "localise",
+    "geo",
+    "compass",
+    "pose",
+    "dog",
+    "gears",
+    "nav",
+    "unity",
+    "simulation",
+    "sheep",
+    "eval",
+    "tuning",
+    "weights"
+  ],
+  "projects": [
+    {
+      "id": "project-field-communications",
+      "status": "active",
+      "name": "Evaluating Long Range (LoRa) units for remote robot control",
+      "description": "Measure range, latency and link reliability for low-bandwidth robot commands in field conditions, and identify where LoRa fits in the control system.",
+      "iconType": "radio",
+      "accent": "communication",
+      "papers": [],
+      "leadContact": "To be confirmed",
+      "contributors": [],
+      "components": ["radio-bridge", "lora-radio", "nrf-radio", "teleop-server"]
+    },
+    {
+      "id": "project-drone-observation",
+      "status": "active",
+      "name": "High-altitude small-object sheep detection",
+      "description": "Assess how flight altitude affects the reliable detection of small sheep in aerial imagery, informing practical capture and vision-system requirements.",
+      "iconType": "drone",
+      "accent": "drone",
+      "papers": [],
+      "leadContact": "To be confirmed",
+      "contributors": [],
+      "components": ["mini-aircraft", "video", "image-stream", "sheep-detection"]
+    },
+    {
+      "id": "project-supervised-dog-control",
+      "status": "available",
+      "name": "Testing RF impacts across heterogeneous agricultural obstacles",
+      "description": "Investigate how vegetation, fencing and farm structures affect radio propagation, with the goal of making field robot links more predictable.",
+      "iconType": "radio",
+      "accent": "communication",
+      "papers": [],
+      "leadContact": "To be confirmed",
+      "contributors": [],
+      "components": ["radio-bridge", "lora-radio", "nrf-radio"]
+    },
+    {
+      "id": "project-flock-simulation",
+      "status": "available",
+      "name": "Sheep synthetic-data generation with Low-Rank Adaptation (LoRA)",
+      "description": "Explore adapting image-generation models to create varied synthetic sheep imagery that can expand and diversify detector-training data.",
+      "iconType": "simulation",
+      "accent": "simulation",
+      "papers": [],
+      "leadContact": "To be confirmed",
+      "contributors": [],
+      "components": ["synthetic-stream", "sheep-detection", "simulations", "tuning"]
+    },
+    {
+      "id": "project-flock-localisation",
+      "status": "completed",
+      "name": "Live sheep clustering and map visualisation",
+      "description": "Added real-time sheep clusters, trail history and interactive map overlays to make flock observations easier to interpret.",
+      "iconType": "sheep",
+      "accent": "vision",
+      "papers": [],
+      "leadContact": "To be confirmed",
+      "contributors": [],
+      "components": ["sheep-detection", "localisation", "geo-references"]
+    }
+  ]
+}

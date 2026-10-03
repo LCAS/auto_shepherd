@@ -1,0 +1,91 @@
+{
+  "subsystems": [
+    { "id": "drone", "name": "Drone", "accent": "drone" },
+    { "id": "vision", "name": "Vision", "accent": "vision" },
+    { "id": "simulation", "name": "Simulation", "accent": "simulation" },
+    { "id": "communication", "name": "Communication", "accent": "communication" },
+    { "id": "dog", "name": "Dog", "accent": "dog" },
+    { "id": "ethics", "name": "Ethics", "accent": "ethics" }
+  ],
+  "organisers": [
+    { "name": "James R. Heselden", "image": "assets/jamesh-profile.jpeg", "profileUrl": "https://agriforwards-cdt.blogs.lincoln.ac.uk/cdt-personal/james-heselden/", "bio": "PhD Student and AutoShepherd Sub-System Architect. Responsible for the inter-system communication along with the communication and simulation subsystems along with the Unity3D, Docker and ROS2 integrations.", "subsystems": ["drone", "vision", "simulation", "communication"] },
+    { "name": "Dr Jonathan Cox", "image": "assets/jonathan-cox.png", "profileUrl": "https://staff.lincoln.ac.uk/215900f2-00fd-4e04-b070-956d05d711dd", "bio": "Post Doctoral Research Associate and AutoShepherd Research Lead. Responsible for overseeing the vision and dog subsystems.", "subsystems": ["drone", "vision", "dog"] },
+    { "name": "Josh Cooper", "image": "https://avatars.githubusercontent.com/u/28831674?v=4", "profileUrl": "https://github.com/cooperj", "bio": "AutoShepherd Dev-Ops Lead. Responsible for architectural design, docker support and systems integration across all subsystems.", "subsystems": ["drone", "vision", "simulation", "dog"] },
+    { "name": "Dr Rob Lloyd", "image": "https://agriforwards-cdt.blogs.lincoln.ac.uk/files/2019/10/rob-lloyd-180x180.jpg", "profileUrl": "https://agriforwards-cdt.blogs.lincoln.ac.uk/cdt-role/delivery-team/", "bio": "AutoShepherd Hardware and Technical Implementation Lead. Responsible for the hardware integration in the communication, drone and dog systems.", "subsystems": ["communication", "drone", "dog"] },
+    { "name": "Dr Riccardo Polvara", "image": "https://agriforwards-cdt.blogs.lincoln.ac.uk/files/2022/11/Riccardo-Polvara-180x180.png", "profileUrl": "https://agriforwards-cdt.blogs.lincoln.ac.uk/cdt-personal/dr-riccardo-polvara/", "bio": "Senior Lecturer in Robotics and Autonomous Systems and AutoShepherd Vision Lead. Responsible for vision research and drone integration.", "subsystems": ["vision", "drone"] }
+  ],
+  "collaborators": [
+    { "name": "Si", "image": "", "profileUrl": "", "contribution": "...", "subsystems": ["vision", "drone", "simulation"] }
+  ],
+  "pastContributors": [
+    { "name": "Afsaneh Karami", "image": "https://agriforwards-cdt.blogs.lincoln.ac.uk/files/2022/09/Afsaneh-Karami-180x180.jpg", "profileUrl": "https://agriforwards-cdt.blogs.lincoln.ac.uk/cdt-personal/afsaneh-karami/", "cohort": "2022/23", "subsystems": ["vision"] },
+    { "name": "Amanda Xu", "image": "https://agriforwards-cdt.blogs.lincoln.ac.uk/files/2023/09/Amanda-Xu-180x180.jpeg", "profileUrl": "https://agriforwards-cdt.blogs.lincoln.ac.uk/cdt-personal/xiaoxian-xu/", "cohort": "2023/24", "subsystems": ["ethics"] },
+    { "name": "Andrew Perrett", "image": "https://agriforwards-cdt.blogs.lincoln.ac.uk/files/2022/09/Andrew-Perrett-180x180.jpg", "profileUrl": "https://agriforwards-cdt.blogs.lincoln.ac.uk/cdt-personal/andrew-perrett/", "cohort": "2022/23", "subsystems": ["vision"] },
+    { "name": "Andrew Simpson", "image": "https://agriforwards-cdt.blogs.lincoln.ac.uk/files/2022/09/Andrew-Simpson-180x180.jpg", "profileUrl": "https://agriforwards-cdt.blogs.lincoln.ac.uk/cdt-personal/andrew-simpson/", "cohort": "2022/23", "subsystems": ["ethics"] },
+    { "name": "Benjamin Nicholls", "image": "https://agriforwards-cdt.blogs.lincoln.ac.uk/files/2023/09/Benjamin-Horner-180x180.jpg", "profileUrl": "https://agriforwards-cdt.blogs.lincoln.ac.uk/cdt-personal/benjamin-nicholls/", "cohort": "2023/24", "subsystems": ["drone"] },
+    { "name": "Bethan Moncur", "image": "https://agriforwards-cdt.blogs.lincoln.ac.uk/files/2021/10/Bethan-Moncur-180x180.jpg", "profileUrl": "https://agriforwards-cdt.blogs.lincoln.ac.uk/cdt-personal/bethan-moncur-2/", "cohort": "2021/22", "subsystems": ["simulation"] },
+    { "name": "Callum Lennox", "image": "https://agriforwards-cdt.blogs.lincoln.ac.uk/files/2020/10/Callum-Lennox-180x180.jpg", "profileUrl": "https://agriforwards-cdt.blogs.lincoln.ac.uk/cdt-personal/callum-lennox/", "cohort": "2021/22", "subsystems": ["communication"] },
+    { "name": "Calvin John", "image": "https://agriforwards-cdt.blogs.lincoln.ac.uk/files/2022/09/Calvin-John-180x180.jpeg", "profileUrl": "https://agriforwards-cdt.blogs.lincoln.ac.uk/cdt-personal/calvin-john/", "cohort": "2022/23", "subsystems": ["vision"] },
+    { "name": "Catherine Merchant", "image": "https://agriforwards-cdt.blogs.lincoln.ac.uk/files/2023/09/Catherine-Merchant-180x180.jpg", "profileUrl": "https://agriforwards-cdt.blogs.lincoln.ac.uk/cdt-personal/catherine-merchant/", "cohort": "2023/24", "subsystems": ["ethics"] },
+    { "name": "Dimitris Paparas", "image": "https://agriforwards-cdt.blogs.lincoln.ac.uk/files/2023/09/Dimitrios-Paparas-V2-180x180.jpeg", "profileUrl": "https://agriforwards-cdt.blogs.lincoln.ac.uk/cdt-personal/dimitrios-paparas/", "cohort": "2023/24", "subsystems": ["communication"] },
+    { "name": "Elliot Smith", "image": "https://agriforwards-cdt.blogs.lincoln.ac.uk/files/2023/09/Elliot-Smith-180x180.jpg", "profileUrl": "https://agriforwards-cdt.blogs.lincoln.ac.uk/cdt-personal/elliot-smith/", "cohort": "2023/24", "subsystems": ["ethics"] },
+    { "name": "Emlyn Williams", "image": "https://agriforwards-cdt.blogs.lincoln.ac.uk/files/2021/10/Emlyn-Williams-180x180.jpeg", "profileUrl": "https://agriforwards-cdt.blogs.lincoln.ac.uk/cdt-personal/emlyn-williams/", "cohort": "2021/22", "subsystems": ["dog"] },
+    { "name": "Emmanuel Soumo", "image": "https://agriforwards-cdt.blogs.lincoln.ac.uk/files/2023/09/Emmanuel-Soumo-180x180.jpg", "profileUrl": "https://agriforwards-cdt.blogs.lincoln.ac.uk/cdt-personal/emmanuel-soumo/", "cohort": "2023/24", "subsystems": ["dog"] },
+    { "name": "Garry Clawson", "image": "https://agriforwards-cdt.blogs.lincoln.ac.uk/files/2021/10/Garry-Clawson-180x180.png", "profileUrl": "https://agriforwards-cdt.blogs.lincoln.ac.uk/cdt-personal/garry-clawson/", "cohort": "2021/22", "subsystems": ["ethics"] },
+    { "name": "George Davies", "image": "https://agriforwards-cdt.blogs.lincoln.ac.uk/files/2023/09/20250904_1837261-180x180.jpg", "profileUrl": "https://agriforwards-cdt.blogs.lincoln.ac.uk/cdt-personal/george-davies/", "cohort": "2023/24", "subsystems": ["vision"] },
+    { "name": "Jack Bradley", "image": "https://agriforwards-cdt.blogs.lincoln.ac.uk/files/2022/09/Jack-Bradley-180x180.jpg", "profileUrl": "https://agriforwards-cdt.blogs.lincoln.ac.uk/cdt-personal/jack-bradley/", "cohort": "2022/23", "subsystems": ["ethics"] },
+    { "name": "Jacob Swindell", "image": "https://agriforwards-cdt.blogs.lincoln.ac.uk/files/2023/09/Jacob-Swindell-e1695308784853-180x180.jpg", "profileUrl": "https://agriforwards-cdt.blogs.lincoln.ac.uk/cdt-personal/jacob-swindell/", "cohort": "2023/24", "subsystems": ["drone"] },
+    { "name": "James Bennett", "image": "https://agriforwards-cdt.blogs.lincoln.ac.uk/files/2021/10/James-Bennett-180x180.jpg", "profileUrl": "https://agriforwards-cdt.blogs.lincoln.ac.uk/cdt-personal/james-bennett/", "cohort": "2021/22", "subsystems": ["simulation"] },
+    { "name": "Liyou Zhou", "image": "https://agriforwards-cdt.blogs.lincoln.ac.uk/files/2023/09/Liyou-Zhou-180x180.jpg", "profileUrl": "https://agriforwards-cdt.blogs.lincoln.ac.uk/cdt-personal/liyou-zhou/", "cohort": "2023/24", "subsystems": ["communication"] },
+    { "name": "Omar Ali", "image": "https://agriforwards-cdt.blogs.lincoln.ac.uk/files/2023/09/Omar-Ali-180x180.jpg", "profileUrl": "https://agriforwards-cdt.blogs.lincoln.ac.uk/cdt-personal/omar-ali/", "cohort": "2023/24", "subsystems": ["simulation"] },
+    { "name": "Omar Faris", "image": "https://agriforwards-cdt.blogs.lincoln.ac.uk/files/2023/09/Omar-Faris-180x180.jpg", "profileUrl": "https://agriforwards-cdt.blogs.lincoln.ac.uk/cdt-personal/omar-faris/", "cohort": "2023/24", "subsystems": ["drone"] },
+    { "name": "Paul-David Zuercher", "image": "https://agriforwards-cdt.blogs.lincoln.ac.uk/files/2021/10/Paul-David-Zuercher-180x180.jpg", "profileUrl": "https://agriforwards-cdt.blogs.lincoln.ac.uk/cdt-personal/paul-david-zuercher/", "cohort": "2021/22", "subsystems": ["simulation"] },
+    { "name": "Prabuddhi Wariyapperuma", "image": "https://agriforwards-cdt.blogs.lincoln.ac.uk/files/2022/09/Prabuddhi-Wariyapperuma-180x180.jpg", "profileUrl": "https://agriforwards-cdt.blogs.lincoln.ac.uk/cdt-personal/prabuddhi-wariyapperuma/", "cohort": "2022/23", "subsystems": ["vision"] },
+    { "name": "Rajitha De Silva", "image": "", "profileUrl": "", "cohort": "", "subsystems": ["dog"] },
+    { "name": "Robbie Cato", "image": "https://agriforwards-cdt.blogs.lincoln.ac.uk/files/2023/09/Robbie-Cato-180x180.jpeg", "profileUrl": "https://agriforwards-cdt.blogs.lincoln.ac.uk/cdt-personal/robbie-cato/", "cohort": "2023/24", "subsystems": ["communication"] },
+    { "name": "Robert Stevenson", "image": "https://agriforwards-cdt.blogs.lincoln.ac.uk/files/2023/09/Robert-Stevenson-180x180.jpg", "profileUrl": "https://agriforwards-cdt.blogs.lincoln.ac.uk/cdt-personal/robert-stevenson/", "cohort": "2023/24", "subsystems": ["communication"] },
+    { "name": "Dr Roopika Ravikanna", "image": "https://agriforwards-cdt.blogs.lincoln.ac.uk/files/2019/10/Roopika-Ravikanna-3-180x180.jpeg", "profileUrl": "https://agriforwards-cdt.blogs.lincoln.ac.uk/cdt-personal/roopika-ravikanna/", "cohort": "Alumni", "subsystems": ["ethics"] },
+    { "name": "Vijja Wichitwechkarn", "image": "https://agriforwards-cdt.blogs.lincoln.ac.uk/files/2021/10/Vijja-Wichitwechkarn-180x180.jpg", "profileUrl": "https://agriforwards-cdt.blogs.lincoln.ac.uk/cdt-personal/vijja-pat-wichitwechkarn/", "cohort": "2021/22", "subsystems": ["dog"] },
+    { "name": "Violet Mayne", "image": "https://agriforwards-cdt.blogs.lincoln.ac.uk/files/2023/09/Violet-Mayne-180x180.jpg", "profileUrl": "https://agriforwards-cdt.blogs.lincoln.ac.uk/cdt-personal/violet-mayne/", "cohort": "2023/24", "subsystems": ["simulation"] },
+    { "name": "Xumin Gao", "image": "https://agriforwards-cdt.blogs.lincoln.ac.uk/files/2021/10/xumin-180x180.jpg", "profileUrl": "https://agriforwards-cdt.blogs.lincoln.ac.uk/cdt-personal/xumin-gao/", "cohort": "2021/22", "subsystems": ["dog"] },
+    { "name": "Yi Zhang", "image": "https://agriforwards-cdt.blogs.lincoln.ac.uk/files/2022/09/Yi-Zhang-180x180.jpg", "profileUrl": "https://agriforwards-cdt.blogs.lincoln.ac.uk/cdt-personal/yi-zhang/", "cohort": "2022/23", "subsystems": ["simulation"] }
+  ],
+  "organisations": [
+    {
+      "name": "AgriFoRwArdS",
+      "logo": "assets/pipeline-media/AgriForwards.svg",
+      "logoText": "AgriFoRwArdS",
+      "description": "Centre for Doctoral Training in Agri-Food Robotics.",
+      "url": "https://agriforwards-cdt.blogs.lincoln.ac.uk/"
+    },
+    {
+      "name": "LCAS",
+      "logo": "assets/lcas-logo.png",
+      "logoText": "L-CAS",
+      "description": "The University of Lincoln's cross-disciplinary centre for robotics research.",
+      "url": "https://lcas.lincoln.ac.uk/wp/"
+    },
+    {
+      "name": "LIAT",
+      "logo": "assets/liat-logo-transparent.png",
+      "logoText": "LIAT",
+      "description": "The Lincoln Institute for Agri-food Technology.",
+      "url": "https://www.lincoln.ac.uk/liat/research/"
+    },
+    {
+      "name": "University of Lincoln",
+      "logo": "assets/university-of-lincoln-logo.svg",
+      "wordmark": "University of Lincoln",
+      "logoText": "UoL",
+      "description": "University home to the programme's robotics and agri-food research partners.",
+      "url": "https://www.lincoln.ac.uk/"
+    },
+    {
+      "name": "Riseholme Park Farm",
+      "logo": "",
+      "logoText": "Riseholme Park Farm",
+      "description": "Agricultural field setting for Auto Shepherd research and development.",
+      "url": "https://estates.lincoln.ac.uk/campus-info/riseholme-park/riseholme/"
+    }
+  ]
+}

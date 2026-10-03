@@ -53,6 +53,7 @@
       --accent-simulation: #c4a7ea;
       --accent-communication: #b7e4b5;
       --accent-dog: #f0d28a;
+      --accent-ethics: #A0523D;
       --sans: "Space Grotesk", sans-serif;
       --mono: "IBM Plex Mono", monospace;
     }
@@ -90,6 +91,7 @@
       --accent-simulation: #906fb7;
       --accent-communication: #5f9f6a;
       --accent-dog: #b98e32;
+      --accent-ethics: #A0523D;
     }
 
     * { box-sizing: border-box; }
@@ -575,12 +577,12 @@
       display: block;
       width: 100%;
       max-width: 270px;
+      aspect-ratio: 1;
       justify-self: end;
-      object-fit: contain;
-      mix-blend-mode: multiply;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 18px 38px var(--shadow);
     }
-
-    :root[data-theme="dark"] .overview-logo { mix-blend-mode: screen; }
 
     .eyebrow {
       margin: 0 0 16px;
@@ -919,6 +921,158 @@
     .site-grid.is-research-page .signal-column { display: none; }
 
     .site-grid.is-research-page .content-column { padding: 42px clamp(24px, 7.5vw, 110px) 80px; }
+
+    .site-grid.is-contributors-page {
+      display: block;
+      width: 100%;
+      min-height: calc(100svh - 76px);
+    }
+
+    .site-grid.is-contributors-page .signal-column { display: none; }
+    .site-grid.is-contributors-page .content-column { padding: 42px clamp(24px, 7.5vw, 110px) 80px; }
+
+    .contributors-section + .contributors-section { margin-top: 44px; }
+
+    .organiser-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .organiser-profile {
+      display: grid;
+      grid-template-columns: minmax(96px, 132px) minmax(0, 1fr);
+      align-items: center;
+      gap: 20px;
+      min-width: 0;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      background: var(--surface-soft);
+    }
+
+    .person-portrait {
+      width: 100%;
+      aspect-ratio: 1;
+      padding: 3px;
+      border-radius: 50%;
+      background: var(--portrait-ring, var(--line-strong));
+      box-shadow: 0 0 0 1px var(--portrait-glow, var(--line-strong)), 0 0 18px color-mix(in srgb, var(--portrait-glow, var(--line-strong)) 32%, transparent);
+    }
+
+    .person-portrait img,
+    .person-portrait-placeholder {
+      display: grid;
+      width: 100%;
+      height: 100%;
+      place-items: center;
+      border: 3px solid var(--surface);
+      border-radius: 50%;
+      background: var(--surface-raised);
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 1.65rem;
+      object-fit: cover;
+    }
+
+    .person-portrait-link { display: block; width: 100%; border-radius: 50%; }
+    .person-portrait-link:focus-visible { outline: 2px solid var(--portrait-glow, var(--lime)); outline-offset: 4px; }
+
+    .organiser-subsystem-dots { display: flex; align-items: center; gap: 9px; margin-bottom: 11px; }
+    .organiser-subsystem-dot { width: 9px; height: 9px; flex: 0 0 auto; border-radius: 50%; background: var(--line-strong); }
+    .organiser-subsystem-dot.is-active { background: var(--dot-color); box-shadow: 0 0 10px color-mix(in srgb, var(--dot-color) 70%, transparent); }
+
+    .organiser-copy h3 { margin: 0 0 7px; font-size: 1.42rem; font-weight: 500; line-height: 1.1; }
+    .organiser-copy p,
+    .contributor-card p { margin: 0; color: var(--muted); font-size: 0.72rem; line-height: 1.55; }
+
+    .contributor-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .contributor-card {
+      display: grid;
+      min-width: 0;
+      justify-items: center;
+      align-content: start;
+      gap: 10px;
+      padding: 15px 10px;
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      background: var(--surface-soft);
+      text-align: center;
+    }
+
+    .contributor-card .person-portrait { width: min(100%, 112px); }
+    .contributor-card h3 { margin: 0; font-size: 0.83rem; font-weight: 500; line-height: 1.35; }
+    .contributor-card p { max-width: 230px; }
+
+    .contributors-empty {
+      grid-column: 1 / -1;
+      margin: 0;
+      padding: 18px 0;
+      border-top: 1px solid var(--line-strong);
+      border-bottom: 1px solid var(--line);
+      color: var(--faint);
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      text-transform: uppercase;
+    }
+
+    .organisations-layout {
+      display: grid;
+      grid-template-columns: minmax(220px, 0.72fr) minmax(0, 1.28fr);
+      gap: 48px;
+      align-items: start;
+    }
+
+    .organisations-intro h3 { margin: 0 0 12px; font-size: 1.15rem; font-weight: 500; }
+    .organisations-intro p { margin: 0; color: var(--muted); font-size: 0.78rem; line-height: 1.65; }
+
+    .organisation-list { border-top: 1px solid var(--line-strong); }
+
+    .organisation-row {
+      display: grid;
+      grid-template-columns: minmax(180px, 0.8fr) minmax(0, 1.2fr) auto;
+      align-items: center;
+      gap: 20px;
+      min-height: 88px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .organisation-brand { display: flex; min-width: 0; align-items: center; justify-content: center; gap: 9px; }
+
+    .organisation-logo {
+      display: block;
+      width: 100%;
+      max-width: 150px;
+      height: 52px;
+      justify-self: center;
+      color: var(--ink);
+      font-size: 1rem;
+      font-weight: 600;
+      object-fit: contain;
+      object-position: center;
+    }
+
+    .organisation-brand.has-wordmark .organisation-logo { width: 52px; height: 52px; flex: 0 0 52px; }
+    .organisation-wordmark { max-width: 124px; color: var(--ink); font-size: 0.76rem; font-weight: 600; line-height: 1.15; }
+
+    .organisation-logo-placeholder { display: grid; height: auto; min-height: 52px; place-items: center; line-height: 1.2; text-align: center; }
+    :root[data-theme="dark"] .organisation-logo[src*="lcas-logo.png"],
+    :root[data-theme="dark"] .organisation-logo[src*="university-of-lincoln-logo.svg"],
+    :root[data-theme="dark"] .organisation-logo[src*="liat-logo-transparent.png"] { filter: brightness(0) invert(1); }
+
+    .organisation-copy h4 { margin: 0 0 5px; font-size: 0.83rem; font-weight: 500; }
+    .organisation-copy p { margin: 0; color: var(--muted); font-size: 0.68rem; line-height: 1.5; }
+    .organisation-link { color: var(--coral); font-family: var(--mono); font-size: 0.55rem; text-decoration: none; text-transform: uppercase; white-space: nowrap; }
+    .organisation-link:hover,
+    .organisation-link:focus-visible { color: var(--ink); outline: none; }
+
+    .site-grid.is-contributors-page .page-header { margin-bottom: 38px; }
 
     .site-grid.is-architecture-page .content-column {
       height: calc(100svh - 76px);
@@ -1589,6 +1743,8 @@
     .research-dialog-details ul { margin: 0; padding: 0; color: var(--muted); font-size: 0.72rem; line-height: 1.6; }
     .research-dialog-details ul { display: grid; gap: 5px; list-style: none; }
     .research-dialog-details li::before { margin-right: 7px; color: var(--project-accent, var(--coral)); content: ">"; font-family: var(--mono); }
+    .research-dialog-details a { color: var(--project-accent, var(--coral)); text-underline-offset: 3px; }
+    .research-dialog-details a:hover { color: var(--ink); }
 
     @media (max-width: 560px) {
       .research-project-list { grid-template-columns: 1fr; }
@@ -1630,7 +1786,9 @@
       .site-grid.is-architecture-page .content-column { height: calc(100svh - 134px); padding: 0; }
       .geometry-sheet { width: max(100%, calc((100svh - 134px) * 1.4136)); }
       .site-grid.is-overview-page .content-column { padding: 28px 18px 60px; }
+      .site-grid.is-contributors-page .content-column { padding: 28px 18px 60px; }
       .subsystem-overview-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .contributor-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
       .page-header { margin-bottom: 32px; }
       .page-header h2 { font-size: 3rem; }
       .overview-page-header { grid-template-columns: minmax(0, 1fr) minmax(150px, 210px); gap: 20px; }
@@ -1655,6 +1813,14 @@
       .signal-mark img { width: 56px; height: 56px; }
       .content-column { padding: 24px 12px 52px; }
       .site-grid.is-overview-page .content-column { padding: 24px 12px 52px; }
+      .site-grid.is-contributors-page .content-column { padding: 24px 12px 52px; }
+      .organiser-grid,
+      .organisations-layout { grid-template-columns: 1fr; }
+      .contributor-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .organiser-profile { grid-template-columns: 88px minmax(0, 1fr); gap: 14px; padding: 13px; }
+      .organiser-copy h3 { font-size: 1.15rem; }
+      .organisation-row { grid-template-columns: 140px minmax(0, 1fr); gap: 12px; }
+      .organisation-link { grid-column: 2; }
       .site-grid.is-research-page .content-column { padding: 24px 12px 52px; }
       .overview-actions,
       .subsystem-overview-grid { grid-template-columns: 1fr; }
@@ -1681,7 +1847,7 @@
 <body>
   <header class="topbar">
     <a class="brand" href="#overview" aria-label="Auto Shepherd overview">
-      <span class="brand-mark"><img src="assets/auto-shepherd-mark.png" alt=""></span>
+      <span class="brand-mark"><img src="assets/auto-shepherd-logo-icon.png" alt=""></span>
       <span class="brand-copy">
         <span class="brand-name">Auto Shepherd</span>
         <span class="brand-meta">Field robotics programme</span>
@@ -1698,6 +1864,7 @@
         <button class="nav-item" id="communication-tab" type="button" role="tab" aria-label="Open Communication page" data-page-target="communication" aria-controls="page-communication" aria-selected="false"><span class="nav-number">04</span><span class="nav-name">Comms</span></button>
         <button class="nav-item" id="dog-control-tab" type="button" role="tab" aria-label="Open Dog control page" data-page-target="dog-control" aria-controls="page-dog-control" aria-selected="false"><span class="nav-number">05</span><span class="nav-name">Dog</span></button>
         <button class="nav-item nav-wide" id="research-tab" type="button" role="tab" aria-label="Open Supporting Research Projects page" data-page-target="research" aria-controls="page-research" aria-selected="false"><span class="nav-name">Supporting Research<br>Projects</span></button>
+        <button class="nav-item" id="contributors-tab" type="button" role="tab" aria-label="Open Contributors page" data-page-target="contributors" aria-controls="page-contributors" aria-selected="false"><span class="nav-name">Contributors</span></button>
       </div>
     </nav>
 
@@ -1717,7 +1884,7 @@
           <h1>Auto<br>Shepherd</h1>
           <p>Robotics for understanding, guiding and caring for animals across the working landscape.</p>
         </div>
-        <div class="signal-mark" aria-hidden="true"><img src="assets/auto-shepherd-mark.png" alt=""></div>
+        <div class="signal-mark" aria-hidden="true"><img src="assets/auto-shepherd-logo-icon.png" alt=""></div>
         <div class="signal-meta">
           <div class="meta-block">
             <span class="micro-label">Focus</span>
@@ -1743,7 +1910,7 @@
             <h2>One connected system for animal-aware shepherding.</h2>
             <p>Auto Shepherd brings aerial observation, flock perception, simulation, field communications and supervised ground robotics into one practical research programme. Each subsystem can develop independently while contributing to a shared picture of the animals and the field.</p>
           </div>
-          <img class="overview-logo" src="assets/auto-shepherd-mark.png" alt="Auto Shepherd sheep radar logo">
+          <img class="overview-logo" src="assets/auto-shepherd-logo-photo.png" alt="Auto Shepherd sheep and robot dog in a field">
         </header>
 
         <div class="overview-actions">
@@ -2089,20 +2256,7 @@
             <h3 id="active-projects-title">Active Projects</h3>
             <span>In progress</span>
           </div>
-          <div class="research-project-list">
-            <article class="research-project" id="project-field-communications" tabindex="-1" style="--project-accent: var(--accent-communication)">
-              <button class="research-project-card" type="button" data-research-project="project-field-communications" aria-haspopup="dialog">
-                <svg class="research-project-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#map-icon-radio"></use></svg>
-                <span class="research-project-title">Evaluating Long Range (LoRa) units for remote robot control</span>
-              </button>
-            </article>
-            <article class="research-project" id="project-drone-observation" tabindex="-1" style="--project-accent: var(--accent-drone)">
-              <button class="research-project-card" type="button" data-research-project="project-drone-observation" aria-haspopup="dialog">
-                <svg class="research-project-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#map-icon-drone"></use></svg>
-                <span class="research-project-title">High-altitude small-object sheep detection</span>
-              </button>
-            </article>
-          </div>
+          <div class="research-project-list" data-research-project-list="active" aria-live="polite"></div>
         </section>
 
         <section class="research-status" aria-labelledby="available-projects-title">
@@ -2110,20 +2264,7 @@
             <h3 id="available-projects-title">Available Projects</h3>
             <span>Open for collaboration</span>
           </div>
-          <div class="research-project-list">
-            <article class="research-project" id="project-supervised-dog-control" tabindex="-1" style="--project-accent: var(--accent-dog)">
-              <button class="research-project-card" type="button" data-research-project="project-supervised-dog-control" aria-haspopup="dialog">
-                <svg class="research-project-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#map-icon-radio"></use></svg>
-                <span class="research-project-title">Testing RF impacts across heterogeneous agricultural obstacles</span>
-              </button>
-            </article>
-            <article class="research-project" id="project-flock-simulation" tabindex="-1" style="--project-accent: var(--accent-simulation)">
-              <button class="research-project-card" type="button" data-research-project="project-flock-simulation" aria-haspopup="dialog">
-                <svg class="research-project-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#map-icon-simulation"></use></svg>
-                <span class="research-project-title">Sheep synthetic-data generation with Low-Rank Adaptation (LoRA)</span>
-              </button>
-            </article>
-          </div>
+          <div class="research-project-list" data-research-project-list="available" aria-live="polite"></div>
         </section>
 
         <section class="research-status" aria-labelledby="completed-projects-title">
@@ -2131,13 +2272,51 @@
             <h3 id="completed-projects-title">Completed Projects</h3>
             <span>System contributions</span>
           </div>
-          <div class="research-project-list">
-            <article class="research-project" id="project-flock-localisation" tabindex="-1" style="--project-accent: var(--accent-vision)">
-              <button class="research-project-card" type="button" data-research-project="project-flock-localisation" aria-haspopup="dialog">
-                <svg class="research-project-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#map-icon-sheep"></use></svg>
-                <span class="research-project-title">Live sheep clustering and map visualisation</span>
-              </button>
-            </article>
+          <div class="research-project-list" data-research-project-list="completed" aria-live="polite"></div>
+        </section>
+      </section>
+
+      <section class="page-view contributors-page" id="page-contributors" data-page-view="contributors" role="tabpanel" aria-labelledby="contributors-tab" hidden>
+        <header class="page-header">
+          <div>
+            <p class="eyebrow">People and partners</p>
+            <h2>Contributors</h2>
+            <p>The organisers, collaborators and organisations building Auto Shepherd together.</p>
+          </div>
+        </header>
+
+        <section class="contributors-section" aria-labelledby="organisers-title">
+          <div class="section-intro">
+            <h3 id="organisers-title">Organisers</h3>
+            <span>Project maintainers</span>
+          </div>
+          <div class="organiser-grid" data-contributor-list="organisers"></div>
+        </section>
+
+        <section class="contributors-section" aria-labelledby="collaborators-title">
+          <div class="section-intro">
+            <h3 id="collaborators-title">Collaborators</h3>
+            <span>Active contributions</span>
+          </div>
+          <div class="contributor-grid" data-contributor-list="collaborators"></div>
+        </section>
+
+        <section class="contributors-section" aria-labelledby="past-contributors-title">
+          <div class="section-intro">
+            <h3 id="past-contributors-title">Past Contributors</h3>
+            <span>Previous project contributions</span>
+          </div>
+          <div class="contributor-grid" data-contributor-list="pastContributors"></div>
+        </section>
+
+        <section class="contributors-section organisations-section" aria-labelledby="organisations-title">
+          <div class="organisations-layout">
+            <div class="organisations-intro">
+              <p class="eyebrow">Collaborating organisations</p>
+              <h3 id="organisations-title">Research in partnership</h3>
+              <p>Auto Shepherd brings robotics, agri-food research and field expertise together to develop useful systems for working landscapes.</p>
+            </div>
+            <div class="organisation-list" data-contributor-list="organisations"></div>
           </div>
         </section>
       </section>
@@ -2162,6 +2341,10 @@
             <section>
               <h3>Developers / Contributors</h3>
               <ul id="research-dialog-collaborators"></ul>
+            </section>
+            <section>
+              <h3>Components</h3>
+              <ul id="research-dialog-components"></ul>
             </section>
           </div>
         </div>
@@ -2249,12 +2432,14 @@
         "simulation",
         "communication",
         "dog-control",
-        "research"
+        "research",
+        "contributors"
       ];
       const pageNames = {
         overview: "Overview",
         "system-architecture": "System Architecture",
         research: "Supporting Research Projects",
+        contributors: "Contributors",
         "drone-control": "Drone control",
         "sheep-detection": "Vision",
         simulation: "Simulation",
@@ -2310,33 +2495,7 @@
           { id: "robot-dog", title: "Robot dog", icon: "dog", mapLabels: ["Robot dog"], description: "Ground platform for supervised field interaction with the flock.", project: "project-supervised-dog-control" }
         ]
       };
-      const researchProjectDetails = {
-        "project-field-communications": {
-          description: "Measure range, latency and link reliability for low-bandwidth robot commands in field conditions, and identify where LoRa fits in the control system.",
-          papers: [],
-          leadContact: "To be confirmed"
-        },
-        "project-drone-observation": {
-          description: "Assess how flight altitude affects the reliable detection of small sheep in aerial imagery, informing practical capture and vision-system requirements.",
-          papers: [],
-          leadContact: "To be confirmed"
-        },
-        "project-supervised-dog-control": {
-          description: "Investigate how vegetation, fencing and farm structures affect radio propagation, with the goal of making field robot links more predictable.",
-          papers: [],
-          leadContact: "To be confirmed"
-        },
-        "project-flock-simulation": {
-          description: "Explore adapting image-generation models to create varied synthetic sheep imagery that can expand and diversify detector-training data.",
-          papers: [],
-          leadContact: "To be confirmed"
-        },
-        "project-flock-localisation": {
-          description: "Added real-time sheep clusters, trail history and interactive map overlays to make flock observations easier to interpret.",
-          papers: [],
-          leadContact: "To be confirmed"
-        }
-      };
+      const researchProjectDetails = new Map();
       const pageButtons = [...document.querySelectorAll("button[data-page-target]")];
       const pageLinks = [...document.querySelectorAll("a[data-page-target]")];
       const pages = [...document.querySelectorAll("[data-page-view]")];
@@ -2347,6 +2506,7 @@
       const researchDialogPapers = document.getElementById("research-dialog-papers");
       const researchDialogContact = document.getElementById("research-dialog-contact");
       const researchDialogCollaborators = document.getElementById("research-dialog-collaborators");
+      const researchDialogComponents = document.getElementById("research-dialog-components");
       const researchDialogClose = document.getElementById("research-dialog-close");
       const siteGrid = document.querySelector(".site-grid");
       const themeButton = document.getElementById("theme-toggle");
@@ -2457,6 +2617,7 @@
         siteGrid.classList.toggle("is-overview-page", page === "overview");
         siteGrid.classList.toggle("is-architecture-page", page === "system-architecture");
         siteGrid.classList.toggle("is-research-page", page === "research");
+        siteGrid.classList.toggle("is-contributors-page", page === "contributors");
         pages.forEach((panel) => {
           const isActive = panel.dataset.pageView === page;
           panel.hidden = !isActive;
@@ -3085,6 +3246,8 @@
       }
 
       renderComponentLists();
+      loadResearchProjects();
+      loadContributors();
       addSystemMapIcons();
       renderPipelineGeometry();
 
@@ -3110,20 +3273,302 @@
         });
       }
 
-      document.querySelectorAll("[data-research-project]").forEach((button) => {
-        button.addEventListener("click", () => {
-          const projectId = button.dataset.researchProject;
-          const details = researchProjectDetails[projectId];
-          const project = document.getElementById(projectId);
+      function renderResearchDialogPapers(list, papers) {
+        list.replaceChildren();
+        if (!papers.length) {
+          renderResearchDialogList(list, [], "No papers linked yet");
+          return;
+        }
+        papers.forEach((paper) => {
+          const entry = document.createElement("li");
+          const link = document.createElement("a");
+          link.href = paper.url;
+          link.target = "_blank";
+          link.rel = "noreferrer";
+          link.textContent = paper.title;
+          entry.append(link);
+          list.append(entry);
+        });
+      }
+
+      function findComponent(componentId) {
+        for (const [page, components] of Object.entries(componentDefinitions)) {
+          const component = components.find((item) => item.id === componentId);
+          if (component) return { page, component };
+        }
+        return null;
+      }
+
+      function renderResearchDialogComponents(list, componentIds) {
+        list.replaceChildren();
+        const components = componentIds.map(findComponent).filter(Boolean);
+        if (!components.length) {
+          renderResearchDialogList(list, [], "No linked components");
+          return;
+        }
+        components.forEach(({ page, component }) => {
+          const entry = document.createElement("li");
+          const targetId = `component-${component.id}`;
+          const link = document.createElement("a");
+          link.href = `#${page}--${targetId}`;
+          link.textContent = component.title;
+          link.addEventListener("click", (event) => {
+            event.preventDefault();
+            researchProjectDialog.close();
+            navigateToPage(page, targetId);
+          });
+          entry.append(link);
+          list.append(entry);
+        });
+      }
+
+      function renderResearchProjects(projectData) {
+        const iconTypes = new Set(projectData.availableIconTypes);
+        const projectLists = new Map([...document.querySelectorAll("[data-research-project-list]")].map((list) => [list.dataset.researchProjectList, list]));
+        projectData.projects.forEach((details) => {
+          const list = projectLists.get(details.status);
+          if (!list || !iconTypes.has(details.iconType)) return;
+
+          const project = document.createElement("article");
+          project.className = "research-project";
+          project.id = details.id;
+          project.tabIndex = -1;
+          project.style.setProperty("--project-accent", `var(--accent-${details.accent})`);
+
+          const button = document.createElement("button");
+          button.className = "research-project-card";
+          button.type = "button";
+          button.dataset.researchProject = details.id;
+          button.setAttribute("aria-haspopup", "dialog");
+
+          const icon = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+          icon.classList.add("research-project-icon");
+          icon.setAttribute("viewBox", "0 0 24 24");
+          icon.setAttribute("aria-hidden", "true");
+          const iconUse = document.createElementNS("http://www.w3.org/2000/svg", "use");
+          iconUse.setAttribute("href", `#map-icon-${details.iconType}`);
+          icon.append(iconUse);
+
+          const title = document.createElement("span");
+          title.className = "research-project-title";
+          title.textContent = details.name;
+          button.append(icon, title);
+          project.append(button);
+          list.append(project);
+          researchProjectDetails.set(details.id, details);
+        });
+      }
+
+      async function loadResearchProjects() {
+        try {
+          const response = await fetch("assets/research-projects.json?source=project-data-01", { cache: "no-store" });
+          if (!response.ok) throw new Error(`Research project request failed: ${response.status}`);
+          renderResearchProjects(await response.json());
+        } catch {
+          document.querySelectorAll("[data-research-project-list]").forEach((list) => {
+            const message = document.createElement("p");
+            message.textContent = "Research projects could not be loaded.";
+            list.append(message);
+          });
+        }
+      }
+
+      function setPortraitRing(portrait, person, subsystemById) {
+        const colors = (person.subsystems || []).map((id) => subsystemById.get(id)).filter(Boolean).map((subsystem) => `var(--accent-${subsystem.accent})`);
+        portrait.style.setProperty("--portrait-ring", colors.length > 1 ? `conic-gradient(${colors.join(", ")})` : colors[0] || "var(--line-strong)");
+        portrait.style.setProperty("--portrait-glow", colors[0] || "var(--line-strong)");
+      }
+
+      function createPortrait(person, subsystemById) {
+        const portrait = document.createElement("div");
+        portrait.className = "person-portrait";
+        setPortraitRing(portrait, person, subsystemById);
+
+        const showPlaceholder = () => {
+          const placeholder = document.createElement("span");
+          placeholder.className = "person-portrait-placeholder";
+          placeholder.setAttribute("role", "img");
+          placeholder.setAttribute("aria-label", `Portrait to be added for ${person.name}`);
+          placeholder.textContent = person.name.split(/\s+/).map((part) => part[0]).join("").slice(0, 2).toUpperCase();
+          portrait.replaceChildren(placeholder);
+        };
+
+        if (!person.image) {
+          showPlaceholder();
+          return portrait;
+        }
+
+        const image = document.createElement("img");
+        image.src = person.image;
+        image.alt = person.name;
+        image.addEventListener("error", showPlaceholder, { once: true });
+        portrait.append(image);
+        return portrait;
+      }
+
+      function renderOrganisers(people, subsystems) {
+        const list = document.querySelector('[data-contributor-list="organisers"]');
+        const subsystemById = new Map(subsystems.map((subsystem) => [subsystem.id, subsystem]));
+        people.forEach((person) => {
+          const card = document.createElement("article");
+          card.className = "organiser-profile";
+          card.append(createPortrait(person, subsystemById));
+
+          const copy = document.createElement("div");
+          copy.className = "organiser-copy";
+          const dots = document.createElement("div");
+          dots.className = "organiser-subsystem-dots";
+          dots.setAttribute("role", "group");
+          dots.setAttribute("aria-label", `Subsystem contributions for ${person.name}`);
+          subsystems.forEach((subsystem) => {
+            const isActive = (person.subsystems || []).includes(subsystem.id);
+            const dot = document.createElement("span");
+            dot.className = `organiser-subsystem-dot${isActive ? " is-active" : ""}`;
+            dot.style.setProperty("--dot-color", `var(--accent-${subsystem.accent})`);
+            dot.title = `${subsystem.name}: ${isActive ? "contributed" : "not listed"}`;
+            dot.setAttribute("aria-label", dot.title);
+            dots.append(dot);
+          });
+          const name = document.createElement("h3");
+          name.textContent = person.name;
+          const bio = document.createElement("p");
+          bio.textContent = person.bio || "One-line bio to be added.";
+          copy.append(dots, name, bio);
+          card.append(copy);
+          list.append(card);
+        });
+      }
+
+      function renderPeopleGrid(people, list, emptyMessage, includeBio, subsystemById) {
+        if (!people.length) {
+          const empty = document.createElement("p");
+          empty.className = "contributors-empty";
+          empty.textContent = emptyMessage;
+          list.append(empty);
+          return;
+        }
+        people.forEach((person) => {
+          const card = document.createElement("article");
+          card.className = "contributor-card";
+          const portrait = createPortrait(person, subsystemById);
+          if (person.profileUrl && includeBio) {
+            const link = document.createElement("a");
+            link.className = "person-portrait-link";
+            link.href = person.profileUrl;
+            link.target = "_blank";
+            link.rel = "noreferrer";
+            link.setAttribute("aria-label", `Open ${person.name}'s profile`);
+            link.append(portrait);
+            card.append(link);
+          } else {
+            card.append(portrait);
+          }
+          const name = document.createElement("h3");
+          name.textContent = person.name;
+          card.append(name);
+          if (includeBio) {
+            const bio = document.createElement("p");
+            bio.textContent = person.contribution || "One-line contribution to be added.";
+            card.append(bio);
+          }
+          list.append(card);
+        });
+      }
+
+      function renderOrganisations(organisations, list) {
+        organisations.forEach((organisation) => {
+          const row = document.createElement("article");
+          row.className = "organisation-row";
+          if (organisation.logo) {
+            const brand = document.createElement("div");
+            brand.className = "organisation-brand";
+            if (organisation.wordmark) brand.classList.add("has-wordmark");
+            const logo = document.createElement("img");
+            logo.className = "organisation-logo";
+            logo.src = organisation.logo;
+            logo.alt = `${organisation.name} logo`;
+            brand.append(logo);
+            if (organisation.wordmark) {
+              const wordmark = document.createElement("span");
+              wordmark.className = "organisation-wordmark";
+              wordmark.textContent = organisation.wordmark;
+              brand.append(wordmark);
+            }
+            row.append(brand);
+          } else {
+            const logo = document.createElement("span");
+            logo.className = "organisation-logo organisation-logo-placeholder";
+            logo.textContent = organisation.logoText || organisation.name;
+            logo.setAttribute("aria-label", `${organisation.name} logo placeholder`);
+            row.append(logo);
+          }
+
+          const copy = document.createElement("div");
+          copy.className = "organisation-copy";
+          const name = document.createElement("h4");
+          name.textContent = organisation.name;
+          const description = document.createElement("p");
+          description.textContent = organisation.description;
+          copy.append(name, description);
+          row.append(copy);
+
+          if (organisation.url) {
+            const link = document.createElement("a");
+            link.className = "organisation-link";
+            link.href = organisation.url;
+            link.target = "_blank";
+            link.rel = "noreferrer";
+            link.textContent = "Visit website >";
+            row.append(link);
+          } else {
+            const pending = document.createElement("span");
+            pending.className = "organisation-link";
+            pending.textContent = "Website to be added";
+            row.append(pending);
+          }
+          list.append(row);
+        });
+      }
+
+      function renderContributors(data) {
+        const subsystemById = new Map(data.subsystems.map((subsystem) => [subsystem.id, subsystem]));
+        renderOrganisers(data.organisers || [], data.subsystems || []);
+        renderPeopleGrid(data.collaborators || [], document.querySelector('[data-contributor-list="collaborators"]'), "Collaborator profiles will be added here.", true, subsystemById);
+        renderPeopleGrid(data.pastContributors || [], document.querySelector('[data-contributor-list="pastContributors"]'), "Past contributor profiles will be added here.", false, subsystemById);
+        renderOrganisations(data.organisations || [], document.querySelector('[data-contributor-list="organisations"]'));
+      }
+
+      async function loadContributors() {
+        try {
+          const response = await fetch("assets/contributors.json?source=contributors-01", { cache: "no-store" });
+          if (!response.ok) throw new Error(`Contributor request failed: ${response.status}`);
+          renderContributors(await response.json());
+        } catch {
+          document.querySelectorAll("[data-contributor-list]").forEach((list) => {
+            const message = document.createElement("p");
+            message.className = "contributors-empty";
+            message.textContent = "Contributor information could not be loaded.";
+            list.append(message);
+          });
+        }
+      }
+
+      document.querySelectorAll("[data-research-project-list]").forEach((list) => {
+        list.addEventListener("click", (event) => {
+          const button = event.target.closest("[data-research-project]");
+          if (!button) return;
+          const details = researchProjectDetails.get(button.dataset.researchProject);
+          const project = document.getElementById(button.dataset.researchProject);
           if (!details || !project) return;
 
-          researchDialogTitle.textContent = project.querySelector(".research-project-title").textContent;
+          researchDialogTitle.textContent = details.name;
           researchDialogStatus.textContent = project.closest(".research-status").querySelector(".section-intro h3").textContent;
           researchDialogDescription.textContent = details.description;
-          researchDialogContact.textContent = details.leadContact;
+          researchDialogContact.textContent = details.leadContact || "To be confirmed";
           researchProjectDialog.style.setProperty("--project-accent", getComputedStyle(project).getPropertyValue("--project-accent").trim());
-          renderResearchDialogList(researchDialogPapers, details.papers, "No papers linked yet");
-          renderResearchDialogList(researchDialogCollaborators, [], "To be confirmed");
+          renderResearchDialogPapers(researchDialogPapers, details.papers || []);
+          renderResearchDialogList(researchDialogCollaborators, details.contributors || [], "To be confirmed");
+          renderResearchDialogComponents(researchDialogComponents, details.components || []);
           researchProjectDialog.showModal();
         });
       });
