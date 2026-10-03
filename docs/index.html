@@ -170,9 +170,10 @@
 
     .brand-mark img {
       display: block;
-      width: 29px;
-      height: 29px;
-      object-fit: contain;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
       mix-blend-mode: multiply;
     }
 
@@ -837,7 +838,7 @@
 
     .overview-actions {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 12px;
       margin-bottom: 38px;
     }
@@ -1799,7 +1800,6 @@
       .topbar { padding: 10px 14px; }
       .brand { min-width: 0; }
       .brand-mark { width: 35px; height: 35px; }
-      .brand-mark img { width: 26px; height: 26px; }
       .brand-name { font-size: 0.82rem; }
       .theme-toggle { width: 38px; justify-content: center; padding-right: 7px; padding-left: 7px; }
       .theme-toggle span:last-child { display: none; }
@@ -1863,7 +1863,7 @@
         <button class="nav-item" id="simulation-tab" type="button" role="tab" aria-label="Open Simulation page" data-page-target="simulation" aria-controls="page-simulation" aria-selected="false"><span class="nav-number">03</span><span class="nav-name">Sim</span></button>
         <button class="nav-item" id="communication-tab" type="button" role="tab" aria-label="Open Communication page" data-page-target="communication" aria-controls="page-communication" aria-selected="false"><span class="nav-number">04</span><span class="nav-name">Comms</span></button>
         <button class="nav-item" id="dog-control-tab" type="button" role="tab" aria-label="Open Dog control page" data-page-target="dog-control" aria-controls="page-dog-control" aria-selected="false"><span class="nav-number">05</span><span class="nav-name">Dog</span></button>
-        <button class="nav-item nav-wide" id="research-tab" type="button" role="tab" aria-label="Open Supporting Research Projects page" data-page-target="research" aria-controls="page-research" aria-selected="false"><span class="nav-name">Supporting Research<br>Projects</span></button>
+        <button class="nav-item nav-wide" id="research-tab" type="button" role="tab" aria-label="Open Supporting Research page" data-page-target="research" aria-controls="page-research" aria-selected="false"><span class="nav-name">Supporting<br>Research</span></button>
         <button class="nav-item" id="contributors-tab" type="button" role="tab" aria-label="Open Contributors page" data-page-target="contributors" aria-controls="page-contributors" aria-selected="false"><span class="nav-name">Contributors</span></button>
       </div>
     </nav>
@@ -1922,6 +1922,11 @@
           <a class="overview-action" href="#research" data-page-target="research" style="--overview-accent: var(--coral)">
             <svg class="overview-action-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#map-icon-eval"></use></svg>
             <span><small>Contribute to the programme</small><strong>Supporting Research Projects</strong></span>
+            <span class="overview-action-arrow" aria-hidden="true">&gt;</span>
+          </a>
+          <a class="overview-action" href="#contributors" data-page-target="contributors" style="--overview-accent: var(--lime)">
+            <svg class="overview-action-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#map-icon-gears"></use></svg>
+            <span><small>People and partners</small><strong>Contributors</strong></span>
             <span class="overview-action-arrow" aria-hidden="true">&gt;</span>
           </a>
         </div>
@@ -2438,7 +2443,7 @@
       const pageNames = {
         overview: "Overview",
         "system-architecture": "System Architecture",
-        research: "Supporting Research Projects",
+        research: "Supporting Research",
         contributors: "Contributors",
         "drone-control": "Drone control",
         "sheep-detection": "Vision",
