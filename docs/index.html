@@ -48,12 +48,13 @@
       --geometry-dog-fill: #fff2cc;
       --geometry-simulation-fill: #e9dbf5;
       --geometry-media-filter: brightness(0.82) saturate(0.92);
-      --accent-drone: #a9d5f4;
-      --accent-vision: #f3a18f;
-      --accent-simulation: #c4a7ea;
-      --accent-communication: #b7e4b5;
-      --accent-dog: #f0d28a;
-      --accent-ethics: #A0523D;
+      --accent-drone: #5b9bd5;
+      --accent-vision: #ed7d31;
+      --accent-simulation: #8f45c7;
+      --accent-communication: #70ad47;
+      --accent-dog: #ffc000;
+      --accent-ethics: #2F8F83;
+      --ethics-region-fill: #D9F0EE;
       --sans: "Space Grotesk", sans-serif;
       --mono: "IBM Plex Mono", monospace;
     }
@@ -86,12 +87,13 @@
       --geometry-dog-fill: #fff2cc;
       --geometry-simulation-fill: #e9dbf5;
       --geometry-media-filter: none;
-      --accent-drone: #5f8fb8;
-      --accent-vision: #cb715e;
-      --accent-simulation: #906fb7;
-      --accent-communication: #5f9f6a;
-      --accent-dog: #b98e32;
-      --accent-ethics: #A0523D;
+      --accent-drone: #5b9bd5;
+      --accent-vision: #ed7d31;
+      --accent-simulation: #8f45c7;
+      --accent-communication: #70ad47;
+      --accent-dog: #ffc000;
+      --accent-ethics: #2F8F83;
+      --ethics-region-fill: #D9F0EE;
     }
 
     * { box-sizing: border-box; }
@@ -948,6 +950,69 @@
 
     .contributors-section + .contributors-section { margin-top: 44px; }
 
+    .ai-acknowledgement-copy {
+      max-width: 78ch;
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.78rem;
+      line-height: 1.65;
+    }
+
+    .ai-acknowledgement-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.25fr) minmax(280px, 0.85fr);
+      align-items: start;
+      gap: 26px;
+    }
+
+    .responsible-ai-panel { min-width: 0; }
+
+    .responsible-ai-title {
+      margin: 0 0 9px;
+      color: var(--accent-ethics);
+      font-family: var(--mono);
+      font-size: 0.59rem;
+      font-weight: 500;
+      text-transform: uppercase;
+    }
+
+    .responsible-ai-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 7px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .responsible-ai-card {
+      display: grid;
+      min-width: 0;
+      min-height: 42px;
+      grid-template-columns: 18px minmax(0, 1fr);
+      align-items: center;
+      gap: 8px;
+      padding: 8px 9px;
+      border: 1px solid var(--line);
+      border-radius: 3px;
+      background: var(--surface-soft);
+      color: var(--muted);
+      font-size: 0.61rem;
+      line-height: 1.25;
+    }
+
+    .responsible-ai-card:last-child { grid-column: 1 / -1; }
+
+    .responsible-ai-icon {
+      width: 18px;
+      height: 18px;
+      fill: none;
+      stroke: var(--accent-ethics);
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-width: 1.6;
+    }
+
     .organiser-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1484,6 +1549,10 @@
 
     .module-stamp .micro-label { color: var(--accent); }
 
+    #page-ethics .module-stamp {
+      background: linear-gradient(145deg, color-mix(in srgb, var(--ethics-region-fill) 24%, transparent), transparent 50%), var(--surface);
+    }
+
     .module-image-icon {
       position: absolute;
       top: 22px;
@@ -1831,6 +1900,7 @@
       .page-header h2 { font-size: 3rem; }
       .overview-page-header { grid-template-columns: minmax(0, 1fr) minmax(150px, 210px); gap: 20px; }
       .module-identity { grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: 18px; }
+      .ai-acknowledgement-layout { grid-template-columns: 1fr; gap: 18px; }
     }
 
     @media (max-width: 560px) {
@@ -1955,7 +2025,7 @@
         </header>
 
         <div class="overview-actions">
-          <a class="overview-action" href="#system-architecture" data-page-target="system-architecture" style="--overview-accent: var(--lime)">
+          <a class="overview-action" href="#system-architecture" data-page-target="system-architecture" style="--overview-accent: var(--cyan)">
             <svg class="overview-action-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#map-icon-geo"></use></svg>
             <span><small>Explore the system</small><strong>System Architecture</strong></span>
             <span class="overview-action-arrow" aria-hidden="true">&gt;</span>
@@ -1965,7 +2035,7 @@
             <span><small>Contribute to the programme</small><strong>Supporting Research Projects</strong></span>
             <span class="overview-action-arrow" aria-hidden="true">&gt;</span>
           </a>
-          <a class="overview-action" href="#contributors" data-page-target="contributors" style="--overview-accent: var(--lime)">
+          <a class="overview-action" href="#contributors" data-page-target="contributors" style="--overview-accent: var(--ink)">
             <svg class="overview-action-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#map-icon-gears"></use></svg>
             <span><small>People and partners</small><strong>Contributors</strong></span>
             <span class="overview-action-arrow" aria-hidden="true">&gt;</span>
@@ -2370,6 +2440,26 @@
               <p>Auto Shepherd brings robotics, agri-food research and field expertise together to develop useful systems for working landscapes.</p>
             </div>
             <div class="organisation-list" data-contributor-list="organisations"></div>
+          </div>
+        </section>
+
+        <section class="contributors-section" aria-labelledby="ai-acknowledgement-title">
+          <div class="section-intro">
+            <h3 id="ai-acknowledgement-title">Generative AI acknowledgement</h3>
+            <span>Use and accountability</span>
+          </div>
+          <div class="ai-acknowledgement-layout">
+            <p class="ai-acknowledgement-copy">Generative AI tools may be used selectively across research and engineering activities, including literature searches and review synthesis, brainstorming and collaborative idea development, coding assistance or code generation, data analysis, graph-generation code, documentation, and outreach. Their use depends on the task: AI outputs are treated as aids or drafts, not as evidence, expert judgement, or automatically accepted results. Literature claims are checked against original sources, generated code is reviewed and tested, and analyses and visualisations are checked against the underlying data. Human contributors and maintainers remain responsible for decisions and for the provenance, originality, accuracy, and scientific reliability of material produced with AI assistance.</p>
+            <aside class="responsible-ai-panel" aria-labelledby="responsible-ai-title">
+              <h4 class="responsible-ai-title" id="responsible-ai-title">Responsible AI</h4>
+              <ul class="responsible-ai-grid">
+                <li class="responsible-ai-card"><svg class="responsible-ai-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="8.5" cy="7.5" r="3"/><path d="M3.5 19a5 5 0 0 1 9.5-1M14 14l2 2 4-5"/></svg><span>Human Reviewed</span></li>
+                <li class="responsible-ai-card"><svg class="responsible-ai-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3.5h8l4 4V13M14 3.5v4h4M8 12h4M8 16l2 2 5-5"/></svg><span>Outputs Verified</span></li>
+                <li class="responsible-ai-card"><svg class="responsible-ai-icon" viewBox="0 0 24 24" aria-hidden="true"><ellipse cx="12" cy="5" rx="7.5" ry="3"/><path d="M4.5 5v6c0 1.7 3.4 3 7.5 3 .8 0 1.6-.1 2.3-.2M4.5 11v6c0 1.7 3.4 3 7.5 3M19.5 9v2"/></svg><span>Data Conscious</span></li>
+                <li class="responsible-ai-card"><svg class="responsible-ai-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 12s3.3-5 9.5-5 9.5 5 9.5 5-3.3 5-9.5 5-9.5-5-9.5-5Z"/><circle cx="12" cy="12" r="2.5"/><path d="M18 4h4M20 2v4"/></svg><span>AI Use Disclosed</span></li>
+                <li class="responsible-ai-card"><svg class="responsible-ai-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="7" r="3"/><path d="M3 20a6 6 0 0 1 12 0"/><circle cx="18" cy="17" r="4"/><path d="M18 15v2M18 19v.01"/></svg><span>Human Accountable</span></li>
+              </ul>
+            </aside>
           </div>
         </section>
       </section>
