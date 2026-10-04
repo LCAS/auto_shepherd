@@ -9,7 +9,7 @@
   ],
   "organisers": [
     { "name": "James R. Heselden", "image": "assets/profiles-media/jheselden.jpeg", "profileUrl": "https://agriforwards-cdt.blogs.lincoln.ac.uk/cdt-personal/james-heselden/", 
-    "bio": "System Architect for AutoShepherd; coordinating inter-system communications across Unity3D, Docker and ROS2, and overseeing the communication and simulation subsystems.", "subsystems": ["drone", "vision", "simulation", "communication"] },
+    "bio": "System Architect for AutoShepherd; overseeing cross-system compatibility and overseeing the communication and simulation subsystems.", "subsystems": ["drone", "vision", "simulation", "communication"] },
     
     { "name": "Dr Jonathan Cox", "image": "assets/profiles-media/jcox.png", "profileUrl": "https://staff.lincoln.ac.uk/215900f2-00fd-4e04-b070-956d05d711dd", 
     "bio": "Research lead for Auto Shepherd; coordinating programme-wide research activities and overseeing the vision and dog subsystems.", "subsystems": ["drone", "vision", "dog"] },
