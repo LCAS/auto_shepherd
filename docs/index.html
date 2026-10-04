@@ -268,6 +268,7 @@
     .nav-item[data-page-target="simulation"] { --nav-accent: var(--accent-simulation); }
     .nav-item[data-page-target="communication"] { --nav-accent: var(--accent-communication); }
     .nav-item[data-page-target="dog-control"] { --nav-accent: var(--accent-dog); }
+    .nav-item[data-page-target="ethics"] { --nav-accent: var(--accent-ethics); }
 
     .nav-item:hover,
     .nav-item:focus-visible {
@@ -314,12 +315,22 @@
       width: 16px;
       height: 16px;
       place-items: center;
-      border: 1px solid currentColor;
-      border-radius: 50%;
       color: var(--lime);
-      font-size: 0.48rem;
-      line-height: 1;
     }
+
+    .theme-icon svg {
+      width: 16px;
+      height: 16px;
+      fill: none;
+      stroke: currentColor;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-width: 1.8;
+    }
+
+    .theme-icon-moon { display: none; }
+    :root[data-theme="dark"] .theme-icon-sun { display: none; }
+    :root[data-theme="dark"] .theme-icon-moon { display: block; }
 
     .site-grid {
       display: grid;
@@ -487,13 +498,16 @@
 
     .signal-mark img {
       display: block;
-      width: 69px;
-      height: 69px;
-      object-fit: contain;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
       mix-blend-mode: multiply;
     }
 
-    :root[data-theme="dark"] .signal-mark img { mix-blend-mode: screen; }
+    :root[data-theme="dark"] .signal-mark img {
+      mix-blend-mode: screen;
+    }
 
     .signal-meta {
       display: grid;
@@ -1533,6 +1547,28 @@
 
     .module-components { margin-top: 25px; }
 
+    .ethics-project-copy {
+      max-width: 68ch;
+      margin: 0 0 14px;
+      color: var(--muted);
+      font-size: 0.8rem;
+      line-height: 1.65;
+    }
+
+    .ethics-project-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 0.64rem;
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+
+    .ethics-project-link:hover,
+    .ethics-project-link:focus-visible { color: var(--ink); outline-color: var(--accent); }
+
     .module-components-heading {
       display: flex;
       align-items: baseline;
@@ -1847,10 +1883,10 @@
 </head>
 <body>
   <header class="topbar">
-    <a class="brand" href="#overview" aria-label="Auto Shepherd overview">
-      <span class="brand-mark"><img src="assets/auto-shepherd-logo-icon.png" alt=""></span>
+    <a class="brand" href="#overview" aria-label="AutoShepherd overview">
+      <span class="brand-mark"><img src="assets/logos/brand/auto-shepherd-logo-icon.png" alt=""></span>
       <span class="brand-copy">
-        <span class="brand-name">Auto Shepherd</span>
+        <span class="brand-name">AutoShepherd</span>
         <span class="brand-meta">Field robotics programme</span>
       </span>
     </a>
@@ -1864,13 +1900,17 @@
         <button class="nav-item" id="simulation-tab" type="button" role="tab" aria-label="Open Simulation page" data-page-target="simulation" aria-controls="page-simulation" aria-selected="false"><span class="nav-number">03</span><span class="nav-name">Sim</span></button>
         <button class="nav-item" id="communication-tab" type="button" role="tab" aria-label="Open Communication page" data-page-target="communication" aria-controls="page-communication" aria-selected="false"><span class="nav-number">04</span><span class="nav-name">Comms</span></button>
         <button class="nav-item" id="dog-control-tab" type="button" role="tab" aria-label="Open Dog control page" data-page-target="dog-control" aria-controls="page-dog-control" aria-selected="false"><span class="nav-number">05</span><span class="nav-name">Dog</span></button>
+        <button class="nav-item" id="ethics-tab" type="button" role="tab" aria-label="Open Ethics page" data-page-target="ethics" aria-controls="page-ethics" aria-selected="false"><span class="nav-number">06</span><span class="nav-name">Ethics</span></button>
         <button class="nav-item nav-wide" id="research-tab" type="button" role="tab" aria-label="Open Supporting Research page" data-page-target="research" aria-controls="page-research" aria-selected="false"><span class="nav-name">Supporting<br>Research</span></button>
         <button class="nav-item" id="contributors-tab" type="button" role="tab" aria-label="Open Contributors page" data-page-target="contributors" aria-controls="page-contributors" aria-selected="false"><span class="nav-name">Contributors</span></button>
       </div>
     </nav>
 
     <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to light mode" title="Switch to light mode">
-      <span class="theme-icon" id="theme-icon" aria-hidden="true">L</span>
+      <span class="theme-icon" id="theme-icon" aria-hidden="true">
+        <svg class="theme-icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.65 17.65l1.42 1.42M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.65 6.35l1.42-1.42"/></svg>
+        <svg class="theme-icon-moon" viewBox="0 0 24 24"><path d="M20.2 15.2A8.6 8.6 0 0 1 8.8 3.8 8.6 8.6 0 1 0 20.2 15.2Z"/></svg>
+      </span>
       <span id="theme-label">Light</span>
     </button>
   </header>
@@ -1885,7 +1925,7 @@
           <h1>Auto<br>Shepherd</h1>
           <p>Robotics for understanding, guiding and caring for animals across the working landscape.</p>
         </div>
-        <div class="signal-mark" aria-hidden="true"><img src="assets/auto-shepherd-logo-icon.png" alt=""></div>
+        <div class="signal-mark" aria-hidden="true"><img src="assets/logos/brand/auto-shepherd-logo-icon.png" alt=""></div>
         <div class="signal-meta">
           <div class="meta-block">
             <span class="micro-label">Focus</span>
@@ -1911,7 +1951,7 @@
             <h2>One connected system for animal-aware shepherding.</h2>
             <p>Auto Shepherd brings aerial observation, flock perception, simulation, field communications and supervised ground robotics into one practical research programme. Each subsystem can develop independently while contributing to a shared picture of the animals and the field.</p>
           </div>
-          <img class="overview-logo" src="assets/auto-shepherd-logo-photo.png" alt="Auto Shepherd sheep and robot dog in a field">
+          <img class="overview-logo" src="assets/logos/brand/auto-shepherd-logo-photo.png" alt="Auto Shepherd sheep and robot dog in a field">
         </header>
 
         <div class="overview-actions">
@@ -1933,8 +1973,8 @@
         </div>
 
         <div class="section-intro">
-          <h3>Subsystem responsibilities</h3>
-          <span>Five connected subsystems</span>
+          <h3>Subsystems and ethical practice</h3>
+          <span>Five connected subsystems and cross-cutting ethics</span>
         </div>
         <div class="subsystem-overview-grid">
           <a class="subsystem-overview-card" href="#drone-control" data-page-target="drone-control" style="--overview-accent: var(--accent-drone)">
@@ -1966,6 +2006,12 @@
             <h3>Dog control</h3>
             <p>Localises and guides the ground robot under human supervision, with safety and animal welfare in view.</p>
             <span>Open subsystem &gt;</span>
+          </a>
+          <a class="subsystem-overview-card" href="#ethics" data-page-target="ethics" style="--overview-accent: var(--accent-ethics)">
+            <svg class="subsystem-overview-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#map-icon-sheep"></use></svg>
+            <h3>Ethics</h3>
+            <p>Develops welfare-centred guidance for responsible research and use of robots around animals.</p>
+            <span>Open ethics page &gt;</span>
           </a>
         </div>
       </section>
@@ -2035,6 +2081,7 @@
                 <symbol id="map-icon-unity" viewBox="0 0 24 24"><path d="M 12 3 L 20 8 V 16 L 12 21 L 4 16 V 8 Z M 12 3 V 12 M 4 8 L 12 12 L 20 8" /></symbol>
                 <symbol id="map-icon-simulation" viewBox="0 0 24 24"><path d="M 12 3 L 20 8 V 16 L 12 21 L 4 16 V 8 Z" /><path d="M 9 9 L 16 12 L 9 15 Z" /></symbol>
                 <symbol id="map-icon-sheep" viewBox="0 0 24 24"><path d="M 5 15 C 4 11 7 8 11 9 C 14 6 19 8 19 12 C 21 12 21 16 18 16 H 7 C 6 18 4 18 4 16 Z" /><circle cx="18" cy="11" r="1" /><path d="M 8 16 V 20 M 15 16 V 20" /></symbol>
+                <symbol id="map-icon-ethics" viewBox="0 0 24 24"><path d="M 12 3 V 20 M 8 21 H 16 M 6 6 H 18 M 12 3 L 10 5 M 12 3 L 14 5 M 7 6 L 3 13 H 11 Z M 17 6 L 13 13 H 21 Z M 3 13 A 4 4 0 0 0 11 13 M 13 13 A 4 4 0 0 0 21 13" /></symbol>
                 <symbol id="map-icon-eval" viewBox="0 0 24 24"><path d="M 6 20 C 6 20 4 15 4 11 A 6 6 0 0 1 16 11 C 16 15 6 20 6 20 Z" /><path d="M 18 6 L 20 8 L 23 4" /></symbol>
                 <symbol id="map-icon-tuning" viewBox="0 0 24 24"><path d="M 5 4 V 20 M 12 4 V 20 M 19 4 V 20" /><circle cx="5" cy="9" r="2" /><circle cx="12" cy="15" r="2" /><circle cx="19" cy="7" r="2" /></symbol>
                 <symbol id="map-icon-weights" viewBox="0 0 24 24"><path d="M 5 5 V 19 M 12 5 V 19 M 19 5 V 19" /><path d="M 3 9 H 7 M 10 14 H 14 M 17 8 H 21" /></symbol>
@@ -2425,6 +2472,21 @@
           <div class="component-list" data-component-list="dog-control"></div>
         </section>
       </section>
+
+      <section class="page-view module-page" id="page-ethics" data-page-view="ethics" data-accent="ethics" style="--accent: var(--accent-ethics)" role="tabpanel" aria-labelledby="ethics-tab" hidden>
+        <header class="page-header">
+          <div><p class="eyebrow">06 / Cross-cutting practice</p><h2>Ethics and animal welfare</h2><p>Responsible robotics starts with the animals and people affected by it. This work sits alongside the technical architecture, asking what appropriate design, research and field use should look like.</p></div>
+        </header>
+        <div class="module-identity">
+          <div class="module-stamp"><span class="micro-label">Welfare first</span><svg class="module-image-icon" viewBox="0 0 24 24" role="img" aria-label="Ethical balance icon"><use href="#map-icon-ethics"></use></svg><strong>CARE</strong></div>
+          <div class="module-brief"><p class="eyebrow">Research focus</p><h3>Set clear expectations for robotics around farm animals.</h3><p>The work considers animal welfare, responsible human oversight, relevant regulation and the perspectives of farmers, veterinary professionals and animal-welfare organisations.</p><div class="tag-row"><span class="tag">Animal welfare</span><span class="tag">Human oversight</span><span class="tag">Responsible practice</span></div></div>
+        </div>
+        <section class="module-components" aria-labelledby="ethics-guidance-title">
+          <div class="module-components-heading"><h3 id="ethics-guidance-title">Proposed whitepaper</h3><span>Open research project</span></div>
+          <p class="ethics-project-copy">Develop a practical whitepaper outlining considerations and guidance for the design, evaluation and use of robots around animals. The work will bring together evidence and stakeholder perspectives; it is intended to inform discussion, not replace legal or veterinary advice.</p>
+          <a class="ethics-project-link" href="#research--project-ethical-robot-animal-guidance" data-page-target="research" data-anchor-target="project-ethical-robot-animal-guidance">View the project brief <span aria-hidden="true">&gt;</span></a>
+        </section>
+      </section>
     </main>
   </div>
 
@@ -2438,6 +2500,7 @@
         "simulation",
         "communication",
         "dog-control",
+        "ethics",
         "research",
         "contributors"
       ];
@@ -2450,7 +2513,8 @@
         "sheep-detection": "Vision",
         simulation: "Simulation",
         communication: "Communication",
-        "dog-control": "Dog control"
+        "dog-control": "Dog control",
+        ethics: "Ethics and animal welfare"
       };
       const componentDefinitions = {
         "drone-control": [
@@ -2516,7 +2580,6 @@
       const researchDialogClose = document.getElementById("research-dialog-close");
       const siteGrid = document.querySelector(".site-grid");
       const themeButton = document.getElementById("theme-toggle");
-      const themeIcon = document.getElementById("theme-icon");
       const themeLabel = document.getElementById("theme-label");
       const themeColor = document.getElementById("theme-color");
       const themeTransitionSelector = [
@@ -2748,8 +2811,7 @@
       function setTheme(theme, shouldAnimate = true) {
         const nextTheme = theme === "light" ? "dark" : "light";
         document.documentElement.dataset.theme = theme;
-        themeLabel.textContent = nextTheme === "light" ? "Light" : "Dark";
-        themeIcon.textContent = nextTheme === "light" ? "L" : "D";
+        themeLabel.textContent = theme === "light" ? "Light" : "Dark";
         themeButton.setAttribute("aria-label", `Switch to ${nextTheme} mode`);
         themeButton.title = `Switch to ${nextTheme} mode`;
         themeColor.setAttribute("content", theme === "light" ? "#f1f3ea" : "#0c1715");

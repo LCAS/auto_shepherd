@@ -25,7 +25,6 @@
 
   ],
   "collaborators": [
-    { "name": "Si", "image": "", "profileUrl": "", "contribution": "...", "subsystems": ["vision", "drone", "simulation"] }
   ],
   "pastContributors": [
     { "name": "Afsaneh Karami", "image": "https://agriforwards-cdt.blogs.lincoln.ac.uk/files/2022/09/Afsaneh-Karami-180x180.jpg", "profileUrl": "https://agriforwards-cdt.blogs.lincoln.ac.uk/cdt-personal/afsaneh-karami/", "cohort": "2022/23", "subsystems": ["vision"] },
@@ -69,21 +68,21 @@
     },
     {
       "name": "LCAS",
-      "logo": "assets/lcas-logo.png",
+      "logo": "assets/logos/organisations/lcas-logo.png",
       "logoText": "L-CAS",
       "description": "The University of Lincoln's cross-disciplinary centre for robotics research.",
       "url": "https://lcas.lincoln.ac.uk/wp/"
     },
     {
       "name": "LIAT",
-      "logo": "assets/liat-logo-transparent.png",
+      "logo": "assets/logos/organisations/liat-logo-transparent.png",
       "logoText": "LIAT",
       "description": "The Lincoln Institute for Agri-food Technology.",
       "url": "https://www.lincoln.ac.uk/liat/research/"
     },
     {
       "name": "University of Lincoln",
-      "logo": "assets/university-of-lincoln-logo.svg",
+      "logo": "assets/logos/organisations/university-of-lincoln-logo.svg",
       "wordmark": "University of Lincoln",
       "logoText": "UoL",
       "description": "University home to the programme's robotics and agri-food research partners.",
