@@ -976,7 +976,7 @@
       object-fit: cover;
     }
 
-    .person-portrait-link { display: block; width: 100%; border-radius: 50%; }
+    .person-portrait-link { display: grid; width: 100%; justify-items: center; border-radius: 50%; }
     .person-portrait-link:focus-visible { outline: 2px solid var(--portrait-glow, var(--lime)); outline-offset: 4px; }
 
     .organiser-subsystem-dots { display: flex; align-items: center; gap: 9px; margin-bottom: 11px; }
@@ -1006,6 +1006,7 @@
       text-align: center;
     }
 
+    .contributor-card .person-portrait-link { width: min(100%, 112px); justify-self: center; }
     .contributor-card .person-portrait { width: min(100%, 112px); }
     .contributor-card h3 { margin: 0; font-size: 0.83rem; font-weight: 500; line-height: 1.35; }
     .contributor-card p { max-width: 230px; }
@@ -3406,9 +3407,30 @@
         const image = document.createElement("img");
         image.src = person.image;
         image.alt = person.name;
-        image.addEventListener("error", showPlaceholder, { once: true });
+        image.addEventListener("error", () => {
+          if (person.fallbackImage && image.dataset.fallbackAttempted !== "true") {
+            image.dataset.fallbackAttempted = "true";
+            image.src = person.fallbackImage;
+            return;
+          }
+          showPlaceholder();
+        });
         portrait.append(image);
         return portrait;
+      }
+
+      function createProfilePortrait(person, subsystemById) {
+        const portrait = createPortrait(person, subsystemById);
+        if (!person.profileUrl) return portrait;
+
+        const link = document.createElement("a");
+        link.className = "person-portrait-link";
+        link.href = person.profileUrl;
+        link.target = "_blank";
+        link.rel = "noreferrer";
+        link.setAttribute("aria-label", `Open ${person.name}'s profile`);
+        link.append(portrait);
+        return link;
       }
 
       function renderOrganisers(people, subsystems) {
@@ -3417,7 +3439,7 @@
         people.forEach((person) => {
           const card = document.createElement("article");
           card.className = "organiser-profile";
-          card.append(createPortrait(person, subsystemById));
+          card.append(createProfilePortrait(person, subsystemById));
 
           const copy = document.createElement("div");
           copy.className = "organiser-copy";
@@ -3455,19 +3477,7 @@
         people.forEach((person) => {
           const card = document.createElement("article");
           card.className = "contributor-card";
-          const portrait = createPortrait(person, subsystemById);
-          if (person.profileUrl && includeBio) {
-            const link = document.createElement("a");
-            link.className = "person-portrait-link";
-            link.href = person.profileUrl;
-            link.target = "_blank";
-            link.rel = "noreferrer";
-            link.setAttribute("aria-label", `Open ${person.name}'s profile`);
-            link.append(portrait);
-            card.append(link);
-          } else {
-            card.append(portrait);
-          }
+          card.append(createProfilePortrait(person, subsystemById));
           const name = document.createElement("h3");
           name.textContent = person.name;
           card.append(name);
