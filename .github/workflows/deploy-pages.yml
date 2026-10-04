@@ -34,7 +34,7 @@ jobs:
       - name: Validate website files
         run: |
           test -f docs/index.html
-          test -f docs/assets/auto-shepherd-mark.png
+          test -f docs/assets/logos/brand/auto-shepherd-mark.png
           test -f docs/assets/pipeline-geometry.json
           test -d docs/assets/pipeline-media
           test "$(find docs/assets/pipeline-media -type f | wc -l)" -gt 0
