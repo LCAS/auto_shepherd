@@ -1731,6 +1731,32 @@
       gap: 10px;
     }
 
+    .research-principles {
+      margin: -12px 0 36px;
+      padding: 22px 24px;
+      border: 1px solid var(--line);
+      border-left: 4px solid var(--cyan);
+      background: color-mix(in srgb, var(--cyan) 5%, var(--surface));
+    }
+
+    .research-principles h3 {
+      margin: 0;
+      color: var(--ink);
+      font-size: 1.2rem;
+      font-weight: 600;
+      line-height: 1.25;
+    }
+
+    .research-principles p {
+      max-width: 860px;
+      margin: 10px 0 0;
+      color: var(--muted);
+      font-size: 0.88rem;
+      line-height: 1.65;
+    }
+
+    .research-principles strong { color: var(--ink); }
+
     @media (max-width: 800px) and (min-width: 561px) {
       .research-project-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
@@ -2374,12 +2400,9 @@
           </div>
         </header>
 
-        <section class="research-status" aria-labelledby="active-projects-title">
-          <div class="section-intro">
-            <h3 id="active-projects-title">Active Projects</h3>
-            <span>In progress</span>
-          </div>
-          <div class="research-project-list" data-research-project-list="active" aria-live="polite"></div>
+        <section class="research-principles" aria-labelledby="research-principles-title">
+          <h3 id="research-principles-title">Research grows through collaboration.</h3>
+          <p>These projects are shared to encourage curiosity, experimentation and new directions. If your work grows from something here, an acknowledgment of Auto Shepherd and the people involved is always appreciated where appropriate. We'd love to hear what you're exploring too; get in touch and let's look for opportunities to collaborate or share what we learn.</p>
         </section>
 
         <section class="research-status" aria-labelledby="available-projects-title">
@@ -2388,6 +2411,22 @@
             <span>Open for collaboration</span>
           </div>
           <div class="research-project-list" data-research-project-list="available" aria-live="polite"></div>
+        </section>
+
+        <section class="research-status" aria-labelledby="active-projects-title">
+          <div class="section-intro">
+            <h3 id="active-projects-title">Active Projects</h3>
+            <span>In progress</span>
+          </div>
+          <div class="research-project-list" data-research-project-list="active" aria-live="polite"></div>
+        </section>
+
+        <section class="research-status" aria-labelledby="preprint-projects-title">
+          <div class="section-intro">
+            <h3 id="preprint-projects-title">Research Outputs in Preparation</h3>
+            <span>Preprints, articles and submissions</span>
+          </div>
+          <div class="research-project-list" data-research-project-list="preprint" aria-live="polite"></div>
         </section>
 
         <section class="research-status" aria-labelledby="completed-projects-title">
