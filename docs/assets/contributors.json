@@ -8,22 +8,22 @@
     { "id": "ethics", "name": "Ethics", "accent": "ethics" }
   ],
   "organisers": [
-    { "name": "James R. Heselden", "image": "assets/profiles-media/jheselden.jpeg", "profileUrl": "https://agriforwards-cdt.blogs.lincoln.ac.uk/cdt-personal/james-heselden/", 
+    { "id": "james-r-heselden", "name": "James R. Heselden", "image": "assets/profiles-media/jheselden.jpeg", "profileUrl": "https://agriforwards-cdt.blogs.lincoln.ac.uk/cdt-personal/james-heselden/",
     "bio": "System Architect for AutoShepherd; overseeing cross-system compatibility and overseeing the communication and simulation subsystems.", "subsystems": ["drone", "vision", "simulation", "communication"] },
     
-    { "name": "Dr Jonathan Cox", "image": "assets/profiles-media/jcox.png", "profileUrl": "https://staff.lincoln.ac.uk/215900f2-00fd-4e04-b070-956d05d711dd", 
+    { "id": "jonathan-cox", "name": "Dr Jonathan Cox", "image": "assets/profiles-media/jcox.png", "profileUrl": "https://staff.lincoln.ac.uk/215900f2-00fd-4e04-b070-956d05d711dd",
     "bio": "Research lead for Auto Shepherd; coordinating programme-wide research activities and overseeing the vision and dog subsystems.", "subsystems": ["drone", "vision", "dog"] },
     
-    { "name": "Josh Cooper", "image": "assets/profiles-media/jcooper.jpeg", "profileUrl": "https://staff.lincoln.ac.uk/e18c90ae-58fe-4416-afbc-4e09658b17fb", 
+    { "id": "josh-cooper", "name": "Josh Cooper", "image": "assets/profiles-media/jcooper.jpeg", "profileUrl": "https://staff.lincoln.ac.uk/e18c90ae-58fe-4416-afbc-4e09658b17fb",
     "bio": "Dev-Ops Technical Implementation Lead; responsible for docker support and systems integration across all subsystems.", "subsystems": ["drone", "vision", "simulation", "dog"] },
     
-    { "name": "Dr Rob Lloyd", "image": "assets/profiles-media/rlloyd.png", "profileUrl": "https://staff.lincoln.ac.uk/055d6d7e-1dda-4496-92a7-2b4e51b0953f", 
+    { "id": "rob-lloyd", "name": "Dr Rob Lloyd", "image": "assets/profiles-media/rlloyd.png", "profileUrl": "https://staff.lincoln.ac.uk/055d6d7e-1dda-4496-92a7-2b4e51b0953f",
     "bio": "Hardware Technical Implementation Lead; responsible for the hardware integration in the communication, drone and dog subsystems.", "subsystems": ["communication", "drone", "dog"] },
     
-    { "name": "Dr Roopika Ravikanna", "image": "https://agriforwards-cdt.blogs.lincoln.ac.uk/files/2019/10/Roopika-Ravikanna-3-180x180.jpeg", "profileUrl": "https://agriforwards-cdt.blogs.lincoln.ac.uk/cdt-personal/roopika-ravikanna/", 
+    { "id": "roopika-ravikanna", "name": "Dr Roopika Ravikanna", "image": "https://agriforwards-cdt.blogs.lincoln.ac.uk/files/2019/10/Roopika-Ravikanna-3-180x180.jpeg", "profileUrl": "https://agriforwards-cdt.blogs.lincoln.ac.uk/cdt-personal/roopika-ravikanna/",
     "bio": "Ethics Advisor for AutoShepherd; responsible for guiding research in ethical considerations for animal-robot interaction.", "subsystems": ["ethics"] },
 
-    { "name": "Dr Riccardo Polvara", "image": "assets/profiles-media/rpolvara.png", "profileUrl": "https://staff.lincoln.ac.uk/f65aae87-dc86-4c92-b0ea-ab120ee3a540", 
+    { "id": "riccardo-polvara", "name": "Dr Riccardo Polvara", "image": "assets/profiles-media/rpolvara.png", "profileUrl": "https://staff.lincoln.ac.uk/f65aae87-dc86-4c92-b0ea-ab120ee3a540",
     "bio": "Academic lead for AutoShepherd; responsible for vision research and drone integration.", "subsystems": ["vision", "drone"] }
     
   ],

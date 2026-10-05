@@ -412,7 +412,7 @@
       "y": 2.30274,
       "width": 4.57962,
       "height": 17.68776,
-      "fill": "#000000",
+      "fill": "transparent",
       "stroke": "transparent",
       "text": "",
       "route": null,
@@ -1933,13 +1933,13 @@
     {
       "order": 756,
       "kind": "label",
-      "x": 6.77741,
-      "y": -0.00145,
+      "x": 7.77741,
+      "y": 1.103145,
       "width": 10.91035,
-      "height": 4.57962,
+      "height": 2.57962,
       "fill": "transparent",
       "stroke": "transparent",
-      "text": "5thAnnual Summer SchoolGoing to the Dogs",
+      "text": "System Architecture Going to the Dogs",
       "route": null,
       "rotation": 0
     },
@@ -3318,7 +3318,8 @@
       "route": "sheep-detection",
       "rotation": 0,
       "src": "assets/pipeline-media/image44.png",
-      "mediaLabel": "sheep icon"
+      "mediaLabel": "sheep icon",
+      "prevent-inversion": true
     },
     {
       "order": 3551,
@@ -4404,7 +4405,8 @@
       "route": "drone-control",
       "rotation": 0,
       "src": "assets/pipeline-media/image51.png",
-      "mediaLabel": "drone icon"
+      "mediaLabel": "drone icon",
+      "prevent-inversion": true
     },
     {
       "order": 4174,
@@ -4762,7 +4764,8 @@
       "route": null,
       "rotation": 0,
       "src": "assets/pipeline-media/image51.png",
-      "mediaLabel": "drone icon"
+      "mediaLabel": "drone icon",
+      "prevent-inversion": true
     },
     {
       "order": 4260,

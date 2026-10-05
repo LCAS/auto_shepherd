@@ -35,9 +35,9 @@
       "iconType": "detect",
       "accent": "vision",
       "papers": [],
-      "leadContact": "To be confirmed",
+      "leadContact": "jonathan-cox",
       "contributors": [],
-      "components": []
+      "components": ["image-stream", "sheep-detection", "localisation", "geo-references"]
     },
     {
       "id": "project-sheep-prediction-drone-following",
@@ -47,9 +47,9 @@
       "iconType": "drone",
       "accent": "drone",
       "papers": [],
-      "leadContact": "To be confirmed",
+      "leadContact": "jonathan-cox",
       "contributors": [],
-      "components": []
+      "components": ["mini-aircraft", "video", "sheep-detection", "localisation", "goal-estimator", "flight-path"]
     },
     {
       "id": "project-small-sheep-detection-lora",
@@ -59,9 +59,9 @@
       "iconType": "drone",
       "accent": "drone",
       "papers": [],
-      "leadContact": "To be confirmed",
+      "leadContact": "james-r-heselden",
       "contributors": [],
-      "components": []
+      "components": ["mini-aircraft", "video", "image-stream", "sheep-detection", "synthetic-stream", "simulations", "tuning"]
     },
     {
       "id": "project-robot-assisted-rf-survey",
@@ -71,9 +71,9 @@
       "iconType": "radio",
       "accent": "communication",
       "papers": [],
-      "leadContact": "To be confirmed",
+      "leadContact": "james-r-heselden",
       "contributors": [],
-      "components": []
+      "components": ["radio-bridge", "lora-radio", "nrf-radio", "teleop-server"]
     },
     {
       "id": "project-retinex-sheep-detection",
@@ -83,9 +83,9 @@
       "iconType": "detect",
       "accent": "vision",
       "papers": [],
-      "leadContact": "To be confirmed",
+      "leadContact": "riccardo-polvara",
       "contributors": [],
-      "components": []
+      "components": ["sheep-detection"]
     },
     {
       "id": "project-defra-robot-animal-interaction",
@@ -95,9 +95,9 @@
       "iconType": "ethics",
       "accent": "ethics",
       "papers": [],
-      "leadContact": "To be confirmed",
+      "leadContact": "roopika-ravikanna",
       "contributors": [],
-      "components": []
+      "components": ["ethics", "animal-welfare", "animal-robot-interaction", "legislature"]
     },
     {
       "id": "project-sheep-behaviour-dashboard",
@@ -107,9 +107,9 @@
       "iconType": "eval",
       "accent": "vision",
       "papers": [],
-      "leadContact": "To be confirmed",
+      "leadContact": "jonathan-cox",
       "contributors": [],
-      "components": []
+      "components": ["image-stream", "sheep-detection", "localisation", "sheep-poses", "evaluation"]
     },
     {
       "id": "project-citizen-science-sheep-game",
@@ -119,9 +119,9 @@
       "iconType": "unity",
       "accent": "simulation",
       "papers": [],
-      "leadContact": "To be confirmed",
+      "leadContact": "jonathan-cox",
       "contributors": [],
-      "components": []
+      "components": ["unity-sim", "sheep-poses", "simulations", "natural-system-weights", "evaluation"]
     },
     {
       "id": "project-gps-labelled-sheep-dataset",
@@ -131,9 +131,9 @@
       "iconType": "gps",
       "accent": "vision",
       "papers": [],
-      "leadContact": "To be confirmed",
+      "leadContact": "riccardo-polvara",
       "contributors": [],
-      "components": []
+      "components": ["gps", "sheep-detection", "localisation", "geo-references"]
     },
     {
       "id": "project-occlusion-sheep-tracking",
@@ -143,9 +143,9 @@
       "iconType": "sheep",
       "accent": "vision",
       "papers": [],
-      "leadContact": "To be confirmed",
+      "leadContact": "riccardo-polvara",
       "contributors": [],
-      "components": []
+      "components": ["image-stream", "sheep-detection", "localisation"]
     },
     {
       "id": "project-closed-loop-sheep-herding",
@@ -155,9 +155,45 @@
       "iconType": "simulation",
       "accent": "simulation",
       "papers": [],
-      "leadContact": "To be confirmed",
+      "leadContact": "james-r-heselden",
       "contributors": [],
-      "components": []
+      "components": ["sheep-detection", "animal-robot-interaction", "dog-path", "dog-path-prediction", "goal-pose", "simulations", "predicted-poses", "sheep-poses", "evaluation", "goal-proximity", "natural-system-weights"]
+    },
+    {
+      "id": "project-robot-dog-exposure-cues",
+      "status": "available",
+      "name": "[MSc Project] Sheep responses to prolonged robot-dog exposure",
+      "description": "Investigate how sheep respond to longer exposure to a robot dog, including the effects of verbal cues, visual analogues and the robot's colour.",
+      "iconType": "ethics",
+      "accent": "ethics",
+      "papers": [],
+      "leadContact": "jonathan-cox",
+      "contributors": [],
+      "components": ["animal-robot-interaction", "animal-welfare", "robot-dog", "sheep-poses", "evaluation"]
+    },
+    {
+      "id": "project-multi-dog-flock-management",
+      "status": "available",
+      "name": "[MSc Project] Multi-robot flock management for slower robot dogs",
+      "description": "Investigate whether using two or more slower robot dogs can compensate for their lower individual speed compared with a real sheepdog, with simulation focused on driving and coordinating at least two robots around a flock.",
+      "iconType": "dog",
+      "accent": "simulation",
+      "papers": [],
+      "leadContact": "james-r-heselden",
+      "contributors": [],
+      "components": ["dog-path", "unity-sim", "dog-path-prediction", "goal-pose", "simulations", "predicted-poses", "sheep-poses", "poses", "n-second-simulation", "evaluation", "goal-proximity"]
+    },
+    {
+      "id": "project-farm-dog-whistle-control",
+      "status": "available",
+      "name": "[BSc Project] Intuitive farm control for a robot dog",
+      "description": "Develop farm-friendly control for the robot dog using intuitive commands and traditional whistle-based cues familiar to shepherds.",
+      "iconType": "dog",
+      "accent": "dog",
+      "papers": [],
+      "leadContact": "james-r-heselden",
+      "contributors": [],
+      "components": ["robot-dog", "teleop-server", "nav2", "radio-bridge"]
     },
     {
       "id": "project-robot-shepherding-economics-ethics",
@@ -167,9 +203,9 @@
       "iconType": "ethics",
       "accent": "ethics",
       "papers": [],
-      "leadContact": "To be confirmed",
+      "leadContact": "roopika-ravikanna",
       "contributors": [],
-      "components": []
+      "components": ["ethics", "economics"]
     },
     {
       "id": "project-ethical-robot-animal-guidance",
@@ -179,9 +215,9 @@
       "iconType": "ethics",
       "accent": "ethics",
       "papers": [],
-      "leadContact": "To be confirmed",
+      "leadContact": "roopika-ravikanna",
       "contributors": [],
-      "components": []
+      "components": ["ethics", "animal-welfare", "animal-robot-interaction", "community", "legislature"]
     },
     {
       "id": "project-flock-localisation",
@@ -191,9 +227,9 @@
       "iconType": "sheep",
       "accent": "vision",
       "papers": [],
-      "leadContact": "To be confirmed",
+      "leadContact": "riccardo-polvara",
       "contributors": [],
-      "components": ["sheep-detection", "localisation", "geo-references"]
+      "components": ["image-stream", "sheep-detection", "localisation", "geo-references"]
     },
     {
       "id": "project-summer-school-going-to-the-dogs",
@@ -203,9 +239,9 @@
       "iconType": "dog",
       "accent": "dog",
       "papers": [],
-      "leadContact": "To be confirmed",
+      "leadContact": "james-r-heselden",
       "contributors": [],
-      "components": []
+      "components": ["mini-aircraft", "sheep-detection", "simulations", "radio-bridge", "robot-dog"]
     },
     {
       "id": "project-summer-school-blog",
@@ -215,9 +251,9 @@
       "iconType": "video",
       "accent": "drone",
       "papers": [],
-      "leadContact": "To be confirmed",
+      "leadContact": "rob-lloyd",
       "contributors": [],
-      "components": []
+      "components": ["robot-dog", "sheep-detection", "simulations"]
     },
     {
       "id": "project-unitree-go2-blog",
@@ -227,9 +263,9 @@
       "iconType": "dog",
       "accent": "dog",
       "papers": [],
-      "leadContact": "To be confirmed",
+      "leadContact": "rob-lloyd",
       "contributors": [],
-      "components": []
+      "components": ["robot-dog", "teleop-server", "drivers", "nav2", "robot-pose"]
     },
     {
       "id": "project-roscon-bark-to-byte",
@@ -239,9 +275,9 @@
       "iconType": "gears",
       "accent": "communication",
       "papers": [],
-      "leadContact": "To be confirmed",
+      "leadContact": "jonathan-cox",
       "contributors": [],
-      "components": []
+      "components": ["radio-bridge", "sheep-detection", "localisation", "dog-path", "goal-pose", "nav2", "teleop-server"]
     }
   ]
 }

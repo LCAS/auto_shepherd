@@ -101,6 +101,7 @@
     html {
       min-width: 320px;
       min-height: 100%;
+      scrollbar-gutter: stable;
       scroll-behavior: smooth;
     }
 
@@ -264,6 +265,13 @@
     }
 
     .nav-item.nav-wide { min-width: 104px; }
+
+    .nav-item.nav-section-link {
+      width: max-content;
+      min-width: 0;
+      align-items: center;
+      text-align: center;
+    }
 
     .nav-item[data-page-target="drone-control"] { --nav-accent: var(--accent-drone); }
     .nav-item[data-page-target="sheep-detection"] { --nav-accent: var(--accent-vision); }
@@ -889,7 +897,26 @@
 
     .overview-action strong { display: block; font-size: 0.86rem; font-weight: 500; }
     .overview-action small { display: block; margin-bottom: 4px; color: var(--faint); font-family: var(--mono); font-size: 0.52rem; text-transform: uppercase; }
+    .overview-action-description { display: block; margin-top: 5px; color: var(--muted); font-size: 0.68rem; line-height: 1.4; }
     .overview-action-arrow { color: var(--overview-accent, var(--lime)); font-family: var(--mono); }
+
+    .overview-github-link {
+      --overview-accent: var(--background);
+      margin-top: 12px;
+      border-color: var(--background);
+      background: var(--ink);
+      color: var(--background);
+    }
+
+    .overview-github-link small,
+    .overview-github-link .overview-action-description { color: color-mix(in srgb, var(--background) 72%, transparent); }
+
+    .overview-github-link:hover,
+    .overview-github-link:focus-visible {
+      border-color: var(--background);
+      background: color-mix(in srgb, var(--ink) 88%, var(--background));
+      color: var(--background);
+    }
 
     .subsystem-overview-grid {
       display: grid;
@@ -1228,18 +1255,20 @@
 
     .geometry-sheet {
       position: relative;
-      width: max(100%, calc((100svh - 76px) * 1.4136));
-      min-width: 100%;
-      height: 100%;
+      width: min(100%, calc((100svh - 76px) * 1.4136));
+      min-width: 0;
+      height: auto;
+      aspect-ratio: 4681 / 3311;
       flex: 0 0 auto;
-      background: var(--geometry-background);
+      margin: auto;
+      background: transparent;
     }
 
     .geometry-svg {
       display: block;
       width: 100%;
       height: 100%;
-      background: var(--geometry-background);
+      background: transparent;
       overflow: visible;
       user-select: none;
     }
@@ -1288,11 +1317,13 @@
     }
 
     .geometry-title-text {
-      fill: #ffffff;
+      fill: #000000;
       font-style: italic;
       font-weight: 600;
       text-anchor: middle;
     }
+
+    :root[data-theme="dark"] .geometry-title-text { fill: #ffffff; }
 
     .geometry-title-subline {
       font-size: 87px;
@@ -1312,6 +1343,14 @@
       pointer-events: none;
     }
 
+    .geometry-legend .geometry-label-text { fill: #000000; }
+    .geometry-legend .geometry-connector { stroke: #000000; }
+    .geometry-legend-arrow path { fill: #000000; }
+
+    :root[data-theme="dark"] .geometry-legend .geometry-label-text { fill: #ffffff; }
+    :root[data-theme="dark"] .geometry-legend .geometry-connector { stroke: #ffffff; }
+    :root[data-theme="dark"] .geometry-legend-arrow path { fill: #ffffff; }
+
     .geometry-fragment {
       fill: var(--geometry-arrow);
       pointer-events: none;
@@ -1321,6 +1360,8 @@
       filter: var(--geometry-media-filter);
       pointer-events: none;
     }
+
+    :root[data-theme="dark"] .geometry-media.geometry-media-icon { filter: brightness(0) invert(1); }
 
     .geometry-region-communication .geometry-box,
     .geometry-region-communication.geometry-fragment { fill: var(--geometry-communication-fill); }
@@ -1522,6 +1563,12 @@
       margin-bottom: 26px;
       padding-bottom: 24px;
       border-bottom: 1px solid var(--line-strong);
+    }
+
+    @media (min-width: 801px) {
+      #page-simulation .module-identity {
+        grid-template-columns: minmax(220px, 0.61fr) minmax(0, 1.39fr);
+      }
     }
 
     .module-stamp {
@@ -1870,8 +1917,16 @@
       border-top: 1px solid var(--line-strong);
     }
 
+    .research-dialog-people { display: grid; gap: 18px; min-width: 0; }
+    .research-dialog-papers-section { grid-column: 1 / -1; padding-top: 18px; border-top: 1px solid var(--line-strong); }
     .research-dialog-details section { min-width: 0; }
     .research-dialog-details h3 { margin: 0 0 8px; font-size: 0.67rem; font-weight: 600; text-transform: uppercase; }
+    .research-dialog-contact { min-height: 48px; }
+    .research-dialog-contact-link { display: inline-flex; align-items: center; gap: 10px; color: var(--ink); text-decoration: none; }
+    .research-dialog-contact-link:hover .person-portrait,
+    .research-dialog-contact-link:focus-visible .person-portrait { transform: translateY(-1px); }
+    .research-dialog-contact .person-portrait { width: 46px; flex: 0 0 46px; transition: transform 160ms ease; }
+    .research-dialog-contact-name { font-size: 0.75rem; font-weight: 500; }
     .research-dialog-details p,
     .research-dialog-details ul { margin: 0; padding: 0; color: var(--muted); font-size: 0.72rem; line-height: 1.6; }
     .research-dialog-details ul { display: grid; gap: 5px; list-style: none; }
@@ -1917,7 +1972,9 @@
       .signal-visual { min-height: 460px; }
       .content-column { padding: 28px 18px 60px; }
       .site-grid.is-architecture-page .content-column { height: calc(100svh - 134px); padding: 0; }
-      .geometry-sheet { width: max(100%, calc((100svh - 134px) * 1.4136)); }
+      .geometry-sheet {
+        width: min(100%, calc((100svh - 134px) * 1.4136));
+      }
       .site-grid.is-overview-page .content-column { padding: 28px 18px 60px; }
       .site-grid.is-contributors-page .content-column { padding: 28px 18px 60px; }
       .subsystem-overview-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -1989,15 +2046,15 @@
 
     <nav class="top-nav" aria-label="Auto Shepherd pages">
       <div class="nav-list" role="tablist" aria-label="Programme sections">
-        <button class="nav-item" id="overview-tab" type="button" role="tab" aria-label="Open project overview" data-page-target="overview" aria-controls="page-overview" aria-selected="true"><span class="nav-name">Overview</span></button>
-        <button class="nav-item nav-wide" id="system-architecture-tab" type="button" role="tab" aria-label="Open System Architecture page" data-page-target="system-architecture" aria-controls="page-system-architecture" aria-selected="false"><span class="nav-name">System<br>Architecture</span></button>
+        <button class="nav-item nav-section-link" id="overview-tab" type="button" role="tab" aria-label="Open project overview" data-page-target="overview" aria-controls="page-overview" aria-selected="true"><span class="nav-name">Overview</span></button>
+        <button class="nav-item nav-wide nav-section-link" id="system-architecture-tab" type="button" role="tab" aria-label="Open System Architecture page" data-page-target="system-architecture" aria-controls="page-system-architecture" aria-selected="false"><span class="nav-name">System<br>Architecture</span></button>
         <button class="nav-item" id="drone-control-tab" type="button" role="tab" aria-label="Open Drone control page" data-page-target="drone-control" aria-controls="page-drone-control" aria-selected="false"><span class="nav-number">01</span><span class="nav-name">Drone</span></button>
         <button class="nav-item" id="sheep-detection-tab" type="button" role="tab" aria-label="Open Vision page" data-page-target="sheep-detection" aria-controls="page-sheep-detection" aria-selected="false"><span class="nav-number">02</span><span class="nav-name">Vision</span></button>
         <button class="nav-item" id="simulation-tab" type="button" role="tab" aria-label="Open Simulation page" data-page-target="simulation" aria-controls="page-simulation" aria-selected="false"><span class="nav-number">03</span><span class="nav-name">Sim</span></button>
         <button class="nav-item" id="communication-tab" type="button" role="tab" aria-label="Open Communication page" data-page-target="communication" aria-controls="page-communication" aria-selected="false"><span class="nav-number">04</span><span class="nav-name">Comms</span></button>
         <button class="nav-item" id="dog-control-tab" type="button" role="tab" aria-label="Open Dog control page" data-page-target="dog-control" aria-controls="page-dog-control" aria-selected="false"><span class="nav-number">05</span><span class="nav-name">Dog</span></button>
         <button class="nav-item" id="ethics-tab" type="button" role="tab" aria-label="Open Ethics page" data-page-target="ethics" aria-controls="page-ethics" aria-selected="false"><span class="nav-number">06</span><span class="nav-name">Ethics</span></button>
-        <button class="nav-item nav-wide" id="research-tab" type="button" role="tab" aria-label="Open Supporting Research page" data-page-target="research" aria-controls="page-research" aria-selected="false"><span class="nav-name">Supporting<br>Research</span></button>
+        <button class="nav-item nav-wide nav-section-link" id="research-tab" type="button" role="tab" aria-label="Open Supporting Research page" data-page-target="research" aria-controls="page-research" aria-selected="false"><span class="nav-name">Supporting<br>Research</span></button>
         <button class="nav-item" id="contributors-tab" type="button" role="tab" aria-label="Open Contributors page" data-page-target="contributors" aria-controls="page-contributors" aria-selected="false"><span class="nav-name">Contributors</span></button>
       </div>
     </nav>
@@ -2110,6 +2167,15 @@
             <span>Open ethics page &gt;</span>
           </a>
         </div>
+        <a class="overview-action overview-github-link" href="https://github.com/lcas/auto_shepherd" target="_blank" rel="noreferrer">
+          <svg class="overview-action-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5a9.5 9.5 0 0 0-3 18.51c.47.09.65-.2.65-.45v-1.7c-2.65.58-3.21-1.28-3.21-1.28-.43-1.1-1.05-1.39-1.05-1.39-.86-.59.07-.58.07-.58.95.07 1.45.98 1.45.98.85 1.45 2.22 1.03 2.76.79.09-.61.33-1.03.6-1.27-2.11-.24-4.33-1.05-4.33-4.68 0-1.03.37-1.87.98-2.53-.1-.24-.42-1.2.09-2.5 0 0 .8-.25 2.62.97a9.1 9.1 0 0 1 4.76 0c1.82-1.22 2.62-.97 2.62-.97.51 1.3.19 2.26.09 2.5.61.66.98 1.5.98 2.53 0 3.64-2.22 4.44-4.34 4.68.34.3.64.87.64 1.75v2.6c0 .25.18.54.66.45A9.5 9.5 0 0 0 12 2.5Z"></path></svg>
+          <span>
+            <small>Open source collaboration</small>
+            <strong>Share ideas on GitHub</strong>
+            <span class="overview-action-description">Explore the code, suggest improvements, and help shape Auto Shepherd with the wider research community.</span>
+          </span>
+          <span class="overview-action-arrow" aria-hidden="true">&gt;</span>
+        </a>
       </section>
 
       <section class="page-view" id="page-system-architecture" data-page-view="system-architecture" role="tabpanel" aria-labelledby="system-architecture-tab" hidden>
@@ -2512,21 +2578,23 @@
           <h2 id="research-dialog-title"></h2>
           <p class="research-dialog-description" id="research-dialog-description"></p>
           <div class="research-dialog-details">
-            <section>
-              <h3>Papers</h3>
-              <ul id="research-dialog-papers"></ul>
-            </section>
-            <section>
-              <h3>Lead contact</h3>
-              <p id="research-dialog-contact"></p>
-            </section>
-            <section>
-              <h3>Developers / Contributors</h3>
-              <ul id="research-dialog-collaborators"></ul>
-            </section>
-            <section>
+            <div class="research-dialog-people">
+              <section>
+                <h3>Contact</h3>
+                <div class="research-dialog-contact" id="research-dialog-contact"></div>
+              </section>
+              <section>
+                <h3>Developers / Contributors</h3>
+                <ul id="research-dialog-collaborators"></ul>
+              </section>
+            </div>
+            <section class="research-dialog-components-section">
               <h3>Components</h3>
               <ul id="research-dialog-components"></ul>
+            </section>
+            <section class="research-dialog-papers-section" id="research-dialog-papers-section" hidden>
+              <h3>Papers</h3>
+              <ul id="research-dialog-papers"></ul>
             </section>
           </div>
         </div>
@@ -2610,10 +2678,9 @@
           <div class="module-stamp"><span class="micro-label">Welfare first</span><svg class="module-image-icon" viewBox="0 0 24 24" role="img" aria-label="Ethical balance icon"><use href="#map-icon-ethics"></use></svg><strong>CARE</strong></div>
           <div class="module-brief"><p class="eyebrow">Research focus</p><h3>Set clear expectations for robotics around farm animals.</h3><p>The work considers animal welfare, responsible human oversight, relevant regulation and the perspectives of farmers, veterinary professionals and animal-welfare organisations.</p><div class="tag-row"><span class="tag">Animal welfare</span><span class="tag">Human oversight</span><span class="tag">Responsible practice</span></div></div>
         </div>
-        <section class="module-components" aria-labelledby="ethics-guidance-title">
-          <div class="module-components-heading"><h3 id="ethics-guidance-title">Proposed whitepaper</h3><span>Open research project</span></div>
-          <p class="ethics-project-copy">Develop a practical whitepaper outlining considerations and guidance for the design, evaluation and use of robots around animals. The work will bring together evidence and stakeholder perspectives; it is intended to inform discussion, not replace legal or veterinary advice.</p>
-          <a class="ethics-project-link" href="#research--project-ethical-robot-animal-guidance" data-page-target="research" data-anchor-target="project-ethical-robot-animal-guidance">View the project brief <span aria-hidden="true">&gt;</span></a>
+        <section class="module-components" aria-labelledby="ethics-components-title">
+          <div class="module-components-heading"><h3 id="ethics-components-title">Components</h3><span>Architecture / Ethics</span></div>
+          <div class="component-list" data-component-list="ethics"></div>
         </section>
       </section>
     </main>
@@ -2692,9 +2759,26 @@
           { id: "nav2", title: "Nav2", icon: "nav", mapLabels: ["Nav2"], description: "Navigation stack for planning and executing ground-robot movement.", project: "project-supervised-dog-control" },
           { id: "robot-pose", title: "Pose", icon: "pose", mapLabels: ["Pose"], description: "Current robot position and orientation used by navigation and control.", project: "project-supervised-dog-control" },
           { id: "robot-dog", title: "Robot dog", icon: "dog", mapLabels: ["Robot dog"], description: "Ground platform for supervised field interaction with the flock.", project: "project-supervised-dog-control" }
+        ],
+        ethics: [
+          { id: "ethics", title: "Ethics", icon: "ethics", description: "Frames the values and responsibilities that guide animal-aware robotics.", project: "project-ethical-robot-animal-guidance" },
+          { id: "animal-welfare", title: "Animal welfare", icon: "sheep", description: "Keeps the animals' physical and behavioural wellbeing central to design and evaluation.", project: "project-ethical-robot-animal-guidance" },
+          { id: "animal-robot-interaction", title: "Animal-robot interaction", icon: "dog", description: "Examines how robot behaviour, proximity and sensing shape encounters with animals.", project: "project-ethical-robot-animal-guidance" },
+          { id: "community", title: "Community", icon: "bridge", description: "Brings farmers, practitioners, researchers and local perspectives into the work.", project: "project-ethical-robot-animal-guidance" },
+          { id: "legislature", title: "Legislature", icon: "eval", description: "Considers the laws, standards and governance expectations that shape responsible use.", project: "project-ethical-robot-animal-guidance" },
+          { id: "economics", title: "Economics", icon: "weights", description: "Explores who bears the costs, receives the benefits and gets access to the technology.", project: "project-ethical-robot-animal-guidance" }
         ]
       };
+      const researchProjectAliases = {
+        "project-drone-observation": "project-small-sheep-detection-lora",
+        "project-flock-simulation": "project-small-sheep-detection-lora",
+        "project-field-communications": "project-robot-assisted-rf-survey",
+        "project-supervised-dog-control": "project-robot-assisted-rf-survey"
+      };
+      let researchProjectConnections = new Map();
       const researchProjectDetails = new Map();
+      const contributorDetails = new Map();
+      let contributorSubsystemById = new Map();
       const pageButtons = [...document.querySelectorAll("button[data-page-target]")];
       const pageLinks = [...document.querySelectorAll("a[data-page-target]")];
       const pages = [...document.querySelectorAll("[data-page-view]")];
@@ -2703,6 +2787,7 @@
       const researchDialogStatus = document.getElementById("research-dialog-status");
       const researchDialogDescription = document.getElementById("research-dialog-description");
       const researchDialogPapers = document.getElementById("research-dialog-papers");
+      const researchDialogPapersSection = document.getElementById("research-dialog-papers-section");
       const researchDialogContact = document.getElementById("research-dialog-contact");
       const researchDialogCollaborators = document.getElementById("research-dialog-collaborators");
       const researchDialogComponents = document.getElementById("research-dialog-components");
@@ -2761,6 +2846,20 @@
         };
       }
 
+      function getPipelineFitViewBox() {
+        const viewportWidth = posterCanvas?.clientWidth || window.innerWidth;
+        const fallbackSheetWidth = viewportWidth;
+        const renderedWidth = pipelineSvg?.getBoundingClientRect().width || fallbackSheetWidth;
+        const nextWidth = Math.min(basePipelineViewBox.width, Math.max(basePipelineViewBox.width * 0.15, basePipelineViewBox.width * viewportWidth / renderedWidth));
+        const nextHeight = nextWidth * basePipelineViewBox.height / basePipelineViewBox.width;
+        return {
+          x: (basePipelineViewBox.width - nextWidth) / 2,
+          y: (basePipelineViewBox.height - nextHeight) / 2,
+          width: nextWidth,
+          height: nextHeight
+        };
+      }
+
       function renderPipelineView() {
         if (!pipelineSvg) return;
         const { x, y, width, height } = pipelineViewBox;
@@ -2792,7 +2891,7 @@
       }
 
       function resetPipelineCanvas() {
-        pipelineViewBox = { ...basePipelineViewBox };
+        pipelineViewBox = getPipelineFitViewBox();
         renderPipelineView();
       }
 
@@ -2877,11 +2976,14 @@
         document.querySelectorAll("[data-component-list]").forEach((list) => {
           const route = list.dataset.componentList;
           const components = componentDefinitions[route] || [];
+          list.replaceChildren();
           const count = list.closest(".module-components")?.querySelector(".module-components-heading span");
           if (count) count.textContent = `${components.length} architecture components`;
           components.forEach((component) => {
             const targetId = `component-${component.id}`;
-            const relatedProjects = component.projects || [component.project];
+            const connectedProjects = researchProjectConnections.get(component.id) || [];
+            const fallbackProjects = component.projects || [component.project];
+            const relatedProjects = [...new Set((connectedProjects.length ? connectedProjects : fallbackProjects).map((projectId) => researchProjectAliases[projectId] || projectId))];
             const researchTarget = relatedProjects.join(",");
             const row = document.createElement("a");
             row.className = "component-row";
@@ -2937,6 +3039,15 @@
         }, 1250);
       }
 
+      function setPipelineMediaTheme(theme) {
+        document.querySelectorAll(".geometry-media-logo").forEach((image) => {
+          image.setAttribute("href", theme === "dark" ? image.dataset.darkSource : image.dataset.lightSource);
+        });
+        document.querySelectorAll(".organisation-logo-agriforwards").forEach((image) => {
+          image.src = theme === "dark" ? image.dataset.darkSource : image.dataset.lightSource;
+        });
+      }
+
       function setTheme(theme, shouldAnimate = true) {
         const nextTheme = theme === "light" ? "dark" : "light";
         document.documentElement.dataset.theme = theme;
@@ -2944,6 +3055,7 @@
         themeButton.setAttribute("aria-label", `Switch to ${nextTheme} mode`);
         themeButton.title = `Switch to ${nextTheme} mode`;
         themeColor.setAttribute("content", theme === "light" ? "#f1f3ea" : "#0c1715");
+        setPipelineMediaTheme(theme);
         try {
           localStorage.setItem("auto-shepherd-theme", theme);
         } catch {}
@@ -2994,6 +3106,7 @@
         if (Math.hypot(deltaX, deltaY) > 3) pipelinePointer.moved = true;
         if (!pipelinePointer.moved) return;
         const rect = pipelineSvg.getBoundingClientRect();
+        if (!rect.width || !rect.height) return;
         pipelineViewBox = clampPipelineView(
           pipelinePointer.viewBox.x - deltaX * pipelinePointer.viewBox.width / rect.width,
           pipelinePointer.viewBox.y - deltaY * pipelinePointer.viewBox.height / rect.height,
@@ -3007,12 +3120,19 @@
         if (!pipelinePointer || event.pointerId !== pipelinePointer.pointerId) return;
         const didMove = pipelinePointer.moved;
         pipelinePointer = null;
+        if (posterCanvas.hasPointerCapture(event.pointerId)) posterCanvas.releasePointerCapture(event.pointerId);
         posterCanvas.classList.remove("is-panning");
         if (didMove) {
           suppressPipelineClick = true;
           window.setTimeout(() => { suppressPipelineClick = false; }, 0);
         }
       }
+
+      window.addEventListener("resize", () => {
+        if (!pipelineSvg) return;
+        pipelineViewBox = getPipelineFitViewBox();
+        renderPipelineView();
+      });
 
       posterZoomIn.addEventListener("click", () => zoomPipelineCanvas(0.82));
       posterZoomOut.addEventListener("click", () => zoomPipelineCanvas(1.22));
@@ -3032,6 +3152,7 @@
           viewBox: { ...pipelineViewBox },
           moved: false
         };
+        posterCanvas.setPointerCapture(event.pointerId);
         posterCanvas.classList.add("is-panning");
       });
       window.addEventListener("pointermove", panPipelineCanvas);
@@ -3246,8 +3367,6 @@
           svg.classList.add("geometry-svg");
           setSvgAttributes(svg, { viewBox: `0 0 ${viewWidth} ${viewHeight}`, role: "img", "aria-label": "Auto Shepherd pipeline reconstructed from the uploaded slide geometry" });
           pipelineSvg = svg;
-          pipelineViewBox = { ...basePipelineViewBox };
-          renderPipelineView();
           const defs = document.createElementNS(svgNamespace, "defs");
           svg.append(defs);
 
@@ -3270,15 +3389,20 @@
               unity_signal: { dasharray: "0 16.666", linecap: "round" },
               rf_link: { dasharray: "99.998 12.5 12.5 12.5", linecap: "butt" }
             };
+            const legendLineTypes = new Set(Object.keys(lineStyles));
+            const isPipelineLegendConnector = (item) => item.kind === "native-connector" && item.y === 32.52858 && legendLineTypes.has(item.lineType);
+            const geometryArrowMarkerId = (color, scale, isLegendArrow) => `${color.slice(1)}-${scale}${isLegendArrow ? "-legend" : ""}`;
           const arrowHeadMarkers = new Map();
           geometry.objects.filter((item) => item.kind === "native-connector" && item.arrowHead === "triangle").forEach((item) => {
             const color = item.strokeColor || arrowColors[geometryRegion(item)] || "#548235";
             const scale = item.arrowHeadScale || 1;
-            const markerId = `${color.slice(1)}-${scale}`;
-            arrowHeadMarkers.set(markerId, { color, scale });
+              const isLegendArrow = isPipelineLegendConnector(item);
+              const markerId = geometryArrowMarkerId(color, scale, isLegendArrow);
+              arrowHeadMarkers.set(markerId, { color, scale, isLegendArrow });
           });
-          arrowHeadMarkers.forEach(({ color, scale }, markerId) => {
+            arrowHeadMarkers.forEach(({ color, scale, isLegendArrow }, markerId) => {
             const marker = makeElement("marker", { id: `geometry-arrow-${markerId}`, markerWidth: 12 * scale, markerHeight: 12 * scale, refX: 10 * scale, refY: 5 * scale, orient: "auto", markerUnits: "userSpaceOnUse" });
+              if (isLegendArrow) marker.classList.add("geometry-legend-arrow");
             marker.append(makeElement("path", { d: `M 0 0 L ${10 * scale} ${5 * scale} L 0 ${10 * scale} z`, fill: color }));
             defs.append(marker);
           });
@@ -3298,6 +3422,7 @@
             const isClickable = Boolean(item.route) && !isMainText;
             const group = isClickable ? document.createElementNS(svgNamespace, "a") : document.createElementNS(svgNamespace, "g");
             group.classList.add("geometry-object");
+            if (isPipelineLegendConnector(item) || ["Serial", "ROS2 Topic", "Unity Signal", "RF Link"].includes(item.text)) group.classList.add("geometry-legend");
             const region = geometryRegion(item) || ((item.kind === "connector" || item.kind === "native-connector") ? geometryConnectorRegion(item, geometry.objects) : "");
             if (region) group.classList.add(`geometry-region-${region}`);
             if (isClickable) {
@@ -3333,7 +3458,7 @@
               group.style.setProperty("--geometry-arrow-color", strokeColor);
               const pathAttributes = { d: pathData, stroke: strokeColor, "stroke-width": item.strokeWidth ?? 8.333, "stroke-dasharray": lineStyle.dasharray, "stroke-linecap": lineStyle.linecap };
               if (item.arrowHead === "triangle") {
-                const markerId = `${strokeColor.slice(1)}-${item.arrowHeadScale || 1}`;
+                const markerId = geometryArrowMarkerId(strokeColor, item.arrowHeadScale || 1, isPipelineLegendConnector(item));
                 pathAttributes["marker-end"] = `url(#geometry-arrow-${markerId})`;
               }
               const path = makeElement("path", pathAttributes);
@@ -3346,6 +3471,15 @@
             } else if (item.kind === "media") {
               const image = makeElement("image", { x: drawX, y: drawY, width, height, href: item.src, preserveAspectRatio: "none" });
               image.classList.add("geometry-media");
+              const mediaLabel = (item.mediaLabel || item.text || "").trim().toLowerCase();
+              if (mediaLabel === "agriforwards logo") {
+                image.classList.add("geometry-media-logo");
+                image.dataset.lightSource = item.src;
+                image.dataset.darkSource = "assets/pipeline-media/AgriForwards-dark.svg";
+                image.setAttribute("href", document.documentElement.dataset.theme === "dark" ? image.dataset.darkSource : image.dataset.lightSource);
+              }
+              const preventInversion = item["prevent-inversion"] === true;
+              if (["sheep icon", "drone icon", "dog robot icon"].includes(mediaLabel) && !preventInversion) image.classList.add("geometry-media-icon");
               group.append(image);
             } else {
               const box = makeElement("rect", { x: drawX, y: drawY, width, height, rx: Math.min(width, height) * 0.035, fill: item.fill === "transparent" ? "none" : item.fill, stroke: item.stroke === "transparent" ? "none" : item.stroke, "stroke-width": item.stroke === "transparent" ? 0 : 2 });
@@ -3354,14 +3488,18 @@
               if (item.kind === "label" && item.text) {
                 const isPosterTitle = item.order === 756 || item.text.includes("5thAnnual");
                 if (isPosterTitle) {
+                  const titleText = item.text.trim();
+                  const titleBreak = titleText.search(/\bGoing\b/);
+                  const subtitleText = titleBreak > 0 ? titleText.slice(0, titleBreak).trim() : titleText;
+                  const mainlineText = titleBreak > 0 ? titleText.slice(titleBreak).trim() : "";
                   const title = makeElement("text", { x: drawX + width / 2 - 28, y: drawY + height * 0.34 });
                   title.classList.add("geometry-title-text");
                   const subtitle = makeElement("tspan", { x: drawX + width / 2 - 28, dy: 0 });
                   subtitle.classList.add("geometry-title-subline");
-                  subtitle.textContent = "5th Annual Summer School";
+                  subtitle.textContent = subtitleText;
                   const mainline = makeElement("tspan", { x: drawX + width / 2 - 28, dy: height * 0.55 });
                   mainline.classList.add("geometry-title-mainline");
-                  mainline.textContent = "Going to the Dogs";
+                  mainline.textContent = mainlineText;
                   title.append(subtitle, mainline);
                   group.append(title);
                   svg.append(group);
@@ -3396,6 +3534,8 @@
           canvas.querySelector(".geometry-sheet")?.remove();
           canvas.querySelector(".geometry-loading")?.remove();
           canvas.append(sheet);
+          pipelineViewBox = getPipelineFitViewBox();
+          renderPipelineView();
         } catch (error) {
           const loading = document.getElementById("geometry-loading");
           if (loading) loading.textContent = "Source geometry unavailable";
@@ -3472,10 +3612,8 @@
 
       function renderResearchDialogPapers(list, papers) {
         list.replaceChildren();
-        if (!papers.length) {
-          renderResearchDialogList(list, [], "No papers linked yet");
-          return;
-        }
+        researchDialogPapersSection.hidden = !papers.length;
+        if (!papers.length) return;
         papers.forEach((paper) => {
           const entry = document.createElement("li");
           const link = document.createElement("a");
@@ -3486,6 +3624,33 @@
           entry.append(link);
           list.append(entry);
         });
+      }
+
+      function renderResearchDialogContact(contactId) {
+        researchDialogContact.replaceChildren();
+        const contact = contributorDetails.get(contactId);
+        if (!contact) {
+          researchDialogContact.textContent = contactId || "To be confirmed";
+          return;
+        }
+
+        const targetId = `contributor-${contact.id}`;
+        const link = document.createElement("a");
+        link.className = "research-dialog-contact-link";
+        link.href = `#contributors--${targetId}`;
+        link.setAttribute("aria-label", `View ${contact.name} on Contributors page`);
+        link.addEventListener("click", (event) => {
+          event.preventDefault();
+          researchProjectDialog.close();
+          navigateToPage("contributors", targetId);
+        });
+
+        const portrait = createPortrait(contact, contributorSubsystemById);
+        const name = document.createElement("span");
+        name.className = "research-dialog-contact-name";
+        name.textContent = contact.name;
+        link.append(portrait, name);
+        researchDialogContact.append(link);
       }
 
       function findComponent(componentId) {
@@ -3522,7 +3687,13 @@
       function renderResearchProjects(projectData) {
         const iconTypes = new Set(projectData.availableIconTypes);
         const projectLists = new Map([...document.querySelectorAll("[data-research-project-list]")].map((list) => [list.dataset.researchProjectList, list]));
+        researchProjectConnections = new Map();
         projectData.projects.forEach((details) => {
+          (details.components || []).forEach((componentId) => {
+            const projects = researchProjectConnections.get(componentId) || [];
+            if (!projects.includes(details.id)) projects.push(details.id);
+            researchProjectConnections.set(componentId, projects);
+          });
           const list = projectLists.get(details.status);
           if (!list || !iconTypes.has(details.iconType)) return;
 
@@ -3554,6 +3725,7 @@
           list.append(project);
           researchProjectDetails.set(details.id, details);
         });
+        renderComponentLists();
       }
 
       async function loadResearchProjects() {
@@ -3630,6 +3802,10 @@
         people.forEach((person) => {
           const card = document.createElement("article");
           card.className = "organiser-profile";
+          if (person.id) {
+            card.id = `contributor-${person.id}`;
+            card.tabIndex = -1;
+          }
           card.append(createProfilePortrait(person, subsystemById));
 
           const copy = document.createElement("div");
@@ -3691,7 +3867,14 @@
             if (organisation.wordmark) brand.classList.add("has-wordmark");
             const logo = document.createElement("img");
             logo.className = "organisation-logo";
-            logo.src = organisation.logo;
+            if (organisation.logo === "assets/pipeline-media/AgriForwards.svg") {
+              logo.classList.add("organisation-logo-agriforwards");
+              logo.dataset.lightSource = organisation.logo;
+              logo.dataset.darkSource = "assets/pipeline-media/AgriForwards-dark.svg";
+              logo.src = document.documentElement.dataset.theme === "dark" ? logo.dataset.darkSource : logo.dataset.lightSource;
+            } else {
+              logo.src = organisation.logo;
+            }
             logo.alt = `${organisation.name} logo`;
             brand.append(logo);
             if (organisation.wordmark) {
@@ -3737,10 +3920,14 @@
       }
 
       function renderContributors(data) {
-        const subsystemById = new Map(data.subsystems.map((subsystem) => [subsystem.id, subsystem]));
+        contributorSubsystemById = new Map(data.subsystems.map((subsystem) => [subsystem.id, subsystem]));
+        contributorDetails.clear();
+        [...(data.organisers || []), ...(data.collaborators || []), ...(data.pastContributors || [])].forEach((person) => {
+          contributorDetails.set(person.id || person.name, person);
+        });
         renderOrganisers(data.organisers || [], data.subsystems || []);
-        renderPeopleGrid(data.collaborators || [], document.querySelector('[data-contributor-list="collaborators"]'), "Collaborator profiles will be added here.", true, subsystemById);
-        renderPeopleGrid(data.pastContributors || [], document.querySelector('[data-contributor-list="pastContributors"]'), "Past contributor profiles will be added here.", false, subsystemById);
+        renderPeopleGrid(data.collaborators || [], document.querySelector('[data-contributor-list="collaborators"]'), "Collaborator profiles will be added here.", true, contributorSubsystemById);
+        renderPeopleGrid(data.pastContributors || [], document.querySelector('[data-contributor-list="pastContributors"]'), "Past contributor profiles will be added here.", false, contributorSubsystemById);
         renderOrganisations(data.organisations || [], document.querySelector('[data-contributor-list="organisations"]'));
       }
 
@@ -3770,7 +3957,7 @@
           researchDialogTitle.textContent = details.name;
           researchDialogStatus.textContent = project.closest(".research-status").querySelector(".section-intro h3").textContent;
           researchDialogDescription.textContent = details.description;
-          researchDialogContact.textContent = details.leadContact || "To be confirmed";
+          renderResearchDialogContact(details.leadContact);
           researchProjectDialog.style.setProperty("--project-accent", getComputedStyle(project).getPropertyValue("--project-accent").trim());
           renderResearchDialogPapers(researchDialogPapers, details.papers || []);
           renderResearchDialogList(researchDialogCollaborators, details.contributors || [], "To be confirmed");
