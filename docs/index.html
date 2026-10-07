@@ -216,10 +216,15 @@
     .top-nav {
       min-width: 0;
       overflow-x: auto;
-      scrollbar-width: none;
+      overflow-y: hidden;
+      overscroll-behavior-x: contain;
+      scrollbar-color: var(--line-strong) transparent;
+      scrollbar-width: thin;
     }
 
-    .top-nav::-webkit-scrollbar { display: none; }
+    .top-nav::-webkit-scrollbar { height: 4px; }
+    .top-nav::-webkit-scrollbar-track { background: transparent; }
+    .top-nav::-webkit-scrollbar-thumb { background: var(--line-strong); }
 
     .nav-list {
       display: flex;
@@ -2822,6 +2827,7 @@
       const researchDialogClose = document.getElementById("research-dialog-close");
       const researchDialogArchitecture = document.getElementById("research-dialog-architecture");
       const siteGrid = document.querySelector(".site-grid");
+      const topNav = document.querySelector(".top-nav");
       const themeButton = document.getElementById("theme-toggle");
       const themeLabel = document.getElementById("theme-label");
       const themeColor = document.getElementById("theme-color");
@@ -3653,6 +3659,14 @@
       loadContributors();
       addSystemMapIcons();
       renderPipelineGeometry();
+
+      topNav.addEventListener("wheel", (event) => {
+        if (topNav.scrollWidth <= topNav.clientWidth) return;
+        const delta = Math.abs(event.deltaX) > Math.abs(event.deltaY) ? event.deltaX : event.deltaY;
+        if (!delta) return;
+        event.preventDefault();
+        topNav.scrollLeft += delta;
+      }, { passive: false });
 
       pageButtons.forEach((button) => {
         button.addEventListener("click", () => {
