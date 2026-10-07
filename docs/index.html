@@ -48,6 +48,7 @@
       --geometry-dog-fill: #fff2cc;
       --geometry-simulation-fill: #e9dbf5;
       --geometry-media-filter: brightness(0.82) saturate(0.92);
+      --architecture-highlight: #ffffff;
       --accent-drone: #5b9bd5;
       --accent-vision: #ed7d31;
       --accent-simulation: #8f45c7;
@@ -87,6 +88,7 @@
       --geometry-dog-fill: #fff2cc;
       --geometry-simulation-fill: #e9dbf5;
       --geometry-media-filter: none;
+      --architecture-highlight: #000000;
       --accent-drone: #5b9bd5;
       --accent-vision: #ed7d31;
       --accent-simulation: #8f45c7;
@@ -1302,6 +1304,15 @@
     }
 
     .geometry-link .geometry-label-text { fill: #000000; }
+    .geometry-object.geometry-link .geometry-label-text { pointer-events: auto; }
+
+    @keyframes architecture-component-pulse {
+      0%, 100% { filter: drop-shadow(0 0 0 transparent); }
+      50% { filter: drop-shadow(0 0 10px var(--architecture-highlight)); }
+    }
+
+    .geometry-object.geometry-link.is-targeted .geometry-item-box { animation: architecture-component-pulse 1.4s ease-in-out infinite; stroke: var(--architecture-highlight); stroke-width: 8; }
+    .geometry-object.geometry-link.is-targeted .geometry-label-text { fill: var(--architecture-highlight); font-weight: 700; }
 
     .geometry-object.geometry-link:hover .geometry-item-box,
     .geometry-object.geometry-link:focus-visible .geometry-item-box {
@@ -1886,6 +1897,8 @@
       margin-bottom: 18px;
     }
 
+    .research-dialog-header-actions { display: flex; align-items: center; gap: 8px; }
+
     .research-dialog-status {
       color: var(--coral);
       font-family: var(--mono);
@@ -1905,6 +1918,19 @@
 
     .research-dialog-close:hover,
     .research-dialog-close:focus-visible { border-color: var(--line-strong); color: var(--ink); outline: none; }
+
+    .research-dialog-architecture {
+      padding: 7px 10px;
+      border: 1px solid var(--project-accent, var(--coral));
+      border-radius: 3px;
+      background: transparent;
+      color: var(--project-accent, var(--coral));
+      cursor: pointer;
+      font-size: 0.7rem;
+    }
+
+    .research-dialog-architecture:hover,
+    .research-dialog-architecture:focus-visible { background: color-mix(in srgb, var(--project-accent, var(--coral)) 10%, transparent); color: var(--ink); outline: none; }
 
     .research-dialog h2 { margin: 0; font-size: 1.55rem; font-weight: 500; line-height: 1.2; }
     .research-dialog-description { margin: 14px 0 22px; color: var(--muted); font-size: 0.82rem; line-height: 1.6; }
@@ -2573,7 +2599,10 @@
         <div class="research-dialog-content">
           <div class="research-dialog-header">
             <span class="research-dialog-status" id="research-dialog-status"></span>
-            <button class="research-dialog-close" id="research-dialog-close" type="button">Close</button>
+            <div class="research-dialog-header-actions">
+              <button class="research-dialog-architecture" id="research-dialog-architecture" type="button" hidden>View in architecture</button>
+              <button class="research-dialog-close" id="research-dialog-close" type="button">Close</button>
+            </div>
           </div>
           <h2 id="research-dialog-title"></h2>
           <p class="research-dialog-description" id="research-dialog-description"></p>
@@ -2717,7 +2746,7 @@
           { id: "flight-command", title: "Control", icon: "control", mapLabels: ["Control"], description: "Flight command interface for issuing and supervising aircraft actions.", project: "project-drone-observation" },
           { id: "mini-aircraft", title: "DJI Mini 4 Pro", icon: "drone", mapLabels: ["DJI Mini 4 Pro"], description: "Aerial platform providing the field video and telemetry used by the wider system.", project: "project-drone-observation" },
           { id: "android-link", title: "Android", icon: "phone", mapLabels: ["Android"], description: "Mobile operator link between the aircraft controls and the ground system.", project: "project-drone-observation" },
-          { id: "goal-estimator", title: "Navigation goal estimator", icon: "goal", mapLabels: ["Navigation goal estimator"], description: "Turns a selected observation target into a navigation goal for the flight system.", project: "project-drone-observation" },
+          { id: "goal-estimator", title: "Navigation goal estimator", icon: "goal", mapLabels: ["Navigation goal estimator", "Nav Goal Estimator"], description: "Turns a selected observation target into a navigation goal for the flight system.", project: "project-drone-observation" },
           { id: "flight-path", title: "Path", icon: "path", mapLabels: ["Path"], description: "Represents the planned route used to guide an observation flight.", project: "project-drone-observation" },
           { id: "gps", title: "GPS", icon: "gps", mapLabels: ["GPS"], description: "Provides aircraft position information for mapping and geo-referenced observations.", project: "project-drone-observation" },
           { id: "video", title: "Video", icon: "video", mapLabels: ["Video"], description: "Carries the aerial image feed into the vision and localisation pipeline.", project: "project-drone-observation" }
@@ -2726,7 +2755,7 @@
           { id: "image-stream", title: "Stream", icon: "stream", mapLabels: ["Stream"], description: "Receives and distributes the image feed used for flock analysis.", project: "project-flock-localisation" },
           { id: "sheep-detection", title: "Detection", icon: "detect", mapLabels: ["Detection"], description: "Finds sheep in aerial images so individual observations can be measured.", project: "project-flock-localisation", projects: ["project-drone-observation", "project-flock-simulation"] },
           { id: "localisation", title: "Localisation", icon: "localise", mapLabels: ["Localisation"], description: "Estimates sheep positions from detections across successive observations.", project: "project-flock-localisation" },
-          { id: "geo-references", title: "Geo references", icon: "geo", mapLabels: ["Geo references"], description: "Relates image-space observations to a shared geographic frame.", project: "project-flock-localisation" }
+          { id: "geo-references", title: "Geo references", icon: "geo", mapLabels: ["Geo references", "Geo-References"], description: "Relates image-space observations to a shared geographic frame.", project: "project-flock-localisation" }
         ],
         simulation: [
           { id: "dog-path", title: "Dog path", icon: "path", mapLabels: ["Dog path"], description: "Represents the ground robot route used in flock interaction studies.", project: "project-flock-simulation" },
@@ -2738,9 +2767,9 @@
           { id: "predicted-poses", title: "Predicted poses", icon: "pose", mapLabels: ["Predicted poses"], description: "Stores predicted positions for evaluating future system states.", project: "project-flock-simulation" },
           { id: "sheep-poses", title: "Sheep poses", icon: "sheep", mapLabels: ["Sheep poses"], description: "Represents sheep positions and orientations in the simulated flock.", project: "project-flock-simulation" },
           { id: "goal-proximity", title: "Goal proximity score", icon: "goal", mapLabels: ["Goal proximity score"], description: "Measures how close the flock or robot state is to a target.", project: "project-flock-simulation" },
-          { id: "pose-zero", title: "Pose zero setup", icon: "pose", mapLabels: ["Pose zero setup"], description: "Sets the reference pose used to initialise a simulation run.", project: "project-flock-simulation" },
+          { id: "pose-zero", title: "Pose zero setup", icon: "pose", mapLabels: ["Pose zero setup", "Pose 0 Setup"], description: "Sets the reference pose used to initialise a simulation run.", project: "project-flock-simulation" },
           { id: "poses", title: "Poses", icon: "pose", mapLabels: ["Poses"], description: "Collects position and orientation states for simulated agents.", project: "project-flock-simulation" },
-          { id: "n-second-simulation", title: "N-second simulation", icon: "simulation", mapLabels: ["N-second simulation"], description: "Runs a defined-duration scenario for repeatable system checks.", project: "project-flock-simulation" },
+          { id: "n-second-simulation", title: "N-second simulation", icon: "simulation", mapLabels: ["N-second simulation", "N-Second Simulations"], description: "Runs a defined-duration scenario for repeatable system checks.", project: "project-flock-simulation" },
           { id: "evaluation", title: "Evaluation", icon: "eval", mapLabels: ["Evaluation"], description: "Compares run outcomes against target measures and experiment criteria.", project: "project-flock-simulation" },
           { id: "tuning", title: "Tuning", icon: "tuning", mapLabels: ["Tuning"], description: "Adjusts simulation and control parameters against observed outcomes.", project: "project-flock-simulation" },
           { id: "natural-system-weights", title: "Natural system weights", icon: "weights", mapLabels: ["Natural system weights"], description: "Sets the relative influence of natural-system behaviours in the model.", project: "project-flock-simulation" }
@@ -2751,8 +2780,8 @@
           { id: "nrf-radio", title: "nRF", icon: "radio", mapLabels: ["nRF"], description: "Short-range field radio used to exchange subsystem messages.", project: "project-field-communications" }
         ],
         "dog-control": [
-          { id: "teleop-server", title: "Teleop Server", icon: "control", mapLabels: ["Teleop Server"], description: "Operator-facing service for supervising and commanding the robot dog.", project: "project-supervised-dog-control" },
-          { id: "holybro-rtk", title: "Holybro H-RTK", icon: "gps", mapLabels: ["Holybro H-RTK"], description: "RTK positioning hardware supporting accurate ground-robot localisation.", project: "project-supervised-dog-control" },
+          { id: "teleop-server", title: "Teleop Server", icon: "control", mapLabels: ["Teleop Server", "Teleop Dashboard"], description: "Operator-facing service for supervising and commanding the robot dog.", project: "project-supervised-dog-control" },
+          { id: "holybro-rtk", title: "Holybro H-RTK", icon: "gps", mapLabels: ["Holybro H-RTK", "RTK"], description: "RTK positioning hardware supporting accurate ground-robot localisation.", project: "project-supervised-dog-control" },
           { id: "magnetometer", title: "Magnetometer", icon: "compass", mapLabels: ["Magnetometer"], description: "Heading sensor used as an input to the robot state estimate.", project: "project-supervised-dog-control" },
           { id: "ekf", title: "EKF", icon: "pose", mapLabels: ["EKF"], description: "Fuses positioning and motion measurements into a robot pose estimate.", project: "project-supervised-dog-control" },
           { id: "drivers", title: "Drivers", icon: "gears", mapLabels: ["Drivers"], description: "Hardware interfaces that expose platform sensors and actuators to ROS2.", project: "project-supervised-dog-control" },
@@ -2780,7 +2809,6 @@
       const contributorDetails = new Map();
       let contributorSubsystemById = new Map();
       const pageButtons = [...document.querySelectorAll("button[data-page-target]")];
-      const pageLinks = [...document.querySelectorAll("a[data-page-target]")];
       const pages = [...document.querySelectorAll("[data-page-view]")];
       const researchProjectDialog = document.getElementById("research-project-dialog");
       const researchDialogTitle = document.getElementById("research-dialog-title");
@@ -2792,6 +2820,7 @@
       const researchDialogCollaborators = document.getElementById("research-dialog-collaborators");
       const researchDialogComponents = document.getElementById("research-dialog-components");
       const researchDialogClose = document.getElementById("research-dialog-close");
+      const researchDialogArchitecture = document.getElementById("research-dialog-architecture");
       const siteGrid = document.querySelector(".site-grid");
       const themeButton = document.getElementById("theme-toggle");
       const themeLabel = document.getElementById("theme-label");
@@ -2834,6 +2863,8 @@
       let pipelineSourceHeightIn = 33.10938;
       let pipelinePointer = null;
       let suppressPipelineClick = false;
+      let architectureTargetIds = new Set();
+      let architectureHighlightTimer;
 
       function clampPipelineView(x, y, width) {
         const nextWidth = Math.min(basePipelineViewBox.width, Math.max(basePipelineViewBox.width * 0.15, width));
@@ -2933,7 +2964,41 @@
         return window.location.hash.slice(1).toLowerCase().split("--", 1)[0];
       }
 
+      function normaliseComponentLabel(label) {
+        return label.toLowerCase().replace(/[^a-z0-9]+/g, "");
+      }
+
+      function findComponentForLabel(route, label) {
+        const normalisedLabel = normaliseComponentLabel(label);
+        return (componentDefinitions[route] || []).find((entry) => entry.mapLabels.some((mapLabel) => normaliseComponentLabel(mapLabel) === normalisedLabel));
+      }
+
+      function applyArchitectureHighlights() {
+        const targets = [...document.querySelectorAll(".geometry-link[data-anchor-target]")].filter((link) => architectureTargetIds.has(link.dataset.anchorTarget));
+        document.querySelectorAll(".geometry-link.is-targeted").forEach((link) => link.classList.remove("is-targeted"));
+        targets.forEach((link) => link.classList.add("is-targeted"));
+        return targets;
+      }
+
+      function setArchitectureHighlights(targetId) {
+        window.clearTimeout(architectureHighlightTimer);
+        architectureTargetIds = new Set(targetId.split(",").filter(Boolean));
+        const targets = applyArchitectureHighlights();
+        if (architectureTargetIds.size) {
+          architectureHighlightTimer = window.setTimeout(() => {
+            architectureTargetIds = new Set();
+            applyArchitectureHighlights();
+          }, 2200);
+        }
+        return targets;
+      }
+
       function scrollToTarget(targetId) {
+        if (readPageFromHash() === "system-architecture") {
+          const targets = setArchitectureHighlights(targetId);
+          targets[0]?.focus({ preventScroll: true });
+          return;
+        }
         if (!targetId) return;
         window.requestAnimationFrame(() => {
           const targets = targetId.split(",").map((id) => document.getElementById(id)).filter(Boolean);
@@ -3144,7 +3209,8 @@
         zoomPipelineCanvas(factor, event.clientX, event.clientY);
       }, { passive: false });
       posterCanvas.addEventListener("pointerdown", (event) => {
-        if (event.button !== 0 || (event.target instanceof Element && event.target.closest(".poster-controls"))) return;
+        const target = event.target instanceof Element ? event.target : null;
+        if (event.button !== 0 || target?.closest(".poster-controls, .geometry-link")) return;
         pipelinePointer = {
           pointerId: event.pointerId,
           startX: event.clientX,
@@ -3218,7 +3284,7 @@
         document.querySelectorAll(".map-node").forEach((node) => {
           const label = node.getAttribute("aria-label") || "";
           const nodeLabel = label.slice(label.indexOf(":") + 1).trim().toLowerCase();
-          const component = (componentDefinitions[node.dataset.pageTarget] || []).find((entry) => entry.mapLabels.some((mapLabel) => mapLabel.toLowerCase() === nodeLabel));
+          const component = findComponentForLabel(node.dataset.pageTarget, nodeLabel);
           if (component) {
             const componentTarget = `component-${component.id}`;
             node.href.baseVal = `#${node.dataset.pageTarget}--${componentTarget}`;
@@ -3428,7 +3494,7 @@
             if (isClickable) {
               group.classList.add("geometry-link", geometryRouteClass(item.route));
               const objectLabel = (item.text || item.mediaLabel || "").trim().toLowerCase();
-              const component = (componentDefinitions[item.route] || []).find((entry) => entry.mapLabels.some((mapLabel) => mapLabel.toLowerCase() === objectLabel));
+              const component = findComponentForLabel(item.route, objectLabel);
               const componentTarget = component ? `component-${component.id}` : "";
               group.setAttribute("href", `#${item.route}${componentTarget ? `--${componentTarget}` : ""}`);
               group.setAttribute("data-page-target", item.route);
@@ -3594,11 +3660,11 @@
         });
       });
 
-      pageLinks.forEach((link) => {
-        link.addEventListener("click", (event) => {
-          event.preventDefault();
-          navigateToPage(link.dataset.pageTarget, link.dataset.anchorTarget || "");
-        });
+      document.addEventListener("click", (event) => {
+        const link = event.target instanceof Element ? event.target.closest("a[data-page-target]") : null;
+        if (!link) return;
+        event.preventDefault();
+        navigateToPage(link.dataset.pageTarget, link.dataset.anchorTarget || "");
       });
 
       function renderResearchDialogList(list, items, emptyMessage) {
@@ -3962,11 +4028,20 @@
           renderResearchDialogPapers(researchDialogPapers, details.papers || []);
           renderResearchDialogList(researchDialogCollaborators, details.contributors || [], "To be confirmed");
           renderResearchDialogComponents(researchDialogComponents, details.components || []);
+          researchDialogArchitecture.dataset.projectId = details.id;
+          researchDialogArchitecture.hidden = !(details.components || []).some((componentId) => findComponent(componentId));
           researchProjectDialog.showModal();
         });
       });
 
       researchDialogClose.addEventListener("click", () => researchProjectDialog.close());
+      researchDialogArchitecture.addEventListener("click", () => {
+        const details = researchProjectDetails.get(researchDialogArchitecture.dataset.projectId);
+        if (!details) return;
+        const targetIds = [...new Set((details.components || []).map(findComponent).filter(Boolean).map(({ component }) => `component-${component.id}`))];
+        researchProjectDialog.close();
+        navigateToPage("system-architecture", targetIds.join(","));
+      });
       researchProjectDialog.addEventListener("keydown", (event) => {
         if (event.key !== "Escape") return;
         event.preventDefault();

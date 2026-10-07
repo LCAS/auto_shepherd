@@ -211,30 +211,19 @@
       "mediaLabel": ""
     },
     {
-      "order": 60,
-      "kind": "connector",
-      "x": 23.7717,
-      "y": 23.61595,
-      "width": 0.13446,
-      "height": 0.46545,
-      "fill": "#000000",
+      "order": 3044,
+      "kind": "media",
+      "x": 23.56,
+      "y": 23.33,
+      "width": 0.42,
+      "height": 0.42,
+      "fill": "transparent",
       "stroke": "transparent",
       "text": "",
-      "route": null,
-      "rotation": -345.0
-    },
-    {
-      "order": 90,
-      "kind": "connector",
-      "x": 23.67179,
-      "y": 23.64271,
-      "width": 0.09826,
-      "height": 0.29479,
-      "fill": "#000000",
-      "stroke": "transparent",
-      "text": "",
-      "route": null,
-      "rotation": -345.0
+      "route": "dog-control",
+      "rotation": 0,
+      "src": "assets/pipeline-media/image56.png",
+      "mediaLabel": ""
     },
     {
       "order": 126,
@@ -1586,7 +1575,7 @@
       "text": "",
       "route": null,
       "rotation": 0,
-      "src": "assets/pipeline-media/image12.jpeg",
+      "src": "assets/pipeline-media/image12.png",
       "mediaLabel": ""
     },
     {
@@ -1601,7 +1590,7 @@
       "text": "",
       "route": "dog-control",
       "rotation": 0,
-      "src": "assets/pipeline-media/image13.jpeg",
+      "src": "assets/pipeline-media/image13.png",
       "mediaLabel": ""
     },
     {
@@ -1616,7 +1605,7 @@
       "text": "",
       "route": "dog-control",
       "rotation": 0,
-      "src": "assets/pipeline-media/image14.jpeg",
+      "src": "assets/pipeline-media/image14.png",
       "mediaLabel": ""
     },
     {
@@ -1646,7 +1635,7 @@
       "text": "",
       "route": "dog-control",
       "rotation": 0,
-      "src": "assets/pipeline-media/image16.jpeg",
+      "src": "assets/pipeline-media/image16.png",
       "mediaLabel": ""
     },
     {
@@ -1734,7 +1723,7 @@
       "text": "",
       "route": "dog-control",
       "rotation": 0,
-      "src": "assets/pipeline-media/image14.jpeg",
+      "src": "assets/pipeline-media/image14.png",
       "mediaLabel": ""
     },
     {
@@ -1749,7 +1738,7 @@
       "text": "",
       "route": "communication",
       "rotation": 0,
-      "src": "assets/pipeline-media/image20.jpeg",
+      "src": "assets/pipeline-media/image20.png",
       "mediaLabel": ""
     },
     {
@@ -1779,7 +1768,7 @@
       "text": "",
       "route": "communication",
       "rotation": 0,
-      "src": "assets/pipeline-media/image16.jpeg",
+      "src": "assets/pipeline-media/image16.png",
       "mediaLabel": ""
     },
     {
@@ -1832,8 +1821,8 @@
       "kind": "media",
       "x": 10.63764,
       "y": 26.75305,
-      "width": 3.48003,
-      "height": 2.70416,
+      "width": 3.18003,
+      "height": 2.34416,
       "fill": "transparent",
       "stroke": "transparent",
       "text": "",
@@ -1845,25 +1834,10 @@
     {
       "order": 715,
       "kind": "media",
-      "x": 12.98726,
-      "y": 29.48674,
+      "x": 13.58726,
+      "y": 28.95,
       "width": 3.47296,
-      "height": 0.5064,
-      "fill": "transparent",
-      "stroke": "transparent",
-      "text": "",
-      "route": null,
-      "rotation": 0,
-      "src": "assets/pipeline-media/image22.png",
-      "mediaLabel": ""
-    },
-    {
-      "order": 719,
-      "kind": "media",
-      "x": 15.26545,
-      "y": 28.16441,
-      "width": 1.3069,
-      "height": 1.2417,
+      "height": 0.8148,
       "fill": "transparent",
       "stroke": "transparent",
       "text": "",
@@ -2562,30 +2536,19 @@
       "mediaLabel": ""
     },
     {
-      "order": 3051,
-      "kind": "connector",
-      "x": 11.70648,
-      "y": 20.08656,
-      "width": 0.13446,
-      "height": 0.46545,
-      "fill": "#000000",
+      "order": 3044,
+      "kind": "media",
+      "x": 11.45,
+      "y": 19.8,
+      "width": 0.42,
+      "height": 0.42,
+      "fill": "transparent",
       "stroke": "transparent",
       "text": "",
-      "route": null,
-      "rotation": -345.0
-    },
-    {
-      "order": 3081,
-      "kind": "connector",
-      "x": 11.60658,
-      "y": 20.11332,
-      "width": 0.09826,
-      "height": 0.29479,
-      "fill": "#000000",
-      "stroke": "transparent",
-      "text": "",
-      "route": null,
-      "rotation": -345.0
+      "route": "dog-control",
+      "rotation": 0,
+      "src": "assets/pipeline-media/image56.png",
+      "mediaLabel": ""
     },
     {
       "order": 3117,
@@ -2745,7 +2708,7 @@
       "strokeDasharray": "99.998 12.5 12.5 12.5",
       "strokeLinecap": "butt",
       "lineType": "rf_link",
-      "arrowHead": "triangle",
+      "arrowHead": "none",
       "arrowHeadScale": 2, "a":"legend"
     },
     {
@@ -2770,7 +2733,7 @@
       "strokeDasharray": "12.5 12.5",
       "strokeLinecap": "round",
       "lineType": "unity_signal",
-      "arrowHead": "triangle",
+      "arrowHead": "none",
       "arrowHeadScale": 2
     },
     {
@@ -2795,7 +2758,7 @@
       "strokeDasharray": "12.5 12.5",
       "strokeLinecap": "butt",
       "lineType": "ros2_topic",
-      "arrowHead": "triangle",
+      "arrowHead": "none",
       "arrowHeadScale": 2
     },
     {
@@ -2819,7 +2782,7 @@
       "strokeWidth": 12.5,
       "strokeLinecap": "butt",
       "lineType": "serial",
-      "arrowHead": "triangle",
+      "arrowHead": "none",
       "arrowHeadScale": 2
     },
     {
@@ -3084,24 +3047,11 @@
       "rotation": 0
     },
     {
-      "order": 3287,
-      "kind": "connector",
-      "x": 26.75414,
-      "y": 26.15513,
-      "width": 0.22225,
-      "height": 0.22225,
-      "fill": "#000000",
-      "stroke": "transparent",
-      "text": "",
-      "route": null,
-      "rotation": 0
-    },
-    {
       "order": 3369,
       "kind": "media",
-      "x": 26.49423,
+      "x": 26.40147,
       "y": 26.04509,
-      "width": 0.74208,
+      "width": 0.9276,
       "height": 1.05088,
       "fill": "transparent",
       "stroke": "transparent",
@@ -3110,19 +3060,6 @@
       "rotation": 0,
       "src": "assets/pipeline-media/image37.png",
       "mediaLabel": "geo targeting icon"
-    },
-    {
-      "order": 3373,
-      "kind": "connector",
-      "x": 26.7491,
-      "y": 26.22306,
-      "width": 0.23234,
-      "height": 0.23234,
-      "fill": "#8f45c7",
-      "stroke": "transparent",
-      "text": "",
-      "route": null,
-      "rotation": 0
     },
     {
       "order": 3455,
@@ -3420,57 +3357,18 @@
     },
     {
       "order": 3599,
-      "kind": "connector",
-      "x": 8.36112,
-      "y": 17.65215,
-      "width": 0.82137,
-      "height": 0.30114,
-      "fill": "#000000",
-      "stroke": "transparent",
-      "text": "",
-      "route": null,
-      "rotation": -41.431
-    },
-    {
-      "order": 3678,
-      "kind": "connector",
-      "x": 8.61429,
-      "y": 17.45483,
-      "width": 0.48082,
-      "height": 0.16946,
-      "fill": "#000000",
-      "stroke": "transparent",
-      "text": "",
-      "route": null,
-      "rotation": -27.883
-    },
-    {
-      "order": 3757,
-      "kind": "connector",
-      "x": 8.6361,
-      "y": 17.24685,
-      "width": 0.24978,
-      "height": 0.10378,
-      "fill": "#000000",
-      "stroke": "transparent",
-      "text": "",
-      "route": null,
-      "rotation": 0
-    },
-    {
-      "order": 3836,
       "kind": "media",
-      "x": 8.59073,
-      "y": 16.77476,
-      "width": 0.31453,
-      "height": 0.43777,
+      "x": 7.93326,
+      "y": 16.77987,
+      "width": 1.13159,
+      "height": 1.1316,
       "fill": "transparent",
       "stroke": "transparent",
-      "text": "route icon",
-      "route": "dog-control",
+      "text": "ekf icon",
+      "route": null,
       "rotation": 0,
-      "src": "assets/pipeline-media/image38.png",
-      "mediaLabel": "route icon"
+      "src": "assets/pipeline-media/image55.png",
+      "mediaLabel": ""
     },
     {
       "order": 3843,
@@ -4782,16 +4680,18 @@
     },
     {
       "order": 4266,
-      "kind": "connector",
+      "kind": "media",
       "x": 30.01303,
       "y": 17.84205,
       "width": 0.89489,
       "height": 0.91844,
-      "fill": "#000000",
+      "fill": "transparent",
       "stroke": "transparent",
-      "text": "",
+      "text": "simulation icon",
       "route": null,
-      "rotation": 0
+      "rotation": 0,
+      "src": "assets/pipeline-media/image53.png",
+      "mediaLabel": "simulation icon"
     },
     {
       "order": 4371,
@@ -4808,16 +4708,18 @@
     },
     {
       "order": 4378,
-      "kind": "connector",
+      "kind": "media",
       "x": 41.04609,
       "y": 27.71565,
       "width": 0.89489,
       "height": 0.91844,
-      "fill": "#000000",
+      "fill": "transparent",
       "stroke": "transparent",
-      "text": "",
+      "text": "simulation icon",
       "route": null,
-      "rotation": 0
+      "rotation": 0,
+      "src": "assets/pipeline-media/image53.png",
+      "mediaLabel": "simulation icon"
     },
     {
       "order": 4483,
@@ -4834,16 +4736,18 @@
     },
     {
       "order": 4489,
-      "kind": "connector",
+      "kind": "media",
       "x": 29.64559,
       "y": 26.11131,
       "width": 0.89489,
       "height": 0.91844,
-      "fill": "#000000",
+      "fill": "transparent",
       "stroke": "transparent",
-      "text": "",
+      "text": "simulation icon",
       "route": null,
-      "rotation": 0
+      "rotation": 0,
+      "src": "assets/pipeline-media/image53.png",
+      "mediaLabel": "simulation icon"
     },
     {
       "order": 4594,
@@ -4889,30 +4793,19 @@
       "mediaLabel": ""
     },
     {
-      "order": 4617,
-      "kind": "connector",
-      "x": 3.57719,
-      "y": 10.46111,
-      "width": 0.13446,
-      "height": 0.46545,
-      "fill": "#000000",
+      "order": 4650,
+      "kind": "media",
+      "x": 3.32,
+      "y": 10.18,
+      "width": 0.42,
+      "height": 0.42,
+      "fill": "transparent",
       "stroke": "transparent",
       "text": "",
-      "route": null,
-      "rotation": -345.0
-    },
-    {
-      "order": 4647,
-      "kind": "connector",
-      "x": 3.47728,
-      "y": 10.48788,
-      "width": 0.09826,
-      "height": 0.29479,
-      "fill": "#000000",
-      "stroke": "transparent",
-      "text": "",
-      "route": null,
-      "rotation": -345.0
+      "route": "dog-control",
+      "rotation": 0,
+      "src": "assets/pipeline-media/image56.png",
+      "mediaLabel": ""
     },
     {
       "order": 4686,
@@ -4929,146 +4822,18 @@
     },
     {
       "order": 4696,
-      "kind": "connector",
-      "x": 2.79299,
-      "y": 7.19567,
-      "width": 1.14513,
-      "height": 0.81795,
-      "fill": "#000000",
+      "kind": "media",
+      "x": 2.79975,
+      "y": 7.03615,
+      "width": 1.13159,
+      "height": 1.1316,
+      "fill": "transparent",
       "stroke": "transparent",
-      "text": "",
+      "text": "teleop dashboard",
       "route": null,
-      "rotation": 0
-    },
-    {
-      "order": 4738,
-      "kind": "connector",
-      "x": 2.88466,
-      "y": 7.27526,
-      "width": 0.21812,
-      "height": 0.08179,
-      "fill": "#000000",
-      "stroke": "transparent",
-      "text": "",
-      "route": null,
-      "rotation": 0
-    },
-    {
-      "order": 4780,
-      "kind": "connector",
-      "x": 3.39795,
-      "y": 7.63603,
-      "width": 0.38171,
-      "height": 0.21812,
-      "fill": "#000000",
-      "stroke": "transparent",
-      "text": "",
-      "route": null,
-      "rotation": 0
-    },
-    {
-      "order": 4822,
-      "kind": "connector",
-      "x": 3.50273,
-      "y": 7.72289,
-      "width": 0.10906,
-      "height": 0.13633,
-      "fill": "#000000",
-      "stroke": "transparent",
-      "text": "",
-      "route": null,
-      "rotation": 0
-    },
-    {
-      "order": 4852,
-      "kind": "connector",
-      "x": 3.54027,
-      "y": 7.77235,
-      "width": 0.10906,
-      "height": 0.10906,
-      "fill": "#000000",
-      "stroke": "transparent",
-      "text": "",
-      "route": null,
-      "rotation": 0
-    },
-    {
-      "order": 4882,
-      "kind": "connector",
-      "x": 3.39789,
-      "y": 7.37221,
-      "width": 0.38171,
-      "height": 0.21812,
-      "fill": "#000000",
-      "stroke": "transparent",
-      "text": "",
-      "route": null,
-      "rotation": 0
-    },
-    {
-      "order": 4924,
-      "kind": "connector",
-      "x": 3.568,
-      "y": 7.45905,
-      "width": 0.10906,
-      "height": 0.13633,
-      "fill": "#000000",
-      "stroke": "transparent",
-      "text": "",
-      "route": null,
-      "rotation": 0
-    },
-    {
-      "order": 4954,
-      "kind": "connector",
-      "x": 3.54033,
-      "y": 7.50854,
-      "width": 0.10906,
-      "height": 0.10906,
-      "fill": "#000000",
-      "stroke": "transparent",
-      "text": "",
-      "route": null,
-      "rotation": 0
-    },
-    {
-      "order": 4984,
-      "kind": "connector",
-      "x": 3.23823,
-      "y": 7.40667,
-      "width": 0.05453,
-      "height": 0.46351,
-      "fill": "#000000",
-      "stroke": "transparent",
-      "text": "",
-      "route": null,
-      "rotation": 0
-    },
-    {
-      "order": 5016,
-      "kind": "connector",
-      "x": 3.19041,
-      "y": 7.65479,
-      "width": 0.13633,
-      "height": 0.13633,
-      "fill": "#000000",
-      "stroke": "transparent",
-      "text": "",
-      "route": null,
-      "rotation": 0
-    },
-    {
-      "order": 5046,
-      "kind": "connector",
-      "x": 2.93065,
-      "y": 7.40667,
-      "width": 0.21812,
-      "height": 0.46351,
-      "fill": "#000000",
-      "stroke": "transparent",
-      "text": "",
-      "route": null,
-      "rotation": 0
+      "rotation": 0,
+      "src": "assets/pipeline-media/image54.svg",
+      "mediaLabel": ""
     },
     {
       "order": 5088,
@@ -5184,42 +4949,18 @@
     },
     {
       "order": 5112,
-      "kind": "connector",
-      "x": 5.36234,
-      "y": 19.759,
-      "width": 0.63708,
-      "height": 0.63708,
-      "fill": "#000000",
+      "kind": "media",
+      "x": 5.02068,
+      "y": 19.78273,
+      "width": 0.9652,
+      "height": 0.9652,
+      "fill": "transparent",
       "stroke": "transparent",
-      "text": "",
+      "text": "driver icon",
       "route": null,
-      "rotation": 0
-    },
-    {
-      "order": 5446,
-      "kind": "connector",
-      "x": 5.00712,
-      "y": 20.23351,
-      "width": 0.51217,
-      "height": 0.51217,
-      "fill": "#000000",
-      "stroke": "transparent",
-      "text": "",
-      "route": null,
-      "rotation": 0
-    },
-    {
-      "order": 5796,
-      "kind": "connector",
-      "x": 5.48999,
-      "y": 20.3844,
-      "width": 0.38725,
-      "height": 0.38725,
-      "fill": "#000000",
-      "stroke": "transparent",
-      "text": "",
-      "route": null,
-      "rotation": 0
+      "rotation": 0,
+      "src": "assets/pipeline-media/image2.svg",
+      "mediaLabel": ""
     },
     {
       "order": 6132,
