@@ -1,24 +1,42 @@
-services:
+name: auto_shepherd
 
-#  drone_control:
-#    build:
-#      context: ../auto_shepherd_drone_control
-#      dockerfile: docker/Dockerfile
-#    container_name: drone_control
-#    hostname: drone_control
-#    network_mode: bridge
-#    ipc: "host"
-#    tty: true
-#    stdin_open: true
-#    volumes:
-#      - ../auto_shepherd_drone_control/auto_shepherd_drone_control_ros2:/home/ros/base_ws/src/auto_shepherd_drone_control_ros2:rw
-#      - ../auto_shepherd_drone_control/bash_scripts/container:/home/ros/bash_scripts:rw
-#      - /tmp/.X11-unix:/tmp/.X11-unix:rw
-#    environment:
-#      - DISPLAY=${DISPLAY}
-#      - QT_X11_NO_MITSHM=1
-#      - BASE_WS=/home/ros/base_ws
-#      - ROS_DOMAIN_ID=0
+services:
+  vnc:
+    image: lcas.lincoln.ac.uk/vnc
+    container_name: vnc
+    ports:
+      - "5801" # noVNC web interface
+    volumes:
+      - x11:/tmp/.X11-unix # share X server socket with other containers
+    networks:
+      - sheep_net
+    ipc: shareable # Allow other containers to access the IPC of the VNC container to allow data to go into it's X11
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5801/vnc.html"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # drone_control:
+  #   build:
+  #     context: ../auto_shepherd_drone_control
+  #     dockerfile: docker/Dockerfile
+  #   container_name: drone_control
+  #   hostname: drone_control
+  #   network_mode: bridge
+  #   ipc: "host"
+  #   tty: true
+  #   stdin_open: true
+  #   volumes:
+  #     - ../auto_shepherd_drone_control/auto_shepherd_drone_control_ros2:/home/ros/base_ws/src/auto_shepherd_drone_control_ros2:rw
+  #     - ../auto_shepherd_drone_control/bash_scripts/container:/home/ros/bash_scripts:rw
+  #     # - /tmp/.X11-unix:/tmp/.X11-unix:rw
+  #     - x11:/tmp/.X11-unix
+  #   environment:
+  #     - DISPLAY=${DISPLAY:-:1}
+  #     - QT_X11_NO_MITSHM=1
+  #     - BASE_WS=/home/ros/base_ws
+  #     - ROS_DOMAIN_ID=0
 
   sheep_localisation:
     build:
@@ -26,8 +44,9 @@ services:
       dockerfile: docker/Dockerfile
     container_name: sheep_localisation
     hostname: sheep_localisation
-    network_mode: bridge
-    ipc: "host"
+    ipc: "service:vnc"
+    networks:
+      - sheep_net
     tty: true
     stdin_open: true
     ports:
@@ -35,9 +54,10 @@ services:
     volumes:
       - ../auto_shepherd_sheep_localisation/auto_shepherd_sheep_localisation_ros2:/home/ros/base_ws/src/auto_shepherd_sheep_localisation_ros2:rw
       - ../auto_shepherd_sheep_localisation/bash_scripts/container:/home/ros/bash_scripts:rw
-      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+      # - /tmp/.X11-unix:/tmp/.X11-unix:rw
+      - x11:/tmp/.X11-unix
     environment:
-      - DISPLAY=${DISPLAY}
+      - DISPLAY=${DISPLAY:-:1}
       - QT_X11_NO_MITSHM=1
       - BASE_WS=/home/ros/base_ws
       - ROS_DOMAIN_ID=0
@@ -48,18 +68,20 @@ services:
       dockerfile: docker/Dockerfile
     container_name: simulation
     hostname: simulation
-    network_mode: bridge
-    ipc: "host"
+    ipc: "service:vnc"
+    networks:
+      - sheep_net
     tty: true
     stdin_open: true
     volumes:
       - ../auto_shepherd_simulation/auto_shepherd_simulation_ros2:/home/ros/base_ws/src/auto_shepherd_simulation_ros2:rw
       - ../auto_shepherd_simulation/bash_scripts/container:/home/ros/bash_scripts:rw
-      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+      # - /tmp/.X11-unix:/tmp/.X11-unix:rw
+      - x11:/tmp/.X11-unix
       - ../auto_shepherd_simulation/configs/rviz:/home/ros/.rviz2:rw
       - ../auto_shepherd_simulation/configs/map:/home/ros/map:rw
     environment:
-      - DISPLAY=${DISPLAY}
+      - DISPLAY=${DISPLAY:-:1}
       - QT_X11_NO_MITSHM=1
       - BASE_WS=/home/ros/base_ws
       - ROS_DOMAIN_ID=0
@@ -70,21 +92,30 @@ services:
       dockerfile: docker/Dockerfile
     container_name: communications
     hostname: communications
-    network_mode: bridge
-    ipc: "host"
+    ipc: "service:vnc"
+    networks:
+      - sheep_net
     tty: true
     stdin_open: true
-    devices:
-      - "/dev/ttyVserver:/dev/ttyVserver"
-      - "/dev/ttyVrobot:/dev/ttyVrobot"
+    # devices:
+      # - "/dev/ttyVserver:/dev/ttyVserver"
+      # - "/dev/ttyVrobot:/dev/ttyVrobot"
     group_add:
       - dialout
     volumes:
       - ../auto_shepherd_communications/auto_shepherd_communications_ros2:/home/ros/base_ws/src/auto_shepherd_communications_ros2:rw
       - ../auto_shepherd_communications/bash_scripts/container:/home/ros/bash_scripts:rw
-      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+      # - /tmp/.X11-unix:/tmp/.X11-unix:rw
+      - x11:/tmp/.X11-unix
     environment:
-      - DISPLAY=${DISPLAY}
+      - DISPLAY=${DISPLAY:-:1}
       - QT_X11_NO_MITSHM=1
       - BASE_WS=/home/ros/base_ws
       - ROS_DOMAIN_ID=0
+
+volumes:
+  x11:
+
+networks:
+  sheep_net:
+    driver: bridge  
