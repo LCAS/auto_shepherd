@@ -41,6 +41,7 @@
       --geometry-background: #4b5055;
       --geometry-text: #17241d;
       --geometry-muted: #53665a;
+      --geometry-unhighlighted-fill: #7d8286;
       --geometry-arrow: #548235;
       --geometry-communication-fill: #e2f0d9;
       --geometry-drone-fill: #dae3f3;
@@ -81,6 +82,7 @@
       --geometry-background: #f7f9f4;
       --geometry-text: #17241d;
       --geometry-muted: #53665a;
+      --geometry-unhighlighted-fill: #c4c9c5;
       --geometry-arrow: #548235;
       --geometry-communication-fill: #e2f0d9;
       --geometry-drone-fill: #dae3f3;
@@ -1306,6 +1308,10 @@
       stroke: #000000;
       stroke-width: 3;
       vector-effect: non-scaling-stroke;
+    }
+
+    .site-grid.is-highlighting-architecture .geometry-object.geometry-link:not(.is-targeted) .geometry-item-box {
+      fill: var(--geometry-unhighlighted-fill);
     }
 
     .geometry-link .geometry-label-text { fill: #000000; }
@@ -2827,6 +2833,7 @@
       const researchDialogClose = document.getElementById("research-dialog-close");
       const researchDialogArchitecture = document.getElementById("research-dialog-architecture");
       const siteGrid = document.querySelector(".site-grid");
+      const systemArchitecturePage = document.querySelector('[data-page-view="system-architecture"]');
       const topNav = document.querySelector(".top-nav");
       const themeButton = document.getElementById("theme-toggle");
       const themeLabel = document.getElementById("theme-label");
@@ -2870,7 +2877,6 @@
       let pipelinePointer = null;
       let suppressPipelineClick = false;
       let architectureTargetIds = new Set();
-      let architectureHighlightTimer;
 
       function clampPipelineView(x, y, width) {
         const nextWidth = Math.min(basePipelineViewBox.width, Math.max(basePipelineViewBox.width * 0.15, width));
@@ -2948,6 +2954,7 @@
 
       function setPage(requestedPage, shouldResetScroll = true) {
         const page = pageOrder.includes(requestedPage) ? requestedPage : "overview";
+        if (page !== "system-architecture") clearArchitectureHighlights();
         siteGrid.classList.toggle("is-overview-page", page === "overview");
         siteGrid.classList.toggle("is-architecture-page", page === "system-architecture");
         siteGrid.classList.toggle("is-research-page", page === "research");
@@ -2983,20 +2990,18 @@
         const targets = [...document.querySelectorAll(".geometry-link[data-anchor-target]")].filter((link) => architectureTargetIds.has(link.dataset.anchorTarget));
         document.querySelectorAll(".geometry-link.is-targeted").forEach((link) => link.classList.remove("is-targeted"));
         targets.forEach((link) => link.classList.add("is-targeted"));
+        siteGrid.classList.toggle("is-highlighting-architecture", architectureTargetIds.size > 0);
         return targets;
       }
 
-      function setArchitectureHighlights(targetId) {
-        window.clearTimeout(architectureHighlightTimer);
+      function clearArchitectureHighlights() {
+        architectureTargetIds = new Set();
+        applyArchitectureHighlights();
+      }
+
+      function setArchitectureHighlights(targetId = "") {
         architectureTargetIds = new Set(targetId.split(",").filter(Boolean));
-        const targets = applyArchitectureHighlights();
-        if (architectureTargetIds.size) {
-          architectureHighlightTimer = window.setTimeout(() => {
-            architectureTargetIds = new Set();
-            applyArchitectureHighlights();
-          }, 2200);
-        }
-        return targets;
+        return applyArchitectureHighlights();
       }
 
       function scrollToTarget(targetId) {
@@ -3240,6 +3245,9 @@
         if (event.key === "+" || event.key === "=") zoomPipelineCanvas(0.82);
         if (event.key === "-" || event.key === "_") zoomPipelineCanvas(1.22);
         if (event.key === "0") resetPipelineCanvas();
+      });
+      systemArchitecturePage.addEventListener("click", () => {
+        if (architectureTargetIds.size) clearArchitectureHighlights();
       });
       document.addEventListener("click", (event) => {
         if (!suppressPipelineClick || !(event.target instanceof Element) || !posterCanvas.contains(event.target)) return;
@@ -3606,6 +3614,7 @@
           canvas.querySelector(".geometry-sheet")?.remove();
           canvas.querySelector(".geometry-loading")?.remove();
           canvas.append(sheet);
+          applyArchitectureHighlights();
           pipelineViewBox = getPipelineFitViewBox();
           renderPipelineView();
         } catch (error) {
