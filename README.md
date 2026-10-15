@@ -34,6 +34,9 @@ The project website is in [`docs/`](docs/). Run it locally with:
 python3 -m http.server 8000 --directory docs
 ```
 
+The published site is [Auto Shepherd on GitHub Pages](https://lcas.github.io/auto_shepherd/);
+its sitemap is at <https://lcas.github.io/auto_shepherd/sitemap.xml>.
+
 The `Deploy Auto Shepherd website` GitHub Actions workflow publishes the site
 to GitHub Pages whenever `docs/` changes on `main`.
 

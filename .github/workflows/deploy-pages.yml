@@ -34,6 +34,11 @@ jobs:
       - name: Validate website files
         run: |
           test -f docs/index.html
+          test -f docs/robots.txt
+          test -f docs/sitemap.xml
+          test -f docs/assets/logos/brand/auto-shepherd-logo-photo.webp
+          grep -Fq '<link rel="canonical" href="https://lcas.github.io/auto_shepherd/">' docs/index.html
+          grep -Fq '<loc>https://lcas.github.io/auto_shepherd/</loc>' docs/sitemap.xml
           test -f docs/assets/logos/brand/auto-shepherd-mark.png
           test -f docs/assets/pipeline-geometry.json
           test -d docs/assets/pipeline-media

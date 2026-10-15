@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /auto_shepherd/
+
+Sitemap: https://lcas.github.io/auto_shepherd/sitemap.xml

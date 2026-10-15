@@ -4,8 +4,113 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta id="theme-color" name="theme-color" content="#f1f3ea">
-  <meta name="description" content="Auto Shepherd brings field robotics, sheep localisation, simulation and animal-aware control into one research programme.">
-  <title>Auto Shepherd | Field systems</title>
+  <meta name="description" content="Auto Shepherd explores animal-aware field robotics: sheep localisation, drone vision, flock simulation, robot-dog control, communications and animal welfare.">
+  <title>Auto Shepherd | Animal-Aware Field Robotics Research</title>
+  <link rel="canonical" href="https://lcas.github.io/auto_shepherd/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Auto Shepherd">
+  <meta property="og:title" content="Auto Shepherd | Animal-Aware Field Robotics Research">
+  <meta property="og:description" content="Auto Shepherd explores animal-aware field robotics: sheep localisation, drone vision, flock simulation, robot-dog control, communications and animal welfare.">
+  <meta property="og:url" content="https://lcas.github.io/auto_shepherd/">
+  <meta property="og:image" content="https://lcas.github.io/auto_shepherd/assets/logos/brand/auto-shepherd-logo-photo.png">
+  <meta property="og:image:width" content="1254">
+  <meta property="og:image:height" content="1254">
+  <meta property="og:image:alt" content="Auto Shepherd sheep and robot dog in a field">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Auto Shepherd | Animal-Aware Field Robotics Research">
+  <meta name="twitter:description" content="Auto Shepherd explores animal-aware field robotics: sheep localisation, drone vision, flock simulation, robot-dog control, communications and animal welfare.">
+  <meta name="twitter:image" content="https://lcas.github.io/auto_shepherd/assets/logos/brand/auto-shepherd-logo-photo.png">
+  <meta name="twitter:image:alt" content="Auto Shepherd sheep and robot dog in a field">
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "@id": "https://lcas.github.io/auto_shepherd/#website",
+          "url": "https://lcas.github.io/auto_shepherd/",
+          "name": "Auto Shepherd",
+          "description": "Auto Shepherd explores animal-aware field robotics: sheep localisation, drone vision, flock simulation, robot-dog control, communications and animal welfare.",
+          "inLanguage": "en",
+          "keywords": [
+            "animal-aware field robotics",
+            "sheep localisation",
+            "drone vision",
+            "flock simulation",
+            "robot-dog control",
+            "field communications",
+            "animal welfare"
+          ],
+          "mainEntity": {
+            "@id": "https://lcas.github.io/auto_shepherd/#research-project"
+          },
+          "about": [
+            {
+              "@id": "https://lcas.github.io/auto_shepherd/#research-project"
+            },
+            {
+              "@id": "https://lcas.github.io/auto_shepherd/#organization-agriforwards"
+            },
+            {
+              "@id": "https://lcas.github.io/auto_shepherd/#organization-lcas"
+            },
+            {
+              "@id": "https://lcas.github.io/auto_shepherd/#organization-liat"
+            },
+            {
+              "@id": "https://lcas.github.io/auto_shepherd/#organization-university-of-lincoln"
+            },
+            {
+              "@id": "https://lcas.github.io/auto_shepherd/#place-riseholme-park-farm"
+            }
+          ]
+        },
+        {
+          "@type": "ResearchProject",
+          "@id": "https://lcas.github.io/auto_shepherd/#research-project",
+          "name": "Auto Shepherd",
+          "description": "Auto Shepherd brings aerial observation, flock perception, simulation, field communications and supervised ground robotics into one practical research programme. Each subsystem can develop independently while contributing to a shared picture of the animals and the field.",
+          "url": "https://lcas.github.io/auto_shepherd/",
+          "sameAs": "https://github.com/lcas/auto_shepherd"
+        },
+        {
+          "@type": "Organization",
+          "@id": "https://lcas.github.io/auto_shepherd/#organization-agriforwards",
+          "name": "AgriFoRwArdS",
+          "description": "Centre for Doctoral Training in Agri-Food Robotics.",
+          "url": "https://agriforwards-cdt.blogs.lincoln.ac.uk/"
+        },
+        {
+          "@type": "Organization",
+          "@id": "https://lcas.github.io/auto_shepherd/#organization-lcas",
+          "name": "LCAS",
+          "description": "The University of Lincoln's cross-disciplinary centre for robotics research.",
+          "url": "https://lcas.lincoln.ac.uk/wp/"
+        },
+        {
+          "@type": "Organization",
+          "@id": "https://lcas.github.io/auto_shepherd/#organization-liat",
+          "name": "LIAT",
+          "description": "The Lincoln Institute for Agri-food Technology.",
+          "url": "https://www.lincoln.ac.uk/liat/research/"
+        },
+        {
+          "@type": "Organization",
+          "@id": "https://lcas.github.io/auto_shepherd/#organization-university-of-lincoln",
+          "name": "University of Lincoln",
+          "description": "University home to the programme's robotics and agri-food research partners.",
+          "url": "https://www.lincoln.ac.uk/"
+        },
+        {
+          "@type": "Place",
+          "@id": "https://lcas.github.io/auto_shepherd/#place-riseholme-park-farm",
+          "name": "Riseholme Park Farm",
+          "description": "Agricultural field setting for Auto Shepherd research and development.",
+          "url": "https://estates.lincoln.ac.uk/campus-info/riseholme-park/riseholme/"
+        }
+      ]
+    }
+  </script>
   <script>
     (() => {
       try {
@@ -614,8 +719,16 @@
       aspect-ratio: 1;
       justify-self: end;
       border-radius: 50%;
+      overflow: hidden;
       object-fit: cover;
       box-shadow: 0 18px 38px var(--shadow);
+    }
+
+    .overview-logo img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
 
     .eyebrow {
@@ -2074,7 +2187,7 @@
 <body>
   <header class="topbar">
     <a class="brand" href="#overview" aria-label="AutoShepherd overview">
-      <span class="brand-mark"><img src="assets/logos/brand/auto-shepherd-logo-icon.png" alt=""></span>
+      <span class="brand-mark"><img src="assets/logos/brand/auto-shepherd-logo-icon.png" alt="" width="1254" height="1254" decoding="async"></span>
       <span class="brand-copy">
         <span class="brand-name">AutoShepherd</span>
         <span class="brand-meta">Field robotics programme</span>
@@ -2115,7 +2228,7 @@
           <h1>Auto<br>Shepherd</h1>
           <p>Robotics for understanding, guiding and caring for animals across the working landscape.</p>
         </div>
-        <div class="signal-mark" aria-hidden="true"><img src="assets/logos/brand/auto-shepherd-logo-icon.png" alt=""></div>
+        <div class="signal-mark" aria-hidden="true"><img src="assets/logos/brand/auto-shepherd-logo-icon.png" alt="" width="1254" height="1254" decoding="async"></div>
         <div class="signal-meta">
           <div class="meta-block">
             <span class="micro-label">Focus</span>
@@ -2141,7 +2254,10 @@
             <h2>One connected system for animal-aware shepherding.</h2>
             <p>Auto Shepherd brings aerial observation, flock perception, simulation, field communications and supervised ground robotics into one practical research programme. Each subsystem can develop independently while contributing to a shared picture of the animals and the field.</p>
           </div>
-          <img class="overview-logo" src="assets/logos/brand/auto-shepherd-logo-photo.png" alt="Auto Shepherd sheep and robot dog in a field">
+          <picture class="overview-logo">
+            <source srcset="assets/logos/brand/auto-shepherd-logo-photo.webp" type="image/webp">
+            <img src="assets/logos/brand/auto-shepherd-logo-photo.png" alt="Auto Shepherd sheep and robot dog in a field" width="1254" height="1254" fetchpriority="high">
+          </picture>
         </header>
 
         <div class="overview-actions">
@@ -2740,17 +2856,47 @@
         "research",
         "contributors"
       ];
-      const pageNames = {
-        overview: "Overview",
-        "system-architecture": "System Architecture",
-        research: "Supporting Research",
-        contributors: "Contributors",
-        "drone-control": "Drone control",
-        "sheep-detection": "Vision",
-        simulation: "Simulation",
-        communication: "Communication",
-        "dog-control": "Dog control",
-        ethics: "Ethics and animal welfare"
+      const pageMetadata = {
+        overview: {
+          title: "Auto Shepherd | Animal-Aware Field Robotics Research",
+          description: "Auto Shepherd explores animal-aware field robotics: sheep localisation, drone vision, flock simulation, robot-dog control, communications and animal welfare."
+        },
+        "system-architecture": {
+          title: "Auto Shepherd System Architecture | Field Robotics",
+          description: "See how drone observation, sheep detection, simulation, field communications and supervised robot-dog control connect in the Auto Shepherd system."
+        },
+        "drone-control": {
+          title: "Drone Control | Auto Shepherd Field Robotics",
+          description: "Explore aerial observation, flight planning, telemetry, video and the development of supervised drone autonomy within Auto Shepherd."
+        },
+        "sheep-detection": {
+          title: "Sheep Detection and Vision | Auto Shepherd",
+          description: "Explore computer vision for sheep detection and tracking, with geo-referencing to support flock localisation from aerial observations."
+        },
+        simulation: {
+          title: "Flock Simulation | Auto Shepherd Research",
+          description: "Explore flocking, robot-dog influence and synthetic data in repeatable simulation studies for animal-aware field robotics."
+        },
+        communication: {
+          title: "Field Communications | Auto Shepherd Research",
+          description: "Explore ROS 2 messages, serial bridges and radio studies that connect Auto Shepherd's robots and operators across the field."
+        },
+        "dog-control": {
+          title: "Robot-Dog Control | Auto Shepherd",
+          description: "Explore supervised robot-dog control, teleoperation and safety considerations for animal-aware shepherding research."
+        },
+        ethics: {
+          title: "Animal Welfare and Robotics Ethics | Auto Shepherd",
+          description: "Explore animal welfare, human oversight, regulation and responsible research practices for robotics around farm animals."
+        },
+        research: {
+          title: "Supporting Research Projects | Auto Shepherd",
+          description: "Browse collaborative projects and outputs on sheep sensing, flock behaviour, field robotics, communications and animal welfare."
+        },
+        contributors: {
+          title: "Contributors and Research Partners | Auto Shepherd",
+          description: "Meet the people and organisations building Auto Shepherd through robotics, agri-food research and field expertise."
+        }
       };
       const componentDefinitions = {
         "drone-control": [
@@ -2838,6 +2984,7 @@
       const themeButton = document.getElementById("theme-toggle");
       const themeLabel = document.getElementById("theme-label");
       const themeColor = document.getElementById("theme-color");
+      const pageDescriptionMeta = document.querySelector('meta[name="description"]');
       const themeTransitionSelector = [
         ".topbar",
         ".signal-visual",
@@ -2969,7 +3116,8 @@
           button.setAttribute("aria-selected", String(isActive));
           button.tabIndex = isActive ? 0 : -1;
         });
-        document.title = `${pageNames[page]} | Auto Shepherd`;
+        document.title = pageMetadata[page].title;
+        pageDescriptionMeta.setAttribute("content", pageMetadata[page].description);
         if (shouldResetScroll) window.scrollTo(0, 0);
       }
 
@@ -3859,6 +4007,8 @@
         const image = document.createElement("img");
         image.src = person.image;
         image.alt = person.name;
+        image.loading = "lazy";
+        image.decoding = "async";
         image.addEventListener("error", () => {
           if (person.fallbackImage && image.dataset.fallbackAttempted !== "true") {
             image.dataset.fallbackAttempted = "true";
@@ -3965,6 +4115,8 @@
               logo.src = organisation.logo;
             }
             logo.alt = `${organisation.name} logo`;
+            logo.loading = "lazy";
+            logo.decoding = "async";
             brand.append(logo);
             if (organisation.wordmark) {
               const wordmark = document.createElement("span");
