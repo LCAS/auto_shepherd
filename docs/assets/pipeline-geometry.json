@@ -178,6 +178,7 @@
       "stroke": "transparent",
       "text": "Bridge",
       "route": "communication",
+      "componentInstanceId": "simulation-rf-bridge",
       "rotation": 0
     },
     {
@@ -349,6 +350,7 @@
       "stroke": "transparent",
       "text": "LoRa",
       "route": "communication",
+      "componentInstanceId": "simulation-lora-radio",
       "rotation": 0
     },
     {
@@ -377,6 +379,7 @@
       "stroke": "transparent",
       "text": "nRF",
       "route": "communication",
+      "componentInstanceId": "simulation-nrf-radio",
       "rotation": 0
     },
     {
@@ -431,6 +434,7 @@
       "stroke": "transparent",
       "text": "LoRa",
       "route": "communication",
+      "componentInstanceId": "teleop-lora-radio",
       "rotation": 0
     },
     {
@@ -459,6 +463,7 @@
       "stroke": "transparent",
       "text": "nRF",
       "route": "communication",
+      "componentInstanceId": "teleop-nrf-radio",
       "rotation": 0
     },
     {
@@ -831,6 +836,7 @@
       "stroke": "transparent",
       "text": "LoRa",
       "route": "communication",
+      "componentInstanceId": "dog-control-lora-radio",
       "rotation": 0
     },
     {
@@ -859,6 +865,7 @@
       "stroke": "transparent",
       "text": "nRF",
       "route": "communication",
+      "componentInstanceId": "dog-control-nrf-radio",
       "rotation": 0
     },
     {
@@ -900,6 +907,7 @@
       "stroke": "transparent",
       "text": "Holybro H-RTK",
       "route": "dog-control",
+      "componentInstanceId": "onboard-dog-control-holybro-rtk",
       "rotation": 0
     },
     {
@@ -2503,6 +2511,7 @@
       "stroke": "transparent",
       "text": "Bridge",
       "route": "communication",
+      "componentInstanceId": "dog-control-rf-bridge",
       "rotation": 0
     },
     {
@@ -3072,6 +3081,7 @@
       "stroke": "transparent",
       "text": "Dog Path",
       "route": "simulation",
+      "componentInstanceId": "prediction-control-dog-path",
       "rotation": 0
     },
     {
@@ -3240,6 +3250,7 @@
       "stroke": "transparent",
       "text": "",
       "route": null,
+      "highlightComponentId": "sheep-detection",
       "rotation": 0
     },
     {
@@ -3269,6 +3280,7 @@
       "stroke": "transparent",
       "text": "Dog Path",
       "route": "simulation",
+      "componentInstanceId": "full-system-simulation-dog-path",
       "rotation": 0
     },
     {
@@ -3381,6 +3393,7 @@
       "stroke": "transparent",
       "text": "RTK",
       "route": "dog-control",
+      "componentInstanceId": "dog-localisation-holybro-rtk",
       "rotation": 0
     },
     {
@@ -4760,6 +4773,7 @@
       "stroke": "transparent",
       "text": "Bridge",
       "route": "communication",
+      "componentInstanceId": "teleop-rf-bridge",
       "rotation": 0
     },
     {

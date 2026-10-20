@@ -1428,6 +1428,10 @@
       fill: var(--geometry-unhighlighted-fill);
     }
 
+    .site-grid.is-highlighting-architecture .geometry-object.geometry-component-decoration:not(.is-targeted) .geometry-fragment {
+      fill: var(--geometry-unhighlighted-fill);
+    }
+
     .geometry-link .geometry-label-text { fill: #000000; }
     .geometry-object.geometry-link .geometry-label-text { pointer-events: auto; }
 
@@ -2917,9 +2921,11 @@
         ],
         simulation: [
           { id: "dog-path", title: "Dog path", icon: "path", mapLabels: ["Dog path"], description: "Represents the ground robot route used in flock interaction studies.", project: "project-flock-simulation" },
+          { id: "drone-path", title: "Drone path", icon: "path", mapLabels: ["Drone Path"], description: "Represents the aerial route used in simulation and prediction experiments.", project: "project-flock-simulation" },
           { id: "unity-sim", title: "Unity sim", icon: "unity", mapLabels: ["Unity sim"], description: "Provides the interactive environment used to rehearse system behaviour.", project: "project-flock-simulation" },
           { id: "synthetic-stream", title: "Synthetic data stream", icon: "stream", mapLabels: ["Synthetic data stream"], description: "Supplies generated observations for repeatable testing and training.", project: "project-flock-simulation" },
           { id: "dog-path-prediction", title: "Dog path prediction", icon: "path", mapLabels: ["Dog path prediction"], description: "Estimates candidate robot paths for prediction and control experiments.", project: "project-flock-simulation" },
+          { id: "dog-pose-prediction", title: "Dog pose prediction", icon: "pose", mapLabels: ["Dog Pose"], description: "Represents the dog's position and orientation used by prediction and control experiments.", project: "project-flock-simulation" },
           { id: "goal-pose", title: "Goal pose", icon: "goal", mapLabels: ["Goal pose"], description: "Defines a target pose used to evaluate flock movement and robot plans.", project: "project-flock-simulation" },
           { id: "simulations", title: "Simulations", icon: "simulation", mapLabels: ["Simulations"], description: "Runs repeatable scenarios for comparing flock and robot behaviours.", project: "project-flock-simulation" },
           { id: "predicted-poses", title: "Predicted poses", icon: "pose", mapLabels: ["Predicted poses"], description: "Stores predicted positions for evaluating future system states.", project: "project-flock-simulation" },
@@ -2933,7 +2939,7 @@
           { id: "natural-system-weights", title: "Natural system weights", icon: "weights", mapLabels: ["Natural system weights"], description: "Sets the relative influence of natural-system behaviours in the model.", project: "project-flock-simulation" }
         ],
         communication: [
-          { id: "radio-bridge", title: "Bridge", icon: "bridge", mapLabels: ["Bridge", "onboard bridge"], description: "Connects ROS2 messages with the radio or onboard communication link.", project: "project-field-communications" },
+          { id: "rf-bridge", title: "RF Bridge", icon: "bridge", mapLabels: ["Bridge", "onboard bridge"], description: "Connects ROS2 messages with the radio or onboard communication link.", project: "project-field-communications" },
           { id: "lora-radio", title: "LoRa", icon: "radio", mapLabels: ["LoRa"], description: "Long-range radio link for low-bandwidth messages across the field.", project: "project-field-communications" },
           { id: "nrf-radio", title: "nRF", icon: "radio", mapLabels: ["nRF"], description: "Short-range field radio used to exchange subsystem messages.", project: "project-field-communications" }
         ],
@@ -2956,6 +2962,56 @@
           { id: "economics", title: "Economics", icon: "weights", description: "Explores who bears the costs, receives the benefits and gets access to the technology.", project: "project-ethical-robot-animal-guidance" }
         ]
       };
+      const architectureComponentInstances = [
+        { id: "simulation-rf-bridge", componentId: "rf-bridge", title: "Simulation RF Bridge" },
+        { id: "dog-control-rf-bridge", componentId: "rf-bridge", title: "Dog Control RF Bridge" },
+        { id: "teleop-rf-bridge", componentId: "rf-bridge", title: "Teleop RF Bridge" },
+        { id: "simulation-lora-radio", componentId: "lora-radio", title: "Simulation LoRa radio" },
+        { id: "dog-control-lora-radio", componentId: "lora-radio", title: "Dog Control LoRa radio" },
+        { id: "teleop-lora-radio", componentId: "lora-radio", title: "Teleop LoRa radio" },
+        { id: "simulation-nrf-radio", componentId: "nrf-radio", title: "Simulation nRF radio" },
+        { id: "dog-control-nrf-radio", componentId: "nrf-radio", title: "Dog Control nRF radio" },
+        { id: "teleop-nrf-radio", componentId: "nrf-radio", title: "Teleop nRF radio" },
+        { id: "prediction-control-dog-path", componentId: "dog-path", title: "Prediction Control Dog Path" },
+        { id: "full-system-simulation-dog-path", componentId: "dog-path", title: "Full System Simulation Dog Path" },
+        { id: "onboard-dog-control-holybro-rtk", componentId: "holybro-rtk", title: "Onboard Dog Control Holybro H-RTK" },
+        { id: "dog-localisation-holybro-rtk", componentId: "holybro-rtk", title: "Dog Localisation RTK" }
+      ];
+      function normaliseComponentLabel(label) {
+        return label.toLowerCase().replace(/[^a-z0-9]+/g, "");
+      }
+      const componentById = new Map();
+      const componentByPageLabel = new Map();
+      const architectureComponentInstanceById = new Map();
+      const architectureComponentInstancesByComponentId = new Map();
+      for (const [page, components] of Object.entries(componentDefinitions)) {
+        for (const component of components) {
+          if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(component.id || "") || componentById.has(component.id)) {
+            throw new Error(`Invalid or duplicate component ID "${component.id}" on ${page}.`);
+          }
+          componentById.set(component.id, { page, component });
+          for (const label of component.mapLabels || []) {
+            const key = `${page}:${normaliseComponentLabel(label)}`;
+            const existingComponent = componentByPageLabel.get(key);
+            if (existingComponent && existingComponent.id !== component.id) {
+              throw new Error(`Duplicate component map label "${label}" on ${page}.`);
+            }
+            componentByPageLabel.set(key, component);
+          }
+        }
+      }
+      for (const instance of architectureComponentInstances) {
+        if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(instance.id || "") || componentById.has(instance.id) || architectureComponentInstanceById.has(instance.id)) {
+          throw new Error(`Invalid or duplicate architecture component instance ID "${instance.id}".`);
+        }
+        if (!componentById.has(instance.componentId)) {
+          throw new Error(`Unknown component ID "${instance.componentId}" for architecture instance "${instance.id}".`);
+        }
+        architectureComponentInstanceById.set(instance.id, instance);
+        const instances = architectureComponentInstancesByComponentId.get(instance.componentId) || [];
+        instances.push(instance);
+        architectureComponentInstancesByComponentId.set(instance.componentId, instances);
+      }
       const researchProjectAliases = {
         "project-drone-observation": "project-small-sheep-detection-lora",
         "project-flock-simulation": "project-small-sheep-detection-lora",
@@ -3126,21 +3182,87 @@
         return window.location.hash.slice(1).toLowerCase().split("--", 1)[0];
       }
 
-      function normaliseComponentLabel(label) {
-        return label.toLowerCase().replace(/[^a-z0-9]+/g, "");
+      function findComponentForLabel(route, label) {
+        return componentByPageLabel.get(`${route}:${normaliseComponentLabel(label)}`) || null;
       }
 
-      function findComponentForLabel(route, label) {
-        const normalisedLabel = normaliseComponentLabel(label);
-        return (componentDefinitions[route] || []).find((entry) => entry.mapLabels.some((mapLabel) => normaliseComponentLabel(mapLabel) === normalisedLabel));
+      function requireArchitectureComponentInstance(instanceId, context) {
+        const instance = architectureComponentInstanceById.get(instanceId);
+        if (!instance) throw new Error(`Unknown architecture component instance ID "${instanceId}" in ${context}.`);
+        return instance;
+      }
+
+      function validateArchitectureComponentInstances(geometry) {
+        const occurrencesByComponentId = new Map();
+        const seenInstanceIds = new Set();
+        geometry.objects.forEach((item) => {
+          if (item.highlightComponentId) {
+            requireComponent(item.highlightComponentId, `pipeline geometry object "${item.order}"`);
+          }
+          if (!item.route || isMainGeometryText(item)) return;
+          const objectLabel = (item.text || item.mediaLabel || "").trim().toLowerCase();
+          const component = findComponentForLabel(item.route, objectLabel);
+          if (!component) {
+            if (item.componentInstanceId) {
+              throw new Error(`Architecture instance "${item.componentInstanceId}" has no matching component label.`);
+            }
+            return;
+          }
+
+          const occurrences = occurrencesByComponentId.get(component.id) || [];
+          occurrences.push(item);
+          occurrencesByComponentId.set(component.id, occurrences);
+
+          if (!item.componentInstanceId) return;
+          const instance = requireArchitectureComponentInstance(item.componentInstanceId, "pipeline geometry");
+          if (instance.componentId !== component.id) {
+            throw new Error(`Architecture instance "${instance.id}" is assigned to "${component.id}" instead of "${instance.componentId}".`);
+          }
+          if (seenInstanceIds.has(instance.id)) {
+            throw new Error(`Architecture instance ID "${instance.id}" is used more than once.`);
+          }
+          seenInstanceIds.add(instance.id);
+        });
+
+        for (const [componentId, occurrences] of occurrencesByComponentId) {
+          const instances = architectureComponentInstancesByComponentId.get(componentId) || [];
+          if (occurrences.length > 1 && instances.length !== occurrences.length) {
+            throw new Error(`Component "${componentId}" has ${occurrences.length} architecture instances but only ${instances.length} unique instance IDs.`);
+          }
+          if (instances.length && occurrences.length !== instances.length) {
+            throw new Error(`Component "${componentId}" has ${occurrences.length} geometry occurrences but ${instances.length} registered architecture instances.`);
+          }
+          if (instances.length && occurrences.some((item) => !item.componentInstanceId)) {
+            throw new Error(`Every geometry occurrence of "${componentId}" must have a unique architecture instance ID.`);
+          }
+        }
+
+        for (const instance of architectureComponentInstances) {
+          if (!seenInstanceIds.has(instance.id)) {
+            throw new Error(`Architecture instance "${instance.id}" is missing from pipeline geometry.`);
+          }
+        }
+      }
+
+      function projectArchitectureTargetIds(details) {
+        const componentTargets = (details.components || [])
+          .filter((componentId) => !architectureComponentInstancesByComponentId.has(componentId))
+          .map((componentId) => {
+            const { component } = requireComponent(componentId, `research project "${details.id}"`);
+            return component.mapLabels?.length ? `component-${component.id}` : "";
+          })
+          .filter(Boolean);
+        const instanceTargets = (details.architectureInstances || [])
+          .map((instanceId) => `instance-${requireArchitectureComponentInstance(instanceId, `research project "${details.id}"`).id}`);
+        return [...new Set([...componentTargets, ...instanceTargets])];
       }
 
       function applyArchitectureHighlights() {
-        const targets = [...document.querySelectorAll(".geometry-link[data-anchor-target]")].filter((link) => architectureTargetIds.has(link.dataset.anchorTarget));
-        document.querySelectorAll(".geometry-link.is-targeted").forEach((link) => link.classList.remove("is-targeted"));
-        targets.forEach((link) => link.classList.add("is-targeted"));
+        const targetObjects = [...document.querySelectorAll(".geometry-object[data-anchor-target]")].filter((object) => architectureTargetIds.has(object.dataset.anchorTarget));
+        document.querySelectorAll(".geometry-object.is-targeted").forEach((object) => object.classList.remove("is-targeted"));
+        targetObjects.forEach((object) => object.classList.add("is-targeted"));
         siteGrid.classList.toggle("is-highlighting-architecture", architectureTargetIds.size > 0);
-        return targets;
+        return targetObjects.filter((object) => object.classList.contains("geometry-link"));
       }
 
       function clearArchitectureHighlights() {
@@ -3583,6 +3705,7 @@
           const response = await fetch("assets/pipeline-geometry.json?source=odp-v13", { cache: "no-store" });
           if (!response.ok) throw new Error(`Geometry request failed: ${response.status}`);
           const geometry = await response.json();
+          validateArchitectureComponentInstances(geometry);
           pipelineSourceWidthIn = geometry.widthIn;
           pipelineSourceHeightIn = geometry.heightIn;
           const viewWidth = 4681;
@@ -3654,17 +3777,28 @@
             if (isPipelineLegendConnector(item) || ["Serial", "ROS2 Topic", "Unity Signal", "RF Link"].includes(item.text)) group.classList.add("geometry-legend");
             const region = geometryRegion(item) || ((item.kind === "connector" || item.kind === "native-connector") ? geometryConnectorRegion(item, geometry.objects) : "");
             if (region) group.classList.add(`geometry-region-${region}`);
+            if (item.highlightComponentId) {
+              const { component } = requireComponent(item.highlightComponentId, `pipeline geometry object "${item.order}"`);
+              group.classList.add("geometry-component-decoration");
+              group.setAttribute("data-anchor-target", `component-${component.id}`);
+            }
             if (isClickable) {
               group.classList.add("geometry-link", geometryRouteClass(item.route));
               const objectLabel = (item.text || item.mediaLabel || "").trim().toLowerCase();
               const component = findComponentForLabel(item.route, objectLabel);
               const componentTarget = component ? `component-${component.id}` : "";
+              const componentInstance = item.componentInstanceId
+                ? requireArchitectureComponentInstance(item.componentInstanceId, "pipeline geometry")
+                : null;
+              const architectureTarget = componentInstance ? `instance-${componentInstance.id}` : componentTarget;
+              const objectTitle = componentInstance?.title || item.text || item.mediaLabel || "pipeline object";
               group.setAttribute("href", `#${item.route}${componentTarget ? `--${componentTarget}` : ""}`);
               group.setAttribute("data-page-target", item.route);
-              if (componentTarget) group.setAttribute("data-anchor-target", componentTarget);
+              if (architectureTarget) group.setAttribute("data-anchor-target", architectureTarget);
+              if (componentInstance) group.setAttribute("data-component-instance-id", componentInstance.id);
               group.setAttribute("tabindex", "0");
               const componentDescription = component ? ` and highlight ${component.title} in the subsystem` : "";
-              group.setAttribute("aria-label", `Open ${item.route.replaceAll("-", " ")}: ${item.text || item.mediaLabel || "pipeline object"}${componentDescription}`);
+              group.setAttribute("aria-label", `Open ${item.route.replaceAll("-", " ")}: ${objectTitle}${componentDescription}`);
               if (item.kind === "label" && !isMainText) {
                 const componentBoxWidth = Math.min(width, height);
                 const itemBox = makeElement("rect", { x: drawX, y: drawY, width: componentBoxWidth, height, rx: componentBoxWidth * 0.035, fill: geometryComponentFill(item.route), "fill-opacity": 1, opacity: 1 });
@@ -3892,16 +4026,48 @@
       }
 
       function findComponent(componentId) {
-        for (const [page, components] of Object.entries(componentDefinitions)) {
-          const component = components.find((item) => item.id === componentId);
-          if (component) return { page, component };
+        return componentById.get(componentId) || null;
+      }
+
+      function requireComponent(componentId, context) {
+        const match = findComponent(componentId);
+        if (!match) throw new Error(`Unknown component ID "${componentId}" in ${context}.`);
+        return match;
+      }
+
+      function validateResearchProjectComponents(projectData) {
+        for (const details of projectData.projects) {
+          const seenComponentIds = new Set();
+          for (const componentId of details.components || []) {
+            if (seenComponentIds.has(componentId)) {
+              throw new Error(`Duplicate component ID "${componentId}" in research project "${details.id}".`);
+            }
+            requireComponent(componentId, `research project "${details.id}"`);
+            seenComponentIds.add(componentId);
+          }
+          const seenInstanceIds = new Set();
+          for (const instanceId of details.architectureInstances || []) {
+            if (seenInstanceIds.has(instanceId)) {
+              throw new Error(`Duplicate architecture instance ID "${instanceId}" in research project "${details.id}".`);
+            }
+            const instance = requireArchitectureComponentInstance(instanceId, `research project "${details.id}"`);
+            if (!seenComponentIds.has(instance.componentId)) {
+              throw new Error(`Architecture instance "${instanceId}" is not linked to component "${instance.componentId}" in research project "${details.id}".`);
+            }
+            seenInstanceIds.add(instanceId);
+          }
+          for (const componentId of seenComponentIds) {
+            if (architectureComponentInstancesByComponentId.has(componentId) &&
+                ![...seenInstanceIds].some((instanceId) => architectureComponentInstanceById.get(instanceId).componentId === componentId)) {
+              throw new Error(`Research project "${details.id}" must specify architecture instance IDs for repeated component "${componentId}".`);
+            }
+          }
         }
-        return null;
       }
 
       function renderResearchDialogComponents(list, componentIds) {
         list.replaceChildren();
-        const components = componentIds.map(findComponent).filter(Boolean);
+        const components = componentIds.map((componentId) => requireComponent(componentId, "research project dialog"));
         if (!components.length) {
           renderResearchDialogList(list, [], "No linked components");
           return;
@@ -3923,6 +4089,7 @@
       }
 
       function renderResearchProjects(projectData) {
+        validateResearchProjectComponents(projectData);
         const iconTypes = new Set(projectData.availableIconTypes);
         const projectLists = new Map([...document.querySelectorAll("[data-research-project-list]")].map((list) => [list.dataset.researchProjectList, list]));
         researchProjectConnections = new Map();
@@ -3971,7 +4138,8 @@
           const response = await fetch("assets/research-projects.json?source=project-data-01", { cache: "no-store" });
           if (!response.ok) throw new Error(`Research project request failed: ${response.status}`);
           renderResearchProjects(await response.json());
-        } catch {
+        } catch (error) {
+          console.error("Research projects could not be loaded.", error);
           document.querySelectorAll("[data-research-project-list]").forEach((list) => {
             const message = document.createElement("p");
             message.textContent = "Research projects could not be loaded.";
@@ -4205,7 +4373,7 @@
           renderResearchDialogList(researchDialogCollaborators, details.contributors || [], "To be confirmed");
           renderResearchDialogComponents(researchDialogComponents, details.components || []);
           researchDialogArchitecture.dataset.projectId = details.id;
-          researchDialogArchitecture.hidden = !(details.components || []).some((componentId) => findComponent(componentId));
+          researchDialogArchitecture.hidden = !projectArchitectureTargetIds(details).length;
           researchProjectDialog.showModal();
         });
       });
@@ -4214,7 +4382,7 @@
       researchDialogArchitecture.addEventListener("click", () => {
         const details = researchProjectDetails.get(researchDialogArchitecture.dataset.projectId);
         if (!details) return;
-        const targetIds = [...new Set((details.components || []).map(findComponent).filter(Boolean).map(({ component }) => `component-${component.id}`))];
+        const targetIds = projectArchitectureTargetIds(details);
         researchProjectDialog.close();
         navigateToPage("system-architecture", targetIds.join(","));
       });

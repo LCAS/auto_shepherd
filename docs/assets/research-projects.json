@@ -43,37 +43,48 @@
       "id": "project-sheep-prediction-drone-following",
       "status": "active",
       "name": "[Internship] Sheep prediction and drone following",
-      "description": "Work in progress to improve sheep detection through better drone positioning, with the aim of enabling the drone to follow sheep more closely.",
+      "description": "Improve sheep detection through better drone positioning, with the aim of enabling the drone to follow sheep more closely.",
       "iconType": "drone",
       "accent": "drone",
       "papers": [],
       "leadContact": "jonathan-cox",
       "contributors": [],
-      "components": ["mini-aircraft", "video", "sheep-detection", "localisation", "goal-estimator", "flight-path"]
+      "components": ["sheep-detection", "localisation", "goal-estimator", "flight-path", "drone-path", "unity-sim", "synthetic-stream", "image-stream", "geo-references"]
     },
     {
       "id": "project-small-sheep-detection-lora",
       "status": "active",
       "name": "[Core] Small-sheep detection with high-altitude drones and LoRA-supported data synthesis",
-      "description": "Work in progress combining high-altitude drone imagery with synthetic-data generation to improve detection of small sheep. Current next steps are to set up the LoRA pipeline, begin data extraction and configure the models.",
+      "description": "Combining high-altitude drone imagery with synthetic-data generation to improve detection of small sheep. Next steps include establishing the LoRA pipeline, data extraction and model training.",
       "iconType": "drone",
       "accent": "drone",
       "papers": [],
       "leadContact": "james-r-heselden",
       "contributors": [],
-      "components": ["mini-aircraft", "video", "image-stream", "sheep-detection", "synthetic-stream", "simulations", "tuning"]
+      "components": ["image-stream", "sheep-detection", "synthetic-stream", "unity-sim", "video"]
     },
     {
       "id": "project-robot-assisted-rf-survey",
       "status": "active",
       "name": "[Core] Robot-assisted RF surveying and control for agricultural deployments",
-      "description": "Work in progress, currently awaiting hardware. The planned work combines radio-frequency surveying, connectivity assessment across farm obstacles, robot control and link drop-off estimation. It brings together earlier directions on long-range LoRa evaluation, reliable field control and site-wide connectivity surveys.",
+      "description": "The planned work combines radio-frequency surveying, connectivity assessment across farm obstacles, robot control and link drop-off estimation. It brings together earlier directions on long-range LoRa evaluation, reliable field control and site-wide connectivity surveys.",
       "iconType": "radio",
       "accent": "communication",
       "papers": [],
       "leadContact": "james-r-heselden",
       "contributors": [],
-      "components": ["radio-bridge", "lora-radio", "nrf-radio", "teleop-server"]
+      "components": ["rf-bridge", "lora-radio", "nrf-radio", "teleop-server", "robot-dog", "drivers", "nav2", "robot-pose"],
+      "architectureInstances": [
+        "simulation-rf-bridge",
+        "dog-control-rf-bridge",
+        "teleop-rf-bridge",
+        "simulation-lora-radio",
+        "dog-control-lora-radio",
+        "teleop-lora-radio",
+        "simulation-nrf-radio",
+        "dog-control-nrf-radio",
+        "teleop-nrf-radio"
+      ]
     },
     {
       "id": "project-retinex-sheep-detection",
@@ -85,7 +96,7 @@
       "papers": [],
       "leadContact": "riccardo-polvara",
       "contributors": [],
-      "components": ["sheep-detection"]
+      "components": ["image-stream", "sheep-detection", "localisation"]
     },
     {
       "id": "project-defra-robot-animal-interaction",
@@ -109,7 +120,7 @@
       "papers": [],
       "leadContact": "jonathan-cox",
       "contributors": [],
-      "components": ["image-stream", "sheep-detection", "localisation", "sheep-poses", "evaluation"]
+      "components": ["image-stream", "sheep-detection", "localisation", "geo-references", "evaluation", "tuning", "n-second-simulation", "poses", "natural-system-weights", "pose-zero"]
     },
     {
       "id": "project-citizen-science-sheep-game",
@@ -121,7 +132,7 @@
       "papers": [],
       "leadContact": "jonathan-cox",
       "contributors": [],
-      "components": ["unity-sim", "sheep-poses", "simulations", "natural-system-weights", "evaluation"]
+      "components": ["natural-system-weights", "evaluation", "tuning", "n-second-simulation", "poses", "pose-zero"]
     },
     {
       "id": "project-gps-labelled-sheep-dataset",
@@ -133,7 +144,7 @@
       "papers": [],
       "leadContact": "riccardo-polvara",
       "contributors": [],
-      "components": ["gps", "sheep-detection", "localisation", "geo-references"]
+      "components": ["gps", "video", "image-stream", "mini-aircraft", "sheep-detection", "localisation", "geo-references"]
     },
     {
       "id": "project-occlusion-sheep-tracking",
@@ -157,7 +168,8 @@
       "papers": [],
       "leadContact": "james-r-heselden",
       "contributors": [],
-      "components": ["sheep-detection", "animal-robot-interaction", "dog-path", "dog-path-prediction", "goal-pose", "simulations", "predicted-poses", "sheep-poses", "evaluation", "goal-proximity", "natural-system-weights"]
+      "components": ["animal-robot-interaction", "dog-path", "dog-pose-prediction", "unity-sim", "dog-path-prediction", "goal-pose", "simulations", "predicted-poses", "sheep-poses", "goal-proximity", "natural-system-weights"],
+      "architectureInstances": ["prediction-control-dog-path", "full-system-simulation-dog-path"]
     },
     {
       "id": "project-robot-dog-exposure-cues",
@@ -169,7 +181,7 @@
       "papers": [],
       "leadContact": "jonathan-cox",
       "contributors": [],
-      "components": ["animal-robot-interaction", "animal-welfare", "robot-dog", "sheep-poses", "evaluation"]
+      "components": ["animal-robot-interaction", "animal-welfare", "robot-dog"]
     },
     {
       "id": "project-multi-dog-flock-management",
@@ -181,7 +193,8 @@
       "papers": [],
       "leadContact": "james-r-heselden",
       "contributors": [],
-      "components": ["dog-path", "unity-sim", "dog-path-prediction", "goal-pose", "simulations", "predicted-poses", "sheep-poses", "poses", "n-second-simulation", "evaluation", "goal-proximity"]
+      "components": ["dog-path", "dog-pose-prediction", "unity-sim", "dog-path-prediction", "goal-pose", "simulations", "predicted-poses", "sheep-poses", "goal-proximity", "natural-system-weights"],
+      "architectureInstances": ["prediction-control-dog-path", "full-system-simulation-dog-path"]
     },
     {
       "id": "project-farm-dog-whistle-control",
@@ -193,7 +206,8 @@
       "papers": [],
       "leadContact": "james-r-heselden",
       "contributors": [],
-      "components": ["robot-dog", "teleop-server", "nav2", "radio-bridge"]
+      "components": ["robot-dog", "nav2", "drivers", "gps", "holybro-rtk", "magnetometer", "ekf", "robot-pose", "teleop-server", "rf-bridge"],
+      "architectureInstances": ["onboard-dog-control-holybro-rtk", "dog-localisation-holybro-rtk", "teleop-rf-bridge"]
     },
     {
       "id": "project-robot-shepherding-economics-ethics",
@@ -222,7 +236,7 @@
     {
       "id": "project-flock-localisation",
       "status": "available",
-      "name": "[BSc Project] Live sheep clustering and map visualisation",
+      "name": "[Core] Live sheep clustering and map visualisation",
       "description": "Add real-time sheep clusters, trail history and interactive map overlays to make flock observations easier to interpret.",
       "iconType": "sheep",
       "accent": "vision",
@@ -241,7 +255,19 @@
       "papers": [],
       "leadContact": "james-r-heselden",
       "contributors": [],
-      "components": ["mini-aircraft", "sheep-detection", "simulations", "radio-bridge", "robot-dog"]
+      "components": ["robot-dog", "drivers", "nav2", "ekf", "robot-pose", "holybro-rtk", "sheep-detection", "rf-bridge", "lora-radio", "nrf-radio", "dog-path", "dog-pose-prediction", "unity-sim", "dog-path-prediction", "goal-pose", "simulations", "predicted-poses", "sheep-poses", "goal-proximity", "natural-system-weights", "android-link", "flight-command", "gps", "video", "image-stream", "mini-aircraft", "localisation", "geo-references", "ethics", "animal-welfare", "legislature"],
+      "architectureInstances": [
+        "simulation-rf-bridge",
+        "dog-control-rf-bridge",
+        "simulation-lora-radio",
+        "dog-control-lora-radio",
+        "simulation-nrf-radio",
+        "dog-control-nrf-radio",
+        "onboard-dog-control-holybro-rtk",
+        "dog-localisation-holybro-rtk",
+        "prediction-control-dog-path",
+        "full-system-simulation-dog-path"
+      ]
     },
     {
       "id": "project-summer-school-blog",
@@ -253,7 +279,19 @@
       "papers": [],
       "leadContact": "rob-lloyd",
       "contributors": [],
-      "components": ["robot-dog", "sheep-detection", "simulations"]
+      "components": ["robot-dog", "drivers", "nav2", "ekf", "robot-pose", "holybro-rtk", "sheep-detection", "rf-bridge", "lora-radio", "nrf-radio", "dog-path", "dog-pose-prediction", "unity-sim", "dog-path-prediction", "goal-pose", "simulations", "predicted-poses", "sheep-poses", "goal-proximity", "natural-system-weights", "android-link", "flight-command", "gps", "video", "image-stream", "mini-aircraft", "localisation", "geo-references", "ethics", "animal-welfare", "legislature"],
+      "architectureInstances": [
+        "simulation-rf-bridge",
+        "dog-control-rf-bridge",
+        "simulation-lora-radio",
+        "dog-control-lora-radio",
+        "simulation-nrf-radio",
+        "dog-control-nrf-radio",
+        "onboard-dog-control-holybro-rtk",
+        "dog-localisation-holybro-rtk",
+        "prediction-control-dog-path",
+        "full-system-simulation-dog-path"
+      ]
     },
     {
       "id": "project-unitree-go2-blog",
@@ -263,9 +301,10 @@
       "iconType": "dog",
       "accent": "dog",
       "papers": [],
-      "leadContact": "rob-lloyd",
+      "leadContact": "jonathan-cox",
       "contributors": [],
-      "components": ["robot-dog", "teleop-server", "drivers", "nav2", "robot-pose"]
+      "components": ["robot-dog", "drivers", "nav2", "ekf", "robot-pose", "holybro-rtk"],
+      "architectureInstances": ["onboard-dog-control-holybro-rtk", "dog-localisation-holybro-rtk"]
     },
     {
       "id": "project-roscon-bark-to-byte",
@@ -277,7 +316,19 @@
       "papers": [],
       "leadContact": "jonathan-cox",
       "contributors": [],
-      "components": ["radio-bridge", "sheep-detection", "localisation", "dog-path", "goal-pose", "nav2", "teleop-server"]
+      "components": ["robot-dog", "drivers", "nav2", "ekf", "robot-pose", "holybro-rtk", "sheep-detection", "rf-bridge", "lora-radio", "nrf-radio", "dog-path", "dog-pose-prediction", "unity-sim", "dog-path-prediction", "goal-pose", "simulations", "predicted-poses", "sheep-poses", "goal-proximity", "natural-system-weights", "android-link", "flight-command", "gps", "video", "image-stream", "mini-aircraft", "localisation", "geo-references", "ethics", "animal-welfare", "legislature"],
+      "architectureInstances": [
+        "simulation-rf-bridge",
+        "dog-control-rf-bridge",
+        "simulation-lora-radio",
+        "dog-control-lora-radio",
+        "simulation-nrf-radio",
+        "dog-control-nrf-radio",
+        "onboard-dog-control-holybro-rtk",
+        "dog-localisation-holybro-rtk",
+        "prediction-control-dog-path",
+        "full-system-simulation-dog-path"
+      ]
     }
   ]
 }
