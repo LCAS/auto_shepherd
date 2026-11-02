@@ -13,14 +13,14 @@
   <meta property="og:title" content="Auto Shepherd | Animal-Aware Field Robotics Research">
   <meta property="og:description" content="Auto Shepherd explores animal-aware field robotics: sheep localisation, drone vision, flock simulation, robot-dog control, communications and animal welfare.">
   <meta property="og:url" content="https://lcas.github.io/auto_shepherd/">
-  <meta property="og:image" content="https://lcas.github.io/auto_shepherd/assets/logos/brand/auto-shepherd-logo-photo.png">
+  <meta property="og:image" content="https://lcas.github.io/auto_shepherd/assets/logos/brand/AutoShepherd-icon-photo.png">
   <meta property="og:image:width" content="1254">
   <meta property="og:image:height" content="1254">
   <meta property="og:image:alt" content="Auto Shepherd sheep and robot dog in a field">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Auto Shepherd | Animal-Aware Field Robotics Research">
   <meta name="twitter:description" content="Auto Shepherd explores animal-aware field robotics: sheep localisation, drone vision, flock simulation, robot-dog control, communications and animal welfare.">
-  <meta name="twitter:image" content="https://lcas.github.io/auto_shepherd/assets/logos/brand/auto-shepherd-logo-photo.png">
+  <meta name="twitter:image" content="https://lcas.github.io/auto_shepherd/assets/logos/brand/AutoShepherd-icon-photo.png">
   <meta name="twitter:image:alt" content="Auto Shepherd sheep and robot dog in a field">
   <script type="application/ld+json">
     {
@@ -265,43 +265,19 @@
       display: inline-flex;
       min-width: 190px;
       align-items: center;
-      gap: 11px;
       color: var(--ink);
       text-decoration: none;
     }
 
-    .brand-mark {
-      display: grid;
-      width: 39px;
-      height: 39px;
-      place-items: center;
-      overflow: hidden;
-      border: 1px solid var(--line-strong);
-      border-radius: 50%;
-      background: var(--surface-raised);
-    }
-
-    .brand-mark img {
+    .brand-logo {
       display: block;
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-      object-fit: cover;
-      mix-blend-mode: multiply;
+      width: 190px;
+      max-width: 100%;
+      height: auto;
     }
 
-    :root[data-theme="dark"] .brand-mark img { mix-blend-mode: screen; }
+    :root[data-theme="dark"] .brand-logo { filter: brightness(0) invert(1); }
 
-    .brand-copy { display: grid; gap: 3px; }
-
-    .brand-name {
-      font-size: 0.92rem;
-      font-weight: 600;
-      letter-spacing: -0.02em;
-      line-height: 1;
-    }
-
-    .brand-meta,
     .eyebrow,
     .micro-label,
     .meta-value,
@@ -313,12 +289,6 @@
       font-family: var(--mono);
       letter-spacing: 0.08em;
       text-transform: uppercase;
-    }
-
-    .brand-meta {
-      color: var(--faint);
-      font-size: 0.51rem;
-      line-height: 1;
     }
 
     .top-nav {
@@ -2144,8 +2114,6 @@
     @media (max-width: 560px) {
       .topbar { padding: 10px 14px; }
       .brand { min-width: 0; }
-      .brand-mark { width: 35px; height: 35px; }
-      .brand-name { font-size: 0.82rem; }
       .theme-toggle { width: 38px; justify-content: center; padding-right: 7px; padding-left: 7px; }
       .theme-toggle span:last-child { display: none; }
       .top-nav { margin-right: -14px; margin-left: -14px; padding-right: 14px; padding-left: 14px; }
@@ -2192,11 +2160,7 @@
 <body>
   <header class="topbar">
     <a class="brand" href="#overview" aria-label="AutoShepherd overview">
-      <span class="brand-mark"><img src="assets/logos/brand/auto-shepherd-logo-icon.png" alt="" width="1254" height="1254" decoding="async"></span>
-      <span class="brand-copy">
-        <span class="brand-name">AutoShepherd</span>
-        <span class="brand-meta">Field robotics programme</span>
-      </span>
+      <img class="brand-logo" src="assets/logos/brand/AutoShepherd-wide.svg" alt="" width="1063" height="235" decoding="async">
     </a>
 
     <nav class="top-nav" aria-label="Auto Shepherd pages">
@@ -2233,7 +2197,7 @@
           <h1>Auto<br>Shepherd</h1>
           <p>Robotics for understanding, guiding and caring for animals across the working landscape.</p>
         </div>
-        <div class="signal-mark" aria-hidden="true"><img src="assets/logos/brand/auto-shepherd-logo-icon.png" alt="" width="1254" height="1254" decoding="async"></div>
+        <div class="signal-mark" aria-hidden="true"><img src="assets/logos/brand/AutoShepherd-icon.svg" alt="" width="1254" height="1254" decoding="async"></div>
         <div class="signal-meta">
           <div class="meta-block">
             <span class="micro-label">Focus</span>
@@ -2260,8 +2224,7 @@
             <p>Auto Shepherd brings aerial observation, flock perception, simulation, field communications and supervised ground robotics into one practical research programme. Each subsystem can develop independently while contributing to a shared picture of the animals and the field.</p>
           </div>
           <picture class="overview-logo">
-            <source srcset="assets/logos/brand/auto-shepherd-logo-photo.webp" type="image/webp">
-            <img src="assets/logos/brand/auto-shepherd-logo-photo.png" alt="Auto Shepherd sheep and robot dog in a field" width="1254" height="1254" fetchpriority="high">
+            <img src="assets/logos/brand/AutoShepherd-icon-photo.png" alt="Auto Shepherd sheep and robot dog in a field" width="1254" height="1254" fetchpriority="high">
           </picture>
         </header>
 
